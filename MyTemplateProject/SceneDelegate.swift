@@ -18,6 +18,30 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
+        let tabVC = UITabBarController.init();
+        tabVC.tabBar.tintColor = UIColor.orange;
+        let classArray:[[String:String]] = [
+            ["class":"HomeVC","title":"首页", "icon": "tab-home"],
+            ["class":"MyVC","title":"我的", "icon": "tab-my"]];
+        
+        for item in classArray {
+            //获取命名空间也就是项目名称
+            let prjName = Bundle.main.infoDictionary!["CFBundleExecutable"] as? String
+            let clsStr = prjName! + "."  + item["class"]!;
+            
+            let cls = NSClassFromString(clsStr) as! UIViewController.Type;
+            
+            let vc = cls.init();
+            vc.tabBarItem.title = item["title"]!
+            vc.tabBarItem.image = UIImage.init(named: item["icon"]!);
+            let navVC = UINavigationController.init(rootViewController: vc);
+            
+            tabVC.addChild(navVC);
+            
+        }
+        self.window?.rootViewController = tabVC;
+        self.window?.makeKeyAndVisible();
+    
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

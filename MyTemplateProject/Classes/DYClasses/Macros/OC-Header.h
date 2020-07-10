@@ -17,5 +17,6 @@
 #import <Masonry.h>
 #import "UIImage+dy_extension.h"
 #import <SVProgressHUD/SVProgressHUD.h>
+#import <AFNetworking/UIImageView+AFNetworking.h>
 
 #endif /* OC_Header_h */
