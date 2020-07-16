@@ -14,6 +14,34 @@
 		92631AE624B86304005A534C /* YZDHomeworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92631ADD24B86304005A534C /* YZDHomeworkModel.swift */; };
 		92631AE724B86304005A534C /* YZDHomeworkDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92631ADF24B86304005A534C /* YZDHomeworkDetailVC.swift */; };
 		92631AE824B86304005A534C /* YZDHomeworkVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92631AE024B86304005A534C /* YZDHomeworkVC.swift */; };
+		92631AEB24BBEDA0005A534C /* YZDTestRecordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92631AEA24BBEDA0005A534C /* YZDTestRecordVC.swift */; };
+		92631AED24BC0DD1005A534C /* YZDHomeworkDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92631AEC24BC0DD1005A534C /* YZDHomeworkDetailCell.swift */; };
+		92631AF024BC10A4005A534C /* UIFont+dy_runtime.m in Sources */ = {isa = PBXBuildFile; fileRef = 92631AEF24BC10A4005A534C /* UIFont+dy_runtime.m */; };
+		92631AFB24BDC374005A534C /* YZDTestCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92631AFA24BDC374005A534C /* YZDTestCollectionVC.swift */; };
+		92631AFD24BDC395005A534C /* YZDTestResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92631AFC24BDC395005A534C /* YZDTestResultVC.swift */; };
+		92631AFF24BDC3D1005A534C /* YZDTestAnswerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92631AFE24BDC3D1005A534C /* YZDTestAnswerVC.swift */; };
+		92631B0124BDC427005A534C /* YZDTestCollectionEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92631B0024BDC427005A534C /* YZDTestCollectionEditVC.swift */; };
+		92631B0324BDC4D3005A534C /* YZDTestRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92631B0224BDC4D3005A534C /* YZDTestRecordCell.swift */; };
+		92631B0524BDD023005A534C /* YZDTestResultCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92631B0424BDD023005A534C /* YZDTestResultCellTableViewCell.swift */; };
+		92631B0724BDD045005A534C /* YZDTestResultHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92631B0624BDD045005A534C /* YZDTestResultHeader.swift */; };
+		92631B0924BDD9BC005A534C /* DYCollectionViewGridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92631B0824BDD9BC005A534C /* DYCollectionViewGridLayout.swift */; };
+		92631B0B24BEAE8B005A534C /* YZDTestResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92631B0A24BEAE8B005A534C /* YZDTestResultCell.swift */; };
+		92631B3424BFF024005A534C /* HomeNetWork.m in Sources */ = {isa = PBXBuildFile; fileRef = 92631B0F24BFF024005A534C /* HomeNetWork.m */; };
+		92631B3524BFF024005A534C /* MainNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 92631B1124BFF024005A534C /* MainNetwork.m */; };
+		92631B3624BFF024005A534C /* MyNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 92631B1324BFF024005A534C /* MyNetwork.m */; };
+		92631B3724BFF024005A534C /* LoginNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 92631B1824BFF024005A534C /* LoginNetwork.m */; };
+		92631B3824BFF024005A534C /* DYBaseNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 92631B1A24BFF024005A534C /* DYBaseNetwork.m */; };
+		92631B3924BFF024005A534C /* YTKNetworkConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 92631B1E24BFF024005A534C /* YTKNetworkConfig.m */; };
+		92631B3A24BFF024005A534C /* YTKChainRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 92631B2024BFF024005A534C /* YTKChainRequest.m */; };
+		92631B3B24BFF024005A534C /* YTKNetworkPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 92631B2424BFF024005A534C /* YTKNetworkPrivate.m */; };
+		92631B3C24BFF024005A534C /* YTKBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 92631B2824BFF024005A534C /* YTKBaseRequest.m */; };
+		92631B3D24BFF024005A534C /* YTKBatchRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 92631B2B24BFF024005A534C /* YTKBatchRequest.m */; };
+		92631B3E24BFF024005A534C /* YTKNetworkAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 92631B2C24BFF024005A534C /* YTKNetworkAgent.m */; };
+		92631B3F24BFF024005A534C /* YTKChainRequestAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 92631B2D24BFF024005A534C /* YTKChainRequestAgent.m */; };
+		92631B4024BFF024005A534C /* YTKBatchRequestAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 92631B2E24BFF024005A534C /* YTKBatchRequestAgent.m */; };
+		92631B4124BFF024005A534C /* YTKRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 92631B3024BFF024005A534C /* YTKRequest.m */; };
+		92631B4224BFF024005A534C /* DYNetworkConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 92631B3224BFF024005A534C /* DYNetworkConfig.m */; };
+		92631B4324BFF024005A534C /* DYNetworkError.m in Sources */ = {isa = PBXBuildFile; fileRef = 92631B3324BFF024005A534C /* DYNetworkError.m */; };
 		92EE7E2E24B8058800BF4DF7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EE7E2D24B8058800BF4DF7 /* AppDelegate.swift */; };
 		92EE7E3024B8058800BF4DF7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EE7E2F24B8058800BF4DF7 /* SceneDelegate.swift */; };
 		92EE7E3224B8058800BF4DF7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EE7E3124B8058800BF4DF7 /* ViewController.swift */; };
@@ -63,6 +91,53 @@
 		92631ADD24B86304005A534C /* YZDHomeworkModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDHomeworkModel.swift; sourceTree = "<group>"; };
 		92631ADF24B86304005A534C /* YZDHomeworkDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDHomeworkDetailVC.swift; sourceTree = "<group>"; };
 		92631AE024B86304005A534C /* YZDHomeworkVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDHomeworkVC.swift; sourceTree = "<group>"; };
+		92631AEA24BBEDA0005A534C /* YZDTestRecordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YZDTestRecordVC.swift; sourceTree = "<group>"; };
+		92631AEC24BC0DD1005A534C /* YZDHomeworkDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YZDHomeworkDetailCell.swift; sourceTree = "<group>"; };
+		92631AEE24BC10A4005A534C /* UIFont+dy_runtime.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIFont+dy_runtime.h"; sourceTree = "<group>"; };
+		92631AEF24BC10A4005A534C /* UIFont+dy_runtime.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIFont+dy_runtime.m"; sourceTree = "<group>"; };
+		92631AFA24BDC374005A534C /* YZDTestCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YZDTestCollectionVC.swift; sourceTree = "<group>"; };
+		92631AFC24BDC395005A534C /* YZDTestResultVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YZDTestResultVC.swift; sourceTree = "<group>"; };
+		92631AFE24BDC3D1005A534C /* YZDTestAnswerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YZDTestAnswerVC.swift; sourceTree = "<group>"; };
+		92631B0024BDC427005A534C /* YZDTestCollectionEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YZDTestCollectionEditVC.swift; sourceTree = "<group>"; };
+		92631B0224BDC4D3005A534C /* YZDTestRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YZDTestRecordCell.swift; sourceTree = "<group>"; };
+		92631B0424BDD023005A534C /* YZDTestResultCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YZDTestResultCellTableViewCell.swift; sourceTree = "<group>"; };
+		92631B0624BDD045005A534C /* YZDTestResultHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YZDTestResultHeader.swift; sourceTree = "<group>"; };
+		92631B0824BDD9BC005A534C /* DYCollectionViewGridLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DYCollectionViewGridLayout.swift; sourceTree = "<group>"; };
+		92631B0A24BEAE8B005A534C /* YZDTestResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YZDTestResultCell.swift; sourceTree = "<group>"; };
+		92631B0F24BFF024005A534C /* HomeNetWork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeNetWork.m; sourceTree = "<group>"; };
+		92631B1024BFF024005A534C /* HomeNetWork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeNetWork.h; sourceTree = "<group>"; };
+		92631B1124BFF024005A534C /* MainNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainNetwork.m; sourceTree = "<group>"; };
+		92631B1324BFF024005A534C /* MyNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNetwork.m; sourceTree = "<group>"; };
+		92631B1424BFF024005A534C /* MyNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNetwork.h; sourceTree = "<group>"; };
+		92631B1524BFF024005A534C /* MainNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainNetwork.h; sourceTree = "<group>"; };
+		92631B1724BFF024005A534C /* LoginNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginNetwork.h; sourceTree = "<group>"; };
+		92631B1824BFF024005A534C /* LoginNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginNetwork.m; sourceTree = "<group>"; };
+		92631B1A24BFF024005A534C /* DYBaseNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DYBaseNetwork.m; sourceTree = "<group>"; };
+		92631B1B24BFF024005A534C /* DYNetworkError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DYNetworkError.h; sourceTree = "<group>"; };
+		92631B1C24BFF024005A534C /* DYNetworkConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DYNetworkConfig.h; sourceTree = "<group>"; };
+		92631B1E24BFF024005A534C /* YTKNetworkConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTKNetworkConfig.m; sourceTree = "<group>"; };
+		92631B1F24BFF024005A534C /* YTKBaseRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTKBaseRequest.h; sourceTree = "<group>"; };
+		92631B2024BFF024005A534C /* YTKChainRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTKChainRequest.m; sourceTree = "<group>"; };
+		92631B2124BFF024005A534C /* YTKNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTKNetwork.h; sourceTree = "<group>"; };
+		92631B2224BFF024005A534C /* YTKBatchRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTKBatchRequest.h; sourceTree = "<group>"; };
+		92631B2324BFF024005A534C /* YTKNetworkAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTKNetworkAgent.h; sourceTree = "<group>"; };
+		92631B2424BFF024005A534C /* YTKNetworkPrivate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTKNetworkPrivate.m; sourceTree = "<group>"; };
+		92631B2524BFF024005A534C /* YTKRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTKRequest.h; sourceTree = "<group>"; };
+		92631B2624BFF024005A534C /* YTKBatchRequestAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTKBatchRequestAgent.h; sourceTree = "<group>"; };
+		92631B2724BFF024005A534C /* YTKChainRequestAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTKChainRequestAgent.h; sourceTree = "<group>"; };
+		92631B2824BFF024005A534C /* YTKBaseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTKBaseRequest.m; sourceTree = "<group>"; };
+		92631B2924BFF024005A534C /* YTKNetworkConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTKNetworkConfig.h; sourceTree = "<group>"; };
+		92631B2A24BFF024005A534C /* YTKChainRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTKChainRequest.h; sourceTree = "<group>"; };
+		92631B2B24BFF024005A534C /* YTKBatchRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTKBatchRequest.m; sourceTree = "<group>"; };
+		92631B2C24BFF024005A534C /* YTKNetworkAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTKNetworkAgent.m; sourceTree = "<group>"; };
+		92631B2D24BFF024005A534C /* YTKChainRequestAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTKChainRequestAgent.m; sourceTree = "<group>"; };
+		92631B2E24BFF024005A534C /* YTKBatchRequestAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTKBatchRequestAgent.m; sourceTree = "<group>"; };
+		92631B2F24BFF024005A534C /* YTKNetworkPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTKNetworkPrivate.h; sourceTree = "<group>"; };
+		92631B3024BFF024005A534C /* YTKRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTKRequest.m; sourceTree = "<group>"; };
+		92631B3124BFF024005A534C /* DYBaseNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DYBaseNetwork.h; sourceTree = "<group>"; };
+		92631B3224BFF024005A534C /* DYNetworkConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DYNetworkConfig.m; sourceTree = "<group>"; };
+		92631B3324BFF024005A534C /* DYNetworkError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DYNetworkError.m; sourceTree = "<group>"; };
+		92631B4424BFF07F005A534C /* DYNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DYNetwork.h; sourceTree = "<group>"; };
 		92EE7E2A24B8058800BF4DF7 /* MyTemplateProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyTemplateProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92EE7E2D24B8058800BF4DF7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92EE7E2F24B8058800BF4DF7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -170,6 +245,7 @@
 				92631AD724B86304005A534C /* YZDHomeworkDetailHeaderView.xib */,
 				92631AD924B86304005A534C /* Cell */,
 				92631ADB24B86304005A534C /* YZDHomeworkDetailHeaderView.swift */,
+				92631B0624BDD045005A534C /* YZDTestResultHeader.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -178,6 +254,10 @@
 			isa = PBXGroup;
 			children = (
 				92631ADA24B86304005A534C /* YZDHomeworkCell.swift */,
+				92631AEC24BC0DD1005A534C /* YZDHomeworkDetailCell.swift */,
+				92631B0224BDC4D3005A534C /* YZDTestRecordCell.swift */,
+				92631B0424BDD023005A534C /* YZDTestResultCellTableViewCell.swift */,
+				92631B0A24BEAE8B005A534C /* YZDTestResultCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -195,8 +275,102 @@
 			children = (
 				92631AE024B86304005A534C /* YZDHomeworkVC.swift */,
 				92631ADF24B86304005A534C /* YZDHomeworkDetailVC.swift */,
+				92631AEA24BBEDA0005A534C /* YZDTestRecordVC.swift */,
+				92631AFA24BDC374005A534C /* YZDTestCollectionVC.swift */,
+				92631B0024BDC427005A534C /* YZDTestCollectionEditVC.swift */,
+				92631AFC24BDC395005A534C /* YZDTestResultVC.swift */,
+				92631AFE24BDC3D1005A534C /* YZDTestAnswerVC.swift */,
 			);
 			path = VC;
+			sourceTree = "<group>";
+		};
+		92631B0C24BFF023005A534C /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				92631B0D24BFF024005A534C /* Module */,
+				92631B1924BFF024005A534C /* DYNetwork */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		92631B0D24BFF024005A534C /* Module */ = {
+			isa = PBXGroup;
+			children = (
+				92631B0E24BFF024005A534C /* Home */,
+				92631B1524BFF024005A534C /* MainNetwork.h */,
+				92631B1124BFF024005A534C /* MainNetwork.m */,
+				92631B1224BFF024005A534C /* My */,
+				92631B1624BFF024005A534C /* Login */,
+			);
+			path = Module;
+			sourceTree = "<group>";
+		};
+		92631B0E24BFF024005A534C /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				92631B0F24BFF024005A534C /* HomeNetWork.m */,
+				92631B1024BFF024005A534C /* HomeNetWork.h */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		92631B1224BFF024005A534C /* My */ = {
+			isa = PBXGroup;
+			children = (
+				92631B1324BFF024005A534C /* MyNetwork.m */,
+				92631B1424BFF024005A534C /* MyNetwork.h */,
+			);
+			path = My;
+			sourceTree = "<group>";
+		};
+		92631B1624BFF024005A534C /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				92631B1724BFF024005A534C /* LoginNetwork.h */,
+				92631B1824BFF024005A534C /* LoginNetwork.m */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		92631B1924BFF024005A534C /* DYNetwork */ = {
+			isa = PBXGroup;
+			children = (
+				92631B3124BFF024005A534C /* DYBaseNetwork.h */,
+				92631B1A24BFF024005A534C /* DYBaseNetwork.m */,
+				92631B1D24BFF024005A534C /* YTK */,
+				92631B1C24BFF024005A534C /* DYNetworkConfig.h */,
+				92631B3224BFF024005A534C /* DYNetworkConfig.m */,
+				92631B1B24BFF024005A534C /* DYNetworkError.h */,
+				92631B3324BFF024005A534C /* DYNetworkError.m */,
+				92631B4424BFF07F005A534C /* DYNetwork.h */,
+			);
+			path = DYNetwork;
+			sourceTree = "<group>";
+		};
+		92631B1D24BFF024005A534C /* YTK */ = {
+			isa = PBXGroup;
+			children = (
+				92631B1E24BFF024005A534C /* YTKNetworkConfig.m */,
+				92631B1F24BFF024005A534C /* YTKBaseRequest.h */,
+				92631B2024BFF024005A534C /* YTKChainRequest.m */,
+				92631B2124BFF024005A534C /* YTKNetwork.h */,
+				92631B2224BFF024005A534C /* YTKBatchRequest.h */,
+				92631B2324BFF024005A534C /* YTKNetworkAgent.h */,
+				92631B2424BFF024005A534C /* YTKNetworkPrivate.m */,
+				92631B2524BFF024005A534C /* YTKRequest.h */,
+				92631B2624BFF024005A534C /* YTKBatchRequestAgent.h */,
+				92631B2724BFF024005A534C /* YTKChainRequestAgent.h */,
+				92631B2824BFF024005A534C /* YTKBaseRequest.m */,
+				92631B2924BFF024005A534C /* YTKNetworkConfig.h */,
+				92631B2A24BFF024005A534C /* YTKChainRequest.h */,
+				92631B2B24BFF024005A534C /* YTKBatchRequest.m */,
+				92631B2C24BFF024005A534C /* YTKNetworkAgent.m */,
+				92631B2D24BFF024005A534C /* YTKChainRequestAgent.m */,
+				92631B2E24BFF024005A534C /* YTKBatchRequestAgent.m */,
+				92631B2F24BFF024005A534C /* YTKNetworkPrivate.h */,
+				92631B3024BFF024005A534C /* YTKRequest.m */,
+			);
+			path = YTK;
 			sourceTree = "<group>";
 		};
 		92EE7E2124B8058800BF4DF7 = {
@@ -239,6 +413,7 @@
 		92EE7EB724B8570200BF4DF7 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				92631B0C24BFF023005A534C /* Network */,
 				92EE7EB824B8570200BF4DF7 /* Module */,
 				92EE7EC024B8570200BF4DF7 /* DYClasses */,
 			);
@@ -330,6 +505,8 @@
 				92EE7EDC24B8570200BF4DF7 /* NSTimer+dy_extension.m */,
 				92EE7EDD24B8570200BF4DF7 /* NSString+dy_extension.h */,
 				92EE7EDE24B8570200BF4DF7 /* UIButton+Ani.h */,
+				92631AEE24BC10A4005A534C /* UIFont+dy_runtime.h */,
+				92631AEF24BC10A4005A534C /* UIFont+dy_runtime.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -365,6 +542,7 @@
 				92EE7EF524B8570200BF4DF7 /* YCMenuViewCompont */,
 				92EE7EF824B8570200BF4DF7 /* DYButton.h */,
 				92EE7EF924B8570200BF4DF7 /* DYMenuView.swift */,
+				92631B0824BDD9BC005A534C /* DYCollectionViewGridLayout.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -519,30 +697,50 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92631AFD24BDC395005A534C /* YZDTestResultVC.swift in Sources */,
 				92631AE824B86304005A534C /* YZDHomeworkVC.swift in Sources */,
 				92631AE624B86304005A534C /* YZDHomeworkModel.swift in Sources */,
 				92EE7F0F24B8570300BF4DF7 /* DYTransitionVC.swift in Sources */,
+				92631B4024BFF024005A534C /* YTKBatchRequestAgent.m in Sources */,
+				92631B3424BFF024005A534C /* HomeNetWork.m in Sources */,
+				92631B3A24BFF024005A534C /* YTKChainRequest.m in Sources */,
 				92EE7F1124B8570300BF4DF7 /* DYPickerView.m in Sources */,
 				92EE7E3224B8058800BF4DF7 /* ViewController.swift in Sources */,
+				92631B3824BFF024005A534C /* DYBaseNetwork.m in Sources */,
+				92631B3D24BFF024005A534C /* YTKBatchRequest.m in Sources */,
+				92631B3524BFF024005A534C /* MainNetwork.m in Sources */,
 				92EE7F1924B8570300BF4DF7 /* YCMenuView.m in Sources */,
 				92EE7EFF24B8570300BF4DF7 /* NSDictionary+Log.m in Sources */,
 				92EE7F0724B8570300BF4DF7 /* UIAlertController+dy_extension.m in Sources */,
+				92631AF024BC10A4005A534C /* UIFont+dy_runtime.m in Sources */,
+				92631B3724BFF024005A534C /* LoginNetwork.m in Sources */,
 				92EE7EFB24B8570300BF4DF7 /* HomeVC.swift in Sources */,
 				92EE7F0B24B8570300BF4DF7 /* NSArray+tx_extension.m in Sources */,
 				92EE7F1224B8570300BF4DF7 /* DYTableView.m in Sources */,
 				92EE7F0324B8570300BF4DF7 /* UILabel+dy_extension.m in Sources */,
+				92631B3B24BFF024005A534C /* YTKNetworkPrivate.m in Sources */,
 				92EE7E2E24B8058800BF4DF7 /* AppDelegate.swift in Sources */,
 				92EE7F1324B8570300BF4DF7 /* DYButton.m in Sources */,
 				92EE7F0024B8570300BF4DF7 /* UIView+dy_extension.m in Sources */,
+				92631AEB24BBEDA0005A534C /* YZDTestRecordVC.swift in Sources */,
 				92EE7F0E24B8570300BF4DF7 /* DYPresentationVC.swift in Sources */,
 				92EE7E3024B8058800BF4DF7 /* SceneDelegate.swift in Sources */,
 				92EE7EFE24B8570300BF4DF7 /* UIViewController+dy_extension.m in Sources */,
+				92631B3E24BFF024005A534C /* YTKNetworkAgent.m in Sources */,
 				92EE7F0524B8570300BF4DF7 /* UIButton+Ani.m in Sources */,
 				92EE7F1A24B8570300BF4DF7 /* DYMenuView.swift in Sources */,
+				92631B0724BDD045005A534C /* YZDTestResultHeader.swift in Sources */,
+				92631B0B24BEAE8B005A534C /* YZDTestResultCell.swift in Sources */,
+				92631B4124BFF024005A534C /* YTKRequest.m in Sources */,
+				92631B0124BDC427005A534C /* YZDTestCollectionEditVC.swift in Sources */,
 				92EE7F0224B8570300BF4DF7 /* NSDate+dy_extension.m in Sources */,
+				92631AED24BC0DD1005A534C /* YZDHomeworkDetailCell.swift in Sources */,
+				92631B3F24BFF024005A534C /* YTKChainRequestAgent.m in Sources */,
 				92EE7F1024B8570300BF4DF7 /* DYView.m in Sources */,
 				92EE7F0A24B8570300BF4DF7 /* NSDictionary+dy_extension.m in Sources */,
 				92EE7F0824B8570300BF4DF7 /* UIImage+dy_extension.m in Sources */,
+				92631B4224BFF024005A534C /* DYNetworkConfig.m in Sources */,
+				92631AFF24BDC3D1005A534C /* YZDTestAnswerVC.swift in Sources */,
 				92EE7F0D24B8570300BF4DF7 /* DYScrollView.m in Sources */,
 				92EE7EFC24B8570300BF4DF7 /* MyVC.swift in Sources */,
 				92EE7F0C24B8570300BF4DF7 /* NSTimer+dy_extension.m in Sources */,
@@ -552,12 +750,20 @@
 				92EE7F1624B8570300BF4DF7 /* DYMaskingView.swift in Sources */,
 				92EE7F0924B8570300BF4DF7 /* DYExtension.swift in Sources */,
 				92631AE524B86304005A534C /* YZDHomeworkDetailHeaderView.swift in Sources */,
+				92631AFB24BDC374005A534C /* YZDTestCollectionVC.swift in Sources */,
+				92631B4324BFF024005A534C /* DYNetworkError.m in Sources */,
+				92631B0324BDC4D3005A534C /* YZDTestRecordCell.swift in Sources */,
 				92EE7F0424B8570300BF4DF7 /* UIColor+dy_extension.m in Sources */,
 				92EE7F1524B8570300BF4DF7 /* DYUnreadView.swift in Sources */,
 				92EE7F1424B8570300BF4DF7 /* DYSliderHeadView.swift in Sources */,
+				92631B0524BDD023005A534C /* YZDTestResultCellTableViewCell.swift in Sources */,
 				92631AE424B86304005A534C /* YZDHomeworkCell.swift in Sources */,
 				92EE7F0624B8570300BF4DF7 /* NSString+dy_extension.m in Sources */,
+				92631B3C24BFF024005A534C /* YTKBaseRequest.m in Sources */,
+				92631B3924BFF024005A534C /* YTKNetworkConfig.m in Sources */,
 				92EE7F0124B8570300BF4DF7 /* NSString+RegexCategory.m in Sources */,
+				92631B3624BFF024005A534C /* MyNetwork.m in Sources */,
+				92631B0924BDD9BC005A534C /* DYCollectionViewGridLayout.swift in Sources */,
 				92EE7F1824B8570300BF4DF7 /* DYSearchVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

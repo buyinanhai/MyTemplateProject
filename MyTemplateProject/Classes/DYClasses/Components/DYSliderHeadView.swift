@@ -48,12 +48,16 @@ enum DYButtonLayout {
     var textColor: UIColor = UIColor.HWColorWithHexString(hex: "#333333");
     var selectColor = UIColor.blue;
     var currSelectIndex: Int = 0;
-    var lineWidth:CGFloat = 30;
+    ///滑动的线条宽度
+    var sliderLineWidth:CGFloat = 30;
     var type: DYSliderHeaderType = .normal;
     var font: UIFont = UIFont.systemFont(ofSize: 14);
     var imageSize: CGSize?
     var images: [String]?
-    var lineColor:UIColor = UIColor.red
+    ///view下面的黑线颜色
+    var lineColor:UIColor = UIColor.clear
+    ///滑动的线条的颜色
+    var sliderLineColor:UIColor = kDY_ThemeColor;
     var sliderPositionX: CGFloat = 0.0 {
         
         didSet {
@@ -61,12 +65,53 @@ enum DYButtonLayout {
         }
     
     }
-    private let titles: [String]
+    private var titles: [String] {
+        
+        didSet {
+            self.dataSources.removeAll();
+            for item in self.titles {
+                let index: Int = titles.firstIndex(of: item)!;
+                let model = DYSliderModel.init();
+                model.isSelect = index == self.currSelectIndex ? true : false;
+                model.title = item;
+                model.index = index;
+                model.image = UIImage.init(named: item);
+                if index < self.images?.count ?? 0 {
+                    let imgstr = self.images?[index];
+                    model.image = UIImage.init(named: imgstr ?? "");
+                }
+                var width = item.getTexWidth(font: self.font, height: 30) + 20;
+                if width < 60 {
+                    width  = 60;
+                }
+                self.widthCache[index] = width;
+                self.dataSources.append(model);
+            }
+            if self.type == .banScroll {
+                for (index,_) in self.dataSources.enumerated() {
+                    let width = self.width / CGFloat(self.dataSources.count);
+                    self.widthCache[index] = width;
+                }
+            }
+            
+        }
+        
+    }
     required init(titles: [String]) {
         self.titles = titles;
         super.init(frame: CGRect.zero)
         
     }
+    
+    public func updateTitles(_ titles: [String]) {
+        
+        self.titles = titles;
+        self.currSelectIndex = 0;
+        self.collectionView.reloadData();
+        self.updateSlider(index: self.currSelectIndex);
+        
+    }
+    
     func updateSelectIndexFromOther(_ index: Int) {
         if index == self.currSelectIndex {
             return;
@@ -86,30 +131,7 @@ enum DYButtonLayout {
         }
     }
     private func setupSubview() {
-        for item in self.titles {
-            let index: Int = titles.firstIndex(of: item)!;
-            let model = DYSliderModel.init();
-            model.isSelect = index == self.currSelectIndex ? true : false;
-            model.title = item;
-            model.index = index;
-            model.image = UIImage.init(named: item);
-            if index < self.images?.count ?? 0 {
-                let imgstr = self.images?[index];
-                model.image = UIImage.init(named: imgstr ?? "");
-            }
-            var width = item.getTexWidth(font: self.font, height: 30) + 20;
-            if width < 60 {
-                width  = 60;
-            }
-            self.widthCache[index] = width;
-            self.dataSources.append(model);
-        }
-        if self.type == .banScroll {
-            for (index,_) in self.dataSources.enumerated() {
-                let width = self.width / CGFloat(self.dataSources.count);
-                self.widthCache[index] = width;
-            }
-        }
+       
         self.addSubview(self.collectionView)
         self.collectionView.mas_makeConstraints { (make) in
             make?.edges.offset()(0);
@@ -120,7 +142,7 @@ enum DYButtonLayout {
         if self.dataSources.count > 0 {
             self.slider.isHidden = false;
             
-            self.slider.frame = CGRect.init(x: (self.widthCache[self.currSelectIndex]! - lineWidth) * 0.5, y: self.height - 2, width: self.lineWidth, height: 2);
+            self.slider.frame = CGRect.init(x: (self.widthCache[self.currSelectIndex]! - sliderLineWidth) * 0.5, y: self.height - 2, width: self.sliderLineWidth, height: 2);
         } else {
             self.slider.isHidden = true;
         }
@@ -150,8 +172,8 @@ enum DYButtonLayout {
     private var widthCache: [Int : CGFloat]  = [:];
     private lazy var slider: UIView = {
         let view = UIView()
-        view.backgroundColor = self.lineColor;
-        view.bounds = CGRect.init(x: 0, y: 0, width: self.lineWidth, height: 2);
+        view.backgroundColor = self.sliderLineColor;
+        view.bounds = CGRect.init(x: 0, y: 0, width: self.sliderLineWidth, height: 2);
         return view
     }()
     
@@ -172,11 +194,12 @@ enum DYButtonLayout {
 
     private lazy var lineView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.lightGray
+        view.backgroundColor = self.lineColor
         view.alpha = 0.5;
         return view
     }()
     private func updateSlider(index: Int) {
+        if index == self.currSelectIndex { return}
         
         let beforeCell = self.collectionView.cellForItem(at: IndexPath.init(item: self.currSelectIndex, section: 0));
         if beforeCell != nil {
@@ -194,7 +217,7 @@ enum DYButtonLayout {
             label.text = model.title;
             self.currSelectIndex = index;
             //        var x: CGFloat = CGFloat(index * self.widthCache[index]) + 15;
-            var x: CGFloat = (self.widthCache[index]! - self.lineWidth)  * 0.5;
+            var x: CGFloat = (self.widthCache[index]! - self.sliderLineWidth)  * 0.5;
         
             if index > 0 {
                 for i in 0...index-1 {
@@ -214,8 +237,8 @@ enum DYButtonLayout {
     }
     
     private func updateLabelStatus(isSelect:Bool, label: DYButton) {
-        let fontSize = label.titleLabel?.font.pointSize;
-        label.titleLabel?.font = UIFont.systemFont(ofSize: isSelect ? fontSize! + 2 : fontSize! - 2);
+        let fontSize = self.font.pointSize ;
+        label.titleLabel?.font = UIFont.systemFont(ofSize: isSelect ? fontSize + 2 : fontSize - 2);
         label.textColor = isSelect ? self.selectColor : self.textColor;
     }
 

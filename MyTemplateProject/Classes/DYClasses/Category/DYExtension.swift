@@ -12,7 +12,7 @@ import UIKit
 
 let kScreenWidth = UIScreen.main.bounds.width;
 let kScreenHeight = UIScreen.main.bounds.height;
-
+let kDY_ThemeColor:UIColor = UIColor.hex("#fb9028");
 
 public extension UIColor {
     

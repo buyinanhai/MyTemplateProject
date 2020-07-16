@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -10,12 +9,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="YZDHomeworkDetailHeaderView" customModule="FXFSOnlineEdu" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="358" height="153"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="YZDHomeworkDetailHeaderView" customModule="MyTemplateProject" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="358" height="89"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3aE-im-nhF">
-                    <rect key="frame" x="15" y="15" width="328" height="123"/>
+                    <rect key="frame" x="15" y="15" width="328" height="59"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="张老师详解六年级数学" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qCe-FD-Fhq">
                             <rect key="frame" x="14" y="10" width="153" height="18"/>
@@ -29,39 +28,18 @@
                             <color key="textColor" red="0.72549019607843135" green="0.72549019607843135" blue="0.72549019607843135" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LT4-0l-Rpz" customClass="DYButton">
-                            <rect key="frame" x="14" y="73" width="120" height="42"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="120" id="9ix-Yw-Htv"/>
-                                <constraint firstAttribute="height" constant="42" id="JHR-6Y-qKA"/>
-                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="42" id="w0E-zV-UFZ"/>
-                            </constraints>
-                            <state key="normal" image="yzd-my-error-topics"/>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pct-F9-03a" customClass="DYButton">
-                            <rect key="frame" x="193" y="73" width="123" height="42"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="42" id="eUI-dY-LMU"/>
-                            </constraints>
-                            <state key="normal" image="yzd-my-collect-topics"/>
-                        </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
-                        <constraint firstItem="pct-F9-03a" firstAttribute="width" secondItem="LT4-0l-Rpz" secondAttribute="width" multiplier="1.02414" id="8ea-Fg-jOn"/>
                         <constraint firstItem="wbb-S7-dZ7" firstAttribute="leading" secondItem="qCe-FD-Fhq" secondAttribute="leading" id="EoP-14-P2X"/>
-                        <constraint firstItem="LT4-0l-Rpz" firstAttribute="leading" secondItem="wbb-S7-dZ7" secondAttribute="leading" id="Hbo-yr-PgA"/>
-                        <constraint firstAttribute="trailing" secondItem="pct-F9-03a" secondAttribute="trailing" constant="12" id="NSh-RZ-tE2"/>
                         <constraint firstItem="qCe-FD-Fhq" firstAttribute="leading" secondItem="3aE-im-nhF" secondAttribute="leading" constant="14" id="RQ2-yT-GdH"/>
                         <constraint firstItem="qCe-FD-Fhq" firstAttribute="top" secondItem="3aE-im-nhF" secondAttribute="top" constant="10" id="XMs-Wu-26G"/>
-                        <constraint firstItem="pct-F9-03a" firstAttribute="centerY" secondItem="LT4-0l-Rpz" secondAttribute="centerY" id="dei-xv-Q3f"/>
                         <constraint firstItem="wbb-S7-dZ7" firstAttribute="top" secondItem="qCe-FD-Fhq" secondAttribute="bottom" constant="8" id="jKP-5v-GGY"/>
                         <constraint firstAttribute="trailing" secondItem="wbb-S7-dZ7" secondAttribute="trailing" constant="8" id="lwA-Gx-mKy"/>
-                        <constraint firstAttribute="bottom" secondItem="LT4-0l-Rpz" secondAttribute="bottom" constant="8" id="mbX-M0-45B"/>
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="3aE-im-nhF" secondAttribute="trailing" constant="15" id="Mft-EW-d2o"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="3aE-im-nhF" secondAttribute="bottom" constant="15" id="WaW-lX-lal"/>
@@ -73,15 +51,10 @@
             <connections>
                 <outlet property="contentView" destination="3aE-im-nhF" id="Mpz-Lf-7tR"/>
                 <outlet property="detailLabel" destination="wbb-S7-dZ7" id="Way-1a-Pa6"/>
-                <outlet property="myCollectionTopicBtn" destination="pct-F9-03a" id="gai-jf-RNy"/>
-                <outlet property="myErrorTpoicBtn" destination="LT4-0l-Rpz" id="RiC-h0-LcG"/>
                 <outlet property="nameLabel" destination="qCe-FD-Fhq" id="4dt-qL-d2y"/>
+                <outlet property="subContent" destination="3aE-im-nhF" id="41K-dG-myM"/>
             </connections>
-            <point key="canvasLocation" x="169.56521739130437" y="24.441964285714285"/>
+            <point key="canvasLocation" x="169.56521739130437" y="3.0133928571428572"/>
         </view>
     </objects>
-    <resources>
-        <image name="yzd-my-collect-topics" width="148.5" height="43"/>
-        <image name="yzd-my-error-topics" width="148.5" height="43"/>
-    </resources>
 </document>

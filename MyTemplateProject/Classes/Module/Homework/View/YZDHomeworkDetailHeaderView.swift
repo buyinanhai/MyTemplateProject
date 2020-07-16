@@ -28,10 +28,11 @@ class YZDHomeworkDetailHeaderView: UIView {
         
         let view = Bundle.main.loadNibNamed("YZDHomeworkDetailHeaderView", owner: nil, options: nil)?.last as! YZDHomeworkDetailHeaderView;
         
-        
+        view.subContent.addRound(10);
         
         return view;
     }
+    @IBOutlet weak var subContent: UIView!
     
     override class func awakeFromNib() {
         super.awakeFromNib()

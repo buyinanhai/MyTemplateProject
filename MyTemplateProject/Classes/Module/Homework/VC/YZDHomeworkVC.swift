@@ -8,6 +8,9 @@
 
 import UIKit
 
+/**
+ 作业中心控制器
+ */
 class YZDHomeworkVC: UIViewController {
 
     override func viewDidLoad() {
@@ -15,6 +18,7 @@ class YZDHomeworkVC: UIViewController {
         self.navigationItem.title = "作业中心"
         self.setupSubview();
         self.tableView.begainRefreshData();
+        self.navigationController?.navigationBar.backgroundColor = kDY_ThemeColor;
         // Do any additional setup after loading the view.
     }
     
@@ -40,7 +44,7 @@ class YZDHomeworkVC: UIViewController {
         
         let rightBtn = DYButton.init(type: .custom);
         rightBtn.direction = 1;
-        rightBtn.setTitle("datijil", for: .normal);
+        rightBtn.setTitle("答题记录", for: .normal);
         rightBtn.addTarget(self, action: #selector(rightBarButtonClick), for: .touchUpInside);
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: rightBtn);
         
@@ -49,7 +53,9 @@ class YZDHomeworkVC: UIViewController {
     @objc
     private func rightBarButtonClick() {
         
+        let vc = YZDTestRecordVC.init()
             
+        self.navigationController?.pushViewController(vc, animated: true);
         
     }
     
@@ -87,9 +93,24 @@ class YZDHomeworkVC: UIViewController {
         view.noDataText = "没有作业内容";
         view.register(YZDHomeworkCell.self, forCellReuseIdentifier: "cell");
         view.separatorStyle = .none;
+        self.searchBar.frame = CGRect.init(x: 0, y: 0, width: self.view.width, height: 55)
+        view.tableHeaderView = self.searchBar;
+        
         return view;
         
     }()
+    
+    private lazy var searchBar: UISearchBar = {
+        
+        let bar = UISearchBar.init()
+        bar.placeholder = "请输入课程名称";
+        bar.barStyle = .default;
+        bar.backgroundColor = .gray;
+        bar.delegate = self;
+        return bar;
+    }()
+    
+    
     /*
     // MARK: - Navigation
 
@@ -100,4 +121,26 @@ class YZDHomeworkVC: UIViewController {
     }
     */
 
+}
+
+
+extension YZDHomeworkVC: UISearchBarDelegate {
+    
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        
+        searchBar.endEditing(true);
+        self.showSearchVC();
+    }
+    
+    
+    private func showSearchVC() {
+        
+        let vc = DYSearchVC.searchVC();
+        
+        
+        self.present(vc, animated: true, completion: nil);
+        
+    }
+    
 }
