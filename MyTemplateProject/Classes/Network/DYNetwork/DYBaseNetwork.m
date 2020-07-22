@@ -28,9 +28,10 @@
     });
 }
 
-- (void)dy_startRequestWithSuccessful:(void (^)(id))successful {
+- (void)dy_startRequestWithSuccessful:(void (^)(id _Nullable))successful {
     if (![self isAvailableNetwork]) {
-        [SVProgressHUD showInfoWithStatus:@"当前网络不可用！"];
+        
+//        [SVProgressHUD showInfoWithStatus:@"当前网络不可用！"];
         successful(nil);
         return;
     }
@@ -64,7 +65,7 @@
             DYNetworkError *error = [DYNetworkError new];
             error.errorCode = status;
             error.errorMessage = message;
-            [SVProgressHUD showErrorWithStatus:error.errorMessage];
+//            [SVProgressHUD showErrorWithStatus:error.errorMessage];
             successful(nil);
         }
         DYLog(@"%@",request);
@@ -77,21 +78,21 @@
         } else {
             error.errorMessage = @"网络请求失败";
         }
-        [SVProgressHUD showErrorWithStatus:error.errorMessage];
+//        [SVProgressHUD showErrorWithStatus:error.errorMessage];
         successful(nil);
         DYLog(@"%@",request);
         DYLog(@"%@",error);
     }];
 }
 
-- (void)dy_startRequestWithFinished:(void (^)(id , DYNetworkError *))finished {
+- (void)dy_startRequestWithFinished:(void (^)(id _Nullable, DYNetworkError * _Nullable))finished {
     if (![self isAvailableNetwork]) {
-        [SVProgressHUD showInfoWithStatus:@"当前网络不可用！"];
+//        [SVProgressHUD showInfoWithStatus:@"当前网络不可用！"];
         return;
     }
     [self startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
         NSInteger status = [self getStatusCode:request.responseJSONObject];
-        if (status == 200) {
+        if (status == 200 || status == 0) {
             id data = [self getResponseJson:request.responseJSONObject];
             DYNetworkError *error = nil;
             @try {
@@ -111,7 +112,7 @@
             }
         } else {
             NSString *message = [self getErrorMessage:request.responseJSONObject];
-            DYNetworkError *error = [DYNetworkError new];
+            DYNetworkError *error = [DYNetworkError errorWithDomain:NSURLErrorDomain code:-999 userInfo:@{@"define": @"自定义的业务错误"}];
             error.errorCode = status;
             error.errorMessage = message;
             finished(nil,error);
@@ -126,10 +127,19 @@
         DYNetworkError *error = [DYNetworkError errorWithDomain:NSCocoaErrorDomain code:-8888 userInfo:request.error.userInfo];
         error.errorCode = request.responseStatusCode;
         error.errorMessage = @"网络请求失败";
+        if (error.code == -8888) {
+            error.errorMessage = @"请求超时，请稍后重试";
+        }
+       DYLog(@"=======================请求地址和参数==============================");
+        DYLog(@"%@",request);
+        DYLog(@"=======================请求结果===================================");
+        DYLog(@"the error: \n%@ \n response : %@",error, request.responseString);
+        DYLog(@"================================================================");
+
         finished(nil,error);
     }];
 }
-- (void)dy_startRequestWithSuccessful:(void (^)(id , DYNetworkError * ))successful failing:(void (^)(DYNetworkError *))failing {
+- (void)dy_startRequestWithSuccessful:(void (^)(id _Nullable, DYNetworkError * _Nullable))successful failing:(void (^)(DYNetworkError * _Nullable))failing {
    
     [self startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
         NSInteger status = [self getStatusCode:request.responseJSONObject];
@@ -183,7 +193,7 @@
     }];
 }
 
-- (void)dy_startRequestWithCompleted:(void (^)(YTKBaseRequest * _Nonnull))Completed {
+- (void)dy_startRequestWithCompleted:(void (^)(YTKBaseRequest * _Nullable))Completed {
     [self startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
         Completed(request);
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
@@ -215,7 +225,7 @@
 }
 - (NSInteger)getStatusCode:(NSDictionary *)dict {
     __block NSInteger code = 0;
-    NSArray *array = @[@"Status",@"State",@"status",@"statusCode"];
+    NSArray *array = @[@"Status",@"State",@"status",@"statusCode",@"flag"];
     [array enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([[dict allKeys] containsObject:obj]) {
             code = [dict[obj] integerValue];

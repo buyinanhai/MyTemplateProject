@@ -14,6 +14,9 @@ import UIKit
  */
 class YZDHomeworkDetailCell: UITableViewCell {
 
+    public var stateBtnClickCallback: ( ( YZDHomeworkChapterSectionModel_afterWorks?) -> Void)?
+
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -37,19 +40,17 @@ class YZDHomeworkDetailCell: UITableViewCell {
         didSet {
             
             self.stackView.removeChildViews();
-            guard let _model = model as? [String:Any] else {
+            guard let _model = model as? YZDHomeworkChapterSectionModel else {
                 return
             }
-            if let title = _model["title"] as? String {
-                self.nameLabel.text = title;
+            self.nameLabel.text = _model.dy_lessonName;
+            for item in _model.dy_afterWorks ?? [] {
+                let view = YZDHomeworkDetailCellSubview.init()
+                view.model = item;
+                view.stateBtnClickCallback = self.stateBtnClickCallback;
+                self.stackView.addArrangedSubview(view);
             }
-            if let datas = _model["practises"] as? [Any] {
-                
-                for _ in datas {
-                    let view = YZDHomeworkDetailCellSubview.init()
-                    self.stackView.addArrangedSubview(view);
-                }
-            }
+          
             
         }
         
@@ -117,6 +118,27 @@ class YZDHomeworkDetailCell: UITableViewCell {
 fileprivate class YZDHomeworkDetailCellSubview: UIView {
     
     
+    public var stateBtnClickCallback: ( ( YZDHomeworkChapterSectionModel_afterWorks?) -> Void)?
+    
+    
+    public var model: YZDHomeworkChapterSectionModel_afterWorks? {
+        
+        didSet {
+            
+            self.detailLabel.text = "题量：\(self.model?.dy_questionCount ?? 0)  已完成：\(self.model?.dy_finishCount ?? 0)         正确率：\(self.model?.dy_accuracy ?? "0.0")%";
+            self.nameLabel.text = self.model?.dy_title;
+            let homeworkState = self.model?.dy_isBegin ?? -1;
+            if homeworkState > -1 {
+                let stateUI = self.states[homeworkState];
+                self.stateBtn.setTitle(stateUI.2, for: .normal);
+                self.stateBtn.setBackgroundImage(UIImage.init(named: stateUI.0), for: .normal);
+                self.stateBtn.setTitleColor(.init(hexString: stateUI.1), for: .normal);
+            }
+            
+        }
+        
+    }
+    
     init() {
         
         super.init(frame: .zero);
@@ -144,7 +166,7 @@ fileprivate class YZDHomeworkDetailCellSubview: UIView {
         }
         self.stateBtn.mas_makeConstraints { (make) in
             make?.right.offset()(-5);
-            make?.width.offset()(70);
+            make?.width.offset()(72);
             make?.height.offset()(28);
             make?.centerY.equalTo()(self.nameLabel);
         }
@@ -153,7 +175,15 @@ fileprivate class YZDHomeworkDetailCellSubview: UIView {
             make?.left.equalTo()(self.nameLabel);
             make?.bottom.offset()(-5);
         }
+        self.stateBtn.addTarget(self, action: #selector(stateBtnClick), for: .touchUpInside);
         
+        
+    }
+    
+    @objc
+    private func stateBtnClick() {
+        
+        self.stateBtnClickCallback?(self.model);
         
     }
     
@@ -185,7 +215,7 @@ fileprivate class YZDHomeworkDetailCellSubview: UIView {
         let view = UILabel.init();
         view.font = UIFont.systemFont(ofSize: 12);
         view.textColor = UIColor.HWColorWithHexString(hex: "#B9B9B9");
-        view.text = "题量：88 已完成：18 正确率：75%";
+        view.text = "题量：  已完成：  正确率： ";
         
         return view;
     }()
@@ -204,12 +234,13 @@ fileprivate class YZDHomeworkDetailCellSubview: UIView {
         return view;
     }()
     
-    private var states: [(String,String)] {
+    private var states: [(String,String, String)] {
         
         get {
             return [
-                ("yzd-class-practise-start","#F0792D"), ("yzd-class-practise-continue","#3793E8"),
-                ("yzd-class-practise-after","#2B44AD")
+                ("yzd-class-practise-continue","#3793E8", "继续作业"),
+                ("yzd-class-practise-again","#2B44AD","再做一次"),
+                ("yzd-class-practise-start","#F0792D","开始作业"),
             ]
         }
     }

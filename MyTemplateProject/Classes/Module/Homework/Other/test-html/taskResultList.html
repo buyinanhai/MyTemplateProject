@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>答题结果</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="js/Zepto.js"></script>
+    <script type="text/x-mathjax-config">
+			MathJax.Hub.Config({ showProcessingMessages: false, messageStyle: "none" });
+		</script>
+    <style>
+			p {
+				margin-bottom: 6px;
+				margin-top: 6px;
+			}
+
+			#content {
+				background: #f7f7f7;
+			}
+
+			.main {
+				font-size: 14px;
+			}
+
+			.item {
+				position: relative;
+				background: #fff;
+				border-radius: 8px;
+				padding: 6px 6px;
+			}
+
+			.typeName {
+				font-size: 12px;
+				line-height: 24px;
+				text-align: center;
+				background: #E5EAFF;
+				border-radius: 6px;
+				color: #2B44AD;
+				padding: 3px 10px;
+				margin-right: 4px;
+			}
+
+			.key {
+				margin-left: 8px;
+				width: 20px;
+				font-size: 12px;
+				height: 20px;
+				display: inline-block;
+				border-radius: 50%;
+				text-align: center;
+				line-height: 20px;
+			}
+
+			.selectOption {
+				background: #FFDCB2;
+				color: #FD952B;
+			}
+
+			.unSelectOption {
+				background: #EDEDED;
+				color: #777777;
+			}
+
+			.answer {
+				display: flex;
+			}
+
+			.answer-option {
+				margin-left: 14px;
+			}
+			/*内部元素两端对齐*/
+
+			.lineData {
+				align-items: center;
+				display: flex;
+			}
+
+			.grayLine {
+				flex: 1;
+				margin: 0 10px;
+				background-color: #CECECE;
+				border: none;
+				height: 1px;
+			}
+
+			.leftCircle {
+				width: 9px;
+				margin-left: -6px;
+				height: 18px;
+				background: #f7f7f7;
+				border-radius: 0 9px 9px 0;
+			}
+
+			.rightCircle {
+				width: 9px;
+				margin-right: -6px;
+				height: 18px;
+				float: right;
+				background: #f7f7f7;
+				border-radius: 9px 0 0 9px;
+			}
+
+			.answer-resolve {
+				margin-left: 4px;
+				font-size: 13px;
+			}
+		</style>
+</head>
+
+<body id="content" style="opacity:1">
+<div class="main">
+</div>
+<script src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+
+<script>
+		// 加载数据
+		function onload(obj) {
+			var list = obj;
+			var main = '';
+			$.each(list, function(i, bean) {
+				var que = bean.questionVo
+				var item = ''
+				// <!--序号 +【题型】+ 题目stem-->
+				item += '<div class="item" id = "item' + i + '">';
+				item += '<p>';
+				item += '<span class="typeName">' + que.questionTypeName + '</span>';
+				item += '<span>' + (i + 1) + '.' + que.stem + '</span>';
+				item += '</p>'
+
+				// 选项
+				var options = JSON.parse(que.options)
+				var myAnswer = bean.userAnswer;
+				var subsetOption = '';
+				$.each(options, function(i, d) {
+					Object.keys(d).forEach(function(key) {
+						var optionVal = d[key];
+						if(optionVal != null) {
+							var isCheck = myAnswer ? myAnswer.indexOf(key) > -1 : false;
+							subsetOption += '<p class="answer">';
+							subsetOption += '<span class="key ';
+							if(isCheck) {
+								subsetOption += 'selectOption';
+							} else {
+								subsetOption += 'unSelectOption';
+							}
+							subsetOption += '">' + key + '</span>';
+							subsetOption += '<span class="answer-option">' + d[key] + '</span></p>';
+						}
+					});
+				})
+				item += subsetOption;
+
+				// 分割线
+				item += '<div class="lineData">';
+				item += '<div class = "leftCircle"/>';
+				item += '<hr class = "grayLine"/>';
+				item += '<div class = "rightCircle"/>';
+				item += '</div>';
+
+				// 解析
+				item += '<div class="answer-resolve" >'
+				item += '<p>正确答案：' + que.answer + '</p>'
+				item += '<p>您的答案：' + (!myAnswer ? '' : myAnswer) + '</p>'
+				item += '<p>' + que.explanation + '</p>'
+				item += '</div>'
+
+				item += '</div>'
+				main += item + '</div><br>'
+			})
+			$(".main").html(main);
+
+			window.MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById('content')]);
+		}
+
+		/**
+		 * 滚动
+		 */
+		function doScroll(position) {
+			window.location.replace(window.location.href.toString().replace(window.location.hash, '')+"#item" + position)
+			window.location.hash = "#item" + position;
+		}
+	</script>
+
+</html>

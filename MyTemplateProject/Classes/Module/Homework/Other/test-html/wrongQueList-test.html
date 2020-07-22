@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<title>错题集</title>
+		<meta charset="UTF-8">
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<script src="js/Zepto.js"></script>
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({ showProcessingMessages: false, messageStyle: "none" });
+		</script>
+		<style>
+			p {
+				margin-bottom: 6px;
+				margin-top: 6px;
+			}
+			
+			#content {
+				background: #f7f7f7;
+			}
+			
+			.main {
+				font-size: 14px;
+			}
+			
+			.item {
+				position: relative;
+				background: #fff;
+				border-radius: 8px;
+				padding: 6px 6px;
+			}
+			
+			.typeName {
+				font-size: 12px;
+				line-height: 24px;
+				text-align: center;
+				background: #FFEEEE;
+				border-radius: 6px;
+				color: #E37171;
+				padding: 3px 10px;
+				margin-right: 4px;
+			}
+			
+			.key {
+				margin-left: 8px;
+				width: 20px;
+				font-size: 12px;
+				height: 20px;
+				display: inline-block;
+				border-radius: 50%;
+				text-align: center;
+				line-height: 20px;
+			}
+			
+			.selectOption {
+				background: #FFDCB2;
+				color: #FD952B;
+			}
+			
+			.unSelectOption {
+				background: #EDEDED;
+				color: #777777;
+			}
+			
+			.answer {
+				display: flex;
+			}
+			
+			.answer-option {
+				margin-left: 14px;
+			}
+			/*内部元素两端对齐*/
+			
+			.lineDate {
+				margin-top: 16px;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+			}
+			
+			.createDate {
+				color: #B5B5B5;
+				font-size: 12px;
+				margin-left: 6px;
+				margin-top: 10px;
+			}
+			
+			.removeBtn {
+				text-align: center;
+				background: #FFDCB2;
+				color: #F0792D;
+				border-radius: 20px;
+				padding: 5px 20px;
+				margin-right: 4px;
+			}
+			
+			.grayLine {
+				margin-left: 6px;
+				margin-right: 6px;
+				background-color: #CECECE;
+				border: none;
+				height: 1px;
+			}
+			/*内部元素居中对齐*/
+			
+			.expDiv {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+			
+			.lookExp {
+				font-size: 13px;
+				color: #444444;
+			}
+			
+			.answer-resolve {
+				display: none;
+				margin-left: 4px;
+				font-size: 13px;
+			}
+			/*用来判断解析显隐的标识*/
+			
+			.active {}
+			
+			.checkBox {
+				width: 18px;
+				height: 18px;
+				display: none;
+				position: absolute;
+				right: 2px;
+				top: 2px;
+			}
+			
+			.selected {}
+		</style>
+	</head>
+
+	<body id="content" style="opacity:1">
+		<div class="main">
+		</div>
+		<script src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+	</body>
+
+	<script>
+		// 加载数据
+		function onload(obj) {
+			var list = obj;
+			var main = '';
+			$.each(list, function(i, bean) {
+				var que = bean.questionVo
+				var item = ''
+				// <!--序号 +【题型】+ 题目stem-->
+				item += '<div class="item">';
+				item += '<p>';
+				item += '<span class="typeName">' + que.questionTypeName + '</span>';
+				item += '<span>' + (i + 1) + '.' + que.stem + '</span>';
+				item += '</p>'
+
+				// 选项
+				var options = JSON.parse(que.options)
+				var myAnswer = que.myAnswer;
+				var subsetOption = '';
+				$.each(options, function(i, d) {
+					Object.keys(d).forEach(function(key) {
+						var optionVal = d[key];
+						if(optionVal != null) {
+							var isCheck = myAnswer ? myAnswer.indexOf(key) > -1 : false;
+							subsetOption += '<p class="answer">';
+							subsetOption += '<span class="key ';
+							if(isCheck) {
+								subsetOption += 'selectOption';
+							} else {
+								subsetOption += 'unSelectOption';
+							}
+							subsetOption += '">' + key + '</span>';
+							subsetOption += '<span class="answer-option">' + d[key] + '</span></p>';
+						}
+					});
+				})
+				item += subsetOption;
+
+				// 时间
+				item += '<div class ="lineDate"><span class = "createDate">' + bean.createDate + '</span>';
+				item += '<span class = "removeBtn" data-num="' + i + '">' + "移除" + '</span>'
+				item += '</div>';
+
+				// 线条
+				item += '<hr class = "grayLine"/>';
+
+				// 查看解析按钮
+				item += '<div class = "expDiv"><span class="lookExp">';
+				item += '<img width="8" height="8" src = "imgs/img_down.png" style="vertical-align: 1px;margin-right: 5px;"/>';
+				item += "查看解析" + '</span></div>';
+
+				// 解析
+				item += '<div class="answer-resolve" >'
+				item += '<p>正确答案：' + que.answer + '</p>'
+				item += '<p>' + que.explanation + '</p>'
+				item += '</div>'
+
+				// 复选框
+				item += '<img class="checkBox active" data-num="' + i + '" src = "imgs/img_checkbox_0.png" />'
+
+				item += '</div>'
+				main += item + '</div><br>'
+			})
+			$(".main").html(main);
+
+			//查看解析
+			$(".lookExp").click(function lookExp() {
+				$(this).toggleClass("active")
+				$(this).parent().next(".answer-resolve").toggle();
+				if($(this).hasClass("active")) {
+					$(this).children("img").css("transform", "rotate(180deg)");
+				} else {
+					$(this).children("img").css("transform", "none");
+				}
+
+			})
+
+			// 移除本题
+			$(".removeBtn").click(function removeBtn() {
+				var position = $(this).data("num")
+				window.client.removeThisQuestion(position)
+			})
+
+			$(".checkBox").click(function selectQue() {
+				if($(this).hasClass("active")) {
+					$(this).removeClass("active");
+					var position = $(this).data("num")
+					var state;
+					if($(this).hasClass("selected")) {
+						state = true;
+					} else {
+						state = false;
+					}
+					state = !state;
+					if(state) {
+						$(this).addClass("selected")
+						$(this).attr("src", "imgs/img_checkbox_1.png");
+					} else {
+						$(this).removeClass("selected")
+						$(this).attr("src", "imgs/img_checkbox_0.png");
+					}
+					window.client.onCheck(position, state)
+				}
+			})
+
+			window.MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById('content')]);
+		}
+
+		/**
+		 * 更改编辑状态
+		 */
+		function updateEditState(state) {
+			if(state) {
+				$(".checkBox").show();
+				$(".removeBtn").hide();
+				$(".checkBox").addClass();
+			} else {
+				$(".checkBox").hide();
+				$(".removeBtn").show();
+				selectAll(false);
+			}
+		}
+
+		/**
+		 * 全选
+		 * @param {Object} flag
+		 */
+		function selectAll(flag) {
+			if(flag) {
+				$(".checkBox").attr("src", "imgs/img_checkbox_1.png");
+			} else {
+				$(".checkBox").attr("src", "imgs/img_checkbox_0.png");
+			}
+		}
+
+		/**
+		 * 能否选择
+		 */
+		function canCheck() {
+			$(".checkBox").addClass("active");
+		}
+
+		onload([{
+				"createDate": "2020-07-13 10:07:43",
+				"id": 26,
+				"questionVo": {
+					"answer": "C",
+					"difficultId": 3,
+					"difficultName": "一般",
+					"explanation": "【分析】根据反应的微观示意图，分析反应物、生成物，写出反应的方程式，根据方程式分析有关的问题。 <br>【解答】由反应的微观示意图可知，反应物甲、乙分别是二氧化氮和一氧化碳，生成物丙丁分别是二氧化碳和氮气由此可知： <br>A、该反应的反应物是两种化合物，此反应不属于置换反应。故A错误； <br>B、丁是氮气，有一种元素组成。故B错误； <br>C、乙是一氧化碳，丙是二氧化碳，由相同的元素组成。故C正确； <br>D、反应前后有二氧化氮、一氧化碳、二氧化碳、氮气四种分子。故D错误。 <br>故选C。",
+					"optionNum": 0,
+					"options": "[{\"A\":\"此反应属于置换反应\",\"B\":\"丁物质由两种元素组成\",\"C\":\"乙和丙由相同的元素组成\",\"D\":\"反应前后共有三种分子\"}]",
+					"questionTypeId": 1,
+					"questionTypeName": "单选题",
+					"score": 0,
+					"stem": "（2013.宁波）汽车尾气是大气污染主要来源之一。2012年起我市所有机动车必须取得“环保合格标志”后方能安检。“三效催化转换器”可将汽车尾气中的部分有毒气体转化为无毒气体。如图所示为其中的某个反应的微观示意图。则（　&nbsp;&nbsp;&nbsp; 　） <br> <img src=\"https://cunw-edu-zj.oss-cn-hangzhou.aliyuncs.com/2/8c/88/8c88d74d090e8551420f30247324b53a.png\">"
+				}
+			},
+			{
+				"id": 25,
+				"questionVo": {
+					"answer": "A",
+					"difficultId": 5,
+					"difficultName": "困难",
+					"explanation": "<div class=\"tParsing\">  【分析】首先根据所给的物质的性质结合反应间的转化关系，找到题中的题眼进行推断解题，硫酸会和其余的四种物质反应，可以知道丁就是硫酸，然后根据其他物质的性质进行验证推导。要发现题眼，要先了解它们之间的相互是否会反应，它们之间的反应关系如下：  <table border=\"1\" cellpadding=\"0\" cellspacing=\"0\">   <tbody>    <tr>     <td style=\"width:95px;\"></td>     <td style=\"width:92px;\">铁</td>     <td style=\"width:96px;\">氧化铁&nbsp;</td>     <td style=\"width:95px;\">硫酸</td>     <td style=\"width:96px;\">氢氧化钙&nbsp;</td>     <td style=\"width:95px;\">碳酸钠</td>    </tr>    <tr>     <td style=\"width:95px;\">铁</td>     <td style=\"width:92px;\">不会反应</td>     <td style=\"width:96px;\">不会反应</td>     <td style=\"width:95px;\">会反应</td>     <td style=\"width:96px;\">不会反应</td>     <td style=\"width:95px;\">不会反应</td>    </tr>    <tr>     <td style=\"width:95px;\">氧化铁</td>     <td style=\"width:92px;\">不会反应</td>     <td style=\"width:96px;\">不会反应</td>     <td style=\"width:95px;\">会反应</td>     <td style=\"width:96px;\">不会反应</td>     <td style=\"width:95px;\">不会反应</td>    </tr>    <tr>     <td style=\"width:95px;\">硫酸</td>     <td style=\"width:92px;\">会反应</td>     <td style=\"width:96px;\">会反应</td>     <td style=\"width:95px;\">不会反应</td>     <td style=\"width:96px;\">会反应</td>     <td style=\"width:95px;\">会反应</td>    </tr>    <tr>     <td style=\"width:95px;\">氢氧化钙</td>     <td style=\"width:92px;\">不会反应</td>     <td style=\"width:96px;\">不会反应</td>     <td style=\"width:95px;\">不会反应</td>     <td style=\"width:96px;\">不会反应</td>     <td style=\"width:95px;\">会反应</td>    </tr>    <tr>     <td style=\"width:95px;\">碳酸钠</td>     <td style=\"width:92px;\">不会反应</td>     <td style=\"width:96px;\">不会反应</td>     <td style=\"width:95px;\">不会反应</td>     <td style=\"width:96px;\">会反应</td>     <td style=\"width:95px;\">不会反应</td>    </tr>   </tbody>  </table>【解答】  <br>A、根据上面可以看出，碳酸钠会和两种物质反应，而碳酸钠和氢氧化钙都会和两种物质反应，所以甲和丙要从碳酸钠和氢氧化钙中选，丙可能是碳酸钠溶液，故A正确；  <br>B、根据上表可以看出，会与四种物质发生反应的只有硫酸，可知丁一定是硫酸，故B错；  <br>C、只有氧化铁会转化成铁，但是不一定都是置换反应，比如一氧化碳还原氧化铁就不是置换反应，故C错；  <br>D、中和反应必须是酸和碱反应生成盐和水，丁是硫酸，属于酸，但是甲可能是氢氧化钙，也可能是碳酸钠，所以不一定是中和反应，故D错。  <br>故选A。  <br> </div>",
+					"optionNum": 0,
+					"options": "[{\"A\":\"丙可能是碳酸钠溶液&nbsp;\",\"B\":\"丁可能是氢氧化钙溶液\",\"C\":\"乙必须通过置换反应转化为铁\",\"D\":\"甲和丁的反应一定是中和反应\"}]",
+					"questionTypeId": 1,
+					"questionTypeName": "单选题",
+					"score": 0,
+					"stem": "（2013·宁波）现有铁、氧化铁、稀硫酸、氢氧化钙溶液、碳酸钠溶液等五种物质，存在着如图所示的相互反应或转化关系(图中“一”表示物质间可以发生化学反应，“→”表示物质间存在相应的转化关系)。下列判断合理的是（&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ） <br> <img src=\"https://cunw-edu-zj.oss-cn-hangzhou.aliyuncs.com/2/22/b6/22b6e9b080323afdd5d3b6bd34054ddf.png\">"
+				}
+			},
+			{
+				"createDate": "2020-07-13 06:58:31",
+				"id": 24,
+				"questionVo": {
+					"answer": "B",
+					"difficultId": 3,
+					"difficultName": "一般",
+					"explanation": "【分析】解答此题时可以从植物细胞吸水和失水的原理，根细胞液的浓度和土壤溶液浓度的变化方面来切入。 <br>【解答】植物细胞吸水和失水的原理是细胞外部溶液的浓度大于细胞液浓度时细胞就失水，细胞外部溶液的浓度小于细胞液浓度时细胞就吸水。因此，如上图所示，将丝瓜茎靠近基部处切断，可发现“水”会从切面处不断缓缓地向外冒，并可持续一段时间。这段时间内根细胞液的浓度大于土壤溶液的浓度。故B符合题意。 <br>故答案为：B",
+					"optionNum": 0,
+					"options": "[{\"A\":\"植物的根细胞已经丧失呼吸作用\",\"B\":\"根细胞液的浓度大于土壤溶液的浓度\",\"C\":\"\\u201c水\\u201d主要从切面的筛管处冒出\",\"D\":\"根系吸水对植物体内水往高处流动没有影响\"}]",
+					"questionTypeId": 1,
+					"questionTypeName": "单选题",
+					"score": 0,
+					"stem": "（2013 宁波）如图所示，将丝瓜茎靠近基部处切断，可发现“水”会从切面处不断缓缓地向外冒，并可持续一段时间。这段时间内（&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ） <br> <img src=\"https://cunw-edu-zj.oss-cn-hangzhou.aliyuncs.com/2/69/49/694962aa3b7513076138ab824cff9f1d.png\">"
+				}
+			},
+			{
+				"createDate": "2020-07-13 06:58:31",
+				"id": 23,
+				"questionVo": {
+					"answer": "B",
+					"difficultId": 1,
+					"difficultName": "容易",
+					"explanation": "【分析】发电机是根据电磁感应原理制成的，将机械能转化为电能，分析四幅图中各实验的原理找出符合题意的答案。 <br>【解答】A、图中实验是奥斯特实验，证明了通电导体周围存在磁场，不是发电机的原理。 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; B、图中实验是电磁感应实验，是发电机的工作原理。 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; C、图中实验是通电导体在磁场中受到力的作用，是电动机的工作原理。 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; D、图中实验探究的是电磁铁磁性强弱和线圈匝数的关系，不符合题意。",
+					"optionNum": 0,
+					"options": "[{\"A\":\"&nbsp; <img src=\\\"https://cunw-edu-zj.oss-cn-hangzhou.aliyuncs.com/2/25/f2/25f257e89978b3ef7c5d74e0a1454c9d.png\\\">\",\"B\":\"&nbsp; <img src=\\\"https://cunw-edu-zj.oss-cn-hangzhou.aliyuncs.com/2/6a/a9/6aa9ec10a2f28e567784d50300cbab5f.png\\\">\",\"C\":\"&nbsp; <img src=\\\"https://cunw-edu-zj.oss-cn-hangzhou.aliyuncs.com/2/f3/7d/f37d6178dcbc3c249f424b4b7a1d70b8.png\\\">\",\"D\":\"&nbsp; <img src=\\\"https://cunw-edu-zj.oss-cn-hangzhou.aliyuncs.com/2/59/db/59db8528f71baddf4e2bc0dd8d62aa6a.png\\\">\"}]",
+					"questionTypeId": 1,
+					"questionTypeName": "单选题",
+					"score": 0,
+					"stem": "<span style=\"line-height: 22px;\">（2013·宁波）</span>发电机是把机械能转化为电能的装置，下列能作为发电机设计原理的装置是（　　）"
+				}
+			}
+		]);
+	</script>
+
+</html>

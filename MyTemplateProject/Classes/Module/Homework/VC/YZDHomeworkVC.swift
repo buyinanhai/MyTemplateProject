@@ -18,7 +18,7 @@ class YZDHomeworkVC: UIViewController {
         self.navigationItem.title = "作业中心"
         self.setupSubview();
         self.tableView.begainRefreshData();
-        self.navigationController?.navigationBar.backgroundColor = kDY_ThemeColor;
+        self.navigationController?.navigationBar.isOpaque = false;
         // Do any additional setup after loading the view.
     }
     
@@ -43,9 +43,15 @@ class YZDHomeworkVC: UIViewController {
         self.tableView.backgroundColor = .HWColorWithHexString(hex: "#F7F7F7");
         
         let rightBtn = DYButton.init(type: .custom);
-        rightBtn.direction = 1;
+        rightBtn.titleLabel?.font = .systemFont(ofSize: 14);
         rightBtn.setTitle("答题记录", for: .normal);
         rightBtn.addTarget(self, action: #selector(rightBarButtonClick), for: .touchUpInside);
+//        rightBtn.setImage(UIImage.init(named: "yzd-homework-right-btn"), for: .normal);
+        rightBtn.setTitleColor(.init(hexString: "#FC952C"), for: .normal)
+//        rightBtn.margin = 8
+//        rightBtn.bounds = CGRect.init(x: 0, y: 0, width: 94, height: 25);
+//        rightBtn.addRound(12.5);
+//        rightBtn.backgroundColor = .init(hexString: "#FFF3E4");
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: rightBtn);
         
     }
@@ -59,26 +65,30 @@ class YZDHomeworkVC: UIViewController {
         
     }
     
-    private func loadData(page: Int, result:DYTableView_Result) {
+    private func loadData(page: Int, result:@escaping DYTableView_Result) {
         
-        var datas:[YZDHomeworkModel] = [];
-        
-        for index in 0..<3 {
-            
-            let model = YZDHomeworkModel.init();
-            model.homeworkName = "作业名称\(index + 1)";
-            model.topicCount = "\(index + 10)";
-            model.accuracy = "\(CGFloat(99.0 / CGFloat(index)))";
-            datas.append(model);
+        YZDHomeworkNetwork.getMyHomework(page: page, pageSize: 10).dy_startRequest { (response, error) in
+            if let _value = response as? [String : Any],let datas = _value["list"] as? [[String : Any]] {
+                var arrays:[YZDHomeworkModel] = [];
+                for item in datas {
+                    let model = YZDHomeworkModel.initModel(dict: item);
+                    arrays.append(model);
+                }
+                result(arrays);
+            } else {
+                DYNetworkHUD.showInfo(message: error?.errorMessage ?? "没有相关数据", inView: nil);
+                result([]);
+            }
         }
-        result(datas);
         
     }
     
     private func didSelectedTableViewCell(cell: YZDHomeworkCell, index: IndexPath) {
         
         let vc = YZDHomeworkDetailVC.init();
-        
+        if let value = self.tableView.dy_dataSource[index.row] as? YZDHomeworkModel {
+            vc.homeworkModel = value;
+        }
         self.navigationController?.pushViewController(vc, animated: true);
         
         
@@ -95,7 +105,7 @@ class YZDHomeworkVC: UIViewController {
         view.separatorStyle = .none;
         self.searchBar.frame = CGRect.init(x: 0, y: 0, width: self.view.width, height: 55)
         view.tableHeaderView = self.searchBar;
-        
+        view.pageIndex = 0;
         return view;
         
     }()

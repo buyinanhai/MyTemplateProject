@@ -20,7 +20,7 @@ class YZDHomeworkCell: DYTableViewCell {
             if let value = self.model as? YZDHomeworkModel {
                 
                 self.titleLabel.text = value.homeworkName;
-                self.topicLabel.text = "题量：\(value.topicCount ?? "0")   正确率：\(value.accuracy ?? "未做题")"
+                self.topicLabel.text = "题量：\(value.topicCount ?? 0)   正确率：\(value.accuracy ?? 0)"
 //                sd_loadingImg(value.icon ?? "", iv: self.iconView, defImgName: "00000000006")
                 self.iconView.dy_setImage(urlStr: value.icon ?? "", placeholder: UIImage.init(named: "00000000006"));
             }
@@ -103,7 +103,7 @@ class YZDHomeworkCell: DYTableViewCell {
         
         let label = UILabel.init()
         label.textColor = UIColor.HWColorWithHexString(hex: "#2A2B30");
-        label.font = UIFont.boldSystemFont(ofSize: 15);
+        label.font = UIFont.boldSystemFont(ofSize: 15.5);
         label.numberOfLines = 2;
         label.text = "作业名称"
         return label;

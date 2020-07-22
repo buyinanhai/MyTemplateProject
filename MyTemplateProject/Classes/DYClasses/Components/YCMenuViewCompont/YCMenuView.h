@@ -50,8 +50,8 @@
 @property (nonatomic, readonly) NSString      *title;
 @property (nonatomic, readonly) UIImage       *image;
 @property (nonatomic,copy, readonly) void (^handler)(YCMenuAction *action);
-+ (instancetype)actionWithTitle:(NSString *)title image:(UIImage *)image;
-+ (instancetype)actionWithTitle:(NSString *)title image:(UIImage *)image handler:(void (^)(YCMenuAction *action))handler;
++ (instancetype)actionWithTitle:(NSString *)title image:(UIImage * __nullable)image;
++ (instancetype)actionWithTitle:(NSString *)title image:(UIImage *__nullable)image handler:(void (^)(YCMenuAction *action))handler;
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
 @end

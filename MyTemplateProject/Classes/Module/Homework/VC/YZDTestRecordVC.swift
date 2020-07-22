@@ -42,16 +42,36 @@ class YZDTestRecordVC: UIViewController {
     }
     
     
-    private func loadData(_ page: Int, result: DYTableView_Result) {
+    private func loadData(_ page: Int, result:@escaping DYTableView_Result) {
         
-        result([1,2,3,4,3,3,3,3,3]);
+        YZDHomeworkNetwork.getMyHistoryHomework().dy_startRequest { (response, error) in
+            
+            if let items = response as? [[String : Any]] {
+                
+                var array:[YZDTestRecordCellModel] = [];
+                for item in items {
+                   
+                    if  let model = YZDTestRecordCellModel.init(JSON: item) {
+                        array.append(model);
+                    }
+                }
+                result(array);
+                
+            } else {
+                DYNetworkHUD.showInfo(message: error?.errorMessage ?? "没有相关数据", inView: nil);
+                result([]);
+            }
+            
+            
+        }
+        
         
     }
     
     private func didSelectedCell(_ cell: UITableViewCell, indexPath: IndexPath) {
         
         let vc = YZDTestResultVC.init();
-        
+        vc.recordModel = self.tableView.dy_dataSource[indexPath.row] as? YZDTestRecordCellModel;
         self.navigationController?.pushViewController(vc, animated: true);
     }
     
@@ -62,7 +82,7 @@ class YZDTestRecordVC: UIViewController {
           let view = DYTableView.init(frame: .zero);
           view.rowHeight = 120;
           view.isShowNoData = true;
-          view.noDataText = "没有错题集";
+          view.noDataText = "没有答题记录";
           view.register(YZDTestRecordCell.self, forCellReuseIdentifier: "cell");
           view.separatorStyle = .none;
           self.searchBar.frame = CGRect.init(x: 0, y: 0, width: self.view.width, height: 55)

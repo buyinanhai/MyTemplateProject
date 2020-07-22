@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		04D9CD2F49CE7ECB939C1102 /* Pods_MyTemplateProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 954802C722A215C21B6DC642 /* Pods_MyTemplateProject.framework */; };
+		923DC76A24C6883500CCCADC /* TestWebViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923DC76924C6883400CCCADC /* TestWebViewVC.swift */; };
+		9248D89224C5424A001C426C /* DYNetworkHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9248D89124C5424A001C426C /* DYNetworkHUD.swift */; };
+		9248D89524C57398001C426C /* YZDHomeworkChapterSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9248D89324C57398001C426C /* YZDHomeworkChapterSectionModel.swift */; };
+		9248D89624C57399001C426C /* YZDHomeworkChapterSectionModel_afterWorks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9248D89424C57398001C426C /* YZDHomeworkChapterSectionModel_afterWorks.swift */; };
+		9248D89C24C593C9001C426C /* YZDHomeworkQuestionModel_question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9248D89824C593C8001C426C /* YZDHomeworkQuestionModel_question.swift */; };
+		9248D89D24C593C9001C426C /* YZDHomeworkQuestionModel_optionsMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9248D89924C593C9001C426C /* YZDHomeworkQuestionModel_optionsMap.swift */; };
+		9248D89E24C593C9001C426C /* YZDHomeworkQuestionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9248D89A24C593C9001C426C /* YZDHomeworkQuestionModel.swift */; };
+		9248D89F24C593C9001C426C /* YZDHomeworkQuestionModel_optionsJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9248D89B24C593C9001C426C /* YZDHomeworkQuestionModel_optionsJson.swift */; };
+		9248D8B324C5968A001C426C /* test-html in Resources */ = {isa = PBXBuildFile; fileRef = 9248D8B224C5968A001C426C /* test-html */; };
 		92631AE224B86304005A534C /* YZDHomeworkDetailHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92631AD724B86304005A534C /* YZDHomeworkDetailHeaderView.xib */; };
 		92631AE424B86304005A534C /* YZDHomeworkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92631ADA24B86304005A534C /* YZDHomeworkCell.swift */; };
 		92631AE524B86304005A534C /* YZDHomeworkDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92631ADB24B86304005A534C /* YZDHomeworkDetailHeaderView.swift */; };
@@ -81,10 +90,21 @@
 		92EE7F1824B8570300BF4DF7 /* DYSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EE7EF424B8570200BF4DF7 /* DYSearchVC.swift */; };
 		92EE7F1924B8570300BF4DF7 /* YCMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92EE7EF724B8570200BF4DF7 /* YCMenuView.m */; };
 		92EE7F1A24B8570300BF4DF7 /* DYMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EE7EF924B8570200BF4DF7 /* DYMenuView.swift */; };
+		92F874AA24C13C780063F8B1 /* YZDHomeworkNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F874A924C13C780063F8B1 /* YZDHomeworkNetwork.swift */; };
+		92F874AC24C19CC50063F8B1 /* YZDTestRecordCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F874AB24C19CC50063F8B1 /* YZDTestRecordCellModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		5DED31BCD404196FBE8CB7E0 /* Pods-MyTemplateProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTemplateProject.debug.xcconfig"; path = "Target Support Files/Pods-MyTemplateProject/Pods-MyTemplateProject.debug.xcconfig"; sourceTree = "<group>"; };
+		923DC76924C6883400CCCADC /* TestWebViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestWebViewVC.swift; sourceTree = "<group>"; };
+		9248D89124C5424A001C426C /* DYNetworkHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DYNetworkHUD.swift; sourceTree = "<group>"; };
+		9248D89324C57398001C426C /* YZDHomeworkChapterSectionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDHomeworkChapterSectionModel.swift; sourceTree = "<group>"; };
+		9248D89424C57398001C426C /* YZDHomeworkChapterSectionModel_afterWorks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDHomeworkChapterSectionModel_afterWorks.swift; sourceTree = "<group>"; };
+		9248D89824C593C8001C426C /* YZDHomeworkQuestionModel_question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDHomeworkQuestionModel_question.swift; sourceTree = "<group>"; };
+		9248D89924C593C9001C426C /* YZDHomeworkQuestionModel_optionsMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDHomeworkQuestionModel_optionsMap.swift; sourceTree = "<group>"; };
+		9248D89A24C593C9001C426C /* YZDHomeworkQuestionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDHomeworkQuestionModel.swift; sourceTree = "<group>"; };
+		9248D89B24C593C9001C426C /* YZDHomeworkQuestionModel_optionsJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDHomeworkQuestionModel_optionsJson.swift; sourceTree = "<group>"; };
+		9248D8B224C5968A001C426C /* test-html */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "test-html"; sourceTree = "<group>"; };
 		92631AD724B86304005A534C /* YZDHomeworkDetailHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YZDHomeworkDetailHeaderView.xib; sourceTree = "<group>"; };
 		92631ADA24B86304005A534C /* YZDHomeworkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDHomeworkCell.swift; sourceTree = "<group>"; };
 		92631ADB24B86304005A534C /* YZDHomeworkDetailHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDHomeworkDetailHeaderView.swift; sourceTree = "<group>"; };
@@ -182,7 +202,7 @@
 		92EE7EDD24B8570200BF4DF7 /* NSString+dy_extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+dy_extension.h"; sourceTree = "<group>"; };
 		92EE7EDE24B8570200BF4DF7 /* UIButton+Ani.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Ani.h"; sourceTree = "<group>"; };
 		92EE7EE024B8570200BF4DF7 /* DYMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DYMacro.h; sourceTree = "<group>"; };
-		92EE7EE124B8570200BF4DF7 /* OC-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OC-Header.h"; sourceTree = "<group>"; };
+		92EE7EE124B8570200BF4DF7 /* DYOCHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DYOCHeader.h; sourceTree = "<group>"; };
 		92EE7EE324B8570200BF4DF7 /* DYScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DYScrollView.m; sourceTree = "<group>"; };
 		92EE7EE524B8570200BF4DF7 /* DYPresentationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DYPresentationVC.swift; sourceTree = "<group>"; };
 		92EE7EE624B8570200BF4DF7 /* DYTransitionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DYTransitionVC.swift; sourceTree = "<group>"; };
@@ -204,6 +224,8 @@
 		92EE7EF724B8570200BF4DF7 /* YCMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YCMenuView.m; sourceTree = "<group>"; };
 		92EE7EF824B8570200BF4DF7 /* DYButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DYButton.h; sourceTree = "<group>"; };
 		92EE7EF924B8570200BF4DF7 /* DYMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DYMenuView.swift; sourceTree = "<group>"; };
+		92F874A924C13C780063F8B1 /* YZDHomeworkNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YZDHomeworkNetwork.swift; sourceTree = "<group>"; };
+		92F874AB24C19CC50063F8B1 /* YZDTestRecordCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YZDTestRecordCellModel.swift; sourceTree = "<group>"; };
 		954802C722A215C21B6DC642 /* Pods_MyTemplateProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyTemplateProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA9EC7382AF665F2C02C2AAE /* Pods-MyTemplateProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTemplateProject.release.xcconfig"; path = "Target Support Files/Pods-MyTemplateProject/Pods-MyTemplateProject.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -229,9 +251,29 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		9248D89724C593B4001C426C /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				9248D89B24C593C9001C426C /* YZDHomeworkQuestionModel_optionsJson.swift */,
+				9248D89924C593C9001C426C /* YZDHomeworkQuestionModel_optionsMap.swift */,
+				9248D89824C593C8001C426C /* YZDHomeworkQuestionModel_question.swift */,
+				9248D89A24C593C9001C426C /* YZDHomeworkQuestionModel.swift */,
+			);
+			path = Test;
+			sourceTree = "<group>";
+		};
+		9248D8A024C5962E001C426C /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				9248D8B224C5968A001C426C /* test-html */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
 		92631AD424B85BF1005A534C /* Homework */ = {
 			isa = PBXGroup;
 			children = (
+				9248D8A024C5962E001C426C /* Other */,
 				92631ADC24B86304005A534C /* Model */,
 				92631ADE24B86304005A534C /* VC */,
 				92631AD624B86304005A534C /* View */,
@@ -265,7 +307,11 @@
 		92631ADC24B86304005A534C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9248D89724C593B4001C426C /* Test */,
+				9248D89424C57398001C426C /* YZDHomeworkChapterSectionModel_afterWorks.swift */,
+				9248D89324C57398001C426C /* YZDHomeworkChapterSectionModel.swift */,
 				92631ADD24B86304005A534C /* YZDHomeworkModel.swift */,
+				92F874AB24C19CC50063F8B1 /* YZDTestRecordCellModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -296,6 +342,7 @@
 		92631B0D24BFF024005A534C /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				92F874A824C13C250063F8B1 /* YZDHomework */,
 				92631B0E24BFF024005A534C /* Home */,
 				92631B1524BFF024005A534C /* MainNetwork.h */,
 				92631B1124BFF024005A534C /* MainNetwork.m */,
@@ -442,6 +489,7 @@
 			isa = PBXGroup;
 			children = (
 				92EE7EBB24B8570200BF4DF7 /* HomeVC.swift */,
+				923DC76924C6883400CCCADC /* TestWebViewVC.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -466,6 +514,7 @@
 		92EE7EC024B8570200BF4DF7 /* DYClasses */ = {
 			isa = PBXGroup;
 			children = (
+				92EE7ED724B8570200BF4DF7 /* DYExtension.swift */,
 				92EE7EC124B8570200BF4DF7 /* Category */,
 				92EE7EDF24B8570200BF4DF7 /* Macros */,
 				92EE7EE224B8570200BF4DF7 /* Components */,
@@ -497,7 +546,6 @@
 				92EE7ED424B8570200BF4DF7 /* NSDate+dy_extension.h */,
 				92EE7ED524B8570200BF4DF7 /* NSString+RegexCategory.h */,
 				92EE7ED624B8570200BF4DF7 /* UIImage+dy_extension.m */,
-				92EE7ED724B8570200BF4DF7 /* DYExtension.swift */,
 				92EE7ED824B8570200BF4DF7 /* UIColor+dy_extension.h */,
 				92EE7ED924B8570200BF4DF7 /* NSDictionary+dy_extension.m */,
 				92EE7EDA24B8570200BF4DF7 /* NSArray+tx_extension.m */,
@@ -515,7 +563,7 @@
 			isa = PBXGroup;
 			children = (
 				92EE7EE024B8570200BF4DF7 /* DYMacro.h */,
-				92EE7EE124B8570200BF4DF7 /* OC-Header.h */,
+				92EE7EE124B8570200BF4DF7 /* DYOCHeader.h */,
 			);
 			path = Macros;
 			sourceTree = "<group>";
@@ -543,6 +591,7 @@
 				92EE7EF824B8570200BF4DF7 /* DYButton.h */,
 				92EE7EF924B8570200BF4DF7 /* DYMenuView.swift */,
 				92631B0824BDD9BC005A534C /* DYCollectionViewGridLayout.swift */,
+				9248D89124C5424A001C426C /* DYNetworkHUD.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -570,6 +619,14 @@
 			children = (
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		92F874A824C13C250063F8B1 /* YZDHomework */ = {
+			isa = PBXGroup;
+			children = (
+				92F874A924C13C780063F8B1 /* YZDHomeworkNetwork.swift */,
+			);
+			path = YZDHomework;
 			sourceTree = "<group>";
 		};
 		932F1271B2F9324CB01E2FED /* Frameworks */ = {
@@ -642,6 +699,7 @@
 			files = (
 				92EE7EFD24B8570300BF4DF7 /* MyVC.xib in Resources */,
 				92631AE224B86304005A534C /* YZDHomeworkDetailHeaderView.xib in Resources */,
+				9248D8B324C5968A001C426C /* test-html in Resources */,
 				92EE7E3D24B8058D00BF4DF7 /* LaunchScreen.storyboard in Resources */,
 				92EE7E3A24B8058D00BF4DF7 /* Assets.xcassets in Resources */,
 				92EE7E3524B8058800BF4DF7 /* Main.storyboard in Resources */,
@@ -704,6 +762,7 @@
 				92631B4024BFF024005A534C /* YTKBatchRequestAgent.m in Sources */,
 				92631B3424BFF024005A534C /* HomeNetWork.m in Sources */,
 				92631B3A24BFF024005A534C /* YTKChainRequest.m in Sources */,
+				9248D89524C57398001C426C /* YZDHomeworkChapterSectionModel.swift in Sources */,
 				92EE7F1124B8570300BF4DF7 /* DYPickerView.m in Sources */,
 				92EE7E3224B8058800BF4DF7 /* ViewController.swift in Sources */,
 				92631B3824BFF024005A534C /* DYBaseNetwork.m in Sources */,
@@ -717,7 +776,9 @@
 				92EE7EFB24B8570300BF4DF7 /* HomeVC.swift in Sources */,
 				92EE7F0B24B8570300BF4DF7 /* NSArray+tx_extension.m in Sources */,
 				92EE7F1224B8570300BF4DF7 /* DYTableView.m in Sources */,
+				9248D89C24C593C9001C426C /* YZDHomeworkQuestionModel_question.swift in Sources */,
 				92EE7F0324B8570300BF4DF7 /* UILabel+dy_extension.m in Sources */,
+				9248D89224C5424A001C426C /* DYNetworkHUD.swift in Sources */,
 				92631B3B24BFF024005A534C /* YTKNetworkPrivate.m in Sources */,
 				92EE7E2E24B8058800BF4DF7 /* AppDelegate.swift in Sources */,
 				92EE7F1324B8570300BF4DF7 /* DYButton.m in Sources */,
@@ -727,13 +788,16 @@
 				92EE7E3024B8058800BF4DF7 /* SceneDelegate.swift in Sources */,
 				92EE7EFE24B8570300BF4DF7 /* UIViewController+dy_extension.m in Sources */,
 				92631B3E24BFF024005A534C /* YTKNetworkAgent.m in Sources */,
+				9248D89E24C593C9001C426C /* YZDHomeworkQuestionModel.swift in Sources */,
 				92EE7F0524B8570300BF4DF7 /* UIButton+Ani.m in Sources */,
 				92EE7F1A24B8570300BF4DF7 /* DYMenuView.swift in Sources */,
+				92F874AC24C19CC50063F8B1 /* YZDTestRecordCellModel.swift in Sources */,
 				92631B0724BDD045005A534C /* YZDTestResultHeader.swift in Sources */,
 				92631B0B24BEAE8B005A534C /* YZDTestResultCell.swift in Sources */,
 				92631B4124BFF024005A534C /* YTKRequest.m in Sources */,
 				92631B0124BDC427005A534C /* YZDTestCollectionEditVC.swift in Sources */,
 				92EE7F0224B8570300BF4DF7 /* NSDate+dy_extension.m in Sources */,
+				923DC76A24C6883500CCCADC /* TestWebViewVC.swift in Sources */,
 				92631AED24BC0DD1005A534C /* YZDHomeworkDetailCell.swift in Sources */,
 				92631B3F24BFF024005A534C /* YTKChainRequestAgent.m in Sources */,
 				92EE7F1024B8570300BF4DF7 /* DYView.m in Sources */,
@@ -745,9 +809,12 @@
 				92EE7EFC24B8570300BF4DF7 /* MyVC.swift in Sources */,
 				92EE7F0C24B8570300BF4DF7 /* NSTimer+dy_extension.m in Sources */,
 				92631AE724B86304005A534C /* YZDHomeworkDetailVC.swift in Sources */,
+				92F874AA24C13C780063F8B1 /* YZDHomeworkNetwork.swift in Sources */,
 				92EE7F1724B8570300BF4DF7 /* DYWebViewVC.m in Sources */,
 				92EE7E3824B8058800BF4DF7 /* MyTemplateProject.xcdatamodeld in Sources */,
+				9248D89F24C593C9001C426C /* YZDHomeworkQuestionModel_optionsJson.swift in Sources */,
 				92EE7F1624B8570300BF4DF7 /* DYMaskingView.swift in Sources */,
+				9248D89D24C593C9001C426C /* YZDHomeworkQuestionModel_optionsMap.swift in Sources */,
 				92EE7F0924B8570300BF4DF7 /* DYExtension.swift in Sources */,
 				92631AE524B86304005A534C /* YZDHomeworkDetailHeaderView.swift in Sources */,
 				92631AFB24BDC374005A534C /* YZDTestCollectionVC.swift in Sources */,
@@ -759,6 +826,7 @@
 				92631B0524BDD023005A534C /* YZDTestResultCellTableViewCell.swift in Sources */,
 				92631AE424B86304005A534C /* YZDHomeworkCell.swift in Sources */,
 				92EE7F0624B8570300BF4DF7 /* NSString+dy_extension.m in Sources */,
+				9248D89624C57399001C426C /* YZDHomeworkChapterSectionModel_afterWorks.swift in Sources */,
 				92631B3C24BFF024005A534C /* YTKBaseRequest.m in Sources */,
 				92631B3924BFF024005A534C /* YTKNetworkConfig.m in Sources */,
 				92EE7F0124B8570300BF4DF7 /* NSString+RegexCategory.m in Sources */,

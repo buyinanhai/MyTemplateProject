@@ -10,5 +10,5 @@
 #define DYNetwork_h
 
 #import "DYNetworkConfig.h"
-
+#import "DYBaseNetwork.h"
 #endif /* DYNetwork_h */

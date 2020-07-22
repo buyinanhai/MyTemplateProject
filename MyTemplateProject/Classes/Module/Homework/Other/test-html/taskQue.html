@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>答题</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="js/Zepto.js"></script>
+    <script type="text/x-mathjax-config">
+         MathJax.Hub.Config({
+            showProcessingMessages: false,
+            messageStyle: "none"
+         });
+    </script>
+    <style>
+
+        #content{
+            margin: 0;
+            background: transparent;
+        }
+
+        .typeName{
+            font-size:14px;
+            line-height: 24px;
+            text-align: center;
+            background: #E5EAFF;
+            border-radius: 6px;
+            color: #2B44AD;
+            padding:4px 10px;
+        }
+
+        .answer{
+            display: flex;
+        }
+        .answer-option{
+            margin-left: 14px;
+        }
+        .answer-option strong{
+            font-weight:bold;
+            font-size:20px;
+            color:#FF791A;
+        }
+
+        .key{
+            margin-left: 4px;
+            width: 20px;
+            font-size: 12px;
+            height: 20px;
+            display: inline-block;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 20px;
+        }
+
+        .selectOption{
+            background: #FFDCB2;
+            color: #FD952B;
+        }
+
+        .unSelectOption{
+            background: #EDEDED;
+            color: #777777;
+        }
+
+    </style>
+</head>
+
+<body id="content" style="opacity:1">
+<div class="main">
+</div>
+<script src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+        async></script>
+</body>
+
+<script>
+	function onload(obj){
+		var main = '';
+		// main += '<p id = "firstLine" ><span class="typeName">'+ obj.questionTypeName +'</span></p>';
+		// main += '<p><span>'+ obj.tempText +'</span></p>';
+		main += '<p id = "stem">';
+		main += obj.stem+'</p>';
+
+        var options = JSON.parse(obj.options)
+        var myAnswer = obj.myAnswer;
+        var subsetOption='';
+        $.each(options, function (i, d) {
+            Object.keys(d).forEach(function (key) {
+                var optionVal = d[key];
+                if (optionVal != null){
+                    var isCheck = myAnswer ? myAnswer.indexOf(key) > -1:false;
+                    subsetOption += '<p class="answer">'
+                         +'<span class="key '+ ( isCheck ? 'selectOption"' : 'unSelectOption"') + '>'+key+'</span>'
+                         +'<span class="answer-option">'+d[key]+'</span></p>';
+                }
+            });
+        })
+        main += subsetOption;
+
+
+		$(".main").html(main);
+		if(obj.questionTypeId === 2){// 多选
+             $(".answer").click(function(){
+                if($(this).children(".key").hasClass("selectOption")){
+                    $(this).children(".key").removeClass("selectOption");
+                    $(this).children(".key").addClass("unSelectOption");
+                }else{
+                    $(this).children(".key").removeClass("unSelectOption");
+                    $(this).children(".key").addClass("selectOption");
+                }
+                var keys = ''
+                if($(".selectOption").length > 0){
+                     $(".selectOption").forEach(function (item) {
+                        keys += $(item).children(".key").text()+",";
+                    });
+                }
+                window.client.selectAnswer(keys)
+		    })
+		}else if (obj.questionTypeId == 1){// 单选
+		    $(".answer").click(function(){
+		        $(this).children(".key").addClass("selectOption");
+		        $(this).children(".key").removeClass("unSelectOption");
+		        $(this).siblings(".answer").children(".key").removeClass("selectOption");
+		        $(this).siblings(".answer").children(".key").addClass("unSelectOption");
+
+		        var key = $(this).children(".key").text();
+                window.client.selectAnswer(key)
+		    })
+		}
+
+		window.MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById('content')]);
+	}
+
+    // 取消点击事件
+	function cancelClick(){
+        $(".answer").unbind();
+	}
+
+    // 点击事件
+	function buildClick(){
+        $(".answer").bind();
+	}
+
+</script>
+
+</html>

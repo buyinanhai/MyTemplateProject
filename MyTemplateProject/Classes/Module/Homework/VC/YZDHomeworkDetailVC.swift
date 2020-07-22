@@ -14,11 +14,14 @@ import UIKit
  */
 class YZDHomeworkDetailVC: UIViewController {
 
+    public var homeworkModel: YZDHomeworkModel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "选择作业";
         
         self.setupSubview();
+        self.loadData();
         // Do any additional setup after loading the view.
     }
     
@@ -32,7 +35,7 @@ class YZDHomeworkDetailVC: UIViewController {
         }
         let header = YZDHomeworkDetailHeaderView.initHeaderView();
         self.tableView.tableHeaderView = header;
-        header.frame = CGRect.init(x: 0, y: 0, width: self.view.width, height: 90);
+        header.frame = CGRect.init(x: 0, y: 0, width: self.view.width, height: 105);
         self.tableView.register(YZDHomeworkDetailCell.self, forCellReuseIdentifier: "cell");
         self.tableView.dataSource = self;
         self.tableView.delegate = self;
@@ -41,11 +44,82 @@ class YZDHomeworkDetailVC: UIViewController {
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "错题集", style: .plain, target: self, action: #selector(rightBarButtonClick));
     }
+    
+    
+    
+    private func loadData() {
+        
+        DYNetworkHUD.startLoading();
+        //先获取章节  再获取课程作业
+        YZDHomeworkNetwork.getChapterFromCourse(classTypeId: self.homeworkModel.productId ?? 0, liveOrVideo: self.homeworkModel.homeworkType).dy_startRequest { (response, error) in
+            if let _response = response as? [[String : Any]] {
+                
+                for item in _response {
+                    if  let id = item["moduleId"] as? Int, let name = item["moduleName"] as? String {
+                        self.chapters.append((id, name));
+                    }
+                }
+                self.currentChapter = self.chapters.first;
+                
+                if self.chapters.count > 0 {
+                    self.loadHomework(self.currentChapter?.0 ?? 0);
+                } else {
+                    DYNetworkHUD.dismiss();
+                    self.tableView.reloadData();
+                }
+                
+            } else {
+                
+                DYNetworkHUD.showInfo(message: error?.errorMessage ?? "没有相关数据", inView: nil)
+            }
+        }
+        
+        
+    }
+    private func loadHomework(_ moduleId: Int) {
+        
+        YZDHomeworkNetwork.getHomeworkFromCourse(classTypeId: self.homeworkModel.productId ?? 0, liveOrVideo: self.homeworkModel.homeworkType, classModuleId: moduleId).dy_startRequest { (response, error) in
+            
+            DYNetworkHUD.dismiss();
+            if let _response = response as? [String : Any] {
+                
+                if let headerDict = _response["classTypeVo"] as? [String : Any] {
+                    self.updateHeaderView(dict: headerDict);
+                }
+                if let list = _response["moduleList"] as? [String : Any], let sections = list["classModuleLessonWorkVoList"] as? [[String : Any]] {
+                    
+                    for item in sections {
+                        if let section = YZDHomeworkChapterSectionModel.init(JSON: item) {
+                            self.datas.append(section);
+                        }
+                        
+                    }
+                    
+                    self.tableView.reloadData();
+                }
+                
+            } else {
+                DYNetworkHUD.showInfo(message: error?.errorMessage ?? "没有相关数据", inView: nil)
+            }
+        }
+        
+    }
+    
+    private func updateHeaderView(dict: [String : Any]) {
+        
+        let model = YZDHomeworkDetailHeaderViewModel.modelWithDict(dict);
+        
+        let view = self.tableView.tableHeaderView as? YZDHomeworkDetailHeaderView;
+        view?.model = model;
+        
+    }
+    
+    
     @objc
     private func rightBarButtonClick() {
         
         let vc = YZDTestCollectionVC.init()
-        
+        vc.productId = self.homeworkModel.productId;
         self.navigationController?.pushViewController(vc, animated: true);
         
     }
@@ -59,12 +133,13 @@ class YZDHomeworkDetailVC: UIViewController {
         view.separatorColor = .clear;
         return view;
     }()
-    private var datas:[[String: Any]] = [
-        ["title":"课前练习第一节","practises":[1,2,3]],
-        ["title":"课前练习第二节","practises":[1,2,]],
-        ["title":"课前练习第三节","practises":[1,2,3,4]],
-        ["title":"课前练习第四节","practises":[1]],
+    private var datas:[YZDHomeworkChapterSectionModel] = [
+        
     ]
+    
+    private var chapters: [(Int, String)] = [];
+    
+    private var currentChapter:(Int, String)?
     
 
 }
@@ -78,7 +153,15 @@ extension YZDHomeworkDetailVC: UITableViewDataSource,UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! YZDHomeworkDetailCell;
-        cell.model = self.datas[indexPath.row];
+        let section = self.datas[indexPath.row];
+        cell.model = section;
+        cell.stateBtnClickCallback = {
+            [weak self] (model) in
+                
+            let vc = YZDTestAnswerVC.init();
+            
+            self?.navigationController?.pushViewController(vc, animated: true);
+        }
         
         return cell;
     }
@@ -87,11 +170,7 @@ extension YZDHomeworkDetailVC: UITableViewDataSource,UITableViewDelegate {
         
         var height: CGFloat = 40;
         let model = self.datas[indexPath.row];
-        if let datas = model["practises"] as? [Any] {
-            for _ in datas {
-                height += 75.0;
-            }
-        }
+        height += CGFloat((model.dy_afterWorks?.count ?? 0)) * 75.0;
         return height;
     }
     
@@ -112,12 +191,15 @@ extension YZDHomeworkDetailVC: UITableViewDataSource,UITableViewDelegate {
                 make?.edges.offset();
             })
         }
-        btn?.setTitle("第一讲  圆柱的表面积", for: .normal)
+        let name = self.currentChapter?.1;
+        btn?.setTitle(name, for: .normal);
                 
         return header
         
         
     }
+    
+    
     
     
     @objc

@@ -156,12 +156,12 @@
     YCMenuAction *action = [[YCMenuAction alloc] initWithTitle:title image:image handler:handler];
     return action;
 }
-+ (instancetype)actionWithTitle:(NSString *)title image:(UIImage *)image {
++ (instancetype)actionWithTitle:(NSString *)title image:(UIImage * _Nullable)image {
     YCMenuAction *action = [[YCMenuAction alloc] initWithTitle:title image:image handler:nil];
     return action;
 
 }
-- (instancetype)initWithTitle:(NSString *)title image:(UIImage *)image handler:(void (^)(YCMenuAction *))handler{
+- (instancetype)initWithTitle:(NSString *)title image:(UIImage * _Nullable)image handler:(void (^)(YCMenuAction *))handler{
     if (self = [super init]) {
         _title = title;
         _image = image;

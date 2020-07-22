@@ -32,6 +32,7 @@ class HomeVC: UIViewController {
      private var datas: [String] = [
      
          "优智多课堂作业中心",
+         "测试wkwebview",
          
      ];
     
@@ -70,8 +71,11 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
         
         switch indexPath.row {
         case 0:
-            vc = YZDHomeworkVC.init()
+            vc = YZDHomeworkVC.init();
             break
+        case 1:
+            vc = TestWebViewVC.init();
+            break;
         default:
             break
         }

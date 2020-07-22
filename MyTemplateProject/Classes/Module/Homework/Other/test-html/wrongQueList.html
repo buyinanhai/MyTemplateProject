@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>错题集</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="js/Zepto.js"></script>
+    <script type="text/x-mathjax-config">
+			MathJax.Hub.Config({ showProcessingMessages: false, messageStyle: "none" });
+		</script>
+    <style>
+			p {
+				margin-bottom: 6px;
+				margin-top: 6px;
+			}
+
+			#content {
+				background: #f7f7f7;
+			}
+
+			.main {
+				font-size: 14px;
+			}
+
+			.item {
+			    position: relative;
+				background: #fff;
+				border-radius: 8px;
+				padding: 6px 6px;
+			}
+
+			.typeName {
+				font-size: 12px;
+				line-height: 24px;
+				text-align: center;
+				background: #FFEEEE;
+				border-radius: 6px;
+				color: #E37171;
+				padding: 3px 10px;
+				margin-right: 4px;
+			}
+
+			.key {
+				margin-left: 8px;
+				width: 20px;
+				font-size: 12px;
+				height: 20px;
+				display: inline-block;
+				border-radius: 50%;
+				text-align: center;
+				line-height: 20px;
+			}
+
+			.selectOption {
+				background: #FFDCB2;
+				color: #FD952B;
+			}
+
+			.unSelectOption {
+				background: #EDEDED;
+				color: #777777;
+			}
+
+			.answer {
+				display: flex;
+			}
+
+			.answer-option {
+				margin-left: 14px;
+			}
+			/*内部元素两端对齐*/
+
+			.lineDate {
+				margin-top: 16px;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+			}
+
+			.createDate {
+				color: #B5B5B5;
+				font-size: 12px;
+				margin-left: 6px;
+				margin-top: 10px;
+			}
+
+			.removeBtn {
+				text-align: center;
+				background: #FFDCB2;
+				color: #F0792D;
+				border-radius: 20px;
+				padding: 5px 20px;
+				margin-right: 4px;
+			}
+
+			.grayLine {
+				margin-left: 6px;
+				margin-right: 6px;
+				background-color: #CECECE;
+				border: none;
+				height: 1px;
+			}
+			/*内部元素居中对齐*/
+
+			.expDiv {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+
+			.lookExp {
+				font-size: 13px;
+				color: #444444;
+			}
+
+			.answer-resolve {
+				display: none;
+				margin-left: 4px;
+				font-size: 13px;
+			}
+			/*用来判断解析显隐的标识*/
+
+			.active {}
+
+			.checkBox {
+				width: 18px;
+				height: 18px;
+				display: none;
+				position: absolute;
+				right: 2px;
+				top: 2px;
+			}
+
+			.selected {}
+		</style>
+</head>
+
+<body id="content" style="opacity:1">
+<div class="main">
+</div>
+<script src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+
+<script>
+		// 加载数据
+		function onload(obj) {
+			var list = obj;
+			var main = '';
+			$.each(list, function(i, bean) {
+				var que = bean.questionVo
+				var item = ''
+				// <!--序号 +【题型】+ 题目stem-->
+				item += '<div class="item">';
+				item += '<p>';
+				item += '<span class="typeName">' + que.questionTypeName + '</span>';
+				item += '<span>' + (i+1)+ '.' + que.stem + '</span>';
+				item += '</p>'
+
+				// 选项
+				var options = JSON.parse(que.options)
+				var myAnswer = que.myAnswer;
+				var subsetOption = '';
+				$.each(options, function(i, d) {
+					Object.keys(d).forEach(function(key) {
+						var optionVal = d[key];
+						if(optionVal != null) {
+							var isCheck = myAnswer ? myAnswer.indexOf(key) > -1 : false;
+							subsetOption += '<p class="answer">';
+							subsetOption += '<span class="key ';
+							if(isCheck) {
+								subsetOption += 'selectOption';
+							} else {
+								subsetOption += 'unSelectOption';
+							}
+							subsetOption += '">' + key + '</span>';
+							subsetOption += '<span class="answer-option">' + d[key] + '</span></p>';
+						}
+					});
+				})
+				item += subsetOption;
+
+				// 时间
+				item += '<div class ="lineDate"><span class = "createDate">' + bean.createDate + '</span>';
+				item += '<span class = "removeBtn" data-num="' + i + '">' + "移除" + '</span>'
+				item += '</div>';
+
+				// 线条
+				item += '<hr class = "grayLine"/>';
+
+				// 查看解析按钮
+				item += '<div class = "expDiv"><span class="lookExp">';
+				item += '<img width="8" height="8" src = "imgs/img_down.png" style="vertical-align: 1px;margin-right: 5px;"/>';
+				item += "查看解析" + '</span></div>';
+
+				// 解析
+				item += '<div class="answer-resolve" >'
+				item += '<p>正确答案：' + que.answer + '</p>'
+				item += '<p>' + que.explanation + '</p>'
+				item += '</div>'
+
+				// 复选框
+				item += '<img class="checkBox active" data-num="' + i + '" src = "imgs/img_checkbox_0.png" />'
+
+				item += '</div>'
+				main += item + '</div><br>'
+			})
+			$(".main").html(main);
+
+			//查看解析
+			$(".lookExp").click(function lookExp() {
+				$(this).toggleClass("active")
+				$(this).parent().next(".answer-resolve").toggle();
+				if($(this).hasClass("active")) {
+					$(this).children("img").css("transform", "rotate(180deg)");
+				} else {
+					$(this).children("img").css("transform", "none");
+				}
+
+			})
+
+			// 移除本题
+			$(".removeBtn").click(function removeBtn() {
+				var position = $(this).data("num")
+				//window.client.removeThisQuestion(position)
+                window.webkit.messageHandlers.removeThisQuestion.postMessage(position)
+			})
+
+			$(".checkBox").click(function selectQue() {
+				if($(this).hasClass("active")) {
+					//$(this).removeClass("active");
+					var position = $(this).data("num")
+					var state;
+					if($(this).hasClass("selected")) {
+						state = true;
+					} else {
+						state = false;
+					}
+					state = !state;
+					if(state) {
+						$(this).addClass("selected")
+						$(this).attr("src", "imgs/img_checkbox_1.png");
+					} else {
+						$(this).removeClass("selected")
+						$(this).attr("src", "imgs/img_checkbox_0.png");
+					}
+                    window.webkit.messageHandlers.onSelectCheckBox.postMessage([position, state]);
+
+				}
+			})
+
+			window.MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById('content')]);
+		}
+
+		/**
+		 * 更改编辑状态
+		 */
+		function updateEditState(state) {
+			if(state) {
+				$(".checkBox").show();
+				$(".removeBtn").hide();
+				$(".checkBox").addClass();
+			} else {
+				$(".checkBox").hide();
+				$(".removeBtn").show();
+				selectAll(false);
+			}
+		}
+
+		/**
+		 * 全选
+		 * @param {Object} flag
+		 */
+		function selectAll(flag) {
+			if(flag) {
+				$(".checkBox").attr("src", "imgs/img_checkbox_1.png");
+			} else {
+				$(".checkBox").attr("src", "imgs/img_checkbox_0.png");
+			}
+		}
+
+		/**
+		 * 能否选择
+		 */
+		function canCheck() {
+			$(".checkBox").addClass("active");
+		}
+
+	</script>
+
+</html>

@@ -123,7 +123,7 @@
 
 
 - (void)loadData {
-    self.pageIndex = 1;
+    self.pageIndex = 0;
     
     if (self.loadDataCallback) {
         kWeakly(self);

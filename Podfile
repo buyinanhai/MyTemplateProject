@@ -13,5 +13,5 @@ target 'MyTemplateProject' do
   pod "Masonry"
   pod "AFNetworking"
   pod "MJRefresh"
-  pod "SVProgressHUD"
+  pod "ObjectMapper"
 end

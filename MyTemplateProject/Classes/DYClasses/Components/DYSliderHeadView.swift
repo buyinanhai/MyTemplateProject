@@ -42,14 +42,13 @@ enum DYButtonLayout {
 
 @objcMembers class DYSliderHeadView: UIView {
 
-    private var dataSources: [DYSliderModel] = []
     var selectIndexBlock: ((_ index: Int) -> Void)?
     var btnLayout: DYButtonLayout = .imageBeLeft;
     var textColor: UIColor = UIColor.HWColorWithHexString(hex: "#333333");
     var selectColor = UIColor.blue;
     var currSelectIndex: Int = 0;
     ///滑动的线条宽度
-    var sliderLineWidth:CGFloat = 30;
+    var sliderLineWidth:CGFloat = 15;
     var type: DYSliderHeaderType = .normal;
     var font: UIFont = UIFont.systemFont(ofSize: 14);
     var imageSize: CGSize?
@@ -61,7 +60,7 @@ enum DYButtonLayout {
     var sliderPositionX: CGFloat = 0.0 {
         
         didSet {
-            self.slider.frame = CGRect.init(x: self.sliderPositionX, y: self.slider.y, width: self.slider.width, height: self.slider.height)
+            self.slider.frame = CGRect.init(x: self.sliderPositionX, y: self.height - 2, width: self.slider.width, height: self.slider.height)
         }
     
     }
@@ -103,27 +102,7 @@ enum DYButtonLayout {
         
     }
     
-    public func updateTitles(_ titles: [String]) {
-        
-        self.titles = titles;
-        self.currSelectIndex = 0;
-        self.collectionView.reloadData();
-        self.updateSlider(index: self.currSelectIndex);
-        
-    }
-    
-    func updateSelectIndexFromOther(_ index: Int) {
-        if index == self.currSelectIndex {
-            return;
-        }
-        
-        if index > self.dataSources.count {
-            return;
-        }
-//        self.collectionView.selectItem(at: IndexPath.init(item: index, section: 0), animated: true, scrollPosition: UICollectionView.ScrollPosition.centeredHorizontally);
-        self.updateSlider(index: index);
-        
-    }
+  
     override func layoutSubviews() {
         super.layoutSubviews();
         if self.subviews.count == 0 {
@@ -152,11 +131,42 @@ enum DYButtonLayout {
             make?.height.offset()(1.0);
         }
         
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2, execute: {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
             self.updateSlider(index: self.currSelectIndex);
         });
      
     }
+    
+    public func updateTitles(_ titles: [String]) {
+        
+        self.titles = titles;
+        self.collectionView.reloadData();
+        if let cacheWidth = self.widthCache[self.currSelectIndex] {
+            self.slider.frame = CGRect.init(x: (cacheWidth - sliderLineWidth) * 0.5, y: self.height - 2, width: self.sliderLineWidth, height: 2);
+        }
+        self.currSelectIndex = -1
+        self.slider.isHidden = self.dataSources.count > 0 ? false : true;
+        self.collectionView.scrollToItem(at: IndexPath.init(item: 0, section: 0), at: .centeredHorizontally, animated: true);
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.updateSlider(index: 0);
+        }
+        
+    }
+    
+    func updateSelectIndexFromOther(_ index: Int) {
+        if index == self.currSelectIndex {
+            return;
+        }
+        
+        if index > self.dataSources.count {
+            return;
+        }
+        
+        self.updateSlider(index: index);
+        
+    }
+    
     func hideBottomLine() {
         self.lineView.isHidden = true;
     }
@@ -172,7 +182,7 @@ enum DYButtonLayout {
     private var widthCache: [Int : CGFloat]  = [:];
     private lazy var slider: UIView = {
         let view = UIView()
-        view.backgroundColor = self.sliderLineColor;
+        view.backgroundColor = .orange;
         view.bounds = CGRect.init(x: 0, y: 0, width: self.sliderLineWidth, height: 2);
         return view
     }()
@@ -199,11 +209,11 @@ enum DYButtonLayout {
         return view
     }()
     private func updateSlider(index: Int) {
-        if index == self.currSelectIndex { return}
+        if index == self.currSelectIndex || self.currSelectIndex >= self.titles.count { return}
         
         let beforeCell = self.collectionView.cellForItem(at: IndexPath.init(item: self.currSelectIndex, section: 0));
         if beforeCell != nil {
-            let beforeView =  beforeCell?.contentView.subviews.first as! DYButton;
+            
             if self.currSelectIndex < index {
                 self.collectionView.scrollToItem(at: IndexPath.init(item: index, section: 0), at: UICollectionView.ScrollPosition.right, animated: true);
                 
@@ -211,14 +221,17 @@ enum DYButtonLayout {
                 self.collectionView.scrollToItem(at: IndexPath.init(item: index, section: 0), at: UICollectionView.ScrollPosition.left, animated: true);
                 
             }
-            let cell = collectionView.cellForItem(at: IndexPath.init(item: index, section: 0));
-            let label = cell?.contentView.subviews.first as! DYButton;
+        }
+        
+        let cell = collectionView.cellForItem(at: IndexPath.init(item: index, section: 0));
+      
+        if let label = cell?.contentView.subviews.first as? DYButton {
             let model = self.dataSources[index];
             label.text = model.title;
             self.currSelectIndex = index;
             //        var x: CGFloat = CGFloat(index * self.widthCache[index]) + 15;
             var x: CGFloat = (self.widthCache[index]! - self.sliderLineWidth)  * 0.5;
-        
+            
             if index > 0 {
                 for i in 0...index-1 {
                     let width = self.widthCache[i];
@@ -227,19 +240,33 @@ enum DYButtonLayout {
             }
             
             UIView.animate(withDuration: 0.25) {
-                self.updateLabelStatus(isSelect: false, label: beforeView);
+                if let beforeView = beforeCell?.contentView.subviews.first as? DYButton {
+                    self.updateLabelStatus(isSelect: false, label: beforeView);
+                }
                 self.updateLabelStatus(isSelect: true, label: label);
                 self.slider.frame.origin.x = x;
             };
+            
         }
-        
-        
+       
     }
     
     private func updateLabelStatus(isSelect:Bool, label: DYButton) {
         let fontSize = self.font.pointSize ;
         label.titleLabel?.font = UIFont.systemFont(ofSize: isSelect ? fontSize + 2 : fontSize - 2);
         label.textColor = isSelect ? self.selectColor : self.textColor;
+    }
+    
+    private var dataSources: [DYSliderModel] = []
+
+    
+    override var backgroundColor: UIColor? {
+        
+        didSet {
+            
+            self.collectionView.backgroundColor = self.backgroundColor;
+        }
+        
     }
 
     
@@ -275,8 +302,10 @@ extension DYSliderHeadView: UICollectionViewDataSource, UICollectionViewDelegate
         let model = self.dataSources[indexPath.item];
         if model.isSelect == true && indexPath.item == self.currSelectIndex {
             btn?.titleLabel?.font = UIFont.systemFont(ofSize: 16);
+        } else {
+            btn?.titleLabel?.font = self.font;
         }
-        btn?.titleLabel?.textColor = model.isSelect == true ? self.selectColor : UIColor.HWColorWithHexString(hex: "#333333");
+        btn?.setTitleColor(model.isSelect == true ? self.selectColor : UIColor.HWColorWithHexString(hex: "#333333"), for: .normal);
         btn?.setTitle(self.dataSources[indexPath.item].title, for: .normal);
         if self.imageSize?.width ?? 0 > 0 && self.imageSize?.height ?? 0 > 0 {
             btn?.setImage(model.image?.resize(width: self.imageSize?.width ?? 0, height: self.imageSize?.height ?? 0), for: .normal);
@@ -298,8 +327,10 @@ extension DYSliderHeadView: UICollectionViewDataSource, UICollectionViewDelegate
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        return CGSize.init(width: self.widthCache[indexPath.item]!, height: collectionView.height);
+        if let cacheWidth = self.widthCache[indexPath.item] {
+            return CGSize.init(width: cacheWidth, height: collectionView.height);
+        }
+        return CGSize.zero;
     }
     
 }

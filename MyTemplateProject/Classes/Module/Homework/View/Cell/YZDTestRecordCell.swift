@@ -24,6 +24,25 @@ class YZDTestRecordCell: DYTableViewCell {
         // Configure the view for the selected state
     }
     
+    override var model: AnyObject? {
+        
+        didSet {
+            
+            if let _model = model as? YZDTestRecordCellModel {
+                
+                self.nameLabel.text = _model.dy_classTypeName;
+                self.timeLabel.text = Date.getFormdateMDHM(timeStamp: Double(_model.dy_createDate ?? 0));
+//                let useTime = _model.dy_usedTime ?? 0;
+//                self.consumeTimeLabel.text = String.init(format: "用时：%02d:%02d", useTime / 60, useTime % 60);
+                self.consumeTimeLabel.text = Date.getFormdateHM(timeStamp: Double(_model.dy_usedTime ?? 0));
+                self.answeredLabel.text = "已做答：\(_model.dy_finishCount ?? 0)题";
+                self.accuracyLabel.text = "正确率：\(_model.dy_accuracy ?? "0.0")/%";
+            }
+            
+        }
+        
+    }
+    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -41,47 +60,71 @@ class YZDTestRecordCell: DYTableViewCell {
     private func setupSubview() {
         self.backgroundColor = .clear
         let subContentView = UIView.init();
-        subContentView.backgroundColor = .white;
+        subContentView.backgroundColor = .clear;
         self.contentView.addSubview(subContentView);
         subContentView.mas_makeConstraints { (make) in
             make?.top.offset()(5);
-            make?.left.right()?.bottom()?.offset();
+            make?.left.offset()(10);
+            make?.right.offset()(-10);
+            make?.bottom.offset()(-5);
         }
         
+        let imgView = UIImageView.init(image: UIImage.init(named: "yzd-test-record-cell"));
+        subContentView.addSubview(imgView);
         subContentView.addSubview(self.timeLabel);
         subContentView.addSubview(self.nameLabel);
         subContentView.addSubview(self.chapterLabel);
-        subContentView.addSubview(self.descLabel);
+        
+        imgView.mas_makeConstraints { (make) in
+            make?.edges.offset();
+        }
 
         self.timeLabel.mas_makeConstraints { (make) in
-            make?.top.left()?.offset()(8);
+            make?.right.offset()(-8);
+            make?.centerY.equalTo()(self.nameLabel);
+            make?.width.offset()(70);
         }
         self.nameLabel.mas_makeConstraints { (make) in
-            make?.top.equalTo()(self.timeLabel.mas_bottom)?.offset()(8);
-            make?.left.equalTo()(self.timeLabel.mas_left);
-            make?.right.offset()(-10);
+            make?.top.offset()(12);
+            make?.left.offset()(10);
+            make?.right.equalTo()(self.timeLabel.mas_right)?.offset()(-5);
         }
         self.chapterLabel.mas_makeConstraints { (make) in
-                   make?.top.equalTo()(self.nameLabel.mas_bottom)?.offset()(8);
-                   make?.left.equalTo()(self.timeLabel.mas_left);
-                   make?.right.offset()(-10);
-               }
-        self.descLabel.mas_makeConstraints { (make) in
-                   
-            make?.left.equalTo()(self.timeLabel.mas_left);
+            make?.centerY.offset();
+            make?.left.equalTo()(self.nameLabel.mas_left);
             make?.right.offset()(-10);
-            make?.bottom.offset();
-            
-               }
+        }
         
+        
+        let bottomView = UIView.init();
+        
+        subContentView.addSubview(bottomView);
+        bottomView.mas_makeConstraints { (make) in
+            make?.left.right()?.bottom()?.offset();
+            make?.height.offset()(30);
+        }
+        bottomView.addSubview(self.consumeTimeLabel)
+        bottomView.addSubview(self.answeredLabel);
+        bottomView.addSubview(self.accuracyLabel);
+        self.consumeTimeLabel.mas_makeConstraints { (make) in
+            make?.centerY.offset();
+            make?.left.offset()(5);
+        }
+        self.answeredLabel.mas_makeConstraints { (make) in
+            make?.center.offset()
+        }
+        self.accuracyLabel.mas_makeConstraints { (make) in
+            make?.right.offset()(-5);
+            make?.centerY.offset();
+        }
     }
     
     private lazy var timeLabel: UILabel = {
         
         let view = UILabel.init();
-        view.font = .systemFont(ofSize: 13);
+        view.font = .systemFont(ofSize: 11);
         view.text = "07月07日  11:30";
-        view.textColor = .lightGray;
+        view.textColor = .init(hexString: "#B9B9B9");
         
         return view;
     }()
@@ -89,7 +132,7 @@ class YZDTestRecordCell: DYTableViewCell {
     private lazy var nameLabel: UILabel = {
         
         let view = UILabel.init();
-        view.font = UIFont.boldSystemFont(ofSize: 16);
+        view.font = UIFont.boldSystemFont(ofSize: 15);
         view.textColor = UIColor.black;
         view.text = "六年级数学";
         
@@ -98,18 +141,35 @@ class YZDTestRecordCell: DYTableViewCell {
     private lazy var chapterLabel: UILabel = {
         
         let view = UILabel.init();
-        view.font = UIFont.systemFont(ofSize: 14);
+        view.font = UIFont.systemFont(ofSize: 13);
         view.textColor = UIColor.gray;
         view.text = "第一单元  老茶馆 第一节 光头强";
         
         return view;
     }()
-    private lazy var descLabel: UILabel = {
+    
+    private lazy var consumeTimeLabel: UILabel = {
         
         let view = UILabel.init();
-        view.font = .systemFont(ofSize: 15)
-        view.textColor = .black;
-        view.text = "用时：2分30秒   已做答：5题    正确率：66%";
+        view.font = UIFont.systemFont(ofSize: 12)
+        view.textColor = .init(hexString: "#B9B9B9")
+        
+        return view;
+    }()
+    private lazy var answeredLabel: UILabel = {
+        
+        let view = UILabel.init();
+        view.font = UIFont.systemFont(ofSize: 12)
+        view.textColor = .init(hexString: "#B9B9B9")
+        
+        return view;
+    }()
+    private lazy var accuracyLabel: UILabel = {
+        
+        let view = UILabel.init();
+        view.font = UIFont.systemFont(ofSize: 12)
+        view.textColor = .init(hexString: "#B9B9B9")
+        
         return view;
     }()
 }

@@ -43,7 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
  *@param response 返回数据 已经是从字典中取出的data
  *@param error 错误信息
  */
-- (void)dy_startRequestWithFinished:(void(^)(id  responseObject,DYNetworkError *error))finished;
+- (void)dy_startRequestWithFinished:(void(^)(id __nullable  responseObject,DYNetworkError * __nullable error))finished;
 
 /*
  *统一调用 对返回进行统一处理
@@ -52,17 +52,17 @@ NS_ASSUME_NONNULL_BEGIN
  *@param error1 业务错误信息
  *@param error2 接口错误信息
  */
-- (void)dy_startRequestWithSuccessful:(void(^)(id  responseObject,DYNetworkError *error))successful failing:(void(^)(DYNetworkError *error))failing;
+- (void)dy_startRequestWithSuccessful:(void(^)(id __nullable responseObject,DYNetworkError * __nullable error))successful failing:(void(^)(DYNetworkError * __nullable error))failing;
 
 /*
 *只返回成功的回调，出现错误会弹出提示
 *
 *@param response 返回数据 已经是从字典中取出的data
 */
-- (void)dy_startRequestWithSuccessful:(void(^)(id  responseObject))successful;
+- (void)dy_startRequestWithSuccessful:(void(^)(id __nullable  responseObject))successful;
 
 ///统一调用 无处理
-- (void)dy_startRequestWithCompleted:(void (^)(YTKBaseRequest *request))Completed;
+- (void)dy_startRequestWithCompleted:(void (^)(YTKBaseRequest *__nullable request))Completed;
 
 
 - (BOOL)isAvailableNetwork;

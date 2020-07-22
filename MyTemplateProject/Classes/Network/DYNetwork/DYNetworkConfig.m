@@ -54,6 +54,7 @@
 + (void)initializeNetworkConfig {
     YTKNetworkAgent *agent = [YTKNetworkAgent sharedAgent];
     [agent setValue:[NSSet setWithObjects:@"application/json", @"text/plain", @"text/javascript", @"text/json",@"text/html", nil] forKeyPath:@"jsonResponseSerializer.acceptableContentTypes"];
+    
 //    NSNumber *value = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefault_EnvirmentKey];
 //    if (value) {
 //        kNetworkConfig.environmentType = (DYNetworkType)value.integerValue;

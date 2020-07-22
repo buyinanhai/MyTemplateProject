@@ -16,27 +16,27 @@ PODS:
     - AFNetworking/NSURLSession
   - Masonry (1.1.0)
   - MJRefresh (3.4.3)
-  - SVProgressHUD (2.2.5)
+  - ObjectMapper (4.2.0)
 
 DEPENDENCIES:
   - AFNetworking
   - Masonry
   - MJRefresh
-  - SVProgressHUD
+  - ObjectMapper
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - AFNetworking
     - Masonry
     - MJRefresh
-    - SVProgressHUD
+    - ObjectMapper
 
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MJRefresh: 53e3e3219f204425ee6d3e62e8733d3295944cd6
-  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
 
-PODFILE CHECKSUM: c50c8fd1fb9027d54c446bae6b3de8b0e50734c9
+PODFILE CHECKSUM: 958e5c9cfb1c8dae97e4f5889e67d6c6489fdde6
 
 COCOAPODS: 1.9.3

@@ -13,6 +13,9 @@ import UIKit
  */
 class YZDTestResultVC: UIViewController {
 
+    
+    public var recordModel: YZDTestRecordCellModel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "答题结果";
@@ -55,12 +58,27 @@ class YZDTestResultVC: UIViewController {
     private func loadData(page: Int, result:DYTableView_Result) {
         
         
-        result([1,2,2,3,3,1,2,2,3,3,1,2,2,3,3,1,2,2,3,3,]);
+        if let _model = self.recordModel {
+            YZDHomeworkNetwork.getMyHistoryHomeworkDetail(homeworkId: _model.dy_afterWorkId ?? 0, finishedHomeworkId: _model.dy_afterWorkFinishId ?? 0).dy_startRequest { (response, error) in
+                
+                if let _response = response as? [String : Any] {
+                    
+                    
+                    
+                } else {
+                    
+                    
+                }
+                
+            }
+        }
+        
+        
+
         
     }
     
     private func didSelectedTableViewCell(cell: YZDTestResultCell, index: IndexPath) {
-        
         
         
         
@@ -82,16 +100,5 @@ class YZDTestResultVC: UIViewController {
         
     }()
     
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
