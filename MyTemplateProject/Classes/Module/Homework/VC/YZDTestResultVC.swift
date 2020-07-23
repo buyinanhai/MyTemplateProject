@@ -73,9 +73,6 @@ class YZDTestResultVC: UIViewController {
             }
         }
         
-        
-
-        
     }
     
     private func didSelectedTableViewCell(cell: YZDTestResultCell, index: IndexPath) {
@@ -91,7 +88,7 @@ class YZDTestResultVC: UIViewController {
         view.rowHeight = 120;
         view.isShowNoData = true;
         view.noDataText = "没有答题结果";
-        view.register(YZDTestResultCell.self, forCellReuseIdentifier: "cell");
+        view.register(UITableViewCell.self, forCellReuseIdentifier: "cell");
         view.separatorStyle = .none;
         view.allowsSelection = false;
         view.rowHeight = 200;

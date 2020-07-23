@@ -44,12 +44,27 @@ class YZDHomeworkDetailCell: UITableViewCell {
                 return
             }
             self.nameLabel.text = _model.dy_lessonName;
-            for item in _model.dy_afterWorks ?? [] {
-                let view = YZDHomeworkDetailCellSubview.init()
-                view.model = item;
-                view.stateBtnClickCallback = self.stateBtnClickCallback;
-                self.stackView.addArrangedSubview(view);
+            if _model.dy_afterWorks?.count == 0 {
+                self.stackView.removeFromSuperview();
+            } else {
+                if let contentView = self.stackView.superview {
+                    contentView.addSubview(self.stackView);
+                    self.stackView.mas_makeConstraints { (make) in
+                        make?.top.equalTo()(self.nameLabel.mas_bottom)?.offset()(8);
+                        make?.left.right()?.bottom()?.offset();
+                    }
+                    for item in _model.dy_afterWorks ?? [] {
+                        let view = YZDHomeworkDetailCellSubview.init()
+                        view.model = item;
+                        view.stateBtnClickCallback = {
+                            [weak self] (model) in
+                            self?.stateBtnClickCallback?(model);
+                        };
+                        self.stackView.addArrangedSubview(view);
+                    }
+                }
             }
+           
           
             
         }

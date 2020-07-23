@@ -46,7 +46,9 @@ class YZDTestCollectionVC: UIViewController {
             [weak self] (index) in
             self?.onSubjectBtnClick(index);
         }
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "编辑", style: .plain, target: self, action: #selector(rightBarButtonClick));
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "yzd-homework-collection-rightbtn"), style: .plain, target: self, action: #selector(rightBarButtonClick));
+        self.navigationItem.rightBarButtonItem?.title = "编辑";
 
         self.view.addSubview(self.webView);
         self.webView.mas_makeConstraints { (make) in
@@ -152,8 +154,6 @@ class YZDTestCollectionVC: UIViewController {
         return view;
     }()
     
-    private var allTests: [[String : Any]] = [];
-    
     private var currentPage: Int = 0;
     private var pageSize: Int {
         get {
@@ -183,6 +183,8 @@ class YZDTestCollectionVC: UIViewController {
     
     //第一次加载 有可能会失败
     private var isSuccessLoad:Bool = true;
+    private var allTests: [[String : Any]] = [];
+
     
     /**
      将要删除的题目  只有在编辑状态下使用

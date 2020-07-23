@@ -114,7 +114,8 @@
                         keys += $(item).children(".key").text()+",";
                     });
                 }
-                window.client.selectAnswer(keys)
+                window.webkit.messageHandlers.selectAnswer.postMessage(keys)
+
 		    })
 		}else if (obj.questionTypeId == 1){// 单选
 		    $(".answer").click(function(){
@@ -124,7 +125,7 @@
 		        $(this).siblings(".answer").children(".key").addClass("unSelectOption");
 
 		        var key = $(this).children(".key").text();
-                window.client.selectAnswer(key)
+                window.webkit.messageHandlers.selectAnswer.postMessage(key)
 		    })
 		}
 

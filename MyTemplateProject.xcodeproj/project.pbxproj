@@ -29,7 +29,6 @@
 		92631AFB24BDC374005A534C /* YZDTestCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92631AFA24BDC374005A534C /* YZDTestCollectionVC.swift */; };
 		92631AFD24BDC395005A534C /* YZDTestResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92631AFC24BDC395005A534C /* YZDTestResultVC.swift */; };
 		92631AFF24BDC3D1005A534C /* YZDTestAnswerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92631AFE24BDC3D1005A534C /* YZDTestAnswerVC.swift */; };
-		92631B0124BDC427005A534C /* YZDTestCollectionEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92631B0024BDC427005A534C /* YZDTestCollectionEditVC.swift */; };
 		92631B0324BDC4D3005A534C /* YZDTestRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92631B0224BDC4D3005A534C /* YZDTestRecordCell.swift */; };
 		92631B0524BDD023005A534C /* YZDTestResultCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92631B0424BDD023005A534C /* YZDTestResultCellTableViewCell.swift */; };
 		92631B0724BDD045005A534C /* YZDTestResultHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92631B0624BDD045005A534C /* YZDTestResultHeader.swift */; };
@@ -118,7 +117,6 @@
 		92631AFA24BDC374005A534C /* YZDTestCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YZDTestCollectionVC.swift; sourceTree = "<group>"; };
 		92631AFC24BDC395005A534C /* YZDTestResultVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YZDTestResultVC.swift; sourceTree = "<group>"; };
 		92631AFE24BDC3D1005A534C /* YZDTestAnswerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YZDTestAnswerVC.swift; sourceTree = "<group>"; };
-		92631B0024BDC427005A534C /* YZDTestCollectionEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YZDTestCollectionEditVC.swift; sourceTree = "<group>"; };
 		92631B0224BDC4D3005A534C /* YZDTestRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YZDTestRecordCell.swift; sourceTree = "<group>"; };
 		92631B0424BDD023005A534C /* YZDTestResultCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YZDTestResultCellTableViewCell.swift; sourceTree = "<group>"; };
 		92631B0624BDD045005A534C /* YZDTestResultHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YZDTestResultHeader.swift; sourceTree = "<group>"; };
@@ -323,7 +321,6 @@
 				92631ADF24B86304005A534C /* YZDHomeworkDetailVC.swift */,
 				92631AEA24BBEDA0005A534C /* YZDTestRecordVC.swift */,
 				92631AFA24BDC374005A534C /* YZDTestCollectionVC.swift */,
-				92631B0024BDC427005A534C /* YZDTestCollectionEditVC.swift */,
 				92631AFC24BDC395005A534C /* YZDTestResultVC.swift */,
 				92631AFE24BDC3D1005A534C /* YZDTestAnswerVC.swift */,
 			);
@@ -795,7 +792,6 @@
 				92631B0724BDD045005A534C /* YZDTestResultHeader.swift in Sources */,
 				92631B0B24BEAE8B005A534C /* YZDTestResultCell.swift in Sources */,
 				92631B4124BFF024005A534C /* YTKRequest.m in Sources */,
-				92631B0124BDC427005A534C /* YZDTestCollectionEditVC.swift in Sources */,
 				92EE7F0224B8570300BF4DF7 /* NSDate+dy_extension.m in Sources */,
 				923DC76A24C6883500CCCADC /* TestWebViewVC.swift in Sources */,
 				92631AED24BC0DD1005A534C /* YZDHomeworkDetailCell.swift in Sources */,

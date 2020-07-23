@@ -129,7 +129,7 @@ class YZDHomeworkDetailVC: UIViewController {
         
         let view = UITableView.init(frame: self.view.frame);
         view.backgroundColor = UIColor.HWColorWithHexString(hex: "#F7F7F7")
-        view.allowsSelection = false;
+        view.allowsSelection = true;
         view.separatorColor = .clear;
         return view;
     }()
@@ -153,13 +153,14 @@ extension YZDHomeworkDetailVC: UITableViewDataSource,UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! YZDHomeworkDetailCell;
+        cell.selectionStyle = .none;
         let section = self.datas[indexPath.row];
         cell.model = section;
         cell.stateBtnClickCallback = {
             [weak self] (model) in
                 
             let vc = YZDTestAnswerVC.init();
-            
+            vc.afterWorkId = model?.dy_id;
             self?.navigationController?.pushViewController(vc, animated: true);
         }
         
@@ -168,7 +169,7 @@ extension YZDHomeworkDetailVC: UITableViewDataSource,UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        var height: CGFloat = 40;
+        var height: CGFloat = 60;
         let model = self.datas[indexPath.row];
         height += CGFloat((model.dy_afterWorks?.count ?? 0)) * 75.0;
         return height;

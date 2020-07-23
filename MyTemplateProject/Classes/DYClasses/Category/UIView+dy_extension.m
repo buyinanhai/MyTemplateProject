@@ -153,9 +153,9 @@
     self.layer.cornerRadius = roundRadius;
     self.layer.masksToBounds = false;
     self.layer.shadowRadius = shadowRadius;
-    self.layer.shadowColor = [UIColor colorWithRed:102/255.0 green:102/255.0 blue:102/255.0 alpha:0.5].CGColor;
+    self.layer.shadowColor = [UIColor colorWithRed:220/255.0 green:220/255.0 blue:220/255.0 alpha:0.41].CGColor;;
     self.layer.shadowOpacity = 1.0;
-    self.layer.shadowOffset = CGSizeMake(0, 5);
+    self.layer.shadowOffset = CGSizeMake(0, -2);
 }
 
 - (void)addBoard:(CGFloat)radius color:(UIColor *)color {

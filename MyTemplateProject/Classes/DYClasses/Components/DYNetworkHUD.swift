@@ -34,7 +34,7 @@ class DYNetworkHUD: NSObject {
     public class func dismiss() {
         
         let hud = DYNetworkHUD.shared;
-
+        hud.activityView.stopAnimating();
         hud.activityView.removeFromSuperview();
         
     }
@@ -44,6 +44,7 @@ class DYNetworkHUD: NSObject {
         let hud = DYNetworkHUD.shared;
 
         if hud.activityView.isAnimating {
+            hud.activityView.stopAnimating();
             hud.activityView.removeFromSuperview()
         }
         hud.inView = inView;
@@ -56,8 +57,8 @@ class DYNetworkHUD: NSObject {
             make?.center.offset();
             make?.height.lessThanOrEqualTo()(hud.inView);
             make?.width.lessThanOrEqualTo()(hud.inView)
-            make?.width.offset()(120);
-            make?.height.offset()(60);
+//            make?.width.offset()(120);
+//            make?.height.offset()(60);
         }
        
         

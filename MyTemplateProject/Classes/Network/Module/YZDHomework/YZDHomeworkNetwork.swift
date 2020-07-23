@@ -279,4 +279,77 @@ class YZDHomeworkNetwork: DYBaseNetwork {
         
         return obj;
     }
+    
+    /**
+            获取作业试题
+         
+        */
+       public class func getHomeworkQuestions(afterWorkId: Int) -> YZDHomeworkNetwork {
+
+           let obj = YZDHomeworkNetwork.init();
+           obj.dy_baseURL = "http://192.168.10.243:8082";
+           obj.dy_requestUrl = "/sdk/appApi/afterWork/after-work/questions";
+           
+           obj.dy_requestArgument = [
+               "userId": self.userId,
+               "token" : self.token,
+               "afterWorkId": afterWorkId,
+           ];
+           obj.dy_requestMethod = .POST;
+           obj.dy_requestSerializerType = .JSON;
+           obj.dy_responseSerializerType = .JSON;
+           
+           
+           return obj;
+       }
+    
+    /**
+     收藏题目
+      
+     */
+    public class func collectQuestion(afterWorkId: Int,questionId: Int,likeOrUnlike: Int) -> YZDHomeworkNetwork {
+
+        let obj = YZDHomeworkNetwork.init();
+        obj.dy_baseURL = "http://192.168.10.243:8082";
+        obj.dy_requestUrl = "/sdk/appApi/afterWork/like-question";
+        
+        obj.dy_requestArgument = [
+            "userId": self.userId,
+            "token" : self.token,
+            "afterWorkId": afterWorkId,
+            "questionId":questionId,
+            "likeOrUnlike": likeOrUnlike
+        ];
+        obj.dy_requestMethod = .POST;
+        obj.dy_requestSerializerType = .JSON;
+        obj.dy_responseSerializerType = .JSON;
+        
+        
+        return obj;
+    }
+    
+    /**
+     提交答案
+      
+     */
+    public class func commitAnswers(afterWorkId: Int,usedTime: Int,answers: [[String : String]]) -> YZDHomeworkNetwork {
+
+        let obj = YZDHomeworkNetwork.init();
+        obj.dy_baseURL = "http://192.168.10.243:8082";
+        obj.dy_requestUrl = "/sdk/appApi/afterWork/after-work/finish";
+        
+        obj.dy_requestArgument = [
+            "userId": self.userId,
+            "token" : self.token,
+            "afterWorkId": afterWorkId,
+            "usedTime":usedTime,
+            "answers": answers
+        ];
+        obj.dy_requestMethod = .POST;
+        obj.dy_requestSerializerType = .JSON;
+        obj.dy_responseSerializerType = .JSON;
+        
+        return obj;
+    }
+    
 }
