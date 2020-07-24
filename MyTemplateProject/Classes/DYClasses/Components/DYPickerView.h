@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void(^PickerResult)(id);
+typedef void(^PickerResult)(int);
 
 @protocol DYPickerViewProtocol <NSObject>
 
@@ -23,6 +23,7 @@ typedef void(^PickerResult)(id);
 
 @property (nonatomic,copy) NSString *title;
 @property (nonatomic,copy) PickerResult selectResult;
+@property (nonatomic, assign) NSInteger defalutIndex;
 
 
 + (instancetype)pickerView;
@@ -33,6 +34,9 @@ typedef void(^PickerResult)(id);
 @end
 
 
+/**
+ 菜单单选列表
+ */
 @interface DYSinglePickerView : DYPickerView
 
 @property (nonatomic,copy) NSArray<NSString *> *sources;

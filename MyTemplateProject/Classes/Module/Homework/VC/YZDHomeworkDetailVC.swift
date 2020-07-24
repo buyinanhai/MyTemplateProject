@@ -87,14 +87,12 @@ class YZDHomeworkDetailVC: UIViewController {
                     self.updateHeaderView(dict: headerDict);
                 }
                 if let list = _response["moduleList"] as? [String : Any], let sections = list["classModuleLessonWorkVoList"] as? [[String : Any]] {
-                    
+                    self.datas.removeAll();
                     for item in sections {
                         if let section = YZDHomeworkChapterSectionModel.init(JSON: item) {
                             self.datas.append(section);
                         }
-                        
                     }
-                    
                     self.tableView.reloadData();
                 }
                 
@@ -137,10 +135,17 @@ class YZDHomeworkDetailVC: UIViewController {
         
     ]
     
+    /**
+            id    name
+     */
     private var chapters: [(Int, String)] = [];
     
+    /**
+               id    name
+        */
     private var currentChapter:(Int, String)?
-    
+    private var currentChapterIndex:Int = 0;
+
 
 }
 
@@ -192,7 +197,10 @@ extension YZDHomeworkDetailVC: UITableViewDataSource,UITableViewDelegate {
                 make?.edges.offset();
             })
         }
-        let name = self.currentChapter?.1;
+        var name = self.currentChapter?.1;
+        if name?.length ?? 0 > 0 {
+            name = name! + "  ▼";
+        }
         btn?.setTitle(name, for: .normal);
                 
         return header
@@ -206,6 +214,27 @@ extension YZDHomeworkDetailVC: UITableViewDataSource,UITableViewDelegate {
     @objc
     private func sectionHeaderClick(_ sender: DYButton) {
         
+        let view = DYSinglePickerView.init();
+        view.title = "选择单元";
+        view.sources = self.chapters.map({ (value) -> String in
+            return value.1;
+        })
+        view.defalutIndex = self.currentChapterIndex
+    
+        view.selectResult = {
+            [weak self] (value) in
+
+            
+            if let model = self?.chapters[Int(value)] {
+                
+                self?.loadHomework(model.0);
+                self?.currentChapter = model;
+                self?.currentChapterIndex = Int(value);
+            }
+            
+            
+        }
+        view.show();
         
         
     }

@@ -11,7 +11,9 @@ import UIKit
 protocol DYMenuProtocol {
     
 }
-
+/**
+ 菜单下拉列表
+ */
 @objcMembers class DYMenuView: UIView {
     
     var selectedCallback: ((_ index: Int) -> Void)?

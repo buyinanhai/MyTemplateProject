@@ -8,90 +8,115 @@
 
 import UIKit
 
+@objc
+protocol YZDTestResultHeaderDelegate {
+    
+    @objc optional
+    func headerView(_ view:YZDTestResultHeader, didSelected indexPath: IndexPath);
+    func headerView(_ view:YZDTestResultHeader, onClickFolder isUnfold:Bool);
+    
+    
+}
+
 class YZDTestResultHeader: UIView {
 
     public var didSelectedCell: ((_ index: Int) -> Void)?
     
+    public weak var delegate:YZDTestResultHeaderDelegate?
     
-    override init(frame: CGRect) {
-        super.init(frame: frame);
+    
+    @IBOutlet weak var titleBtn: UIButton!
+    @IBOutlet weak var consumeTimeLabel: UILabel!
+    @IBOutlet weak var answeredLabel: UILabel!
+    @IBOutlet weak var accuracyLabel: UILabel!
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    class func initHeaderView() -> YZDTestResultHeader {
+        
+            let view = Bundle.main.loadNibNamed("YZDTestResultHeader", owner: nil, options: nil)?.last as! YZDTestResultHeader;
+        
+        return view;
+    }
+    
+    public func getHeight(for isUnfold: Bool) -> CGFloat {
+    
+        var height = self.height;
+        
+        let updateHeight = self.collectionView.contentSize.height - 60;
+        
+        height = isUnfold ? height + updateHeight : height - updateHeight;
+        
+        return height;
+    }
+    
+    
+    public func update(_ model: YZDTestResultDetailInfo, results: [Int : String]) {
+        
+        self.titleBtn.setTitle(model.dy_title, for: .normal);
+        
+        let timeStr = String.init(format: "%02分 %02d秒", (model.dy_usedTime ?? 0) / 60, (model.dy_usedTime ?? 0) % 60);
+        self.consumeTimeLabel.text = "用时：\(timeStr)";
+        self.answeredLabel.text = "已作答：\(model.dy_finishCount ?? 0)";
+        self.accuracyLabel.text = "正确率：\(model.dy_accuracy ?? "0.0")%";
+        
+        if let layout = self.collectionView.collectionViewLayout as? DYCollectionViewGridLayout {
+            
+            layout.pageCount = results.count;
+            
+        }
+        self.results = results;
+        self.collectionView.reloadData();
+    }
+    
+   
+    override func awakeFromNib() {
+        super.awakeFromNib();
         self.setupSubview();
     }
+  
     
     private func setupSubview() {
-        
-        self.addSubview(self.titleLabel);
-        self.addSubview(self.detailLabel);
-        self.addSubview(self.collectionView);
+        let layout = DYCollectionViewGridLayout.init();
+        layout.itemSize = CGSize.init(width: 40, height: 60);
+        layout.rowCount = 5;
+        layout.pageCount = 999;
+        self.collectionView.collectionViewLayout = layout;
+        self.collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell");
         self.collectionView.dataSource = self;
         self.collectionView.delegate = self;
-        self.titleLabel.mas_makeConstraints { (make) in
-            make?.left.top()?.offset()(8);
-        }
-        self.detailLabel.mas_makeConstraints { (make) in
-            make?.left.equalTo()(self.titleLabel);
-            make?.top.equalTo()(self.titleLabel.mas_bottom)?.offset()(15);
-            make?.right.offset();
-        }
-        self.collectionView.mas_makeConstraints { (make) in
-            make?.top.equalTo()(self.detailLabel.mas_bottom)
-            make?.left.right()?.bottom()?.offset();
-        }
+        self.collectionView.isScrollEnabled = false;
+    }
+    
+    
+    @IBAction func downBtnClick(_ sender: UIButton) {
+        
+        sender.isSelected = !sender.isSelected;
+        
+        sender.transform = sender.isSelected ? CGAffineTransform.init(rotationAngle: CGFloat(M_PI)) : CGAffineTransform.identity;
+        
+        var height = self.height;
+               
+        let updateHeight: CGFloat = self.collectionView.contentSize.height - 60;
+               
+        height = sender.isSelected ? height + updateHeight : height - updateHeight;
+        
+        var frame = self.frame;
+        frame.size.height = height;
+        self.frame = frame;
+        self.delegate?.headerView(self, onClickFolder: sender.isSelected);
         
         
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    private var results: [Int : String] = [:];
+  
     
-    
-    private lazy var titleLabel: UILabel = {
-        
-        let view = UILabel.init();
-        view.font = .boldSystemFont(ofSize: 16);
-        view.textColor  = UIColor.black;
-        view.text = "课后练习";
-        
-        return view;
-    }()
-    
-    private lazy var detailLabel: UILabel = {
-        
-        let view = UILabel.init();
-        view.font = .systemFont(ofSize: 15)
-        view.textColor = .black;
-        view.text = "用时：2分30秒   已做答：5题    正确率：66%";
-        
-        return view;
-    }()
-    
-    private lazy var collectionView: UICollectionView = {
-        
-        let layout = DYCollectionViewGridLayout.init();
-        layout.itemSize = CGSize.init(width: 40, height: 80);
-        layout.rowCount = 5;
-        layout.pageCount = 20;
-        let view =  UICollectionView.init(frame: .zero, collectionViewLayout: layout);
-        view.backgroundColor = .white;
-        view.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell");
-        
-        return view;
-    }()
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
-
 }
 extension YZDTestResultHeader: UICollectionViewDataSource,UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return 20;
+        return self.results.count;
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -107,8 +132,17 @@ extension YZDTestResultHeader: UICollectionViewDataSource,UICollectionViewDelega
             btn?.setImage(image, for: .normal);
             cell.contentView.addSubview(btn!);
             btn?.textColor = .black;
+            btn?.margin = 10;
             btn?.frame = cell.contentView.bounds;
             btn?.isEnabled = false;
+            btn?.titleLabel?.font = .systemFont(ofSize: 15);
+            btn?.setTitleColor(.init(hexString: "#555555"), for: .normal);
+
+        }
+        
+        let imgs = ["0":"yzd-homework-result-error","1":"yzd-homework-result-correct","-1":"yzd-homework-result-unanswer"];
+        if let result = self.results[indexPath.row], let img = imgs[result] {
+            btn?.setImage(UIImage.init(named: img), for: .normal)
         }
         btn?.setTitle("\(indexPath.row + 1)", for: .normal);
 
@@ -120,6 +154,8 @@ extension YZDTestResultHeader: UICollectionViewDataSource,UICollectionViewDelega
         self.didSelectedCell?(indexPath.row);
         
     }
+    
+    
     
     
 }

@@ -352,4 +352,27 @@ class YZDHomeworkNetwork: DYBaseNetwork {
         return obj;
     }
     
+    /**
+        获取答题结果
+         
+        */
+       public class func getMyHomeworkResult(afterWorkId: Int,afterWorkFinishId: Int) -> YZDHomeworkNetwork {
+
+           let obj = YZDHomeworkNetwork.init();
+           obj.dy_baseURL = "http://192.168.10.243:8082";
+           obj.dy_requestUrl = "/sdk/appApi/afterWork/after-work/analysis";
+           
+           obj.dy_requestArgument = [
+               "userId": self.userId,
+               "token" : self.token,
+               "afterWorkId": afterWorkId,
+               "afterWorkFinishId":afterWorkFinishId,
+           ];
+           obj.dy_requestMethod = .POST;
+           obj.dy_requestSerializerType = .JSON;
+           obj.dy_responseSerializerType = .JSON;
+           
+           return obj;
+       }
+    
 }

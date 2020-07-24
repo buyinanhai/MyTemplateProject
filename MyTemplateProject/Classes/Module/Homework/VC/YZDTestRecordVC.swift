@@ -38,7 +38,8 @@ class YZDTestRecordVC: UIViewController {
         }
         
         self.tableView.begainRefreshData();
-        
+        self.searchHeader.addTarget(self, selector: #selector(showSearchVC));
+
     }
     
     
@@ -85,23 +86,94 @@ class YZDTestRecordVC: UIViewController {
           view.noDataText = "没有答题记录";
           view.register(YZDTestRecordCell.self, forCellReuseIdentifier: "cell");
           view.separatorStyle = .none;
-          self.searchBar.frame = CGRect.init(x: 0, y: 0, width: self.view.width, height: 55)
-          view.tableHeaderView = self.searchBar;
+          self.searchHeader.frame = CGRect.init(x: 0, y: 0, width: self.view.width, height: 63)
+          view.tableHeaderView = self.searchHeader;
           view.backgroundColor = UIColor.HWColorWithHexString(hex: "#F7F7F7")
 
           return view;
           
       }()
 
-    private lazy var searchBar: UISearchBar = {
-           
-           let bar = UISearchBar.init()
-           bar.placeholder = "请输入课程名称";
-           bar.barStyle = .default;
-           bar.backgroundColor = .gray;
-           bar.delegate = self;
-           return bar;
-       }()
+    private lazy var searchHeader: UIView = {
+        
+        let view = UIView.init();
+        view.backgroundColor = .clear;
+        
+        let placeView = UILabel.init();
+        placeView.backgroundColor = UIColor.white;
+        placeView.addRound(10);
+        placeView.text = "   请输入课程名称";
+        placeView.textColor = .init(hexString: "#BBBBBB")
+        placeView.font = .systemFont(ofSize: 13);
+        view.addSubview(placeView);
+        
+        let searchBtn = UIButton.init();
+        searchBtn.setImage(UIImage.init(named: "yzd-homework-search"), for: .normal);
+        searchBtn.isUserInteractionEnabled = false;
+        searchBtn.setBackgroundImage(UIImage.init(named: "yzd-homework-search-bg"), for: .normal);
+        view.addSubview(searchBtn);
+        searchBtn.mas_makeConstraints { (make) in
+            make?.right.offset()(-15);
+            make?.left.equalTo()(placeView.mas_right);
+            make?.width.offset()(49);
+            make?.height.offset()(33);
+            make?.top.offset()(15);
+        }
+        placeView.mas_makeConstraints { (make) in
+            make?.left.top()?.offset()(15);
+            make?.right.equalTo()(searchBtn.mas_left)?.offset()(10);
+            make?.height.offset()(33);
+        }
+        
+        
+        return view;
+    }()
+    
+    @objc
+    private func showSearchVC() {
+        
+        let searchVC = DYSearchVC.searchVC();
+        searchVC.resultVCBackgroundColor = .init(hexString: "#F7F7F7");
+        searchVC.tableView?.register(YZDTestRecordCell.self, forCellReuseIdentifier: "cell");
+        searchVC.tableView?.backgroundColor = UIColor.white;
+        searchVC.tableView?.noDataText = "无结果"
+        searchVC.tableView?.rowHeight = 120;
+        searchVC.placeholdertext = "请输入课程名称";
+        searchVC.selectedSearchBtnCallback = {
+            (view, text) in
+            view?.loadDataCallback = {
+                [weak self] (pageIndex, result) in
+                
+                let resultDatas = self?.tableView.dy_dataSource.filter({ (value) -> Bool in
+                    
+                    if let _value = value as? YZDTestRecordCellModel {
+                        if (_value.dy_classTypeName ?? "").contains(text) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+                    return false;
+                });
+                result(resultDatas ?? []);
+            }
+            view?.begainRefreshData();
+        }
+        searchVC.tableView?.didSelectedTableViewCellCallback = {
+            [weak self] (cell, index) in
+            self?.dismiss(animated: true, completion: {
+                let vc = YZDTestResultVC.init();
+                vc.recordModel = self?.tableView.dy_dataSource[index.row] as? YZDTestRecordCellModel;
+                self?.navigationController?.pushViewController(vc, animated: true);
+            })
+        }
+        searchVC.tableView?.backgroundColor = UIColor.clear;
+        searchVC.tableView?.separatorColor = .clear
+        searchVC.tableView?.isShowNoData = false;
+        
+        self.present(searchVC, animated: true, completion: nil);
+        
+    }
     /*
     // MARK: - Navigation
 
@@ -113,23 +185,5 @@ class YZDTestRecordVC: UIViewController {
     */
 
 }
-extension YZDTestRecordVC: UISearchBarDelegate {
-    
-    
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        
-        searchBar.endEditing(true);
-        self.showSearchVC();
-    }
-    
-    
-    private func showSearchVC() {
-        
-        let vc = DYSearchVC.searchVC();
-        
-        
-        self.present(vc, animated: true, completion: nil);
-        
-    }
-    
-}
+
+

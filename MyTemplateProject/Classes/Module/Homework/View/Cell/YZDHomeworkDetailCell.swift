@@ -47,12 +47,15 @@ class YZDHomeworkDetailCell: UITableViewCell {
             if _model.dy_afterWorks?.count == 0 {
                 self.stackView.removeFromSuperview();
             } else {
-                if let contentView = self.stackView.superview {
-                    contentView.addSubview(self.stackView);
+                if  self.stackView.superview == nil {
+                    self.subContentView.addSubview(self.stackView);
                     self.stackView.mas_makeConstraints { (make) in
                         make?.top.equalTo()(self.nameLabel.mas_bottom)?.offset()(8);
                         make?.left.right()?.bottom()?.offset();
                     }
+                    
+                }
+                if self.stackView.subviews.count == 0 {
                     for item in _model.dy_afterWorks ?? [] {
                         let view = YZDHomeworkDetailCellSubview.init()
                         view.model = item;
@@ -87,6 +90,7 @@ class YZDHomeworkDetailCell: UITableViewCell {
             make?.top.offset()(7.5);
             make?.bottom.offset()(-7.5);
         }
+        self.subContentView = subContentView;
         
         subContentView.addSubview(self.nameLabel);
         subContentView.addSubview(self.stackView);
@@ -122,6 +126,8 @@ class YZDHomeworkDetailCell: UITableViewCell {
         return view;
         
     }()
+    
+    private var subContentView: UIView!
     
     
     

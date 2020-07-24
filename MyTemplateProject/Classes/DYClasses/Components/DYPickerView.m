@@ -13,7 +13,7 @@
 @interface DYPickerView ()
 
 @property (nonatomic,strong) UIView *contentView;
-@property (nonatomic,weak) UILabel *titleLabel;
+@property (nonatomic,strong) UILabel *titleLabel;
 
 
 @end
@@ -45,8 +45,16 @@
     }];
     
     
+    
+    
     UIView *toolView = [UIView new];
     toolView.backgroundColor = [UIColor whiteColor];
+    
+    [toolView addSubview:self.titleLabel];
+    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.offset(0);
+    }];
+    
     [self addSubview:toolView];
     [toolView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.offset(0);
@@ -55,6 +63,7 @@
     }];
     UIButton *cancle = [UIButton new];
     [cancle setTitle:@"取消" forState:UIControlStateNormal];
+    cancle.titleLabel.font = [UIFont systemFontOfSize:13];
     [cancle setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [cancle addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
     [toolView addSubview:cancle];
@@ -74,6 +83,7 @@
         make.width.offset(200);
     }];
     UIButton *confirm = [UIButton new];
+    confirm.titleLabel.font = [UIFont systemFontOfSize:13];
     [confirm setTitle:@"确认" forState:UIControlStateNormal];
     [confirm setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [confirm addTarget:self action:@selector(confirmBtnClick) forControlEvents:UIControlEventTouchUpInside];
@@ -112,6 +122,17 @@
     [self removeFromSuperview];
     
 }
+
+- (UILabel *)titleLabel {
+    
+    if (!_titleLabel) {
+        _titleLabel = [[UILabel alloc] init];
+        _titleLabel.font = [UIFont boldSystemFontOfSize:15];
+        _titleLabel.textColor = [UIColor colorWithHexString:@"#2A2B30"];
+    }
+    return _titleLabel;
+    
+}
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
@@ -135,6 +156,14 @@
 }
 
 
+- (void)setDefalutIndex:(NSInteger)defalutIndex {
+    
+    [super setDefalutIndex:defalutIndex];
+    
+    [self.picker selectRow:defalutIndex inComponent:0 animated:false];
+    
+}
+
 
 -(void)setupContentView {
     
@@ -150,7 +179,7 @@
 
 - (void)confirmBtnClick {
     if (self.selectResult) {
-        self.selectResult(@(_currentIndex));
+        self.selectResult(_currentIndex);
     }
     [self dismiss];
 

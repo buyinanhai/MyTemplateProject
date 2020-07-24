@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		04D9CD2F49CE7ECB939C1102 /* Pods_MyTemplateProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 954802C722A215C21B6DC642 /* Pods_MyTemplateProject.framework */; };
+		922FB12224CA750700830383 /* YZDTestResultHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 922FB12124CA750700830383 /* YZDTestResultHeader.xib */; };
+		922FB12424CA83E200830383 /* YZDTestResultDetailInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922FB12324CA83E100830383 /* YZDTestResultDetailInfo.swift */; };
 		923DC76A24C6883500CCCADC /* TestWebViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923DC76924C6883400CCCADC /* TestWebViewVC.swift */; };
 		9248D89224C5424A001C426C /* DYNetworkHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9248D89124C5424A001C426C /* DYNetworkHUD.swift */; };
 		9248D89524C57398001C426C /* YZDHomeworkChapterSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9248D89324C57398001C426C /* YZDHomeworkChapterSectionModel.swift */; };
@@ -95,6 +97,8 @@
 
 /* Begin PBXFileReference section */
 		5DED31BCD404196FBE8CB7E0 /* Pods-MyTemplateProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTemplateProject.debug.xcconfig"; path = "Target Support Files/Pods-MyTemplateProject/Pods-MyTemplateProject.debug.xcconfig"; sourceTree = "<group>"; };
+		922FB12124CA750700830383 /* YZDTestResultHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZDTestResultHeader.xib; sourceTree = "<group>"; };
+		922FB12324CA83E100830383 /* YZDTestResultDetailInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDTestResultDetailInfo.swift; sourceTree = "<group>"; };
 		923DC76924C6883400CCCADC /* TestWebViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestWebViewVC.swift; sourceTree = "<group>"; };
 		9248D89124C5424A001C426C /* DYNetworkHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DYNetworkHUD.swift; sourceTree = "<group>"; };
 		9248D89324C57398001C426C /* YZDHomeworkChapterSectionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDHomeworkChapterSectionModel.swift; sourceTree = "<group>"; };
@@ -286,6 +290,7 @@
 				92631AD924B86304005A534C /* Cell */,
 				92631ADB24B86304005A534C /* YZDHomeworkDetailHeaderView.swift */,
 				92631B0624BDD045005A534C /* YZDTestResultHeader.swift */,
+				922FB12124CA750700830383 /* YZDTestResultHeader.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -305,11 +310,12 @@
 		92631ADC24B86304005A534C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				922FB12324CA83E100830383 /* YZDTestResultDetailInfo.swift */,
 				9248D89724C593B4001C426C /* Test */,
 				9248D89424C57398001C426C /* YZDHomeworkChapterSectionModel_afterWorks.swift */,
 				9248D89324C57398001C426C /* YZDHomeworkChapterSectionModel.swift */,
-				92631ADD24B86304005A534C /* YZDHomeworkModel.swift */,
 				92F874AB24C19CC50063F8B1 /* YZDTestRecordCellModel.swift */,
+				92631ADD24B86304005A534C /* YZDHomeworkModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -699,6 +705,7 @@
 				9248D8B324C5968A001C426C /* test-html in Resources */,
 				92EE7E3D24B8058D00BF4DF7 /* LaunchScreen.storyboard in Resources */,
 				92EE7E3A24B8058D00BF4DF7 /* Assets.xcassets in Resources */,
+				922FB12224CA750700830383 /* YZDTestResultHeader.xib in Resources */,
 				92EE7E3524B8058800BF4DF7 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -799,6 +806,7 @@
 				92EE7F1024B8570300BF4DF7 /* DYView.m in Sources */,
 				92EE7F0A24B8570300BF4DF7 /* NSDictionary+dy_extension.m in Sources */,
 				92EE7F0824B8570300BF4DF7 /* UIImage+dy_extension.m in Sources */,
+				922FB12424CA83E200830383 /* YZDTestResultDetailInfo.swift in Sources */,
 				92631B4224BFF024005A534C /* DYNetworkConfig.m in Sources */,
 				92631AFF24BDC3D1005A534C /* YZDTestAnswerVC.swift in Sources */,
 				92EE7F0D24B8570300BF4DF7 /* DYScrollView.m in Sources */,

@@ -47,7 +47,7 @@ class YZDTestCollectionVC: UIViewController {
             self?.onSubjectBtnClick(index);
         }
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "yzd-homework-collection-rightbtn"), style: .plain, target: self, action: #selector(rightBarButtonClick));
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "编辑", style: .plain, target: self, action: #selector(rightBarButtonClick));
         self.navigationItem.rightBarButtonItem?.title = "编辑";
 
         self.view.addSubview(self.webView);

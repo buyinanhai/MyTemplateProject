@@ -59,7 +59,6 @@ class DYCollectionViewGridLayout: UICollectionViewLayout {
     
     
     override var collectionViewContentSize: CGSize {
-        
        
         self.calculateAppropriateRowCount(rowCount: self.rowCount)
         
@@ -69,9 +68,15 @@ class DYCollectionViewGridLayout: UICollectionViewLayout {
         if page > Float((self.collectionView?.numberOfItems(inSection: 0) ?? 0) / self.pageCount) {
             page += 1;
         }
+        //多少行
+        var rowNum = pageCount / self.rowCount;
+        let lineF = CGFloat(self.pageCount) / CGFloat(self.rowCount);
+        if lineF > CGFloat(rowNum) {
+            rowNum += 1;
+        }
+        let height = CGFloat(rowNum) * self.itemSize.height + CGFloat((rowNum - 1)) * self.verticalMargin;
         
-        
-        return CGSize.init(width: (self.collectionView?.width ?? 0.0) * CGFloat(Int(page)) , height: self.collectionView?.height ?? 0);
+        return CGSize.init(width: (self.collectionView?.width ?? 0.0) * CGFloat(Int(page)) , height: height);
         
     }
     

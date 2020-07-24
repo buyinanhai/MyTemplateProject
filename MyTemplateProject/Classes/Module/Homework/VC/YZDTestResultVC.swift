@@ -30,43 +30,92 @@ class YZDTestResultVC: UIViewController {
         self.tableView.mas_makeConstraints { (make) in
             make?.edges.offset()(0);
         }
+                
         
-        let header = YZDTestResultHeader.init(frame: .init(x: 0, y: 0, width: self.view.width, height: 400));
+        self.tableView.mj_header = MJRefreshNormalHeader.init(refreshingTarget: self, refreshingAction: #selector(loadData))
         
-        header.didSelectedCell = {
-            [weak self] (index) in
-            if (self?.tableView.numberOfSections ?? 0) - 1 <= index {
-                self?.tableView.scrollToRow(at: IndexPath.init(row: index, section: 0), at: .top, animated: true);
+        self.tableView.mj_header?.beginRefreshing()
+       
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        if self.tableView.tableHeaderView == nil {
+            let header = YZDTestResultHeader.initHeaderView();
+            header.delegate = self;
+            self.tableView.tableHeaderView = header;
+            self.tableView.tableHeaderView?.frame = CGRect.init(x: 0, y: 0, width: self.view.width, height: 180);
+            
+            header.didSelectedCell = {
+                [weak self] (index) in
+                if index < self?.allTests.count ?? 0 {
+                   
+                    self?.webView?.evaluateJavaScript("doScroll('\(index)')", completionHandler: nil);
+                }
             }
         }
+    }
+    
+    private func updateHeaderView(_ model: YZDTestResultDetailInfo, results:[Int : String]) {
+    
+        (self.tableView.tableHeaderView as? YZDTestResultHeader)?.update(model, results: results);
+    
+    }
+    
+    //MARK: 重新加载webview
+    private func reloadWebViewContent() {
+        if self.allTests.count == 0 {
+            return;
+        }
         
-        self.tableView.tableHeaderView = header;
-        self.tableView.loadDataCallback = {
-            [weak self] (page, result) in
-            
-            self?.loadData(page: Int(page), result: result)
+        if let jsonStr = try? String.init(data: JSONSerialization.data(withJSONObject: self.allTests, options: .fragmentsAllowed), encoding: .utf8) {
+            self.webView?.evaluateJavaScript("onload(\(jsonStr))") { (result, error) in
+                
+                print("题目加载  error == \(error)");
+                if error != nil {
+                    self.isSuccessLoad = false;
+                }
+            }
         }
-        self.tableView.didSelectedTableViewCellCallback = {
-            [weak self] (cell, indexPath) in
-            
-            self?.didSelectedTableViewCell(cell: cell as! YZDTestResultCell, index: indexPath)
-        }
-        self.tableView.begainRefreshData();
     }
     
     
-    private func loadData(page: Int, result:DYTableView_Result) {
+    @objc
+    private func loadData() {
         
         
         if let _model = self.recordModel {
-            YZDHomeworkNetwork.getMyHistoryHomeworkDetail(homeworkId: _model.dy_afterWorkId ?? 0, finishedHomeworkId: _model.dy_afterWorkFinishId ?? 0).dy_startRequest { (response, error) in
+            YZDHomeworkNetwork.getMyHomeworkResult(afterWorkId: _model.dy_afterWorkId ?? 0, afterWorkFinishId: _model.dy_afterWorkFinishId ?? 0).dy_startRequest { (response, error) in
                 
+                self.tableView.mj_header?.endRefreshing();
                 if let _response = response as? [String : Any] {
                     
+                    var results:[Int: String] = [:];
                     
+                    if let items = _response["questions"] as? [[String : Any]] {
+                        
+                        self.allTests = items;
+                        
+                        for (index,item) in items.enumerated() {
+                            if let rightFlag = item["rightFlag"] as? Int {
+                                
+                                results[index] = "\(rightFlag)";
+                                
+                            } else {
+                                results[index] = "-1";
+                            }
+                        }
+                        self.reloadWebViewContent();
+                    }
+                    if let info = _response["AfterWork"] as? [String : Any], let model = YZDTestResultDetailInfo.init(JSON: info) {
+                        
+                        self.updateHeaderView(model, results: results);
+                    }
                     
                 } else {
                     
+                    DYNetworkHUD.showInfo(message: error?.errorMessage ?? "获取失败", inView: nil);
                     
                 }
                 
@@ -75,27 +124,99 @@ class YZDTestResultVC: UIViewController {
         
     }
     
-    private func didSelectedTableViewCell(cell: YZDTestResultCell, index: IndexPath) {
-        
-        
-        
-    }
     
     
-    private lazy var tableView: DYTableView = {
+    private lazy var tableView: UITableView = {
         
-        let view = DYTableView.init(frame: .zero);
-        view.rowHeight = 120;
-        view.isShowNoData = true;
-        view.noDataText = "没有答题结果";
+        let view = UITableView.init(frame: .zero);
         view.register(UITableViewCell.self, forCellReuseIdentifier: "cell");
         view.separatorStyle = .none;
         view.allowsSelection = false;
-        view.rowHeight = 200;
+        view.dataSource = self;
+        view.delegate = self;
+        
         
         return view;
         
     }()
     
+    private weak var webView:WKWebView?
+    
+    private var isSuccessLoad:Bool = true;
+    private var allTests: [[String : Any]] = [];
 
+
+}
+
+extension YZDTestResultVC : YZDTestResultHeaderDelegate {
+    
+    func headerView(_ view: YZDTestResultHeader, onClickFolder isUnfold: Bool) {
+        
+        
+//        let height = (self.tableView.tableHeaderView as? YZDTestResultHeader)?.getHeight(for: isUnfold);
+//        var frame = self.tableView.tableHeaderView?.frame;
+//        frame?.size.height = height ?? view.height;
+//        self.tableView.tableHeaderView?.frame = frame;
+        self.tableView.reloadData();
+    
+    }
+
+    func headerView(_ view: YZDTestResultHeader, didSelected indexPath: IndexPath) {
+        
+        
+    }
+}
+
+extension YZDTestResultVC: UITableViewDataSource,UITableViewDelegate,WKNavigationDelegate {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1;
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath);
+        
+        var webView = cell.contentView.subviews.first as? WKWebView ;
+        if webView == nil {
+            let config = WKWebViewConfiguration.init();
+            webView = WKWebView.init(frame: .zero, configuration: config);
+            let path = Bundle.main.path(forResource: "test-html/taskResultList.html", ofType: nil)
+            let request = URLRequest.init(url: URL.init(fileURLWithPath: path ?? ""))
+            webView!.load(request);
+            webView!.navigationDelegate = self;
+            webView?.scrollView.delegate = self;
+            cell.contentView.addSubview(webView!);
+            webView?.mas_makeConstraints({ (make) in
+                make?.edges.offset();
+            })
+            self.webView = webView;
+        }
+    
+        return cell;
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        var height = self.tableView.height - (self.tableView.tableHeaderView?.height ?? 0);
+        if height < 0 {
+            height = self.tableView.height;
+        }
+        
+        return height;
+    }
+    
+
+    
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        
+        if isSuccessLoad == false {
+            self.reloadWebViewContent();
+        }
+    }
+    
+    
+    
 }

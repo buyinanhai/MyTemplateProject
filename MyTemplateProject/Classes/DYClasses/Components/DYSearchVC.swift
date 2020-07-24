@@ -20,6 +20,17 @@ import UIKit
      * 点击了搜索
      */
     var selectedSearchBtnCallback: ((_ tableView: DYTableView?,_ searchText: String) -> (Void))?
+    
+    
+    public var resultVCBackgroundColor: UIColor? {
+        
+        didSet {
+            
+            self.searchResultsController?.view.backgroundColor = self.resultVCBackgroundColor;
+        }
+        
+    }
+    
     weak var tableView: DYTableView? {
         
         get {
@@ -70,6 +81,7 @@ extension DYSearchVC: UISearchControllerDelegate, UISearchBarDelegate {
         }
         
     }
+
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
 //        self.isActive = false;
@@ -120,8 +132,9 @@ private class DYSearchResultVC: UIViewController, UISearchResultsUpdating {
             };
             make?.left.right().bottom().offset();
         }
-    
+        self.view.backgroundColor = UIColor.white;
     }
+    
     
     lazy var tableView: DYTableView = {
         
