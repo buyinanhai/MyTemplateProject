@@ -7,8 +7,9 @@
 //
 
 import UIKit
+@_exported import DYTemplate
 
-class YZDHomeworkNetwork: DYBaseNetwork {
+public class YZDHomeworkNetwork: DYBaseNetwork {
 
     
     override init() {
@@ -37,9 +38,8 @@ class YZDHomeworkNetwork: DYBaseNetwork {
         
     }
     
-    /**
-     我的作业
-     */
+    //MARK:我的作业
+     
     public class func getMyHomework(page: Int, pageSize: Int) -> YZDHomeworkNetwork {
         
         let obj = YZDHomeworkNetwork.init();
@@ -60,9 +60,8 @@ class YZDHomeworkNetwork: DYBaseNetwork {
         return obj;
     }
     
-    /**
-     答题记录
-     */
+    //MARK:答题记录
+     
     public class func getMyHistoryHomework() -> YZDHomeworkNetwork {
         
         let obj = YZDHomeworkNetwork.init();
@@ -80,11 +79,10 @@ class YZDHomeworkNetwork: DYBaseNetwork {
         return obj;
     }
     
-    /**
-     答题记录详情
+    //MARK:答题记录详情
      
       
-     */
+     
     public class func getMyHistoryHomeworkDetail(homeworkId: Int, finishedHomeworkId: Int) -> YZDHomeworkNetwork {
         
         let obj = YZDHomeworkNetwork.init();
@@ -104,12 +102,13 @@ class YZDHomeworkNetwork: DYBaseNetwork {
         return obj;
     }
     
-    /**
-        查询课程的作业
-        classtypeid == productId
-        iveFlag= 0 && videoFlag =1是录播课  video， liveFlag= 1 && videoFlag =0是直播课 live ，liveFlag= 1 && videoFlag =1是混合课 blend
-            classModuleId   章节id
-        */
+    //MARK:   查询课程的作业
+    /*
+     classtypeid == productId
+     iveFlag= 0 && videoFlag =1是录播课  video， liveFlag= 1 && videoFlag =0是直播课 live ，liveFlag= 1 && videoFlag =1是混合课 blend
+     classModuleId   章节id
+     */
+        
     public class func getHomeworkFromCourse(classTypeId: Int, liveOrVideo: String,classModuleId : Int) -> YZDHomeworkNetwork {
            
            let obj = YZDHomeworkNetwork.init();
@@ -129,9 +128,8 @@ class YZDHomeworkNetwork: DYBaseNetwork {
            
            return obj;
        }
-    /**
-     获取课程章节
-     */
+    //MARK:获取课程章节
+     
     public class func getChapterFromCourse(classTypeId: Int, liveOrVideo: String) -> YZDHomeworkNetwork {
         
         let obj = YZDHomeworkNetwork.init();
@@ -154,11 +152,8 @@ class YZDHomeworkNetwork: DYBaseNetwork {
     
     
    
-    /**
-     获取作业中的题目
-    开始做作业
-      
-     */
+    //MARK:获取作业中的题目
+    //开始做作业     
     public class func getQuestionsFromCourse(afterWorkId: Int) -> YZDHomeworkNetwork {
 
         let obj = YZDHomeworkNetwork.init();
@@ -179,10 +174,9 @@ class YZDHomeworkNetwork: DYBaseNetwork {
     }
     
     
-    /**
-        查询学科
+    //MARK:   查询学科
          
-        */
+        
        public class func getMysSubjects(stagedId: Int) -> YZDHomeworkNetwork {
 
            let obj = YZDHomeworkNetwork.init();
@@ -199,10 +193,9 @@ class YZDHomeworkNetwork: DYBaseNetwork {
            return obj;
        }
     
-    /**
-        查询年级
+    //MARK:   查询年级
          
-        */
+        
        public class func getMyGrades() -> YZDHomeworkNetwork {
 
            let obj = YZDHomeworkNetwork.init();
@@ -217,13 +210,13 @@ class YZDHomeworkNetwork: DYBaseNetwork {
     
     
     
-     /**
-      我的错题集
+     //MARK: 我的错题集
+    /*
+     subjectId  : 科目id
+     
+     gradeId:   年级id
+     */
       
-         subjectId  : 科目id
-        gradeId:   年级id
-       
-      */
      public class func getMyErrorCollections(classTypeId: Int,subjectId : String?, gradeId: Int?,page: Int, pageSize: Int) -> YZDHomeworkNetwork {
 
          let obj = YZDHomeworkNetwork.init();
@@ -257,10 +250,9 @@ class YZDHomeworkNetwork: DYBaseNetwork {
      }
      
     
-    /**
-     移出错题集
+    //MARK:移出错题集
       
-     */
+     
     public class func removeQuestionsFromCollections(questionIds: [Int]) -> YZDHomeworkNetwork {
 
         let obj = YZDHomeworkNetwork.init();
@@ -280,10 +272,9 @@ class YZDHomeworkNetwork: DYBaseNetwork {
         return obj;
     }
     
-    /**
-            获取作业试题
+    //MARK:       获取作业试题
          
-        */
+        
        public class func getHomeworkQuestions(afterWorkId: Int) -> YZDHomeworkNetwork {
 
            let obj = YZDHomeworkNetwork.init();
@@ -303,10 +294,10 @@ class YZDHomeworkNetwork: DYBaseNetwork {
            return obj;
        }
     
-    /**
-     收藏题目
+     
+    //MARK:收藏题目
       
-     */
+     
     public class func collectQuestion(afterWorkId: Int,questionId: Int,likeOrUnlike: Int) -> YZDHomeworkNetwork {
 
         let obj = YZDHomeworkNetwork.init();
@@ -328,10 +319,9 @@ class YZDHomeworkNetwork: DYBaseNetwork {
         return obj;
     }
     
-    /**
-     提交答案
+    //MARK:提交答案
       
-     */
+     
     public class func commitAnswers(afterWorkId: Int,usedTime: Int,answers: [[String : String]]) -> YZDHomeworkNetwork {
 
         let obj = YZDHomeworkNetwork.init();
@@ -352,11 +342,8 @@ class YZDHomeworkNetwork: DYBaseNetwork {
         return obj;
     }
     
-    /**
-        获取答题结果
-         
-        */
-       public class func getMyHomeworkResult(afterWorkId: Int,afterWorkFinishId: Int) -> YZDHomeworkNetwork {
+    //MARK:   获取答题结果
+    public class func getMyHomeworkResult(afterWorkId: Int,afterWorkFinishId: Int) -> YZDHomeworkNetwork {
 
            let obj = YZDHomeworkNetwork.init();
            obj.dy_baseURL = "http://192.168.10.243:8082";

@@ -62,6 +62,7 @@
             background: #EDEDED;
             color: #777777;
         }
+        
 
     </style>
 </head>
@@ -74,12 +75,12 @@
 </body>
 
 <script>
-	function onload(obj){
-		var main = '';
-		// main += '<p id = "firstLine" ><span class="typeName">'+ obj.questionTypeName +'</span></p>';
-		// main += '<p><span>'+ obj.tempText +'</span></p>';
-		main += '<p id = "stem">';
-		main += obj.stem+'</p>';
+    function onload(obj){
+        var main = '';
+        // main += '<p id = "firstLine" ><span class="typeName">'+ obj.questionTypeName +'</span></p>';
+        // main += '<p><span>'+ obj.tempText +'</span></p>';
+        main += '<p id = "stem">';
+        main += obj.stem+'</p>';
 
         var options = JSON.parse(obj.options)
         var myAnswer = obj.myAnswer;
@@ -98,8 +99,8 @@
         main += subsetOption;
 
 
-		$(".main").html(main);
-		if(obj.questionTypeId === 2){// 多选
+        $(".main").html(main);
+        if(obj.questionTypeId === 2){// 多选
              $(".answer").click(function(){
                 if($(this).children(".key").hasClass("selectOption")){
                     $(this).children(".key").removeClass("selectOption");
@@ -111,37 +112,37 @@
                 var keys = ''
                 if($(".selectOption").length > 0){
                      $(".selectOption").forEach(function (item) {
-                        keys += $(item).children(".key").text()+",";
+                        keys += $(item).text()+",";
                     });
                 }
                 window.webkit.messageHandlers.selectAnswer.postMessage(keys)
+            })
+        }else {// 单选、判断
+            $(".answer").click(function(){
+                $(this).children(".key").addClass("selectOption");
+                $(this).children(".key").removeClass("unSelectOption");
+                $(this).siblings(".answer").children(".key").removeClass("selectOption");
+                $(this).siblings(".answer").children(".key").addClass("unSelectOption");
 
-		    })
-		}else if (obj.questionTypeId == 1){// 单选
-		    $(".answer").click(function(){
-		        $(this).children(".key").addClass("selectOption");
-		        $(this).children(".key").removeClass("unSelectOption");
-		        $(this).siblings(".answer").children(".key").removeClass("selectOption");
-		        $(this).siblings(".answer").children(".key").addClass("unSelectOption");
-
-		        var key = $(this).children(".key").text();
+                var key = $(this).children(".key").text();
                 window.webkit.messageHandlers.selectAnswer.postMessage(key)
-		    })
-		}
+            })
+        }
 
-		window.MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById('content')]);
-	}
+        window.MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById('content')]);
+    }
 
     // 取消点击事件
-	function cancelClick(){
+    function cancelClick(){
         $(".answer").unbind();
-	}
+    }
 
     // 点击事件
-	function buildClick(){
+    function buildClick(){
         $(".answer").bind();
-	}
+    }
 
 </script>
 
 </html>
+

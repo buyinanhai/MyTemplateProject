@@ -28,7 +28,7 @@
     HomeNetWork *obj = [HomeNetWork new];
     obj.dy_baseURL = kBaseURL;
     obj.dy_requestUrl = @"/apply/getmyquato";
-    obj.dy_requestArgument = @{@"model":[NSString getCurrentDeviceModel]};
+//    obj.dy_requestArgument = @{@"model":[NSString getCurrentDeviceModel]};
     obj.dy_requestMethod = YTKRequestMethodGET;
     obj.dy_requestSerializerType = YTKRequestSerializerTypeHTTP;
     obj.dy_responseSerializerType = YTKResponseSerializerTypeJSON;

@@ -327,7 +327,7 @@ extension YZDTestAnswerVC: WKScriptMessageHandler,WKNavigationDelegate, WKUIDele
             
             if let answer = message.body as? String {
                 
-                if answer.length > 0 {
+                if answer.count > 0 {
                     
                     self.answersCache[self.currentIndex] = answer;
                     

@@ -42,7 +42,7 @@ class YZDHomeworkDetailVC: UIViewController {
         self.tableView.register(UITableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: "header");
         self.tableView.backgroundColor = .clear;
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "错题集", style: .plain, target: self, action: #selector(rightBarButtonClick));
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "课程错题", style: .plain, target: self, action: #selector(rightBarButtonClick));
     }
     
     
@@ -198,7 +198,7 @@ extension YZDHomeworkDetailVC: UITableViewDataSource,UITableViewDelegate {
             })
         }
         var name = self.currentChapter?.1;
-        if name?.length ?? 0 > 0 {
+        if name?.count ?? 0 > 0 {
             name = name! + "  ▼";
         }
         btn?.setTitle(name, for: .normal);
@@ -223,7 +223,6 @@ extension YZDHomeworkDetailVC: UITableViewDataSource,UITableViewDelegate {
     
         view.selectResult = {
             [weak self] (value) in
-
             
             if let model = self?.chapters[Int(value)] {
                 

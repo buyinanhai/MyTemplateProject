@@ -9,6 +9,6 @@
 #ifndef OC_bridge_header_h
 #define OC_bridge_header_h
 
-#import "DYOCHeader.h"
-#import "DYNetwork.h"
+#import <DYOCHeader.h>
+
 #endif /* OC_bridge_header_h */

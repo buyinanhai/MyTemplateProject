@@ -7,7 +7,8 @@
 //
 
 import UIKit
-
+import WebKit
+import DYTemplate
 /**
  答题结果
  */
@@ -20,6 +21,7 @@ class YZDTestResultVC: UIViewController {
         super.viewDidLoad()
         self.navigationItem.title = "答题结果";
         self.setupSubview();
+    
         // Do any additional setup after loading the view.
     }
     
@@ -114,7 +116,7 @@ class YZDTestResultVC: UIViewController {
                     }
                     
                 } else {
-                    
+                                        
                     DYNetworkHUD.showInfo(message: error?.errorMessage ?? "获取失败", inView: nil);
                     
                 }

@@ -14,10 +14,28 @@ class MyVC: UIViewController {
         super.viewDidLoad()
         self.title = "我的";
 
+        self.edgesForExtendedLayout = UIRectEdge.init();
+        
+        self.view.addSubview(self.versionLabel);
+        self.versionLabel.mas_makeConstraints { (make) in
+            make?.centerX.offset();
+            make?.bottom.offset()(-20);
+        }
         // Do any additional setup after loading the view.
     }
 
-
+    private lazy var versionLabel: UILabel = {
+           
+           let view = UILabel.init();
+           view.textColor = UIColor.lightGray;
+           view.font = .boldSystemFont(ofSize: 16);
+        let versionContent = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String;
+        let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String;
+        view.text = "版本号：\(versionContent ?? "")( \(buildNumber ?? "") )";
+        view.numberOfLines = 2;
+        view.sizeToFit();
+           return view;
+       }()
     /*
     // MARK: - Navigation
 

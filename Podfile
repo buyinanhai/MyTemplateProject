@@ -10,8 +10,5 @@ target 'MyTemplateProject' do
 
   # Pods for MyTemplateProject
 
-  pod "Masonry"
-  pod "AFNetworking"
-  pod "MJRefresh"
-  pod "ObjectMapper"
+  pod "DYTemplate", :path => "localPod/DYTemplate"
 end

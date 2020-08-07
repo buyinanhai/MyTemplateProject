@@ -134,42 +134,42 @@ class YZDTestRecordVC: UIViewController {
         
         let searchVC = DYSearchVC.searchVC();
         searchVC.resultVCBackgroundColor = .init(hexString: "#F7F7F7");
-        searchVC.tableView?.register(YZDTestRecordCell.self, forCellReuseIdentifier: "cell");
-        searchVC.tableView?.backgroundColor = UIColor.white;
-        searchVC.tableView?.noDataText = "无结果"
-        searchVC.tableView?.rowHeight = 120;
-        searchVC.placeholdertext = "请输入课程名称";
-        searchVC.selectedSearchBtnCallback = {
-            (view, text) in
-            view?.loadDataCallback = {
-                [weak self] (pageIndex, result) in
-                
-                let resultDatas = self?.tableView.dy_dataSource.filter({ (value) -> Bool in
-                    
-                    if let _value = value as? YZDTestRecordCellModel {
-                        if (_value.dy_classTypeName ?? "").contains(text) {
-                            return true;
-                        } else {
-                            return false;
-                        }
-                    }
-                    return false;
-                });
-                result(resultDatas ?? []);
-            }
-            view?.begainRefreshData();
-        }
-        searchVC.tableView?.didSelectedTableViewCellCallback = {
-            [weak self] (cell, index) in
-            self?.dismiss(animated: true, completion: {
-                let vc = YZDTestResultVC.init();
-                vc.recordModel = self?.tableView.dy_dataSource[index.row] as? YZDTestRecordCellModel;
-                self?.navigationController?.pushViewController(vc, animated: true);
-            })
-        }
-        searchVC.tableView?.backgroundColor = UIColor.clear;
-        searchVC.tableView?.separatorColor = .clear
-        searchVC.tableView?.isShowNoData = false;
+//        searchVC.tableView?.register(YZDTestRecordCell.self, forCellReuseIdentifier: "cell");
+//        searchVC.tableView?.backgroundColor = UIColor.white;
+//        searchVC.tableView?.noDataText = "无结果"
+//        searchVC.tableView?.rowHeight = 120;
+//        searchVC.placeholdertext = "请输入课程名称";
+//        searchVC.selectedSearchBtnCallback = {
+//            (view, text) in
+//            view?.loadDataCallback = {
+//                [weak self] (pageIndex, result) in
+//                
+//                let resultDatas = self?.tableView.dy_dataSource.filter({ (value) -> Bool in
+//                    
+//                    if let _value = value as? YZDTestRecordCellModel {
+//                        if (_value.dy_classTypeName ?? "").contains(text) {
+//                            return true;
+//                        } else {
+//                            return false;
+//                        }
+//                    }
+//                    return false;
+//                });
+//                result(resultDatas ?? []);
+//            }
+//            view?.begainRefreshData();
+//        }
+//        searchVC.tableView?.didSelectedTableViewCellCallback = {
+//            [weak self] (cell, index) in
+//            self?.dismiss(animated: true, completion: {
+//                let vc = YZDTestResultVC.init();
+//                vc.recordModel = self?.tableView.dy_dataSource[index.row] as? YZDTestRecordCellModel;
+//                self?.navigationController?.pushViewController(vc, animated: true);
+//            })
+//        }
+//        searchVC.tableView?.backgroundColor = UIColor.clear;
+//        searchVC.tableView?.separatorColor = .clear
+//        searchVC.tableView?.isShowNoData = false;
         
         self.present(searchVC, animated: true, completion: nil);
         

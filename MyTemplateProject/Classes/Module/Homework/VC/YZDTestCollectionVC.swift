@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DYTemplate
 /**
  错题集
  */
@@ -17,7 +18,7 @@ class YZDTestCollectionVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "错题集";
+        self.navigationItem.title = "课程错题";
         self.setupSubview();
         self.webView.scrollView.mj_header?.beginRefreshing()
         self.loadData();
