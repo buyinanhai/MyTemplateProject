@@ -1,0 +1,6 @@
+framework module DYTemplate {
+  umbrella header "DYTemplate-umbrella.h"
+
+  export *
+  module * { export * }
+}

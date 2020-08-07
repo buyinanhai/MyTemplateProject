@@ -1,0 +1,101 @@
+{
+  "name": "DYTemplate",
+  "version": "1.0.0",
+  "summary": "我的工程模板",
+  "description": "个人iOS开发的积累，主要是开发常用的工具。",
+  "homepage": "https://dongyee.edu",
+  "license": "Dongye",
+  "authors": {
+    "汪宁": "汪宁"
+  },
+  "platforms": {
+    "ios": "9.0"
+  },
+  "source": {
+    "git": "https://github.com/buyinanhai/DYTemplate.git",
+    "tag": "v1.0.0"
+  },
+  "source_files": [
+    "Classes",
+    "Classes/*.{h,swift}",
+    "Classes/Macros/*.{h,swift}"
+  ],
+  "exclude_files": "Classes/Exclude",
+  "public_header_files": "DYTemplate.h",
+  "requires_arc": true,
+  "static_framework": true,
+  "swift_versions": "5.0",
+  "vendored_frameworks": [
+    "*.framework"
+  ],
+  "prefix_header_contents": "#import \"DYOCHeader.h\"\n#import \"DYMacro.h\"",
+  "resources": [
+    "Resources/*.bundle",
+    "Classes/**/*.xib",
+    "Classes/**/**/*.xib",
+    "Classes/**/**/**/*.xib",
+    "Classes/**/**/**/**/*.xib",
+    "Classes/**/**/**/**/**/*.xib",
+    "Classes/**/**/**/**/**/**/*.xib"
+  ],
+  "dependencies": {
+    "Masonry": [
+
+    ],
+    "AFNetworking": [
+
+    ],
+    "MJRefresh": [
+
+    ],
+    "ObjectMapper": [
+
+    ]
+  },
+  "pod_target_xcconfig": {
+    "GCC_PREPROCESSOR_DEFINITIONS": "$(inherited) DYTemplate_NAME=DYTemplate DYTemplate_VERSION=1.0.0"
+  },
+  "default_subspecs": [
+    "Base",
+    "ComponentUI",
+    "Network"
+  ],
+  "subspecs": [
+    {
+      "name": "Base",
+      "source_files": [
+        "Classes/Category/*.{h,m}",
+        "Foundation/**/*.{h,m}",
+        "UIKit/**/*.{h,m}"
+      ],
+      "public_header_files": [
+        "Classes/Category/*.h",
+        "Foundation/**/*.h",
+        "UIKit/**/*.h"
+      ]
+    },
+    {
+      "name": "ComponentUI",
+      "source_files": [
+        "Classes/Components/*.{h,m,swift}",
+        "Classes/Components/**/*.{h,m,swift}"
+      ],
+      "public_header_files": [
+        "Classes/Components/*.h",
+        "Classes/Components/**/*.h"
+      ]
+    },
+    {
+      "name": "Network",
+      "source_files": [
+        "Classes/Network/*.{h,m}",
+        "Classes/Network/DYNetwork/*.{h,m}",
+        "Classes/Network/DYNetwork/YTK/*.{h,m}"
+      ],
+      "public_header_files": [
+        "Classes/Network/DYBaseNetwork.h"
+      ]
+    }
+  ],
+  "swift_version": "5.0"
+}
