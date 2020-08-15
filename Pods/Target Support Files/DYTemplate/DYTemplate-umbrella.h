@@ -50,6 +50,9 @@
 #import "YTKNetworkConfig.h"
 #import "YTKNetworkPrivate.h"
 #import "YTKRequest.h"
+#import "MinewBeacon.h"
+#import "MinewBeaconManager.h"
+#import "MinewBeaconValue.h"
 
 FOUNDATION_EXPORT double DYTemplateVersionNumber;
 FOUNDATION_EXPORT const unsigned char DYTemplateVersionString[];

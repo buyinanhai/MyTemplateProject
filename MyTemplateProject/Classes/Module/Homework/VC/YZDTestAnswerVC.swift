@@ -18,6 +18,17 @@ class YZDTestAnswerVC: UIViewController {
     
     public var afterWorkId: Int?
     
+    
+    /**
+     是否可以点击下一题 在没选择答案的情况下
+     */
+    internal var isEnableClickNoAnswer: Bool {
+        
+        get {
+            return true;
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "答题";
@@ -65,6 +76,16 @@ class YZDTestAnswerVC: UIViewController {
     
     private func updateCurrentState() {
         
+        //如果这道题没有作答并且 不允许在没提交答案的情况下到下一题
+        if (self.answersCache[self.currentIndex]?.count ?? 0) == 0 && !self.isEnableClickNoAnswer {
+            self.bottomView.nextBtn.isEnabled = false;
+        } else if (self.answersCache[self.currentIndex]?.count ?? 0 > 0 && !self.isEnableClickNoAnswer) {
+            self.bottomView.nextBtn.isEnabled = true;
+        }
+        if self.currentIndex == self.allTests.count - 1 {
+            self.bottomView.nextBtn.isEnabled = false;
+        }
+        
         self.headerView.previewLabel.text = "\(self.currentIndex + 1)/\(self.allTests.count)";
         
         let typeName = self.getCurrentQuestionValue(for: "questionTypeName") as? String;
@@ -92,7 +113,7 @@ class YZDTestAnswerVC: UIViewController {
    
     
     //MARK: 重新加载webview
-    private func reloadWebViewContent() {
+    internal func reloadWebViewContent() {
         if self.allTests.count == 0 {
             return;
         }
@@ -121,7 +142,9 @@ class YZDTestAnswerVC: UIViewController {
            userCtrol.add(self, name: "selectAnswer");
            config.userContentController = userCtrol;
            let view = WKWebView.init(frame: .zero, configuration: config);
-           let path = Bundle.main.path(forResource: "test-html/taskQue.html", ofType: nil)
+            //如果不是当前控制器就加载 练习中心html
+           let html = self.isEnableClickNoAnswer ? "test-html/taskQue.html" : "test-html/testCenterQue.html"        
+           let path = Bundle.main.path(forResource: html, ofType: nil)
            let request = URLRequest.init(url: URL.init(fileURLWithPath: path ?? ""))
            view.load(request);
            view.navigationDelegate = self;
@@ -132,7 +155,7 @@ class YZDTestAnswerVC: UIViewController {
 
     //第一次加载 有可能会失败
     private var isSuccessLoad:Bool = true;
-    private var allTests: [[String : Any]] = [];
+    internal var allTests: [[String : Any]] = [];
 
     /**
      当前的题目的index
@@ -148,13 +171,13 @@ class YZDTestAnswerVC: UIViewController {
      收藏的标记
      */
     private var collectionCache:[Int : Bool] = [:];
-    private var headerView: YZDTestAnswerHeaderView = {
+    internal var headerView: YZDTestAnswerHeaderView = {
         
         let view = YZDTestAnswerHeaderView.init(frame: .zero);
         
         return view;
     }()
-    private var bottomView: YZDTestAnswerBottomView = {
+    internal var bottomView: YZDTestAnswerBottomView = {
         
         let view = YZDTestAnswerBottomView.init(frame: .zero);
         
@@ -178,12 +201,12 @@ extension YZDTestAnswerVC {
         
         if let questionId = self.getCurrentQuestionValue(for: "questionId") as? Int {
             DYNetworkHUD.startLoading();
-            YZDHomeworkNetwork.collectQuestion(afterWorkId: self.afterWorkId ?? 0, questionId: questionId, likeOrUnlike: sender.isSelected ? 1 : 0).dy_startRequest { (response, error) in
+            YZDHomeworkNetwork.collectQuestion(afterWorkId: self.afterWorkId, questionId: questionId, likeOrUnlike: sender.isSelected ? 1 : 0).dy_startRequest { (response, error) in
                 
                 DYNetworkHUD.dismiss();
                 if error != nil {
-                    
                     DYNetworkHUD.showInfo(message: error?.errorMessage ?? "操作失败", inView: nil);
+                    sender.isSelected = false;
                 }
             }
         }
@@ -200,6 +223,8 @@ extension YZDTestAnswerVC {
         if self.currentIndex == self.allTests.count - 1 {
             self.bottomView.nextBtn.isEnabled = false;
         }
+        
+       
         self.updateCurrentState()
 
         
@@ -251,11 +276,19 @@ extension YZDTestAnswerVC {
         
     }
     
+    private var hasNext: Bool {
+        
+        get {
+            
+            return self.currentIndex < self.allTests.count - 1;
+        }
+        
+    }
+    
 }
 
 //MARK: 数据加载
 extension YZDTestAnswerVC {
-    
     
     
     private func commitAnswers() {
@@ -265,6 +298,14 @@ extension YZDTestAnswerVC {
             return  ["questionId": String(questionid ?? 0),"answer" : value.value];
         }
         
+        self.commitAnswer(answers: answers)
+        
+        
+    }
+    
+    @objc
+    internal func commitAnswer(answers: [[String:String]]) {
+            
         DYNetworkHUD.startLoading()
         YZDHomeworkNetwork.commitAnswers(afterWorkId: self.afterWorkId ?? 0, usedTime: self.headerView.getUsedTime(), answers: answers).dy_startRequest { (response, error) in
             
@@ -277,9 +318,12 @@ extension YZDTestAnswerVC {
                 
             }
         }
+        
+        
     }
     
-    private func loadData() {
+    @objc
+    internal func loadData() {
         
         DYNetworkHUD.startLoading()
         YZDHomeworkNetwork.getHomeworkQuestions(afterWorkId: self.afterWorkId ?? 0).dy_startRequest { (response, error) in
@@ -289,19 +333,7 @@ extension YZDTestAnswerVC {
                 
                 if let items = _response["questions"] as? [[String : Any]] {
                     
-                    self.allTests = items;
-                    
-                    if self.allTests.count == 0 {
-                        DYNetworkHUD.showInfo(message: "没有试题", inView: nil);
-                    } else {
-                        self.reloadWebViewContent();
-                        if items.count > 1 {
-                            self.bottomView.nextBtn.isEnabled = true;
-                        }
-                        self.headerView.startReckonByTime();
-                        self.headerView.previewLabel.text = "\(self.currentIndex + 1)/\(items.count)";
-                    }
-                   
+                    self.show(questions: items);
                 }
                 
             } else {
@@ -313,14 +345,35 @@ extension YZDTestAnswerVC {
         
     }
     
-    
+    @objc
+    internal func show(questions: [[String : Any]]) {
+        
+        self.allTests = questions;
+        
+        if self.allTests.count == 0 {
+            DYNetworkHUD.showInfo(message: "没有试题", inView: nil);
+        } else {
+            self.reloadWebViewContent();
+            if questions.count > 1  && self.isEnableClickNoAnswer {
+                //默认下一题可以点击
+               
+                self.bottomView.nextBtn.isEnabled = true;
+            }
+            
+            if self.classForCoder == YZDTestAnswerVC.self {
+                self.headerView.startReckonByTime();
+            }
+            self.headerView.previewLabel.text = "\(self.currentIndex + 1)/\(questions.count)";
+        }
+        
+    }
     
 }
 
 //MARK: 代理相关
 extension YZDTestAnswerVC: WKScriptMessageHandler,WKNavigationDelegate, WKUIDelegate {
        
-       
+        
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         
         if message.name == "selectAnswer" {
@@ -331,6 +384,9 @@ extension YZDTestAnswerVC: WKScriptMessageHandler,WKNavigationDelegate, WKUIDele
                     
                     self.answersCache[self.currentIndex] = answer;
                     
+                    if !self.isEnableClickNoAnswer && self.hasNext {
+                        self.bottomView.nextBtn.isEnabled = true;
+                    }
                    
                 } else {
                     self.answersCache.removeValue(forKey: self.currentIndex);
@@ -401,13 +457,19 @@ extension YZDTestAnswerVC: WKScriptMessageHandler,WKNavigationDelegate, WKUIDele
 
 
 
-fileprivate class YZDTestAnswerHeaderView: UIView {
+internal class YZDTestAnswerHeaderView: UIView {
     
     
     override init(frame: CGRect) {
         super.init(frame: frame);
         
         self.setuSubview();
+        
+    }
+    
+    public func hideTimeView() {
+        
+        self.timeBtn.isHidden = true;
         
     }
     
@@ -529,7 +591,7 @@ fileprivate class YZDTestAnswerHeaderView: UIView {
 }
 
 
-fileprivate class YZDTestAnswerBottomView: UIView {
+internal class YZDTestAnswerBottomView: UIView {
     
     
     

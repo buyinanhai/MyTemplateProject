@@ -11,6 +11,8 @@
 		922FB12224CA750700830383 /* YZDTestResultHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 922FB12124CA750700830383 /* YZDTestResultHeader.xib */; };
 		922FB12424CA83E200830383 /* YZDTestResultDetailInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922FB12324CA83E100830383 /* YZDTestResultDetailInfo.swift */; };
 		923DC76A24C6883500CCCADC /* TestWebViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923DC76924C6883400CCCADC /* TestWebViewVC.swift */; };
+		923EC66524DD3B640090C577 /* TestCenterHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923EC66424DD3B640090C577 /* TestCenterHomeVC.swift */; };
+		923EC66724DD3B880090C577 /* TestCenterHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923EC66624DD3B880090C577 /* TestCenterHeaderView.swift */; };
 		9248D89524C57398001C426C /* YZDHomeworkChapterSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9248D89324C57398001C426C /* YZDHomeworkChapterSectionModel.swift */; };
 		9248D89624C57399001C426C /* YZDHomeworkChapterSectionModel_afterWorks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9248D89424C57398001C426C /* YZDHomeworkChapterSectionModel_afterWorks.swift */; };
 		9248D89C24C593C9001C426C /* YZDHomeworkQuestionModel_question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9248D89824C593C8001C426C /* YZDHomeworkQuestionModel_question.swift */; };
@@ -37,6 +39,12 @@
 		92631B3524BFF024005A534C /* MainNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 92631B1124BFF024005A534C /* MainNetwork.m */; };
 		92631B3624BFF024005A534C /* MyNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 92631B1324BFF024005A534C /* MyNetwork.m */; };
 		92631B3724BFF024005A534C /* LoginNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 92631B1824BFF024005A534C /* LoginNetwork.m */; };
+		9271C75D24E0E18B0004E82B /* TestCenterNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271C75C24E0E18B0004E82B /* TestCenterNetwork.swift */; };
+		9271C75F24E0F7C00004E82B /* TestCenterChooseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271C75E24E0F7C00004E82B /* TestCenterChooseVC.swift */; };
+		9271C76324E3E43B0004E82B /* DYBaseNavigationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271C76224E3E43B0004E82B /* DYBaseNavigationVC.swift */; };
+		9271C76524E3EDC20004E82B /* TestCenterChooseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271C76424E3EDC20004E82B /* TestCenterChooseModel.swift */; };
+		9271C76724E4D4980004E82B /* TestCenterChapterNodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271C76624E4D4980004E82B /* TestCenterChapterNodeCell.swift */; };
+		9271C76924E53B760004E82B /* TestCenterAnswerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271C76824E53B760004E82B /* TestCenterAnswerVC.swift */; };
 		92EE7E2E24B8058800BF4DF7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EE7E2D24B8058800BF4DF7 /* AppDelegate.swift */; };
 		92EE7E3024B8058800BF4DF7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EE7E2F24B8058800BF4DF7 /* SceneDelegate.swift */; };
 		92EE7E3224B8058800BF4DF7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EE7E3124B8058800BF4DF7 /* ViewController.swift */; };
@@ -56,6 +64,8 @@
 		922FB12124CA750700830383 /* YZDTestResultHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZDTestResultHeader.xib; sourceTree = "<group>"; };
 		922FB12324CA83E100830383 /* YZDTestResultDetailInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDTestResultDetailInfo.swift; sourceTree = "<group>"; };
 		923DC76924C6883400CCCADC /* TestWebViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestWebViewVC.swift; sourceTree = "<group>"; };
+		923EC66424DD3B640090C577 /* TestCenterHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCenterHomeVC.swift; sourceTree = "<group>"; };
+		923EC66624DD3B880090C577 /* TestCenterHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCenterHeaderView.swift; sourceTree = "<group>"; };
 		9248D89324C57398001C426C /* YZDHomeworkChapterSectionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDHomeworkChapterSectionModel.swift; sourceTree = "<group>"; };
 		9248D89424C57398001C426C /* YZDHomeworkChapterSectionModel_afterWorks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDHomeworkChapterSectionModel_afterWorks.swift; sourceTree = "<group>"; };
 		9248D89824C593C8001C426C /* YZDHomeworkQuestionModel_question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDHomeworkQuestionModel_question.swift; sourceTree = "<group>"; };
@@ -86,6 +96,12 @@
 		92631B1524BFF024005A534C /* MainNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainNetwork.h; sourceTree = "<group>"; };
 		92631B1724BFF024005A534C /* LoginNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginNetwork.h; sourceTree = "<group>"; };
 		92631B1824BFF024005A534C /* LoginNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginNetwork.m; sourceTree = "<group>"; };
+		9271C75C24E0E18B0004E82B /* TestCenterNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCenterNetwork.swift; sourceTree = "<group>"; };
+		9271C75E24E0F7C00004E82B /* TestCenterChooseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCenterChooseVC.swift; sourceTree = "<group>"; };
+		9271C76224E3E43B0004E82B /* DYBaseNavigationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DYBaseNavigationVC.swift; sourceTree = "<group>"; };
+		9271C76424E3EDC20004E82B /* TestCenterChooseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCenterChooseModel.swift; sourceTree = "<group>"; };
+		9271C76624E4D4980004E82B /* TestCenterChapterNodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCenterChapterNodeCell.swift; sourceTree = "<group>"; };
+		9271C76824E53B760004E82B /* TestCenterAnswerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCenterAnswerVC.swift; sourceTree = "<group>"; };
 		92EE7E2A24B8058800BF4DF7 /* MyTemplateProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyTemplateProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92EE7E2D24B8058800BF4DF7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92EE7E2F24B8058800BF4DF7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -125,6 +141,43 @@
 				EA9EC7382AF665F2C02C2AAE /* Pods-MyTemplateProject.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		923EC66024DD3AE40090C577 /* TestCenter */ = {
+			isa = PBXGroup;
+			children = (
+				923EC66324DD3B0F0090C577 /* Model */,
+				923EC66224DD3B0B0090C577 /* View */,
+				923EC66124DD3B050090C577 /* VC */,
+			);
+			path = TestCenter;
+			sourceTree = "<group>";
+		};
+		923EC66124DD3B050090C577 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				923EC66424DD3B640090C577 /* TestCenterHomeVC.swift */,
+				9271C75E24E0F7C00004E82B /* TestCenterChooseVC.swift */,
+				9271C76824E53B760004E82B /* TestCenterAnswerVC.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		923EC66224DD3B0B0090C577 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				923EC66624DD3B880090C577 /* TestCenterHeaderView.swift */,
+				9271C76624E4D4980004E82B /* TestCenterChapterNodeCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		923EC66324DD3B0F0090C577 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9271C76424E3EDC20004E82B /* TestCenterChooseModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		9248D89724C593B4001C426C /* Test */ = {
@@ -218,6 +271,7 @@
 		92631B0D24BFF024005A534C /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				9271C75B24E0E1640004E82B /* TestCenter */,
 				92F874A824C13C250063F8B1 /* YZDHomework */,
 				92631B0E24BFF024005A534C /* Home */,
 				92631B1524BFF024005A534C /* MainNetwork.h */,
@@ -253,6 +307,30 @@
 				92631B1824BFF024005A534C /* LoginNetwork.m */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		9271C75B24E0E1640004E82B /* TestCenter */ = {
+			isa = PBXGroup;
+			children = (
+				9271C75C24E0E18B0004E82B /* TestCenterNetwork.swift */,
+			);
+			path = TestCenter;
+			sourceTree = "<group>";
+		};
+		9271C76024E3E4180004E82B /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				9271C76124E3E4230004E82B /* VC */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		9271C76124E3E4230004E82B /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				9271C76224E3E43B0004E82B /* DYBaseNavigationVC.swift */,
+			);
+			path = VC;
 			sourceTree = "<group>";
 		};
 		92EE7E2124B8058800BF4DF7 = {
@@ -304,6 +382,8 @@
 		92EE7EB824B8570200BF4DF7 /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				9271C76024E3E4180004E82B /* Base */,
+				923EC66024DD3AE40090C577 /* TestCenter */,
 				92631AD424B85BF1005A534C /* Homework */,
 				92EE7EB924B8570200BF4DF7 /* Home */,
 				92EE7EBC24B8570200BF4DF7 /* My */,
@@ -380,7 +460,7 @@
 				92EE7E2724B8058800BF4DF7 /* Frameworks */,
 				92EE7E2824B8058800BF4DF7 /* Resources */,
 				1E820C8D7AC66AD1F854AFE4 /* [CP] Embed Pods Frameworks */,
-				B756113D75930FD63C9702C3 /* [CP] Copy Pods Resources */,
+				2A2813C24C19D31EFDA7036F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -459,7 +539,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MyTemplateProject/Pods-MyTemplateProject-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B756113D75930FD63C9702C3 /* [CP] Copy Pods Resources */ = {
+		2A2813C24C19D31EFDA7036F /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -507,7 +587,9 @@
 			files = (
 				92631AFD24BDC395005A534C /* YZDTestResultVC.swift in Sources */,
 				92631AE824B86304005A534C /* YZDHomeworkVC.swift in Sources */,
+				9271C75F24E0F7C00004E82B /* TestCenterChooseVC.swift in Sources */,
 				92631AE624B86304005A534C /* YZDHomeworkModel.swift in Sources */,
+				9271C76324E3E43B0004E82B /* DYBaseNavigationVC.swift in Sources */,
 				92631B3424BFF024005A534C /* HomeNetWork.m in Sources */,
 				9248D89524C57398001C426C /* YZDHomeworkChapterSectionModel.swift in Sources */,
 				92EE7E3224B8058800BF4DF7 /* ViewController.swift in Sources */,
@@ -516,16 +598,20 @@
 				92EE7EFB24B8570300BF4DF7 /* HomeVC.swift in Sources */,
 				9248D89C24C593C9001C426C /* YZDHomeworkQuestionModel_question.swift in Sources */,
 				92EE7E2E24B8058800BF4DF7 /* AppDelegate.swift in Sources */,
+				9271C76724E4D4980004E82B /* TestCenterChapterNodeCell.swift in Sources */,
 				92631AEB24BBEDA0005A534C /* YZDTestRecordVC.swift in Sources */,
 				92EE7E3024B8058800BF4DF7 /* SceneDelegate.swift in Sources */,
 				9248D89E24C593C9001C426C /* YZDHomeworkQuestionModel.swift in Sources */,
 				92F874AC24C19CC50063F8B1 /* YZDTestRecordCellModel.swift in Sources */,
+				9271C76524E3EDC20004E82B /* TestCenterChooseModel.swift in Sources */,
 				92631B0724BDD045005A534C /* YZDTestResultHeader.swift in Sources */,
 				92631B0B24BEAE8B005A534C /* YZDTestResultCell.swift in Sources */,
 				923DC76A24C6883500CCCADC /* TestWebViewVC.swift in Sources */,
 				92631AED24BC0DD1005A534C /* YZDHomeworkDetailCell.swift in Sources */,
+				923EC66524DD3B640090C577 /* TestCenterHomeVC.swift in Sources */,
 				922FB12424CA83E200830383 /* YZDTestResultDetailInfo.swift in Sources */,
 				92631AFF24BDC3D1005A534C /* YZDTestAnswerVC.swift in Sources */,
+				923EC66724DD3B880090C577 /* TestCenterHeaderView.swift in Sources */,
 				92EE7EFC24B8570300BF4DF7 /* MyVC.swift in Sources */,
 				92631AE724B86304005A534C /* YZDHomeworkDetailVC.swift in Sources */,
 				92F874AA24C13C780063F8B1 /* YZDHomeworkNetwork.swift in Sources */,
@@ -539,6 +625,8 @@
 				92631AE424B86304005A534C /* YZDHomeworkCell.swift in Sources */,
 				9248D89624C57399001C426C /* YZDHomeworkChapterSectionModel_afterWorks.swift in Sources */,
 				92631B3624BFF024005A534C /* MyNetwork.m in Sources */,
+				9271C75D24E0E18B0004E82B /* TestCenterNetwork.swift in Sources */,
+				9271C76924E53B760004E82B /* TestCenterAnswerVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

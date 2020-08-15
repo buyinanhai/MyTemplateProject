@@ -7,6 +7,7 @@
 //
 
 import UIKit
+ 
 
 @objcMembers public class DYSearchVC: SKSearchController {
 
@@ -14,14 +15,29 @@ import UIKit
     /**
      * 是否隐藏navigationbar当显示搜索控制器的时候
      */
-   public var isHideNaivgationbarWhenShowing: Bool = false;
+    public var isHideNaivgationbarWhenShowing: Bool = false;
     
     /**
      * 点击了搜索
      */
-   public var selectedSearchBtnCallback: ((_ tableView: DYTableView?,_ searchText: String) -> (Void))?
+    public var selectedSearchBtnCallback: ((_ tableView: DYTableView?,_ searchText: String) -> (Void))?
+    
+    /**
+     搜索vc 消失了
+     */
+    public var didDismissSearchControllerCallback: (() -> Void)?
     
     
+    public var tableView: DYTableView? {
+        
+        get {
+            if let _resultVC = self.searchResultsController as? DYSearchResultVC {
+                return _resultVC.tableView;
+            }
+            return nil
+        }
+    }
+
     public var resultVCBackgroundColor: UIColor? {
         
         didSet {
@@ -30,16 +46,19 @@ import UIKit
         }
         
     }
+    public func resultTableView() -> DYTableView? {
+        
+        return self.tableView;
+        
+    }
     
-    
-    public var tableView: DYTableView?
     
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated);
         self.presentingViewController?.tabBarController?.tabBar.isHidden = true;
-
+        
     }
-
+    
     public static func searchVC () -> DYSearchVC {
         let result = DYSearchResultVC.init();
         let vc = DYSearchVC.init(searchResultsController: result);
@@ -59,6 +78,12 @@ import UIKit
         self.searchBar.keyboardType = UIKeyboardType.webSearch;
         self.searchBar.delegate = self;
         self.delegate = self;
+
+    }
+    
+    public func didDismissSearchController(_ searchController: UISearchController) {
+        
+        self.didDismissSearchControllerCallback?();
     }
     
     deinit {
@@ -121,14 +146,17 @@ private class DYSearchResultVC: UIViewController, UISearchResultsUpdating {
         self.automaticallyAdjustsScrollViewInsets = false;
         self.tableView.mas_makeConstraints { (make) in
             if #available(iOS 11.0, *) {
-                make?.top.equalTo()(self.view.mas_safeAreaLayoutGuideTop)?.offset()(50);
+                make?.top.equalTo()(self.view.mas_safeAreaLayoutGuideTop)?.offset()(55);
             } else {
                 // Fallback on earlier versions
                 make?.top.offset()(44);
             };
+            
             make?.left.right().bottom().offset();
         }
         self.view.backgroundColor = UIColor.white;
+        self.edgesForExtendedLayout = UIRectEdge.init();
+
     }
     
     

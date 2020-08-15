@@ -14,17 +14,24 @@ typedef int ContentDirection;
 @interface DYButton : UIButton
 @property (nonatomic, copy) NSString *text;
 @property (nonatomic, copy) UIColor  *textColor;
-@property (nonatomic, copy) UIImage *image;
+@property (nonatomic, copy) UIImage  *image;
 @property (nonatomic, copy) NSString *seleText;
 @property (nonatomic, copy) UIColor  *seleTextColor;
-@property (nonatomic, copy) UIImage *seleTmage;
+@property (nonatomic, copy) UIImage  *seleTmage;
 @property (nonatomic, copy) NSString *highlightText;
 @property (nonatomic, copy) UIColor  *highlightTextColor;
-@property (nonatomic, copy) UIImage *highlightTmage;
+@property (nonatomic, copy) UIImage  *highlightTmage;
 ///图片跟文字的间距
 @property (nonatomic, assign) CGFloat margin;
-
+/**
+ 方便在collectionview中的使用
+ */
+@property (nonatomic, copy) NSIndexPath *indexpath;
 
 /**1 图片在上 2 图片在右 3 图片文字都居中*/
 @property (assign, nonatomic) IBInspectable ContentDirection direction;
+
+- (void)dy_setBackgroundColor:(UIColor *)backgroundColor forState:(UIControlState)state;
+- (void)dy_setBorderColor:(UIColor *)color forState:(UIControlState)state;
+
 @end

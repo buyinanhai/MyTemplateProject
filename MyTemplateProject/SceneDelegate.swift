@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import DYTemplate
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
@@ -34,14 +34,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let vc = cls.init();
             vc.tabBarItem.title = item["title"]!
             vc.tabBarItem.image = UIImage.init(named: item["icon"]!);
-            let navVC = UINavigationController.init(rootViewController: vc);
+            let navVC = DYBaseNavigationVC.init(rootViewController: vc);
             
             tabVC.addChild(navVC);
             
         }
         self.window?.rootViewController = tabVC;
         self.window?.makeKeyAndVisible();
-
+        
+        DYNetworkConfig.share()?.extraData = ["token": "SRn55wqmX06TlYIStQdT7WMZhTAZDdHLzNZ4eYtHGyVJuL4Hi5lVjFcEGZq%2F5erQkKAJFTDWONDU%0D%0AsaQL2JTmuw%3D%3D","userId":2984573];
+        DYNetworkConfig.share()?.networkBaseURL = "http://192.168.11.195:8082";
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

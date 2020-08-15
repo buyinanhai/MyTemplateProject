@@ -8,7 +8,15 @@
 
 #import "DYButton.h"
 
+@interface DYButton ()
+
+@property (nonatomic, strong) NSMutableDictionary<NSNumber *,UIColor *> *backgroundColorCache;
+@property (nonatomic, strong) NSMutableDictionary<NSNumber *,UIColor *> *borderColorCache;
+
+@end
+
 @implementation DYButton
+
 
 - (void)setText:(NSString *)text {
     [self setTitle:text forState:UIControlStateNormal];
@@ -63,4 +71,66 @@
         [self bringSubviewToFront:self.titleLabel];
     }
 }
+
+//如果是外面设置就是针对于normal的state
+- (void)setBackgroundColor:(UIColor *)backgroundColor {
+    self.backgroundColorCache[@(UIControlStateNormal)] = backgroundColor;
+    [super setBackgroundColor:backgroundColor];
+}
+
+- (void)setSelected:(BOOL)selected {
+    [super setSelected:selected];
+    
+    UIColor *selectColor = self.backgroundColorCache[@(UIControlStateSelected)];
+    
+    if (selectColor && selected) {
+        super.backgroundColor = selectColor;
+    } else if (self.backgroundColorCache[@(UIControlStateNormal)] && !selected) {
+        super.backgroundColor = self.backgroundColorCache[@(UIControlStateNormal)];
+    }
+    if (self.borderColorCache[@(UIControlStateSelected)] && selected) {
+        [self dy_setBorderColor:self.borderColorCache[@(UIControlStateSelected)] forState:UIControlStateSelected];
+    } else if (self.borderColorCache[@(UIControlStateNormal)] && !selected) {
+        
+        [self dy_setBorderColor:self.borderColorCache[@(UIControlStateNormal)] forState:UIControlStateNormal];
+    }
+}
+
+- (void)dy_setBackgroundColor:(UIColor *)backgroundColor forState:(UIControlState)state {
+    
+    self.backgroundColorCache[@(state)] = backgroundColor;
+    if (state == self.state) {
+        self.backgroundColor = backgroundColor;
+    }
+    
+}
+
+- (void)dy_setBorderColor:(UIColor *)color forState:(UIControlState)state {
+
+    self.borderColorCache[@(state)] = color;
+    if (state == self.state) {
+        self.layer.borderColor = [color CGColor];
+    }
+    
+    
+}
+
+
+- (NSMutableDictionary<NSNumber *,UIColor *> *)backgroundColorCache {
+    
+    if (!_backgroundColorCache) {
+        _backgroundColorCache = [NSMutableDictionary new];
+    }
+    return _backgroundColorCache;
+    
+}
+
+- (NSMutableDictionary<NSNumber *,UIColor *> *)borderColorCache {
+    
+    if (!_borderColorCache) {
+        _borderColorCache = [NSMutableDictionary new];
+    }
+    return _borderColorCache;
+}
+
 @end

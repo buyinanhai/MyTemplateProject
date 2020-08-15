@@ -40,6 +40,12 @@ typedef enum {
 ///为了在测试环境下 部分接口可以使用正式环境 配合KBaseURL宏使用
 @property (nonatomic, assign, readonly) BOOL isNormallySign;
 
+/**
+ 自定义数据
+ */
+@property (nonatomic, copy) NSDictionary* extraData;
+
+
 + (instancetype)shareConfig;
 
 + (void)initializeNetworkConfig;

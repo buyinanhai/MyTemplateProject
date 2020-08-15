@@ -17,7 +17,7 @@
   },
   "source_files": [
     "Classes",
-    "Classes/*.{h,swift}",
+    "Classes/*.{h,m,swift}",
     "Classes/Macros/*.{h,swift}"
   ],
   "exclude_files": "Classes/Exclude",
@@ -25,9 +25,6 @@
   "requires_arc": true,
   "static_framework": true,
   "swift_versions": "5.0",
-  "vendored_frameworks": [
-    "*.framework"
-  ],
   "prefix_header_contents": "#import \"DYOCHeader.h\"\n#import \"DYMacro.h\"",
   "resources": [
     "Resources/*.bundle",
@@ -58,9 +55,22 @@
   "default_subspecs": [
     "Base",
     "ComponentUI",
-    "Network"
+    "Network",
+    "Test"
   ],
   "subspecs": [
+    {
+      "name": "Test",
+      "source_files": [
+        "Classes/Test/*.{h,m,swift}",
+        "Classes/Test/**/*.{h,m,swift}"
+      ],
+      "vendored_libraries": "Classes/Test/**/*.a",
+      "public_header_files": [
+        "Classes/Test/*.h",
+        "Classes/Test/**/*.h"
+      ]
+    },
     {
       "name": "Base",
       "source_files": [

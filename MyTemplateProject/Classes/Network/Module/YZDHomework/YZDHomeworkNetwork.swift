@@ -23,8 +23,11 @@ public class YZDHomeworkNetwork: DYBaseNetwork {
         
         get {
             
-            return "SRn55wqmX0525NN4xsdDnTOjlqPw9LW3";
-            
+            if let token = DYNetworkConfig.share()?.extraData["token"] as? String {
+                return token;
+            } else {
+                return "SRn55wqmX0525NN4xsdDnTOjlqPw9LW3";
+            }
         }
         
     }
@@ -32,7 +35,11 @@ public class YZDHomeworkNetwork: DYBaseNetwork {
         
         get {
             
-            return 2983482;
+            if let userId = DYNetworkConfig.share()?.extraData["userId"] as? Int {
+                return userId;
+            } else {
+                return 2983482;
+            }
             
         }
         
@@ -43,7 +50,7 @@ public class YZDHomeworkNetwork: DYBaseNetwork {
     public class func getMyHomework(page: Int, pageSize: Int) -> YZDHomeworkNetwork {
         
         let obj = YZDHomeworkNetwork.init();
-        obj.dy_baseURL = "http://192.168.10.243:8082";
+        obj.dy_baseURL = DYNetworkConfig.share()?.networkBaseURL == nil ?  "http://192.168.10.243:8082" :  DYNetworkConfig.share()!.networkBaseURL;
         obj.dy_requestUrl = "/sdk/appApi/afterWork/my-after-work";
         obj.dy_requestArgument = [
             "userId": self.userId,
@@ -65,7 +72,7 @@ public class YZDHomeworkNetwork: DYBaseNetwork {
     public class func getMyHistoryHomework() -> YZDHomeworkNetwork {
         
         let obj = YZDHomeworkNetwork.init();
-        obj.dy_baseURL = "http://192.168.10.243:8082";
+        obj.dy_baseURL = DYNetworkConfig.share()?.networkBaseURL == nil ?  "http://192.168.10.243:8082" :  DYNetworkConfig.share()!.networkBaseURL;
         obj.dy_requestUrl = "/sdk/appApi/afterWork/historyWork";
         obj.dy_requestArgument = [
            "userId": self.userId,
@@ -86,7 +93,7 @@ public class YZDHomeworkNetwork: DYBaseNetwork {
     public class func getMyHistoryHomeworkDetail(homeworkId: Int, finishedHomeworkId: Int) -> YZDHomeworkNetwork {
         
         let obj = YZDHomeworkNetwork.init();
-        obj.dy_baseURL = "http://192.168.10.243:8082";
+        obj.dy_baseURL = DYNetworkConfig.share()?.networkBaseURL == nil ?  "http://192.168.10.243:8082" :  DYNetworkConfig.share()!.networkBaseURL;
         obj.dy_requestUrl = "/sdk/appApi/afterWork/after-work/analysis";
         obj.dy_requestArgument = [
            "userId": self.userId,
@@ -112,7 +119,7 @@ public class YZDHomeworkNetwork: DYBaseNetwork {
     public class func getHomeworkFromCourse(classTypeId: Int, liveOrVideo: String,classModuleId : Int) -> YZDHomeworkNetwork {
            
            let obj = YZDHomeworkNetwork.init();
-           obj.dy_baseURL = "http://192.168.10.243:8082";
+           obj.dy_baseURL = DYNetworkConfig.share()?.networkBaseURL == nil ?  "http://192.168.10.243:8082" :  DYNetworkConfig.share()!.networkBaseURL;
            obj.dy_requestUrl = "/sdk/appApi/afterWork/class-type/after-works";
            obj.dy_requestArgument = [
                "userId": self.userId,
@@ -133,7 +140,7 @@ public class YZDHomeworkNetwork: DYBaseNetwork {
     public class func getChapterFromCourse(classTypeId: Int, liveOrVideo: String) -> YZDHomeworkNetwork {
         
         let obj = YZDHomeworkNetwork.init();
-        obj.dy_baseURL = "http://192.168.10.243:8082";
+        obj.dy_baseURL = DYNetworkConfig.share()?.networkBaseURL == nil ?  "http://192.168.10.243:8082" :  DYNetworkConfig.share()!.networkBaseURL;
         obj.dy_requestUrl = "/sdk/appApi/afterWork/getModule";
         obj.dy_requestArgument = [
             
@@ -157,7 +164,7 @@ public class YZDHomeworkNetwork: DYBaseNetwork {
     public class func getQuestionsFromCourse(afterWorkId: Int) -> YZDHomeworkNetwork {
 
         let obj = YZDHomeworkNetwork.init();
-        obj.dy_baseURL = "http://192.168.10.243:8082";
+        obj.dy_baseURL = DYNetworkConfig.share()?.networkBaseURL == nil ?  "http://192.168.10.243:8082" :  DYNetworkConfig.share()!.networkBaseURL;
         obj.dy_requestUrl = "/sdk/appApi/afterWork/after-work/questions";
         obj.dy_requestArgument = [
             "userId": 2983482,
@@ -180,7 +187,7 @@ public class YZDHomeworkNetwork: DYBaseNetwork {
        public class func getMysSubjects(stagedId: Int) -> YZDHomeworkNetwork {
 
            let obj = YZDHomeworkNetwork.init();
-           obj.dy_baseURL = "http://192.168.10.243:8082";
+           obj.dy_baseURL = DYNetworkConfig.share()?.networkBaseURL == nil ?  "http://192.168.10.243:8082" :  DYNetworkConfig.share()!.networkBaseURL;
            obj.dy_requestUrl = "/sdk/appApi/resource/subjects";
            obj.dy_requestArgument = [
                "stageId": stagedId,
@@ -199,7 +206,7 @@ public class YZDHomeworkNetwork: DYBaseNetwork {
        public class func getMyGrades() -> YZDHomeworkNetwork {
 
            let obj = YZDHomeworkNetwork.init();
-           obj.dy_baseURL = "http://192.168.10.243:8082";
+           obj.dy_baseURL = DYNetworkConfig.share()?.networkBaseURL == nil ?  "http://192.168.10.243:8082" :  DYNetworkConfig.share()!.networkBaseURL;
            obj.dy_requestUrl = "/sdk/appApi/resource/grades";
            obj.dy_requestMethod = .GET;
            obj.dy_requestSerializerType = .JSON;
@@ -220,7 +227,7 @@ public class YZDHomeworkNetwork: DYBaseNetwork {
      public class func getMyErrorCollections(classTypeId: Int,subjectId : String?, gradeId: Int?,page: Int, pageSize: Int) -> YZDHomeworkNetwork {
 
          let obj = YZDHomeworkNetwork.init();
-         obj.dy_baseURL = "http://192.168.10.243:8082";
+         obj.dy_baseURL = DYNetworkConfig.share()?.networkBaseURL == nil ?  "http://192.168.10.243:8082" :  DYNetworkConfig.share()!.networkBaseURL;
          obj.dy_requestUrl = "/sdk/appApi/afterWork/wrong-collection";
          obj.dy_requestArgument = [
             "userId": self.userId,
@@ -256,7 +263,7 @@ public class YZDHomeworkNetwork: DYBaseNetwork {
     public class func removeQuestionsFromCollections(questionIds: [Int]) -> YZDHomeworkNetwork {
 
         let obj = YZDHomeworkNetwork.init();
-        obj.dy_baseURL = "http://192.168.10.243:8082";
+        obj.dy_baseURL = DYNetworkConfig.share()?.networkBaseURL == nil ?  "http://192.168.10.243:8082" :  DYNetworkConfig.share()!.networkBaseURL;
         obj.dy_requestUrl = "/sdk/appApi/afterWork/removewrong";
         
         obj.dy_requestArgument = [
@@ -278,7 +285,7 @@ public class YZDHomeworkNetwork: DYBaseNetwork {
        public class func getHomeworkQuestions(afterWorkId: Int) -> YZDHomeworkNetwork {
 
            let obj = YZDHomeworkNetwork.init();
-           obj.dy_baseURL = "http://192.168.10.243:8082";
+           obj.dy_baseURL = DYNetworkConfig.share()?.networkBaseURL == nil ?  "http://192.168.10.243:8082" :  DYNetworkConfig.share()!.networkBaseURL;
            obj.dy_requestUrl = "/sdk/appApi/afterWork/after-work/questions";
            
            obj.dy_requestArgument = [
@@ -298,19 +305,29 @@ public class YZDHomeworkNetwork: DYBaseNetwork {
     //MARK:收藏题目
       
      
-    public class func collectQuestion(afterWorkId: Int,questionId: Int,likeOrUnlike: Int) -> YZDHomeworkNetwork {
+    public class func collectQuestion(afterWorkId: Int?,questionId: Int,likeOrUnlike: Int) -> YZDHomeworkNetwork {
 
         let obj = YZDHomeworkNetwork.init();
-        obj.dy_baseURL = "http://192.168.10.243:8082";
+        obj.dy_baseURL = DYNetworkConfig.share()?.networkBaseURL == nil ?  "http://192.168.10.243:8082" :  DYNetworkConfig.share()!.networkBaseURL;
         obj.dy_requestUrl = "/sdk/appApi/afterWork/like-question";
         
-        obj.dy_requestArgument = [
-            "userId": self.userId,
-            "token" : self.token,
-            "afterWorkId": afterWorkId,
-            "questionId":questionId,
-            "likeOrUnlike": likeOrUnlike
-        ];
+        if afterWorkId == nil {
+            obj.dy_requestArgument = [
+                "userId": self.userId,
+                "token" : self.token,
+                "questionId":questionId,
+                "likeOrUnlike": likeOrUnlike
+            ];
+        } else {
+            obj.dy_requestArgument = [
+                "userId": self.userId,
+                "token" : self.token,
+                "afterWorkId": afterWorkId!,
+                "questionId":questionId,
+                "likeOrUnlike": likeOrUnlike
+            ];
+        }
+        
         obj.dy_requestMethod = .POST;
         obj.dy_requestSerializerType = .JSON;
         obj.dy_responseSerializerType = .JSON;
@@ -325,7 +342,7 @@ public class YZDHomeworkNetwork: DYBaseNetwork {
     public class func commitAnswers(afterWorkId: Int,usedTime: Int,answers: [[String : String]]) -> YZDHomeworkNetwork {
 
         let obj = YZDHomeworkNetwork.init();
-        obj.dy_baseURL = "http://192.168.10.243:8082";
+        obj.dy_baseURL = DYNetworkConfig.share()?.networkBaseURL == nil ?  "http://192.168.10.243:8082" :  DYNetworkConfig.share()!.networkBaseURL;
         obj.dy_requestUrl = "/sdk/appApi/afterWork/after-work/finish";
         
         obj.dy_requestArgument = [
@@ -346,7 +363,7 @@ public class YZDHomeworkNetwork: DYBaseNetwork {
     public class func getMyHomeworkResult(afterWorkId: Int,afterWorkFinishId: Int) -> YZDHomeworkNetwork {
 
            let obj = YZDHomeworkNetwork.init();
-           obj.dy_baseURL = "http://192.168.10.243:8082";
+           obj.dy_baseURL = DYNetworkConfig.share()?.networkBaseURL == nil ?  "http://192.168.10.243:8082" :  DYNetworkConfig.share()!.networkBaseURL;
            obj.dy_requestUrl = "/sdk/appApi/afterWork/after-work/analysis";
            
            obj.dy_requestArgument = [

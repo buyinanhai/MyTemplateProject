@@ -33,6 +33,7 @@ class HomeVC: UIViewController {
      
          "优智多课堂作业中心",
          "测试wkwebview",
+         "练习中心"
          
      ];
     
@@ -75,6 +76,9 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
             break
         case 1:
             vc = TestWebViewVC.init();
+            break;
+        case 2:
+            vc = TestCenterChooseVC.init();
             break;
         default:
             break

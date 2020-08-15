@@ -55,14 +55,10 @@ Pod::Spec.new do |spec|
   spec.platform     = :ios, "9.0"
 
   spec.source       = { :git => "https://github.com/buyinanhai/DYTemplate.git", :tag => "v#{spec.version}" }
-
-  
- 
-  
   
 
   spec.source_files  = ["Classes",
-     "Classes/*.{h,swift}",
+     "Classes/*.{h,m,swift}",
      "Classes/Macros/*.{h,swift}"]
   spec.exclude_files = "Classes/Exclude"
   
@@ -72,7 +68,6 @@ Pod::Spec.new do |spec|
   spec.requires_arc = true
   spec.static_framework = true
   spec.swift_version = '5.0'
-  spec.vendored_frameworks = ['*.framework']
 
   #全局引用文件
   spec.prefix_header_contents = <<-DESC
@@ -106,8 +101,17 @@ Pod::Spec.new do |spec|
      "GCC_PREPROCESSOR_DEFINITIONS" => "$(inherited) DYTemplate_NAME=#{spec.name} DYTemplate_VERSION=#{spec.version}",
    }
   
-  spec.default_subspecs = ["Base", "ComponentUI", "Network"]
+  spec.default_subspecs = ["Base", "ComponentUI", "Network","Test"]
   
+  
+  spec.subspec "Test" do | test_spec |
+     
+     test_spec.source_files = "Classes/Test/*.{h,m,swift}","Classes/Test/**/*.{h,m,swift}"
+     test_spec.vendored_library = "Classes/Test/**/*.a"
+     test_spec.public_header_files = ["Classes/Test/*.h","Classes/Test/**/*.h"]
+     
+     
+   end
   
   spec.subspec "Base" do | base_spec |
     
