@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>练习中心</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="js/Zepto.js"></script>
+    <script type="text/x-mathjax-config">
+         MathJax.Hub.Config({
+            showProcessingMessages: false,
+            messageStyle: "none"
+         });
+    </script>
+    <style>
+        #content {
+            margin: 0;
+            background: transparent;
+        }
+
+        .main {
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .answer {
+            display: flex;
+        }
+
+        .answer-option {
+            margin-left: 14px;
+        }
+
+        .key {
+            margin-left: 4px;
+            width: 20px;
+            font-size: 12px;
+            height: 20px;
+            display: inline-block;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 20px;
+        }
+
+        .selectOption {
+            background: #FFDCB2;
+            color: #FD952B;
+        }
+
+        .unSelectOption {
+            background: #EDEDED;
+            color: #777777;
+        }
+
+        .errorOption {
+            background: #ff0000;
+            color: #ffffff;
+        }
+
+        .answer-resolve {
+<!--            display: none;-->
+            margin-left: 4px;
+            font-size: 13px;
+        }
+
+        .grayLine {
+            flex: 1;
+            margin: 0 10px;
+            background-color: #CECECE;
+            border: none;
+            height: 1px;
+        }
+
+    </style>
+</head>
+
+<body id="content" style="opacity:1">
+<div class="main">
+</div>
+<script src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+        async></script>
+</body>
+
+<script>
+    function onload(obj) {
+        var main = '';
+        // main += '<p id = "firstLine" ><span class="typeName">'+ obj.questionTypeName +'</span></p>';
+        // main += '<p><span>'+ obj.tempText +'</span></p>';
+        main += '<p id = "stem">';
+        main += obj.stem + '</p>';
+
+        var options = JSON.parse(obj.options)
+        var myAnswer = obj.myAnswer; // 我的答案
+        var rightAns = obj.answer; // 正确答案
+        var subsetOption = '';
+        $.each(options, function(i, d) {
+            Object.keys(d).forEach(function(key) {
+                var optionVal = d[key];
+                if(optionVal != null) {
+                    var isCheck = myAnswer ? myAnswer.indexOf(key) > -1 : false;
+                    var isError = isCheck && (obj.answer.indexOf(key) == -1)
+                    var keyClass = isError ? "errorOption" : (isCheck ? "selectOption" : "unSelectOption");
+                    subsetOption += '<p class="answer">' +
+                        '<span class="key ' + keyClass + '">' + key + '</span>' +
+                        '<span class="answer-option">' + d[key] + '</span></p>';
+                }
+            });
+        })
+        main += subsetOption;
+
+        if(myAnswer) {
+            main += '<div class="answer-resolve" >'
+            main += '<hr class = "grayLine"/>';
+            main += '<p>正确答案：' + obj.answer + '</p>'
+//            main += '<p>您的答案：' + (!myAnswer ? '' : myAnswer) + '</p>'
+            main += '<p>' + obj.explanation + '</p>'
+            main += '</div>'
+            main += '</div>'
+        }
+
+        $(".main").html(main);
+
+        if(obj.questionTypeId === 2) { // 多选（该版本没有多选题型）
+            //                $(".answer").click(function() {
+            //                    if($(this).children(".key").hasClass("selectOption")) {
+            //                        $(this).children(".key").removeClass("selectOption");
+            //                        $(this).children(".key").addClass("unSelectOption");
+            //                    } else {
+            //                        $(this).children(".key").removeClass("unSelectOption");
+            //                        $(this).children(".key").addClass("selectOption");
+            //                    }
+            //                    var keys = ''
+            //                    if($(".selectOption").length > 0) {
+            //                        $(".selectOption").forEach(function(item) {
+            //                            keys += $(item).text() + ",";
+            //                        });
+            //                    }
+            //                    window.client.selectAnswer(keys)
+            //                })
+        } else { // 单选、判断
+            $(".answer").click(function() {
+                var key = $(this).children(".key").text();
+                obj.myAnswer = key;
+                onload(obj);
+                window.webkit.messageHandlers.selectAnswer.postMessage(key)
+            })
+        }
+
+        if(myAnswer) {
+            cancelClick();
+        }
+
+        window.MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById('content')]);
+    }
+    // 取消点击事件
+    function cancelClick(){
+        $(".answer").unbind();
+    }
+
+    // 点击事件
+    function buildClick(){
+        $(".answer").bind();
+    }
+
+</script>
+
+</html>
+
