@@ -11,4 +11,6 @@ target 'MyTemplateProject' do
   # Pods for MyTemplateProject
 
   pod "DYTemplate", :path => "localPod/DYTemplate"
+  pod "NCNLivingSDK", :path => "LocalPod/NCNLivingSDK"
+
 end

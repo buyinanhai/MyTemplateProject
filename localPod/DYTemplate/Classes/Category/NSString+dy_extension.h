@@ -42,6 +42,8 @@ NS_ASSUME_NONNULL_BEGIN
  * 随机生成一个长度的字符串
  */
 + (NSString *)generateRandomStringWithLength:(NSInteger)length;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

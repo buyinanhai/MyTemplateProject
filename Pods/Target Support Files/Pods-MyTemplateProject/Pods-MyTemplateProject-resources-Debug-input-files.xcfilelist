@@ -1,2 +1,7 @@
 ${PODS_ROOT}/Target Support Files/Pods-MyTemplateProject/Pods-MyTemplateProject-resources.sh
 ${PODS_ROOT}/../localPod/DYTemplate/Resources/dy_sources.bundle
+${PODS_ROOT}/../LocalPod/NCNLivingSDK/Resources/LiveResources.bundle
+${PODS_ROOT}/../LocalPod/NCNLivingSDK/Classes/UI/Views/Landscape/NCNStuListCell.xib
+${PODS_ROOT}/../LocalPod/NCNLivingSDK/Classes/UI/Views/NCNLivingSettingView.xib
+${PODS_ROOT}/../LocalPod/NCNLivingSDK/Classes/UI/Views/NCNMemberCell.xib
+${PODS_ROOT}/../LocalPod/NCNLivingSDK/Classes/UI/Views/NCNPublishView.xib

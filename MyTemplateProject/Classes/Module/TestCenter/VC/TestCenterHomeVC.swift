@@ -40,8 +40,8 @@ class TestCenterHomeVC: UIViewController {
             make?.left.right()?.top()?.offset();
             make?.height.offset()(190);
         }
-        self.headerView.titleLabel.text = self.headerTitle;
-        self.headerView.subjectLabel.text = self.subjectTitle;
+       self.headerView.titleLabel.text = self.headerTitle;
+       self.headerView.subjectLabel.text = self.subjectTitle;
         self.headerView.delegate = self;
         self.view.addSubview(self.tableView);
         self.tableView.mas_makeConstraints { (make) in
@@ -55,6 +55,13 @@ class TestCenterHomeVC: UIViewController {
         self.tableView.delegate = self;
         self.tableView.addRound(5)
     
+    }
+    
+    public func update() {
+        
+        self.headerView.titleLabel.text = self.headerTitle;
+        self.headerView.subjectLabel.text = self.subjectTitle;
+        self.tableView.mj_header?.beginRefreshing();
     }
     
     

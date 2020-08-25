@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginVC" customModule="MyTemplateProject" customModuleProvider="target">
+            <connections>
+                <outlet property="loginBtn" destination="12S-3l-TU7" id="N12-9a-mlO"/>
+                <outlet property="pwdField" destination="3cS-s1-mMo" id="YY5-6G-0f8"/>
+                <outlet property="usernameField" destination="Whr-s3-XGa" id="Bcw-4R-dpa"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="303" height="550"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入用户名" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Whr-s3-XGa">
+                    <rect key="frame" x="15" y="158" width="273" height="34"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入密码" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="3cS-s1-mMo">
+                    <rect key="frame" x="16" y="212" width="271" height="34"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
+                </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登录" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eBS-eu-Ymg">
+                    <rect key="frame" x="15" y="94" width="41" height="24"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="12S-3l-TU7">
+                    <rect key="frame" x="16" y="296" width="271" height="30"/>
+                    <color key="backgroundColor" red="0.99215686270000003" green="0.63921568630000003" blue="0.2156862745" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <state key="normal" title="登录">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="loginBtnClick:" destination="-1" eventType="touchUpInside" id="59s-Q9-3Io"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="Whr-s3-XGa" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="01k-yt-ZUf"/>
+                <constraint firstItem="3cS-s1-mMo" firstAttribute="width" secondItem="Whr-s3-XGa" secondAttribute="width" multiplier="0.992674" id="2G8-XL-jUa"/>
+                <constraint firstItem="eBS-eu-Ymg" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="50" id="5fV-x4-YJ6"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Whr-s3-XGa" secondAttribute="trailing" constant="15" id="Fgb-55-SD1"/>
+                <constraint firstItem="3cS-s1-mMo" firstAttribute="top" secondItem="Whr-s3-XGa" secondAttribute="bottom" constant="20" id="L0h-Am-jY3"/>
+                <constraint firstItem="12S-3l-TU7" firstAttribute="height" secondItem="3cS-s1-mMo" secondAttribute="height" multiplier="0.882353" id="Rlx-jX-CFr"/>
+                <constraint firstItem="12S-3l-TU7" firstAttribute="top" secondItem="3cS-s1-mMo" secondAttribute="bottom" constant="50" id="ZNO-9e-hpR"/>
+                <constraint firstItem="12S-3l-TU7" firstAttribute="width" secondItem="3cS-s1-mMo" secondAttribute="width" id="a4V-8a-7Wm"/>
+                <constraint firstItem="3cS-s1-mMo" firstAttribute="height" secondItem="Whr-s3-XGa" secondAttribute="height" id="a6q-W5-Zo8"/>
+                <constraint firstItem="Whr-s3-XGa" firstAttribute="top" secondItem="eBS-eu-Ymg" secondAttribute="bottom" constant="40" id="bYh-mN-pP4"/>
+                <constraint firstItem="12S-3l-TU7" firstAttribute="centerX" secondItem="3cS-s1-mMo" secondAttribute="centerX" id="dtt-XA-gcX"/>
+                <constraint firstItem="eBS-eu-Ymg" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="e2A-Lh-7e2"/>
+                <constraint firstItem="3cS-s1-mMo" firstAttribute="centerX" secondItem="Whr-s3-XGa" secondAttribute="centerX" id="udb-U1-bqf"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="200.72463768115944" y="-111.16071428571428"/>
+        </view>
+    </objects>
+</document>

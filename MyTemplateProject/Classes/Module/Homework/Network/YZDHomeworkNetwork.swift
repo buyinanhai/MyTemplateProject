@@ -19,6 +19,30 @@ public class YZDHomeworkNetwork: DYBaseNetwork {
         
     }
     
+    class private  var  hostUrl: String {
+        
+        get {
+            
+           return DYNetworkConfig.share()?.networkBaseURL == nil ?  "http://192.168.10.243:8082" :  DYNetworkConfig.share()!.networkBaseURL;
+        }
+        
+    }
+    
+    class private var isTest: Bool {
+        
+        get {
+            
+            return self.hostUrl.contains("test.sdk");
+            
+        }
+    }
+    class private var relativeUrl: String {
+        
+        get {
+            return "\(self.isTest ? "" : "/sdk")/appApi"
+        }
+    }
+    
     class private var token: String {
         
         get {
@@ -51,7 +75,7 @@ public class YZDHomeworkNetwork: DYBaseNetwork {
         
         let obj = YZDHomeworkNetwork.init();
         obj.dy_baseURL = DYNetworkConfig.share()?.networkBaseURL == nil ?  "http://192.168.10.243:8082" :  DYNetworkConfig.share()!.networkBaseURL;
-        obj.dy_requestUrl = "/sdk/appApi/afterWork/my-after-work";
+        obj.dy_requestUrl = "\(self.relativeUrl)/afterWork/my-after-work";
         obj.dy_requestArgument = [
             "userId": self.userId,
             "token" : self.token,
@@ -73,7 +97,7 @@ public class YZDHomeworkNetwork: DYBaseNetwork {
         
         let obj = YZDHomeworkNetwork.init();
         obj.dy_baseURL = DYNetworkConfig.share()?.networkBaseURL == nil ?  "http://192.168.10.243:8082" :  DYNetworkConfig.share()!.networkBaseURL;
-        obj.dy_requestUrl = "/sdk/appApi/afterWork/historyWork";
+        obj.dy_requestUrl = "\(self.relativeUrl)/afterWork/historyWork";
         obj.dy_requestArgument = [
            "userId": self.userId,
             "token" : self.token,
@@ -94,7 +118,7 @@ public class YZDHomeworkNetwork: DYBaseNetwork {
         
         let obj = YZDHomeworkNetwork.init();
         obj.dy_baseURL = DYNetworkConfig.share()?.networkBaseURL == nil ?  "http://192.168.10.243:8082" :  DYNetworkConfig.share()!.networkBaseURL;
-        obj.dy_requestUrl = "/sdk/appApi/afterWork/after-work/analysis";
+        obj.dy_requestUrl = "\(self.relativeUrl)/afterWork/after-work/analysis";
         obj.dy_requestArgument = [
            "userId": self.userId,
             "token" : self.token,
@@ -120,7 +144,7 @@ public class YZDHomeworkNetwork: DYBaseNetwork {
            
            let obj = YZDHomeworkNetwork.init();
            obj.dy_baseURL = DYNetworkConfig.share()?.networkBaseURL == nil ?  "http://192.168.10.243:8082" :  DYNetworkConfig.share()!.networkBaseURL;
-           obj.dy_requestUrl = "/sdk/appApi/afterWork/class-type/after-works";
+           obj.dy_requestUrl = "\(self.relativeUrl)/afterWork/class-type/after-works";
            obj.dy_requestArgument = [
                "userId": self.userId,
                "token" : self.token,
@@ -141,7 +165,7 @@ public class YZDHomeworkNetwork: DYBaseNetwork {
         
         let obj = YZDHomeworkNetwork.init();
         obj.dy_baseURL = DYNetworkConfig.share()?.networkBaseURL == nil ?  "http://192.168.10.243:8082" :  DYNetworkConfig.share()!.networkBaseURL;
-        obj.dy_requestUrl = "/sdk/appApi/afterWork/getModule";
+        obj.dy_requestUrl = "\(self.relativeUrl)/afterWork/getModule";
         obj.dy_requestArgument = [
             
             "classTypeId": classTypeId,
@@ -165,7 +189,7 @@ public class YZDHomeworkNetwork: DYBaseNetwork {
 
         let obj = YZDHomeworkNetwork.init();
         obj.dy_baseURL = DYNetworkConfig.share()?.networkBaseURL == nil ?  "http://192.168.10.243:8082" :  DYNetworkConfig.share()!.networkBaseURL;
-        obj.dy_requestUrl = "/sdk/appApi/afterWork/after-work/questions";
+        obj.dy_requestUrl = "\(self.relativeUrl)/afterWork/after-work/questions";
         obj.dy_requestArgument = [
             "userId": 2983482,
             "token" : "SRn55wqmX05xTJlnCOePBRp75bE8Ch7N",
@@ -188,7 +212,7 @@ public class YZDHomeworkNetwork: DYBaseNetwork {
 
            let obj = YZDHomeworkNetwork.init();
            obj.dy_baseURL = DYNetworkConfig.share()?.networkBaseURL == nil ?  "http://192.168.10.243:8082" :  DYNetworkConfig.share()!.networkBaseURL;
-           obj.dy_requestUrl = "/sdk/appApi/resource/subjects";
+           obj.dy_requestUrl = "\(self.relativeUrl)/resource/subjects";
            obj.dy_requestArgument = [
                "stageId": stagedId,
            ];
@@ -207,7 +231,7 @@ public class YZDHomeworkNetwork: DYBaseNetwork {
 
            let obj = YZDHomeworkNetwork.init();
            obj.dy_baseURL = DYNetworkConfig.share()?.networkBaseURL == nil ?  "http://192.168.10.243:8082" :  DYNetworkConfig.share()!.networkBaseURL;
-           obj.dy_requestUrl = "/sdk/appApi/resource/grades";
+           obj.dy_requestUrl = "\(self.relativeUrl)/resource/grades";
            obj.dy_requestMethod = .GET;
            obj.dy_requestSerializerType = .JSON;
            obj.dy_responseSerializerType = .JSON;
@@ -228,7 +252,7 @@ public class YZDHomeworkNetwork: DYBaseNetwork {
 
          let obj = YZDHomeworkNetwork.init();
          obj.dy_baseURL = DYNetworkConfig.share()?.networkBaseURL == nil ?  "http://192.168.10.243:8082" :  DYNetworkConfig.share()!.networkBaseURL;
-         obj.dy_requestUrl = "/sdk/appApi/afterWork/wrong-collection";
+         obj.dy_requestUrl = "\(self.relativeUrl)/afterWork/wrong-collection";
          obj.dy_requestArgument = [
             "userId": self.userId,
             "token" : self.token,
@@ -264,7 +288,7 @@ public class YZDHomeworkNetwork: DYBaseNetwork {
 
         let obj = YZDHomeworkNetwork.init();
         obj.dy_baseURL = DYNetworkConfig.share()?.networkBaseURL == nil ?  "http://192.168.10.243:8082" :  DYNetworkConfig.share()!.networkBaseURL;
-        obj.dy_requestUrl = "/sdk/appApi/afterWork/removewrong";
+        obj.dy_requestUrl = "\(self.relativeUrl)/afterWork/removewrong";
         
         obj.dy_requestArgument = [
             "userId": self.userId,
@@ -286,7 +310,7 @@ public class YZDHomeworkNetwork: DYBaseNetwork {
 
            let obj = YZDHomeworkNetwork.init();
            obj.dy_baseURL = DYNetworkConfig.share()?.networkBaseURL == nil ?  "http://192.168.10.243:8082" :  DYNetworkConfig.share()!.networkBaseURL;
-           obj.dy_requestUrl = "/sdk/appApi/afterWork/after-work/questions";
+           obj.dy_requestUrl = "\(self.relativeUrl)/afterWork/after-work/questions";
            
            obj.dy_requestArgument = [
                "userId": self.userId,
@@ -309,7 +333,7 @@ public class YZDHomeworkNetwork: DYBaseNetwork {
 
         let obj = YZDHomeworkNetwork.init();
         obj.dy_baseURL = DYNetworkConfig.share()?.networkBaseURL == nil ?  "http://192.168.10.243:8082" :  DYNetworkConfig.share()!.networkBaseURL;
-        obj.dy_requestUrl = "/sdk/appApi/afterWork/like-question";
+        obj.dy_requestUrl = "\(self.relativeUrl)/afterWork/like-question";
         
         if afterWorkId == nil {
             obj.dy_requestArgument = [
@@ -343,7 +367,7 @@ public class YZDHomeworkNetwork: DYBaseNetwork {
 
         let obj = YZDHomeworkNetwork.init();
         obj.dy_baseURL = DYNetworkConfig.share()?.networkBaseURL == nil ?  "http://192.168.10.243:8082" :  DYNetworkConfig.share()!.networkBaseURL;
-        obj.dy_requestUrl = "/sdk/appApi/afterWork/after-work/finish";
+        obj.dy_requestUrl = "\(self.relativeUrl)/afterWork/after-work/finish";
         
         obj.dy_requestArgument = [
             "userId": self.userId,
@@ -364,7 +388,7 @@ public class YZDHomeworkNetwork: DYBaseNetwork {
 
            let obj = YZDHomeworkNetwork.init();
            obj.dy_baseURL = DYNetworkConfig.share()?.networkBaseURL == nil ?  "http://192.168.10.243:8082" :  DYNetworkConfig.share()!.networkBaseURL;
-           obj.dy_requestUrl = "/sdk/appApi/afterWork/after-work/analysis";
+           obj.dy_requestUrl = "\(self.relativeUrl)/afterWork/after-work/analysis";
            
            obj.dy_requestArgument = [
                "userId": self.userId,

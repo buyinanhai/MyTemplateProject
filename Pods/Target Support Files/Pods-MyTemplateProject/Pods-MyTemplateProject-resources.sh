@@ -98,9 +98,19 @@ EOM
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "${PODS_ROOT}/../localPod/DYTemplate/Resources/dy_sources.bundle"
+  install_resource "${PODS_ROOT}/../LocalPod/NCNLivingSDK/Resources/LiveResources.bundle"
+  install_resource "${PODS_ROOT}/../LocalPod/NCNLivingSDK/Classes/UI/Views/Landscape/NCNStuListCell.xib"
+  install_resource "${PODS_ROOT}/../LocalPod/NCNLivingSDK/Classes/UI/Views/NCNLivingSettingView.xib"
+  install_resource "${PODS_ROOT}/../LocalPod/NCNLivingSDK/Classes/UI/Views/NCNMemberCell.xib"
+  install_resource "${PODS_ROOT}/../LocalPod/NCNLivingSDK/Classes/UI/Views/NCNPublishView.xib"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "${PODS_ROOT}/../localPod/DYTemplate/Resources/dy_sources.bundle"
+  install_resource "${PODS_ROOT}/../LocalPod/NCNLivingSDK/Resources/LiveResources.bundle"
+  install_resource "${PODS_ROOT}/../LocalPod/NCNLivingSDK/Classes/UI/Views/Landscape/NCNStuListCell.xib"
+  install_resource "${PODS_ROOT}/../LocalPod/NCNLivingSDK/Classes/UI/Views/NCNLivingSettingView.xib"
+  install_resource "${PODS_ROOT}/../LocalPod/NCNLivingSDK/Classes/UI/Views/NCNMemberCell.xib"
+  install_resource "${PODS_ROOT}/../LocalPod/NCNLivingSDK/Classes/UI/Views/NCNPublishView.xib"
 fi
 
 mkdir -p "${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"

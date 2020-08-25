@@ -72,10 +72,39 @@
     }
 }
 
+
+- (void)setBorderColor:(UIColor *)borderColor {
+    _borderColor = borderColor;
+    self.layer.borderColor = [borderColor CGColor];
+}
+
+- (void)setBorderWidth:(CGFloat)borderWidth {
+    _borderWidth = borderWidth;
+    self.layer.borderWidth = borderWidth;
+}
+
+- (void)setCornerRadius:(CGFloat)cornerRadius {
+    _cornerRadius = cornerRadius;
+    self.layer.cornerRadius = cornerRadius;
+}
+
+- (void)setMasksToBounds:(BOOL)masksToBounds {
+    _masksToBounds = masksToBounds;
+    self.layer.masksToBounds = masksToBounds;
+}
+
+
 //如果是外面设置就是针对于normal的state
 - (void)setBackgroundColor:(UIColor *)backgroundColor {
     self.backgroundColorCache[@(UIControlStateNormal)] = backgroundColor;
     [super setBackgroundColor:backgroundColor];
+}
+- (void)setSelectedBackColor:(UIColor *)selectedBackColor {
+    
+    _selectedBackColor = selectedBackColor;
+    
+    [self dy_setBackgroundColor:selectedBackColor forState:UIControlStateSelected];
+
 }
 
 - (void)setSelected:(BOOL)selected {
@@ -96,6 +125,7 @@
     }
 }
 
+
 - (void)dy_setBackgroundColor:(UIColor *)backgroundColor forState:(UIControlState)state {
     
     self.backgroundColorCache[@(state)] = backgroundColor;
@@ -113,6 +143,14 @@
     }
     
     
+}
+- (CGSize)intrinsicContentSize {
+    
+    if (self.dy_intrinsicContentSize.width > 0 || self.dy_intrinsicContentSize.height > 0) {
+        return self.dy_intrinsicContentSize;
+    }
+    
+    return [super intrinsicContentSize];
 }
 
 
@@ -132,5 +170,7 @@
     }
     return _borderColorCache;
 }
+
+
 
 @end

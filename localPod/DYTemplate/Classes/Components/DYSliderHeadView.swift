@@ -69,6 +69,7 @@ import UIKit
         
         didSet {
             self.dataSources.removeAll();
+            self.widthCache.removeAll();
             for item in self.titles {
                 let index: Int = titles.firstIndex(of: item)!;
                 let model = DYSliderModel.init();
@@ -168,7 +169,7 @@ import UIKit
         
     }
     
-    func hideBottomLine() {
+    public func hideBottomLine() {
         self.lineView.isHidden = true;
     }
 //   设置固有的size  在nnavigation push pop的时候回联通这个view带上动画
@@ -211,32 +212,39 @@ import UIKit
     }()
     private func updateSlider(index: Int) {
         if index == self.currSelectIndex || self.currSelectIndex >= self.titles.count { return}
-        
+        self.currentSelectModel?.isSelect = false;
         let beforeCell = self.collectionView.cellForItem(at: IndexPath.init(item: self.currSelectIndex, section: 0));
         if beforeCell != nil {
             
             if self.currSelectIndex < index {
-                self.collectionView.scrollToItem(at: IndexPath.init(item: index, section: 0), at: UICollectionView.ScrollPosition.right, animated: true);
+                if index + 1 != self.titles.count {
+                    
+                    self.collectionView.scrollToItem(at: IndexPath.init(item: index + 1, section: 0), at: UICollectionView.ScrollPosition.right, animated: true);
+                }
                 
             } else {
-                self.collectionView.scrollToItem(at: IndexPath.init(item: index, section: 0), at: UICollectionView.ScrollPosition.left, animated: true);
+                if index - 1 >= 0 {
+                    self.collectionView.scrollToItem(at: IndexPath.init(item: index - 1, section: 0), at: UICollectionView.ScrollPosition.left, animated: true);
+                }
                 
             }
         }
-        
+
         let cell = collectionView.cellForItem(at: IndexPath.init(item: index, section: 0));
       
         if let label = cell?.contentView.subviews.first as? DYButton {
             let model = self.dataSources[index];
             label.text = model.title;
             self.currSelectIndex = index;
+            self.currentSelectModel?.isSelect = true;
             //        var x: CGFloat = CGFloat(index * self.widthCache[index]) + 15;
             var x: CGFloat = (self.widthCache[index]! - self.sliderLineWidth)  * 0.5;
             
             if index > 0 {
                 for i in 0...index-1 {
-                    let width = self.widthCache[i];
-                    x += width!;
+                    if let width = self.widthCache[i] {
+                        x += width;
+                    }
                 }
             }
             
@@ -260,6 +268,14 @@ import UIKit
     
     private var dataSources: [DYSliderModel] = []
 
+    
+    private var currentSelectModel: DYSliderModel? {
+        
+        get {
+            
+            return (self.dataSources.count > 0 && self.currSelectIndex > -1) ? self.dataSources[self.currSelectIndex] : nil;
+        }
+    }
     
     public override var backgroundColor: UIColor? {
         
@@ -300,26 +316,31 @@ extension DYSliderHeadView: UICollectionViewDataSource, UICollectionViewDelegate
         } else {
             btn = cell.contentView.subviews.first as? DYButton
         }
-        let model = self.dataSources[indexPath.item];
-        if model.isSelect == true && indexPath.item == self.currSelectIndex {
-            btn?.titleLabel?.font = UIFont.systemFont(ofSize: 16);
-        } else {
-            btn?.titleLabel?.font = self.font;
-        }
-        btn?.setTitleColor(model.isSelect == true ? self.selectColor : UIColor.HWColorWithHexString(hex: "#333333"), for: .normal);
-        btn?.setTitle(self.dataSources[indexPath.item].title, for: .normal);
-        if self.imageSize?.width ?? 0 > 0 && self.imageSize?.height ?? 0 > 0 {
-            btn?.setImage(model.image?.resize(width: self.imageSize?.width ?? 0, height: self.imageSize?.height ?? 0), for: .normal);
-
-        } else {
-            btn?.setImage(model.image, for: .normal);
-
-        }
+       
 
         return cell
     }
     
-    
+    public func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
+        if let btn = cell.contentView.subviews.last as? DYButton {
+            let model = self.dataSources[indexPath.item];
+            if model.isSelect == true && indexPath.item == self.currSelectIndex {
+                btn.titleLabel?.font = UIFont.systemFont(ofSize: 16);
+            } else {
+                btn.titleLabel?.font = self.font;
+            }
+            btn.setTitleColor(model.isSelect == true ? self.selectColor : UIColor.HWColorWithHexString(hex: "#333333"), for: .normal);
+            btn.setTitle(self.dataSources[indexPath.item].title, for: .normal);
+            if self.imageSize?.width ?? 0 > 0 && self.imageSize?.height ?? 0 > 0 {
+                btn.setImage(model.image?.resize(width: self.imageSize?.width ?? 0, height: self.imageSize?.height ?? 0), for: .normal);
+                
+            } else {
+                btn.setImage(model.image, for: .normal);
+            }
+        }
+        
+    }
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.updateSlider(index: indexPath.item);
         if self.selectIndexBlock != nil {

@@ -123,6 +123,7 @@ class YZDTestAnswerVC: UIViewController {
         }
         
         if let jsonStr = try? String.init(data: JSONSerialization.data(withJSONObject: question, options: .fragmentsAllowed), encoding: .utf8) {
+            
             self.webView.evaluateJavaScript("onload(\(jsonStr))") { (result, error) in
                 
                 print("题目加载  error == \(error)");
@@ -550,6 +551,7 @@ internal class YZDTestAnswerHeaderView: UIView {
         view.font = .systemFont(ofSize: 14);
         view.addRound(5.5)
         view.text = "单选题";
+        view.textAlignment = .center;
         
         return view;
     }()

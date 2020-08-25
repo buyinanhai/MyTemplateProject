@@ -335,31 +335,45 @@ extension TestCenterChooseVC {
     private func confirmBtnClick() {
         
       
+        var subjectId = -1;
+        var volumeId = -1;
+        var headerTitle = "";
+        var subjectTitle = "";
         
-        let vc = TestCenterHomeVC.init();
-        vc.chooseVC = self;
+       
         if self.selectModel[TestCenterChooseType.type.rawValue]?.id == 0 {
-            vc.subjectId =  self.selectModel[TestCenterChooseType.subject.rawValue]?.id ?? -1;
-            vc.subjectTitle = String.init(format: "%@-%@",self.selectModel[TestCenterChooseType.level.rawValue]?.name ?? "",self.selectModel[TestCenterChooseType.subject.rawValue]?.name ?? "" )
-            vc.headerTitle = "  知识点做题  ";
-            if vc.subjectId < 0 {
+            subjectId =  self.selectModel[TestCenterChooseType.subject.rawValue]?.id ?? -1;
+            subjectTitle = String.init(format: "%@-%@",self.selectModel[TestCenterChooseType.level.rawValue]?.name ?? "",self.selectModel[TestCenterChooseType.subject.rawValue]?.name ?? "" )
+            headerTitle = "  知识点做题  ";
+            if subjectId < 0 {
                 DYNetworkHUD.showInfo(message: "请选择科目！", inView: nil);
                 return
             }
         } else if self.selectModel[TestCenterChooseType.type.rawValue]?.id == 1 {
-            vc.volumeId = self.selectModel[TestCenterChooseType.volume.rawValue]?.id ?? -1;
-            vc.subjectTitle = String.init(format: "%@-%@-%@-%@",self.selectModel[TestCenterChooseType.level.rawValue]?.name ?? "",self.selectModel[TestCenterChooseType.subject.rawValue]?.name ?? "",self.selectModel[TestCenterChooseType.version.rawValue]?.name ?? "",self.selectModel[TestCenterChooseType.volume.rawValue]?.name ?? "" );
-            vc.headerTitle = "  章节做题  ";
-            if vc.volumeId < 0 {
+            volumeId = self.selectModel[TestCenterChooseType.volume.rawValue]?.id ?? -1;
+            subjectTitle = String.init(format: "%@-%@-%@-%@",self.selectModel[TestCenterChooseType.level.rawValue]?.name ?? "",self.selectModel[TestCenterChooseType.subject.rawValue]?.name ?? "",self.selectModel[TestCenterChooseType.version.rawValue]?.name ?? "",self.selectModel[TestCenterChooseType.volume.rawValue]?.name ?? "" );
+            headerTitle = "  章节做题  ";
+            if volumeId < 0 {
                 DYNetworkHUD.showInfo(message: "请选择册别！", inView: nil);
                 return
             }
         }
        
         if (self.navigationController?.viewControllers.count ?? 0) > 2 {
-            
+            let lastVC = self.navigationController?.viewControllers[1] as? TestCenterHomeVC;
+            lastVC?.subjectId = subjectId;
+            lastVC?.subjectTitle = subjectTitle;
+            lastVC?.volumeId = volumeId;
+            lastVC?.headerTitle = headerTitle;
+            lastVC?.update();
             self.navigationController?.popViewController(animated: true);
         } else {
+            let vc = TestCenterHomeVC.init();
+            vc.chooseVC = self;
+            vc.subjectTitle = subjectTitle;
+            vc.subjectId = subjectId;
+            vc.volumeId = volumeId;
+            vc.headerTitle = headerTitle;
             self.navigationController?.pushViewController(vc, animated: true);
             self.navigationController?.viewControllers.remove(at: 1);
         }

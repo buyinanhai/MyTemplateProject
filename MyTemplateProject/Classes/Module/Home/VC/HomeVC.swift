@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import NCNLivingSDK
 /**
  首页控制器
  */
@@ -33,7 +33,11 @@ class HomeVC: UIViewController {
      
          "优智多课堂作业中心",
          "测试wkwebview",
-         "练习中心"
+         "练习中心",
+         "手机投屏",
+         "自研直播间",
+         "错题集",
+         
          
      ];
     
@@ -80,6 +84,19 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
         case 2:
             vc = TestCenterChooseVC.init();
             break;
+        case 3:
+            vc = APHomeVC.init();
+            break;
+            
+        case 4:
+
+            self.enterLivingRoom();
+            
+            return
+            
+        case 5:
+            vc = YZDTestCollectionVC.init();
+            break;
         default:
             break
         }
@@ -92,5 +109,40 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     
+    private func enterLivingRoom() {
+        NCNNetwork.shared().baseURL = "http://test.sdk.live.cunwedu.com.cn";
+        let model = NCNLivingRoomModel.init();
+        model.studentId = "3051998";
+        model.liveRoomId = "1b04d5ccf28649ad94f23a2446bf9ccc";
+        
+        DYNetworkHUD.startLoading();
+        NCNNetwork.getLiveRoomParameters(withRoomID: model.liveRoomId, studentId: model.studentId, companyId: "138363") { (error, response) in
+            DYNetworkHUD.dismiss();
+            if let data = response?["data"] as? [String : Any] {
+                
+                let jsonData = try? JSONSerialization.data(withJSONObject: response as Any, options: .prettyPrinted);
+                print("直播间参数：\(try? JSONSerialization.jsonObject(with: jsonData ?? Data.init(), options: .allowFragments) )");
+                model.studentSignIdentifier = data["token"] as? String ?? "";
+                model.liveAppid = UInt32(data["trtcAppId"] as? Int ?? 0);
+                model.liveUserSign = data["trtcSig"] as? String ?? "";
+                if let cml = data["cml"] as? [String : Any] {
+                    
+                    model.teacherName = cml["teachers"] as? String ?? "";
+                    model.courseDesc = cml["lessonName"] as? String ?? "";
+                    model.groupChatId = cml["id"] as? String ?? "";
+                    model.groupCodeId = model.groupChatId;
+                }
+                let vc = NCNLivingMainVC.init(roomModel: model);
+                      
+                self.present(vc, animated: true, completion: nil);
+            } else {
+                
+                DYNetworkHUD.showInfo(message: "加载失败", inView: self.view)
+            }
+            
+        }
+        
+      
+    }
     
 }

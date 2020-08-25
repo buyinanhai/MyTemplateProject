@@ -45,10 +45,23 @@ PODS:
     - ObjectMapper
   - Masonry (1.1.0)
   - MJRefresh (3.4.3)
+  - NCNLivingSDK (0.0.1):
+    - AFNetworking
+    - DYTemplate/ComponentUI
+    - Masonry
+    - Socket.IO-Client-Swift
+    - TXLiteAVSDK_TRTC
+    - TZImagePickerController
   - ObjectMapper (4.2.0)
+  - Socket.IO-Client-Swift (15.2.0):
+    - Starscream (~> 3.1)
+  - Starscream (3.1.1)
+  - TXLiteAVSDK_TRTC (7.4.9203)
+  - TZImagePickerController (3.4.1)
 
 DEPENDENCIES:
   - DYTemplate (from `localPod/DYTemplate`)
+  - NCNLivingSDK (from `LocalPod/NCNLivingSDK`)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -56,18 +69,29 @@ SPEC REPOS:
     - Masonry
     - MJRefresh
     - ObjectMapper
+    - Socket.IO-Client-Swift
+    - Starscream
+    - TXLiteAVSDK_TRTC
+    - TZImagePickerController
 
 EXTERNAL SOURCES:
   DYTemplate:
     :path: localPod/DYTemplate
+  NCNLivingSDK:
+    :path: LocalPod/NCNLivingSDK
 
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
   DYTemplate: d72148042b106002a962ff67bf7656bfd5b3b370
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MJRefresh: 53e3e3219f204425ee6d3e62e8733d3295944cd6
+  NCNLivingSDK: 6880965a7ee138028216dd87925d3c26d5229abe
   ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
+  Socket.IO-Client-Swift: 1e3e3a1f09f3312a167f0d781eb2f383d477357c
+  Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
+  TXLiteAVSDK_TRTC: a7264c56f44ce61bf6a553c892b1daad8a281265
+  TZImagePickerController: 4e7a7b3d314f8a75f11042931dfd9d34c270c7db
 
-PODFILE CHECKSUM: a94937929834cc31eafeb3c739e2c0f98e857234
+PODFILE CHECKSUM: 83d3db9fb8f54064d95d064931593348a8afcf25
 
 COCOAPODS: 1.9.3

@@ -31,7 +31,27 @@ typedef int ContentDirection;
 /**1 图片在上 2 图片在右 3 图片文字都居中*/
 @property (assign, nonatomic) IBInspectable ContentDirection direction;
 
+@property (nonatomic, copy) IBInspectable UIColor *borderColor;
+@property (nonatomic, assign) IBInspectable CGFloat borderWidth;
+@property (nonatomic, assign) IBInspectable CGFloat cornerRadius;
+@property (nonatomic, assign) IBInspectable BOOL masksToBounds;
+
+/**
+ 选中的背景颜色
+ */
+@property (nonatomic, copy) IBInspectable UIColor *selectedBackColor;
+
+
+/**
+ 固有宽高
+ */
+@property (nonatomic, assign) CGSize dy_intrinsicContentSize;
+
+
 - (void)dy_setBackgroundColor:(UIColor *)backgroundColor forState:(UIControlState)state;
 - (void)dy_setBorderColor:(UIColor *)color forState:(UIControlState)state;
+
+- (void)setCornerRadius:(CGFloat)radius;
+
 
 @end

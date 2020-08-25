@@ -8,45 +8,51 @@
 
 import UIKit
 import DYTemplate
+@available(iOS 13.0, *)
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
 
+    @available(iOS 13.0, *)
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
-        let tabVC = UITabBarController.init();
-        tabVC.tabBar.tintColor = UIColor.orange;
-        let classArray:[[String:String]] = [
-            ["class":"HomeVC","title":"首页", "icon": "tab-home"],
-            ["class":"MyVC","title":"我的", "icon": "tab-my"]];
-        
-        for item in classArray {
-            //获取命名空间也就是项目名称
-            let prjName = Bundle.main.infoDictionary!["CFBundleExecutable"] as? String
-            let clsStr = prjName! + "."  + item["class"]!;
-            
-            let cls = NSClassFromString(clsStr) as! UIViewController.Type;
-            
-            let vc = cls.init();
-            vc.tabBarItem.title = item["title"]!
-            vc.tabBarItem.image = UIImage.init(named: item["icon"]!);
-            let navVC = DYBaseNavigationVC.init(rootViewController: vc);
-            
-            tabVC.addChild(navVC);
-            
-        }
-        self.window?.rootViewController = tabVC;
-        self.window?.makeKeyAndVisible();
-        
-        DYNetworkConfig.share()?.extraData = ["token": "SRn55wqmX06TlYIStQdT7WMZhTAZDdHLzNZ4eYtHGyVJuL4Hi5lVjFcEGZq%2F5erQkKAJFTDWONDU%0D%0AsaQL2JTmuw%3D%3D","userId":2984573];
-        DYNetworkConfig.share()?.networkBaseURL = "http://192.168.11.195:8082";
+        self.configMainVC()
         
     }
+    private func configMainVC () {
+           let tabVC = UITabBarController.init();
+           tabVC.tabBar.tintColor = UIColor.orange;
+           let classArray:[[String:String]] = [
+               ["class":"HomeVC","title":"首页", "icon": "tab-home"],
+               ["class":"MyVC","title":"我的", "icon": "tab-my"]];
+           
+           for item in classArray {
+               //获取命名空间也就是项目名称
+               let prjName = Bundle.main.infoDictionary!["CFBundleExecutable"] as? String
+               let clsStr = prjName! + "."  + item["class"]!;
+               
+               let cls = NSClassFromString(clsStr) as! UIViewController.Type;
+               
+               let vc = cls.init();
+               vc.tabBarItem.title = item["title"]!
+               vc.tabBarItem.image = UIImage.init(named: item["icon"]!);
+               let navVC = DYBaseNavigationVC.init(rootViewController: vc);
+               
+               tabVC.addChild(navVC);
+               
+           }
+           self.window?.rootViewController = tabVC;
+           self.window?.makeKeyAndVisible();
+           
+           DYNetworkConfig.share()?.extraData = ["token": "SRn55wqmX06TlYIStQdT7WMZhTAZDdHLzNZ4eYtHGyVJuL4Hi5lVjFcEGZq%2F5erQkKAJFTDWONDU%0D%0AsaQL2JTmuw%3D%3D","userId":2984573];
+           DYNetworkConfig.share()?.networkBaseURL = "http://192.168.11.195:8082";
+           
+       }
 
+    @available(iOS 13.0, *)
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.
@@ -54,6 +60,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // The scene may re-connect later, as its session was not neccessarily discarded (see `application:didDiscardSceneSessions` instead).
     }
 
+    @available(iOS 13.0, *)
     func sceneDidBecomeActive(_ scene: UIScene) {
         // Called when the scene has moved from an inactive state to an active state.
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.

@@ -12,6 +12,7 @@ import CoreData
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    var window: UIWindow?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -19,26 +20,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
        
-        
+        self.configMainVC()
         
         
         return true
     }
 
+    
+    private func configMainVC () {
+        let tabVC = UITabBarController.init();
+        tabVC.tabBar.tintColor = UIColor.orange;
+        let classArray:[[String:String]] = [
+            ["class":"HomeVC","title":"首页", "icon": "tab-home"],
+            ["class":"MyVC","title":"我的", "icon": "tab-my"]];
+        
+        for item in classArray {
+            //获取命名空间也就是项目名称
+            let prjName = Bundle.main.infoDictionary!["CFBundleExecutable"] as? String
+            let clsStr = prjName! + "."  + item["class"]!;
+            
+            let cls = NSClassFromString(clsStr) as! UIViewController.Type;
+            
+            let vc = cls.init();
+            vc.tabBarItem.title = item["title"]!
+            vc.tabBarItem.image = UIImage.init(named: item["icon"]!);
+            let navVC = DYBaseNavigationVC.init(rootViewController: vc);
+            
+            tabVC.addChild(navVC);
+            
+        }
+        self.window?.rootViewController = tabVC;
+        self.window?.makeKeyAndVisible();
+        
+        DYNetworkConfig.share()?.extraData = ["token": "SRn55wqmX06TlYIStQdT7WMZhTAZDdHLzNZ4eYtHGyVJuL4Hi5lVjFcEGZq%2F5erQkKAJFTDWONDU%0D%0AsaQL2JTmuw%3D%3D","userId":2984573];
+        
+//        DYNetworkConfig.share()?.networkBaseURL = "http://192.168.11.195:8082";
+        DYNetworkConfig.share()?.networkBaseURL = "http://test.sdk.live.cunwedu.com.cn";
+
+    }
+    
     // MARK: UISceneSession Lifecycle
 
-    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        // Called when a new scene session is being created.
-        // Use this method to select a configuration to create the new scene with.
-        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
-    }
-
-    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-        // Called when the user discards a scene session.
-        // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
-        // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
-    }
-
+   
     // MARK: - Core Data stack
 
     lazy var persistentContainer: NSPersistentContainer = {
@@ -84,5 +107,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
+    
+    
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        return .portrait;
+    }
 }
 

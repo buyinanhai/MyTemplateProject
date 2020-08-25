@@ -21,10 +21,12 @@ class TestCenterNetwork: DYBaseNetwork {
         
         get {
             
+            return "SRn55wqmX07nUDZr4aVMxh69ZmUkaJAWvtJcKA2hOdI%3D";
+            
             if let token = DYNetworkConfig.share()?.extraData["token"] as? String {
                 return token;
             } else {
-                return "SRn55wqmX06TlYIStQdT7WMZhTAZDdHLzNZ4eYtHGyVJuL4Hi5lVjFcEGZq%2F5erQkKAJFTDWONDU%0D%0AsaQL2JTmuw%3D%3D";
+                return "1%2B6Eifdnurv%2BwIXACMLMLsZZe75nzv8P6ZeQAVm%2FSgSvGSgIN1DqBehPdNANo5Jsg7bb0r5%2BUfqP%0A2SiEriu%2BvKFFqIIFT%2FgA";
             }
         }
         
@@ -228,4 +230,7 @@ class TestCenterNetwork: DYBaseNetwork {
     }
 
 
+    
+    
+    
 }

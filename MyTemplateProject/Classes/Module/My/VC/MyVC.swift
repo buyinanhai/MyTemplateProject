@@ -21,21 +21,34 @@ class MyVC: UIViewController {
             make?.centerX.offset();
             make?.bottom.offset()(-20);
         }
+        
         // Do any additional setup after loading the view.
     }
 
     private lazy var versionLabel: UILabel = {
-           
-           let view = UILabel.init();
-           view.textColor = UIColor.lightGray;
-           view.font = .boldSystemFont(ofSize: 16);
+        
+        let view = UILabel.init();
+        view.textColor = UIColor.lightGray;
+        view.font = .boldSystemFont(ofSize: 16);
         let versionContent = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String;
         let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String;
         view.text = "版本号：\(versionContent ?? "")( \(buildNumber ?? "") )";
         view.numberOfLines = 2;
         view.sizeToFit();
-           return view;
-       }()
+        return view;
+    }()
+    
+    
+    
+    @IBAction func loginBtnClick(_ sender: Any) {
+        
+        let vc = LoginVC.init()
+        
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+    }
+    
     /*
     // MARK: - Navigation
 
