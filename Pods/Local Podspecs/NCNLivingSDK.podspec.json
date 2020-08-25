@@ -1,0 +1,75 @@
+{
+  "name": "NCNLivingSDK",
+  "version": "0.0.1",
+  "summary": "新云网直播上课sdk 包含UI",
+  "description": "新云网内部直播上课工具 使用说明： 1.将LocalPod文件夹放到工具根目录(手动集成)  2.依赖库 有 libc++ libiconv libbz2 libz AudioToolbox VideoToolbox",
+  "homepage": "https://xinyunwang.edu",
+  "license": "License",
+  "authors": {
+    "汪宁": "汪宁"
+  },
+  "platforms": {
+    "ios": "9.0"
+  },
+  "source": {
+    "svn": "https://192.168.19.201/svn/%E6%A0%B8%E5%BF%83%E5%9F%BA%E7%A1%80%E5%BA%93/%E7%A0%94%E5%8F%91/iOS/%E7%9B%B4%E6%92%ADiOS/%E4%BB%A3%E7%A0%81/NCNLivingSDK"
+  },
+  "source_files": [
+    "Classes",
+    "Classes/*.{h,m}",
+    "Classes/**/*.{h,m,mm}",
+    "Classes/**/**/*.{h,m,mm}",
+    "Classes/**/**/**/*.{h,m,mm}",
+    "Classes/**/**/**/**/*.{h,m,mm}",
+    "Classes/**/**/**/**/**/*.{h,m,mm}",
+    "Classes/**/**/**/**/**/**/*.{h,m,mm}"
+  ],
+  "exclude_files": "Classes/Exclude",
+  "public_header_files": "NCNLivingSDK.h",
+  "requires_arc": true,
+  "static_framework": true,
+  "vendored_frameworks": [
+    "*.framework"
+  ],
+  "prefix_header_contents": "#import \"NCLiveSDKHeader.h\"",
+  "resources": [
+    "Resources/*.bundle",
+    "Classes/**/*.xib",
+    "Classes/**/**/*.xib",
+    "Classes/**/**/**/*.xib",
+    "Classes/**/**/**/**/*.xib",
+    "Classes/**/**/**/**/**/*.xib",
+    "Classes/**/**/**/**/**/**/*.xib"
+  ],
+  "frameworks": [
+    "AudioToolbox",
+    "VideoToolbox",
+    "Accelerate"
+  ],
+  "pod_target_xcconfig": {
+    "ENABLE_BITCODE": "NO"
+  },
+  "user_target_xcconfig": {
+    "ENABLE_BITCODE": "NO"
+  },
+  "dependencies": {
+    "Masonry": [
+
+    ],
+    "AFNetworking": [
+
+    ],
+    "Socket.IO-Client-Swift": [
+
+    ],
+    "TZImagePickerController": [
+
+    ],
+    "TXLiteAVSDK_TRTC": [
+
+    ],
+    "DYTemplate/ComponentUI": [
+
+    ]
+  }
+}

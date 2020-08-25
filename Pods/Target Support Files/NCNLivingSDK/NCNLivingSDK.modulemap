@@ -1,0 +1,6 @@
+framework module NCNLivingSDK {
+  umbrella header "NCNLivingSDK-umbrella.h"
+
+  export *
+  module * { export * }
+}
