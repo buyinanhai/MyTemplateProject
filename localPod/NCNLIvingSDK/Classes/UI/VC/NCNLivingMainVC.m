@@ -1324,7 +1324,7 @@
                 if (msg.optType.boolValue) {
                     NSMutableArray *ppts = [[NSMutableArray alloc] initWithCapacity:msg.imageList.count];
                     [msg.imageList enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                       
+                        
                         NSString *imageUrl = [obj valueForKey:@"imageUrl"];
                         NSString *pageIndex = [obj valueForKey:@"seq"];
                         
@@ -1334,10 +1334,16 @@
                         model.pageIndex = pageIndex;
                         model.pptImageURL = imageUrl;
                         [ppts addObject:model];
+                        NSLog(@"PPT 页码 === %@",model.pageIndex);
                         
                     }];
-                    //如果先显示ppt 会有bug
-                    [self.blankListView addPPTS:ppts];
+                    //如果课件超过过多会分包收到消息，在这里判断如果是同一个课件id 就继续添加
+                    if (msg.id.intValue == self.blankListView.fileId.intValue) {
+                        [self.blankListView addPPTS:ppts];
+                    } else {
+                        [self.blankListView showPPTs:ppts];
+                    }
+                    self.blankListView.fileId = msg.id;
                 } else {
                     [self.blankListView closePPT];
                 }

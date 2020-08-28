@@ -161,8 +161,10 @@ Pod::Spec.new do |spec|
    spec.dependency "TZImagePickerController"
    spec.dependency "TXLiteAVSDK_TRTC"
    
+   spec.dependency "SDWebImage"
   
    spec.dependency "DYTemplate/ComponentUI"
+   
 
    #为了引用IJKMedia库 而引用这个本地库s
 #   spec.dependency 'LibMediaSDK/CCLiveSDK'

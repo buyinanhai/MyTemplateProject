@@ -11,6 +11,7 @@
 #import "NCNImageCollectionViewCell.h"
 #import "NCNBlankPPTListView.h"
 #import "NCAddNewBlankElemMSG.h"
+#import "UIImageView+WebCache.h"
 
 @interface NCNBlankView ()<UICollectionViewDelegate,UICollectionViewDataSource>
 
@@ -420,9 +421,8 @@
     self.drawView.backgroundColor = model.blankColor == nil ? UIColor.clearColor : model.blankColor;
     
     if (model.pptImageURL.length > 1) {
-        [self.imgV setImageWithURL:[NSURL URLWithString:model.pptImageURL]];
+        [self.imgV sd_setImageWithURL:[NSURL URLWithString:model.pptImageURL] placeholderImage:nil options:SDWebImageProgressiveLoad];
     }
-    
 }
 
 - (void)layoutSubviews {
@@ -435,21 +435,6 @@
         }];
         self.isDrawed = true;
     }
-    
-}
-
-
--(void)setImageUrl:(NSString *)imageUrl {
-    
-    _imgV.image = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]]];
-    
-}
-
-- (void)setImageSize:(CGSize)sz {
-    
-    [self.imgV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(sz);
-    }];
     
 }
 

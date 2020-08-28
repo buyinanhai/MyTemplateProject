@@ -51,7 +51,7 @@ class LiveVC: UIViewController {
         //3051876(我的) 3051998
         model.studentId = "3051998";
         
-        model.liveRoomId = "741c2080757a4ae6b59b482a1362aef3";
+        model.liveRoomId = "6ee0438367c74dc5a2fd7cdb05e60694";
         if self.idField.text?.count ?? 0 > 0 {
             model.liveRoomId = self.idField.text ?? "";
         }

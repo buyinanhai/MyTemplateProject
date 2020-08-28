@@ -124,35 +124,42 @@
     }
     
 }
-
-- (void)addPPTS:(NSArray<NCNBlankPPTListCellModel *> *)ppts {
+- (void)showPPTs:(NSArray<NCNBlankPPTListCellModel *> *)ppts {
     
-    if (ppts.count == 0) return;
-    
-    
-    //ppt不会增加或减少页数
+     if (ppts.count == 0) return;
+    //ppt不会增加或减少页数 分包的情况除外
     [self.pptModels removeAllObjects];
     [self.pptModels addObjectsFromArray:ppts];
     [self.pptListView reloadData];
     self.pptListView.hidden = false;
     self.lastPPTSeletModel = ppts.firstObject;
+        
+        
+}
+
+- (void)addPPTS:(NSArray<NCNBlankPPTListCellModel *> *)ppts {
     
-//    if (self.pptModels.count == 0) {
-//
-//           [ppts enumerateObjectsUsingBlock:^(NCNBlankPPTListCellModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//               [self.pptModels addObject:obj];
-//           }];
-//           [self.pptListView reloadData];
-//        self.pptListView.hidden = false;
-//        self.lastPPTSeletModel = ppts.firstObject;
-//       } else {
-//           NSMutableArray *indexPaths = [[NSMutableArray alloc] initWithCapacity:ppts.count];
-//           [ppts enumerateObjectsUsingBlock:^(NCNBlankPPTListCellModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//               [indexPaths addObject:[NSIndexPath indexPathForItem:self.blankModels.count inSection:0]];
-//               [self.pptModels addObject:obj];
-//           }];
-//           [self.pptListView insertItemsAtIndexPaths:indexPaths];
-//       }
+    if (ppts.count == 0) return;
+    
+    if (self.pptModels.count == 0) {
+        
+        [ppts enumerateObjectsUsingBlock:^(NCNBlankPPTListCellModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [self.pptModels addObject:obj];
+        }];
+        [self.pptListView reloadData];
+        self.pptListView.hidden = false;
+        self.lastPPTSeletModel = ppts.firstObject;
+    } else {
+        NSMutableArray *indexPaths = [[NSMutableArray alloc] initWithCapacity:ppts.count];
+        [ppts enumerateObjectsUsingBlock:^(NCNBlankPPTListCellModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [indexPaths addObject:[NSIndexPath indexPathForItem:self.blankModels.count inSection:0]];
+            [self.pptModels addObject:obj];
+        }];
+        [self.pptModels sortUsingComparator:^NSComparisonResult(NCNBlankPPTListCellModel *  _Nonnull obj1, NCNBlankPPTListCellModel*  _Nonnull obj2) {
+            return obj1.pageIndex.intValue > obj2.pageIndex.intValue;
+        }];
+        [self.pptListView reloadData];
+    }
     
 }
 

@@ -19,6 +19,7 @@ typedef int NCNBlankType;
 @class NCNBlankPPTListCellModel;
 @protocol NCNBlankPPTListViewDelegate <NSObject>
 
+
 @optional
 - (void)blankPPTListView:(NCNBlankPPTListView *)view scrollBlankToIndexPath:(NSIndexPath *)path;
 
@@ -57,11 +58,16 @@ typedef int NCNBlankType;
 @class NCAddNewBlankElemMSG;
 @interface NCNBlankPPTListView : UIView
 
+/**
+ 当前显示的课件的id
+ */
+@property (nonatomic, copy) NSNumber *fileId;
+
 @property (nonatomic, weak) id<NCNBlankPPTListViewDelegate> delegate;
 
 - (void)addBlanks:(NSArray<NCNBlankPPTListCellModel *> *)blanks;
 - (void)addPPTS:(NSArray<NCNBlankPPTListCellModel *> *)ppts;
-
+- (void)showPPTs:(NSArray<NCNBlankPPTListCellModel *> *)ppts;
 
 - (void)enterLandscape:(BOOL)isLandscape;
 
