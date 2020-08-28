@@ -39,12 +39,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 - (void)showContentWithCellModel:(NCNBlankPPTListCellModel *)model;
-/**
- 添加新的绘图
- */
-- (void)addNewDrawMSG:(NCDrawElemMSG *)msg;
 
 - (void)classEnded;
+
 
 
 
@@ -67,6 +64,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 - (void)reloadAllDraws;
+
+- (NCNBlankPPTListCellModel *)model;
 @end
 
 

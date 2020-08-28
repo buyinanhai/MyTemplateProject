@@ -81,7 +81,7 @@
     
     [self.pptListView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.offset(8);
-        make.left.equalTo(self.mas_right).offset(-50);
+        make.left.equalTo(self.mas_right).offset(-100);
         make.width.equalTo(self).multipliedBy(0.8);
         make.bottom.offset(-8);
     }];

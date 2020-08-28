@@ -231,10 +231,11 @@
     
     if (self.state == NCLivingViewStateSmall) {
         self.frame = self.smallOriginalFrame;
+        //让可拖动的view始终在最上层显示
+        [self.superview bringSubviewToFront:self];
     } else if (self.state == NCLivingViewStateBig) {
         self.frame = self.portraitFrame;
     }
-    
 //    CGRect originalFrame = [self convertRect:self.blankFrame toView:UIApplication.sharedApplication.keyWindow];
 //    [UIView animateWithDuration:0.25 animations:^{
 //

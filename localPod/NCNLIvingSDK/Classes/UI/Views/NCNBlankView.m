@@ -45,20 +45,6 @@
     return self;
 }
 
-- (void)showContentWithCellModel:(NCNBlankPPTListCellModel *)model {
-    if (model == nil) return;
-    self.contentView.hidden = false;
-    [self.contentView showWithModel:model isNeedRedraw:true];
-    
-    NSString *symbol = [NSString stringWithFormat:@"%@%d",[model.useIdentifier isEqualToString:@"blank"] ? @"白板" : @"课件",model.pageIndex.intValue];
-    [self.blankBtn setTitle:symbol forState:UIControlStateNormal];
-    
-}
-- (void)addNewDrawMSG:(NCDrawElemMSG *)msg {
-    
-    [self.contentView addNewDrawMSG:msg];
-}
-
 - (void)setupSubview {
     
     self.contentView = [[NCNBlankCellView alloc] init];
@@ -102,6 +88,61 @@
     }
     
 }
+
+#pragma mark 显示白板或课件
+- (void)showContentWithCellModel:(NCNBlankPPTListCellModel *)model {
+    if (model == nil) return;
+    self.contentView.hidden = false;
+    //内部实现画图操作
+    [self.contentView showWithModel:model isNeedRedraw:true];
+    
+    NSString *symbol = [NSString stringWithFormat:@"%@%d",[model.useIdentifier isEqualToString:@"blank"] ? @"白板" : @"课件",model.pageIndex.intValue];
+    [self.blankBtn setTitle:symbol forState:UIControlStateNormal];
+    
+}
+
+
+
+#pragma mark 画图操作
+
+- (void)addNewDrawMSG:(NCDrawElemMSG *)msg {
+    
+    NCNBlankPPTListCellModel *currentModel = self.contentView.model;
+    if (currentModel.newDrawMessageCallback) {
+        currentModel.newDrawMessageCallback(msg);
+    }
+    [self.contentView addNewDrawMSG:msg];
+}
+
+- (void)deleteAnyoneDrawWithDrawMessage:(NCDrawElemMSG *)msg {
+    
+    NCNBlankPPTListCellModel *currentModel = self.contentView.model;
+    if (currentModel.deleteDrawMessageCallback) {
+        currentModel.deleteDrawMessageCallback(msg);
+    }
+    [self.contentView deleteAnyoneDrawWithDrawMessage:msg];
+    
+}
+
+- (void)updateDrawLayerBackgroundColorWithMessage:(NCAddNewBlankElemMSG *)msg {
+    
+    NCNBlankPPTListCellModel *currentModel = self.contentView.model;
+    if (currentModel.updateDrawLayerBackgroundColorCallback) {
+        currentModel.updateDrawLayerBackgroundColorCallback(msg);
+    }
+    [self.contentView updateDrawLayerBackgroundColorWithMessage:msg];
+    
+}
+
+- (void)clearDrawLayerWithDrawMessage:(NCDrawElemMSG *)msg {
+   
+    NCNBlankPPTListCellModel *currentModel = self.contentView.model;
+    if (currentModel.clearDrawLayerCallback) {
+        currentModel.clearDrawLayerCallback(msg);
+    }
+    [self.contentView clearDrawLayerWithDrawMessage:msg];
+}
+
 
 - (void)blankBtnClick:(UIButton *)sender {
     
@@ -347,21 +388,31 @@
         self.imgV.image = nil;
         return;
     }
-    
+    if (_model && [self.superview isKindOfClass:NCNBlankView.class]) {
+        _model.newDrawMessageCallback = nil;
+        _model.deleteDrawMessageCallback = nil;
+        _model.clearDrawLayerCallback = nil;
+        _model.updateDrawLayerBackgroundColorCallback = nil;
+    }
     _model = model;
-    kWeakSelf(self);
-    model.newDrawMessageCallback = ^(NCDrawElemMSG * _Nonnull msg) {
-        [weakself addNewDrawMSG:msg];
-    };
-    model.deleteDrawMessageCallback = ^(NCDrawElemMSG * _Nonnull msg) {
-        [weakself deleteAnyoneDrawWithDrawMessage:msg];
-    };
-    model.clearDrawLayerCallback = ^(NCDrawElemMSG * _Nonnull msg) {
-        [weakself clearDrawLayerWithDrawMessage:msg];
-    };
-    model.updateDrawLayerBackgroundColorCallback = ^(NCAddNewBlankElemMSG * _Nonnull msg) {
-        [weakself updateDrawLayerBackgroundColorWithMessage:msg];
-    };
+    //只在白板的view里面实现 方便同步画笔
+    if ([self.superview isKindOfClass:NCNBlankView.class]) {
+       
+        kWeakSelf(self);
+        model.newDrawMessageCallback = ^(NCDrawElemMSG * _Nonnull msg) {
+            [weakself addNewDrawMSG:msg];
+        };
+        model.deleteDrawMessageCallback = ^(NCDrawElemMSG * _Nonnull msg) {
+            [weakself deleteAnyoneDrawWithDrawMessage:msg];
+        };
+        model.clearDrawLayerCallback = ^(NCDrawElemMSG * _Nonnull msg) {
+            [weakself clearDrawLayerWithDrawMessage:msg];
+        };
+        model.updateDrawLayerBackgroundColorCallback = ^(NCAddNewBlankElemMSG * _Nonnull msg) {
+            [weakself updateDrawLayerBackgroundColorWithMessage:msg];
+        };
+    }
+    
     if (isNeedReDraw) {
         self.isDrawed = false;
         [self layoutSubviews];
@@ -403,7 +454,7 @@
 }
 
 - (void)addNewDrawMSG:(NCDrawElemMSG *)msg {
-    
+   
     [self.drawView receiveIMElemMsg:msg layerSize:self.size];
 }
 
@@ -413,12 +464,15 @@
     
 }
 - (void)clearDrawLayerWithDrawMessage:(NCDrawElemMSG *)msg {
-    
+   
     [self.drawView clearDrawingLayer];
 }
 - (void)updateDrawLayerBackgroundColorWithMessage:(NCAddNewBlankElemMSG *)msg{
     
     if (msg.Color.length ==0) return;
+    
+    
+    
     UIColor *blankColor = [NCCustomeElemMSG getColorFromColorString:msg.Color];
     self.model.blankColor = blankColor;
     self.drawView.backgroundColor = blankColor;

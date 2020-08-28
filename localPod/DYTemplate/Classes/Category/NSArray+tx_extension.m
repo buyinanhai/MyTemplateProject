@@ -5,7 +5,6 @@
 #import "NSArray+tx_extension.h"
 
 
-
 @implementation NSArray (tx_extension)
 - (BOOL)tx_contain:(BOOL (^)(id _Nonnull))handler{
     BOOL isContain = NO;

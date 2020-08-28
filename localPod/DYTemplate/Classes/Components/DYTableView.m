@@ -9,7 +9,6 @@
 #import "DYTableView.h"
 #import <MJRefresh/MJRefresh.h>
 #import "DYButton.h"
-
 @interface DYTableView ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong) DYButton *noDataBtn;
 
@@ -24,6 +23,7 @@
     
     self = [super initWithFrame:frame style:style];
     [self setupView];
+    
     
     return self;
 }
@@ -62,7 +62,6 @@
     [_noDataBtn setImage:[UIImage imageNamed:self.noDataImage] forState:UIControlStateNormal];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-
 }
 
 - (void)keyboardWillShow:(NSNotification *)info {
@@ -391,3 +390,4 @@
     return 0;
 }
 @end
+

@@ -101,8 +101,6 @@
 
 + (instancetype)livingMainVCWithRoomModel:(NCNLivingRoomModel *)model {
     
-    NCNLivingMainVC *vc = [[NCNLivingMainVC alloc] init];
-    vc.liveModel = model;
     [NCNLivingSDK.shareInstance setLiveRoomId:model.liveRoomId];
     [NCNLivingSDK.shareInstance setGroupId:[NSString stringWithFormat:@"CHAT_%@",model.groupChatId]];
     [NCNLivingSDK.shareInstance setTeacherId:model.teacherId];
@@ -110,7 +108,9 @@
     [NCNLivingSDK.shareInstance setGroupCodeId:[NSString stringWithFormat:@"CODE_%@",model.groupCodeId]];
     [NCIMManager.sharedInstance setAccountID:model.studentId];
     [NCIMManager.sharedInstance setPassword:model.studentSignIdentifier];
-   
+    [NCNLivingSDK setupWithTcentIM_AppID:model.IM_appId];
+    NCNLivingMainVC *vc = [[NCNLivingMainVC alloc] init];
+    vc.liveModel = model;
     
 
     return vc;
@@ -128,7 +128,7 @@
     [self loadData];
     [NCIMManager.sharedInstance connectLiveRoom];
     [NCIMManager.sharedInstance startLoginForIM];
-    if ([UIDevice.currentDevice orientation] == UIDeviceOrientationLandscapeRight) {
+    if ([UIDevice.currentDevice orientation] == UIDeviceOrientationLandscapeRight || [UIDevice.currentDevice orientation] == UIDeviceOrientationLandscapeLeft) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             self.isLandscape = true;
             [self orientationChange:YES];
@@ -262,44 +262,7 @@
             [NCNNetwork getLivingRoomIMInstructsWithLiveRoomID:roomId completed:^(NSError * _Nullable error, NSDictionary * _Nullable response) {
                   if (response) {
                       NSArray *datas = response[@"data"];
-                      NSMutableDictionary<NSString *,NCNBlankPPTListCellModel *> *newBlanks = @{}.mutableCopy;
-                      NSMutableDictionary<NSString *, NSMutableArray<NCCustomeElemMSG *> *> *drawDictM = @{}.mutableCopy;
-                      [datas enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                          NCCustomMessageData *data = [NCCustomMessageData customMessageWithDict:obj];
-                          if ([data.cmdType isEqualToString:@"16"] || [data.cmdType isEqualToString:@"17"]) {
-                              NCNBlankPPTListCellModel *model = [NCNBlankPPTListCellModel modelFromElemMsg:data.cmdData];
-                              newBlanks[model.pageIndex] = model;
-                              
-                          }
-                          if (data.cmdType.intValue == 0) {
-                              NCDrawElemMSG *drawElem = (NCDrawElemMSG *)data.cmdData;
-                              NSString *identifier = drawElem.pageType.boolValue ? @"ppt" : @"blank";
-                              NSString *key = [NSString stringWithFormat:@"%@+%@",identifier, drawElem.pageIndex];
-                              NSMutableArray<NCCustomeElemMSG *> *drawsM = drawDictM[key];
-                              if (drawsM == nil) {
-                                  drawsM = @[].mutableCopy;
-                                  drawDictM[key] = drawsM;
-                              }
-                              [drawsM addObject:data.cmdData];
-                          }
-                      }];
-                      NSArray <NCNBlankPPTListCellModel *> *models = [newBlanks.allValues sortedArrayUsingComparator:^NSComparisonResult(NCNBlankPPTListCellModel  *obj1, NCNBlankPPTListCellModel  * obj2) {
-                          return obj1.pageIndex.intValue > obj2.pageIndex.intValue;
-                      }];
-                      [models enumerateObjectsUsingBlock:^(NCNBlankPPTListCellModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                          NSString *key = [NSString stringWithFormat:@"%@+%@",obj.useIdentifier ,obj.pageIndex];
-                          NSMutableArray *arrayM = drawDictM[key];
-                          [obj.draws addObjectsFromArray:arrayM.copy];
-                      }];
-                      if (models.count > 0) {
-                          [self.blankListView addBlanks:models];
-                          NSInteger currentPage = kLivingConfig.currentPage.intValue - 1;
-                          if (currentPage > models.count - 1) {
-                              currentPage = 0;
-                          }
-                          NCNBlankPPTListCellModel *model = models[currentPage];
-                          [self.blankView showContentWithCellModel:model];
-                      }
+                      [self handleInstructionsWithDatas:datas];
                       [self startToSetup];
                   } else {
                       [YJProgressHUD showMessage:@"请求指令信息失败！" inView:self.view];
@@ -316,6 +279,88 @@
     
   
 }
+#pragma mark 处理接口历史数据  包含指令和配置信息
+- (void)handleInstructionsWithDatas:(NSArray *)datas {
+    
+    NSMutableArray<NCNBlankPPTListCellModel *> *pptModels = [[NSMutableArray alloc] initWithCapacity:kLivingConfig.courseData.imageList.count];
+    [kLivingConfig.courseData.imageList enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NCNBlankPPTListCellModel *model = [NCNBlankPPTListCellModel new];
+        model.useIdentifier = @"ppt";
+        model.pptImageURL = obj[@"imageUrl"];
+        model.pageIndex = obj[@"seq"];
+        [pptModels addObject:model];
+    }];
+    [self.blankListView addPPTS:pptModels.copy];
+    
+    
+    NSMutableArray<NCNBlankPPTListCellModel *> *blankModels = @[].mutableCopy;
+    NSMutableDictionary<NSString *, NSMutableArray<NCCustomeElemMSG *> *> *drawDictM = @{}.mutableCopy;
+    [datas enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NCCustomMessageData *data = [NCCustomMessageData customMessageWithDict:obj];
+        //白板
+        if ([data.cmdType isEqualToString:@"16"] || [data.cmdType isEqualToString:@"17"]) {
+            NCNBlankPPTListCellModel *model = [NCNBlankPPTListCellModel modelFromElemMsg:data.cmdData];
+            [blankModels addObject:model];
+            
+        }
+        //画图指令type
+        if (data.cmdType.intValue == 0) {
+            NCDrawElemMSG *drawElem = (NCDrawElemMSG *)data.cmdData;
+            NSString *identifier = drawElem.pageType.boolValue ? @"ppt" : @"blank";
+            NSString *key = [NSString stringWithFormat:@"%@+%@",identifier, drawElem.pageIndex];
+            NSMutableArray<NCCustomeElemMSG *> *drawsM = drawDictM[key];
+            if (drawsM == nil) {
+                drawsM = @[].mutableCopy;
+                drawDictM[key] = drawsM;
+            }
+            [drawsM addObject:data.cmdData];
+        }
+    }];
+//    NSArray <NCNBlankPPTListCellModel *> *models = [blankModels.allValues sortedArrayUsingComparator:^NSComparisonResult(NCNBlankPPTListCellModel  *obj1, NCNBlankPPTListCellModel  * obj2) {
+//        return obj1.pageIndex.intValue > obj2.pageIndex.intValue;
+//    }];
+    [blankModels enumerateObjectsUsingBlock:^(NCNBlankPPTListCellModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSString *key = [NSString stringWithFormat:@"%@+%@",obj.useIdentifier ,obj.pageIndex];
+        NSMutableArray *arrayM = drawDictM[key];
+        [obj.draws addObjectsFromArray:arrayM.copy];
+    }];
+    [pptModels enumerateObjectsUsingBlock:^(NCNBlankPPTListCellModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSString *key = [NSString stringWithFormat:@"%@+%@",obj.useIdentifier ,obj.pageIndex];
+        NSMutableArray *arrayM = drawDictM[key];
+        [obj.draws addObjectsFromArray:arrayM.copy];
+    }];
+    
+    if (blankModels.count > 0) {
+        [self.blankListView addBlanks:blankModels];
+        if (kLivingConfig.pageType.intValue == 0) {
+            NSInteger currentPage = kLivingConfig.currentPage.intValue - 1;
+            if (currentPage > blankModels.count - 1) {
+                currentPage = 0;
+            }
+            NCNBlankPPTListCellModel *model = blankModels[currentPage];
+            [self.blankView showContentWithCellModel:model];
+        }
+    }
+    
+    if (kLivingConfig.pageType.intValue == 1) {
+        NSInteger index = kLivingConfig.currentPage.intValue;
+        if (index < pptModels.count) {
+            [self.blankListView makeListViewIsPullOut:true];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.blankListView selectBlankOrPPTWithType:1 pageIndex:index];
+                [self.blankView showContentWithCellModel:pptModels[index - 1]];
+            });
+        }
+        
+    }
+    if (pptModels.count > 0 || [self.blankListView canShow]) {
+        [self showBlankListView:true];
+    } else {
+        [self showBlankListView:false];
+    }
+    
+}
+
 - (void)startToSetup {
    
 
@@ -326,32 +371,6 @@
     [self updateMyPushLiving];
     [self updateRightButtonsState];
     
-    NSMutableArray<NCNBlankPPTListCellModel *> *arrayM = [[NSMutableArray alloc] initWithCapacity:kLivingConfig.courseData.imageList.count];
-    [kLivingConfig.courseData.imageList enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        NCNBlankPPTListCellModel *model = [NCNBlankPPTListCellModel new];
-        model.useIdentifier = @"ppt";
-        model.pptImageURL = obj[@"imageUrl"];
-        model.pageIndex = obj[@"seq"];
-        [arrayM addObject:model];
-    }];
-    //    [self.blankListView clear];
-    [self.blankListView addPPTS:arrayM.copy];
-    if (kLivingConfig.pageType.intValue == 1) {
-        NSInteger index = kLivingConfig.currentPage.intValue;
-        if (index < arrayM.count) {
-            [self.blankListView makeListViewIsPullOut:true];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [self.blankListView selectBlankOrPPTWithType:1 pageIndex:index];
-                [self.blankView showContentWithCellModel:arrayM[index - 1]];
-            });
-        }
-        
-    }
-    if (arrayM.count > 0 || [self.blankListView canShow]) {
-        [self showBlankListView:true];
-    } else {
-        [self showBlankListView:false];
-    }
     
 }
 
@@ -490,7 +509,7 @@
     Method originalMethod = class_getInstanceMethod([appdelegate class], @selector(application:supportedInterfaceOrientationsForWindow:));
     if (originalMethod == nil) {
         //appdelegate必须实现  这个方法
-        NSAssert(0, @"appdelegate must define application:supportedInterfaceOrientationsForWindow:");
+        NSAssert(0, @"appdelegate must implement application:supportedInterfaceOrientationsForWindow: method");
     }
     Method newMethod = class_getInstanceMethod(self.class, implSelector);
     
@@ -500,7 +519,7 @@
 
 - (UIInterfaceOrientationMask)ncn_application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
     
-    return UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskPortrait;
+    return UIInterfaceOrientationMaskLandscape | UIInterfaceOrientationMaskPortrait;
     
 }
 - (BOOL)shouldAutorotate {
@@ -508,34 +527,40 @@
     return true;
 }
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
-    return UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskPortrait;
+    return UIInterfaceOrientationMaskLandscape | UIInterfaceOrientationMaskPortrait;
 }
 
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
     
     if (self.isLandscape) {
-        return UIInterfaceOrientationLandscapeLeft;
+        
+        return UIDevice.currentDevice.orientation == UIDeviceOrientationLandscapeLeft ? UIInterfaceOrientationLandscapeLeft : UIInterfaceOrientationLandscapeRight;
     }
     return UIInterfaceOrientationPortrait;
 }
 
-- (void)deviceOrientationDidChange
+- (void)deviceOrientationDidChange:(NSNotification *)info
 {
-    if([UIDevice currentDevice].orientation == UIDeviceOrientationPortrait) {
-        self.isLandscape = false;
-        [self orientationChange:NO];
-        
-        
-        //注意： UIDeviceOrientationLandscapeLeft 与 UIInterfaceOrientationLandscapeRight
-    } else if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight) {
-        self.isLandscape = true;
-        [self orientationChange:YES];
-        
-    }
+    
+    //为了适配ipad的旋转屏幕宽高延迟的问题
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        UIDevice *device = info.object;
+        if(device.orientation == UIDeviceOrientationPortrait) {
+            self.isLandscape = false;
+            [self orientationChange:NO];
+            
+            //注意： UIDeviceOrientationLandscapeLeft 与 UIInterfaceOrientationLandscapeRight
+        } else if (device.orientation == UIDeviceOrientationLandscapeRight || [UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft ) {
+            self.isLandscape = true;
+            [self orientationChange:YES];
+            
+        }
+    });
+   
 }
 - (void)orientationChange:(BOOL)landscapeRight
 {
-   
+    
     if (landscapeRight) {
       
         [self enterLandscapeScreen];
@@ -577,19 +602,20 @@
     }
     self.landscapeBtnsCiew.hidden = false;
     NCNSpeakView *chatView = self.chatView.getChatView;
+    [chatView removeFromSuperview];
     [self.view addSubview:self.chatView.getChatView];
     [self.chatView.getChatView enterLandscapeScreen];
     chatView.frame = CGRectMake(35, self.view.height - 200 - 80, 350, 200);
-        [self.rightBottomBtnsView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            CGFloat rightMargin = -10;
-            if (@available(iOS 11.0, *)) {
-                rightMargin = self.view.safeAreaLayoutGuide.layoutFrame.origin.x > 0 ? -32 : -10;
-            }
-            make.right.offset(rightMargin);
-            make.bottom.offset(-20);
-            make.width.offset(180);
-            make.height.offset(120);
-        }];
+    [self.rightBottomBtnsView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        CGFloat rightMargin = -10;
+        if (@available(iOS 11.0, *)) {
+            rightMargin = self.view.safeAreaLayoutGuide.layoutFrame.origin.x > 0 ? -32 : -10;
+        }
+        make.right.offset(rightMargin);
+        make.bottom.offset(-20);
+        make.width.offset(180);
+        make.height.offset(120);
+    }];
     
     self.infoView.hidden = true;
     self.chatView.hidden = true;
@@ -610,6 +636,7 @@
     self.inputVC.view.hidden = true;
         [self.blankListView enterLandscape:true];
     [self.chatView.getChatView scrollToMessageBottom];
+    
 }
 
 - (void)exitLandscapeScreen {
@@ -669,7 +696,7 @@
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(IMloginSuccessful) name:TUIKitNotification_onLoginSuccessful object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceOrientationDidChange) name:UIDeviceOrientationDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceOrientationDidChange:) name:UIDeviceOrientationDidChangeNotification object:nil];
 
 }
 
@@ -746,6 +773,7 @@
     }
     
 }
+
 
 #pragma mark NCNBlankPPTListViewDelegate
 
@@ -933,14 +961,17 @@
     [alertVC addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
     [alertVC addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         
+        //发送结束举手
+        TIMMessage *message = [NCNCustomMessageUtil customMessageForSendHandsUpWithOpen:false];
+        [[self teacherConversaction] sendMessage:message succ:nil fail:nil];
         ////再将方法交换回去
-           [self setupOrientationConfig];
-           [self.studentPushView stopToLive];
-           [self.teacherLiveView stop];
-           [self.studentPullView stop];
-            [NCIMManager.sharedInstance disConectLiveRoom];
-            [NCIMManager.sharedInstance logoutForIM];
-           [self dismissViewControllerAnimated:true completion:nil];
+        [self setupOrientationConfig];
+        [self.studentPushView stopToLive];
+        [self.teacherLiveView stop];
+        [self.studentPullView stop];
+        [NCIMManager.sharedInstance disConectLiveRoom];
+        [NCIMManager.sharedInstance logoutForIM];
+        [self dismissViewControllerAnimated:true completion:nil];
         
     }]];
     
@@ -948,6 +979,7 @@
     
    
 }
+
 
 - (void)rightBottomViewBtnClick:(UIButton *)sender {
 
@@ -972,13 +1004,12 @@
             } else {
                 isHandup = !self.handsupTimer.isValid;
             }
-            [self updateRightButtonsState];
             
             TIMMessage *message = [NCNCustomMessageUtil customMessageForSendHandsUpWithOpen:isHandup];
             
             [[self teacherConversaction] sendMessage:message succ:^{
                 
-                [YJProgressHUD showMessage:(self.handsupTimer.isValid || isPushingStream) ? @"举手被取消了" : @"举手成功，等待同意..." inView:self.view];
+                [YJProgressHUD showMessage:(self.handsupTimer.isValid || isPushingStream) ? @"你取消了发言！" : @"举手成功，等待同意..." inView:self.view];
 
                 if (!self.handsupTimer.isValid && !isPushingStream) {
                     //开始倒计时
@@ -987,31 +1018,47 @@
                     [self.handsupTimer invalidate];
                     self.handsupTimer = nil;
                     self->_handsupCount = 0;
-                    [[self.rightBottomBtnsView viewWithTag:1001] removeFromSuperview];
+                    kLivingConfig.stuId = nil;
                 }
+                //删除进度条
+                [[self.rightBottomBtnsView viewWithTag:1001] removeFromSuperview];
+                [self updateRightButtonsState];
                 
             } fail:^(int code, NSString *msg) {
                 [YJProgressHUD showMessage:[NCNLivingHelper im_errorMsgWithCode:code defaultErrMsg:@"举手失败！"] inView:self.view];
+                [self updateRightButtonsState];
                 
             }];
             
         }
             
-            
             break;
         case 12:
+            //ipad上面不支持手动旋转屏幕方向
+            if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+                [YJProgressHUD showMessage:@"iPad暂不支持手动旋转屏幕，请使用自动旋转的方式！" inView:self.view];
+                return;
+            }
+            
             sender.selected = !sender.isSelected;
 
             //点击了旋转屏幕
             if (sender.isSelected) {
                 self.isLandscape = true;
-                 if ([[UIDevice currentDevice]   respondsToSelector:@selector(setOrientation:)]) {
-                          [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationLandscapeLeft]
-                                                       forKey:@"orientation"];
-                        }
+//                SEL selector = NSSelectorFromString(@"setOrientation:");
+//
+//                   NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[UIDevice instanceMethodSignatureForSelector:selector]];
+//                   [invocation setSelector:selector];
+//                   [invocation setTarget:[UIDevice currentDevice]];
+//                   int val = UIInterfaceOrientationLandscapeRight;
+//                   [invocation setArgument:&val atIndex:2];
+//                   [invocation invoke];
+                if ([[UIDevice currentDevice]   respondsToSelector:@selector(setOrientation:)]) {
+                    [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationLandscapeRight]
+                                                forKey:@"orientation"];
+                }
 
-                [self orientationChange:true];
-
+//                [self orientationChange:true];
             } else {
                 
                 self.isLandscape = false;
@@ -1019,7 +1066,7 @@
                   [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationPortrait]
                                                forKey:@"orientation"];
                 }
-                [self orientationChange:false];
+//                [self orientationChange:false];
             }
             break;
         case 13:
@@ -1139,7 +1186,7 @@
             data.askText = text;
             data.askId = [NSString stringWithFormat:@"%llu",msg.locator.seq];
             data.askName = NCIMManager.sharedInstance.myselfProfile.nickname;
-            data.askTime = [NSDate.date dateWithFormat:@"hh:mm"];
+            data.askTime = [NSDate.date dateWithFormat:@"MM-dd HH:mm"];
             data.askElem = msg;
             data.sender = [NCNLivingSDK.shareInstance studentId];
             [weakself.chatView.askView addQAData:@[data]];
@@ -1208,6 +1255,8 @@
 
 - (void)handleUpCustomeMessage:(TIMCustomElem *)elem message:(TIMMessage *)msg {
     
+    
+    [[self teacherConversaction] setReadMessage:msg succ:nil fail:nil];
     NSError *error = NULL;
     NSDictionary *customDict = [NSJSONSerialization JSONObjectWithData:elem.data options:0 error:&error];
     if (!error) {
@@ -1297,9 +1346,14 @@
                 break;
             case 2:
             {
-                #pragma mark  答题器
+                #pragma mark 2 答题器
                 NCAnswerElemMSG *msg = (NCAnswerElemMSG *)message.cmdData;
                 
+                //如果当前正在答题 并且不是结束答题  就删除当前的答题view
+                if (self.testView  && msg.questionOperation.boolValue) {
+                    [self.testView dismiss];
+                    self.testView = nil;
+                }
                 if (self.testView) {
                     if (msg.questionOperation.boolValue == false) {
                         [YJProgressHUD showMessage:@"答题结束" inView:self.view];
@@ -1375,7 +1429,7 @@
                 if (data) {
                     data.answerText = msg.askText;
                     data.answerName = NCIMManager.sharedInstance.teacherProfile.nickname;
-                    data.answerTime = [NSDate.date dateWithFormat:@"hh:mm"];
+                    data.answerTime = [NSDate.date dateWithFormat:@"MM-dd HH:mm"];
                     data.answerElem = message;
                     [self.chatView.askView updateData:data];
                     
@@ -1496,7 +1550,7 @@
             case 22:
             {
                 #pragma mark  22    学生端推流    同意学生举手，推送指令
-                //其他的同学举手了  也有可能是自己
+                //其他的同学举手了  也有可能是自己  在学生开启关闭发言都会收到该指令
                 NCCustomeElemMSG *msg = message.cmdData;
                 NSString *open = [msg valueForKey:@"open"];
                 NSString *rtmpURL = [msg valueForKey:@"liveUrl"];
@@ -1511,8 +1565,10 @@
                     kLivingConfig.stuId = stuId;
                     [self updateRightButtonsState];
                     [self updateStudentPullLiving];
+                } else {
+                    kLivingConfig.stuPlayRtmp = nil;
+                    [self updateRightButtonsState];
                 }
-               
             }
                 
                 break;
@@ -1548,8 +1604,11 @@
 //    [self teacherInfoView:self.infoView isFold:true];
     [[self handsupBtn] setHidden:true];
     [self.testView dismiss];
+    [self.handsupTimer timeInterval];
+    self.handsupTimer = nil;
     
-    
+   
+
     
 }
 #pragma mark 开始上课
@@ -1614,6 +1673,16 @@
     
     [self.view endEditing:true];
     
+}
+- (BOOL)isPushingFromMe {
+    
+    BOOL isPushing = false;
+    
+    if ([kLivingConfig.stuId isEqualToString:NCNLivingSDK.shareInstance.studentId]) {
+        isPushing = true;
+    }
+    
+    return isPushing;
 }
 #pragma mark lazy
 
@@ -1691,6 +1760,7 @@
     [btn addTarget:self action:@selector(rightBottomViewBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     return btn;
 }
+
 
 - (UIStackView *)landscapeBtnsCiew {
     

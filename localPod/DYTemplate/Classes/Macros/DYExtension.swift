@@ -17,6 +17,7 @@ public let kDY_ThemeColor:UIColor = UIColor.hex("#fb9028");
 public extension UIColor {
     
     
+
     class func HWColorWithHexString(hex:String,alpha:CGFloat) -> UIColor {
         var cString = hex.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).uppercased()
         if cString.hasPrefix("#") {

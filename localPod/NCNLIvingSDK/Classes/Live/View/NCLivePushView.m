@@ -306,8 +306,6 @@
     [self videoIsHorizontal:true];
 
     
-
-    
     self.oritention = NCLivingViewOritention_landscape;
 
 

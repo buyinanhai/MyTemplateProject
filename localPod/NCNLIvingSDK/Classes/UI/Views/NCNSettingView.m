@@ -7,6 +7,7 @@
 //
 
 #import "NCNSettingView.h"
+#import "DYButton.h"
 
 @interface NCNSettingView ()
 
@@ -61,11 +62,16 @@
     }
     
     for (int i = 21; i < 31; i ++) {
-        UIButton *btn = [self viewWithTag:i];
-        [btn setTitleColor:UIColor.whiteColor forState:UIControlStateSelected];
-        
-        _allBtns[i - 21] = btn;
-        [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
+        DYButton *btn = [self viewWithTag:i];
+        if ([btn isKindOfClass:DYButton.class]) {
+            [btn setTitleColor:UIColor.whiteColor forState:UIControlStateSelected];
+            
+            _allBtns[i - 21] = btn;
+            [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
+            [btn dy_setBackgroundColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [btn dy_setBackgroundColor:[UIColor colorWithHexString:@"#FF9500"] forState:UIControlStateSelected];
+            [btn dy_setBorderColor:[UIColor colorWithHexString:@"#CBCCD8"] forState:UIControlStateNormal];
+        }
     }
     
 }

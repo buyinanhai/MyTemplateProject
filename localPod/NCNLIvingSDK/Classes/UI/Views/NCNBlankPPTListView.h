@@ -43,10 +43,10 @@ typedef int NCNBlankType;
  更新选中的白板或者ppt
  */
 
-@property (nonatomic, copy) void(^newDrawMessageCallback)(NCDrawElemMSG *msg);
-@property (nonatomic, copy) void(^deleteDrawMessageCallback)(NCDrawElemMSG *msg);
-@property (nonatomic, copy) void(^clearDrawLayerCallback)(NCDrawElemMSG *msg);
-@property (nonatomic, copy) void(^updateDrawLayerBackgroundColorCallback)(NCAddNewBlankElemMSG *msg);
+@property (nonatomic, copy)void(^ _Nullable newDrawMessageCallback)(NCDrawElemMSG *msg);
+@property (nonatomic, copy) void(^ _Nullable deleteDrawMessageCallback)(NCDrawElemMSG *msg);
+@property (nonatomic, copy) void(^ _Nullable clearDrawLayerCallback)(NCDrawElemMSG *msg);
+@property (nonatomic, copy) void(^ _Nullable updateDrawLayerBackgroundColorCallback)(NCAddNewBlankElemMSG *msg);
 
 
 + (instancetype)modelFromElemMsg:(NCAddNewBlankElemMSG *)msg;
@@ -62,10 +62,6 @@ typedef int NCNBlankType;
 - (void)addBlanks:(NSArray<NCNBlankPPTListCellModel *> *)blanks;
 - (void)addPPTS:(NSArray<NCNBlankPPTListCellModel *> *)ppts;
 
-- (void)addNewDrawMSG:(NCDrawElemMSG *)msg;
-- (void)deleteAnyoneDrawWithDrawMessage:(NCDrawElemMSG *)msg;
-- (void)clearDrawLayerWithDrawMessage:(NCDrawElemMSG *)msg;
-- (void)updateDrawLayerBackgroundColorWithMessage:(NCAddNewBlankElemMSG *)msg;
 
 - (void)enterLandscape:(BOOL)isLandscape;
 
@@ -85,6 +81,16 @@ typedef int NCNBlankType;
     type 0 : 白板  1 ： ppt
  */
 - (NCNBlankPPTListCellModel *)selectBlankOrPPTWithType:(NCNBlankType)type pageIndex:(NSInteger)pageIndex;
+
+/**
+ 白板画图操作
+
+ */
+
+- (void)addNewDrawMSG:(NCDrawElemMSG *)msg;
+- (void)deleteAnyoneDrawWithDrawMessage:(NCDrawElemMSG *)msg;
+- (void)clearDrawLayerWithDrawMessage:(NCDrawElemMSG *)msg;
+- (void)updateDrawLayerBackgroundColorWithMessage:(NCAddNewBlankElemMSG *)msg;
 
 - (void)closePPT;
 

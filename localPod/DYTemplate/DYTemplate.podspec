@@ -89,14 +89,14 @@ Pod::Spec.new do |spec|
             "Classes/**/**/**/**/*.xib",
             "Classes/**/**/**/**/**/*.xib",
             "Classes/**/**/**/**/**/**/*.xib"
- 
-
- 
+  
   spec.dependency "Masonry"
   spec.dependency "AFNetworking"
   spec.dependency "MJRefresh"
   spec.dependency "ObjectMapper"
-
+  
+  #spec.dependency "AlipaySDK-iOS"
+  
   spec.pod_target_xcconfig = {
      "GCC_PREPROCESSOR_DEFINITIONS" => "$(inherited) DYTemplate_NAME=#{spec.name} DYTemplate_VERSION=#{spec.version}",
    }

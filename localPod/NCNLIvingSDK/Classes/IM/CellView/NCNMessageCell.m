@@ -312,9 +312,7 @@
     if (!_contentLabel) {
         _contentLabel = [UILabel  new];
         _contentLabel.numberOfLines = 0;
-        _contentLabel.font = [UIFont mediumFont:14];
-        
-        
+        _contentLabel.font = [UIFont systemFontOfSize:14];
     }
     return _contentLabel;
     
@@ -324,13 +322,21 @@
     [super layoutSubviews];
     BOOL isLandscape = kScreen_Width > kScreen_Height;
        
-       CGFloat cellWidth = isLandscape ? 200 : kScreen_Width - 20;
-    CGFloat nameWidth = [self.model.senderName boundingRectWithSize:CGSizeMake(100, 20) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:13]} context:nil].size.width;
-       nameWidth = MIN(nameWidth, 40);
-       CGFloat contentWidth = cellWidth - nameWidth - 26;
-    _contentLabel.preferredMaxLayoutWidth = contentWidth - 40;
-       
+//       CGFloat cellWidth = isLandscape ? 350 : kScreen_Width - 20;
+//    CGFloat nameWidth = [self.model.senderName boundingRectWithSize:CGSizeMake(100, 20) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:13]} context:nil].size.width;
+//       nameWidth = MIN(nameWidth, 40);
+//       CGFloat contentWidth = cellWidth - nameWidth - 26;
+//    _contentLabel.preferredMaxLayoutWidth = contentWidth - 40;
     
+    CGFloat cellWidth = isLandscape ? 350 : kScreen_Width - 20;
+    CGFloat nameWidth = [self.model.senderName boundingRectWithSize:CGSizeMake(60, 20) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:13]} context:nil].size.width;
+    if (nameWidth > 60) {
+        nameWidth = 60;
+    }
+    nameWidth = MAX(nameWidth, 40);
+    CGFloat contentWidth = cellWidth - nameWidth - 15 - 35;
+    _contentLabel.preferredMaxLayoutWidth = contentWidth;
+
 }
 
 

@@ -48,6 +48,7 @@
     view.explainLabel.text = msg.questionExplain;
     view->_seconds = msg.questionTime.intValue;
     view.timeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld",view->_seconds / 60, view->_seconds % 60];
+    view.explainLabel.hidden = msg.questionExplain.length > 0 ? false : true;
 
     return view;
     
@@ -183,7 +184,7 @@
     confirmBtn.text = @"提交答案";
     confirmBtn.textColor = UIColor.whiteColor;
     [confirmBtn dy_setBackgroundColor:[UIColor colorWithHexString:@"#D2D5DF"] forState:UIControlStateNormal];
-    [confirmBtn dy_setBackgroundColor:[UIColor colorWithHexString:@"#FC9400"] forState:UIControlStateNormal];
+    [confirmBtn dy_setBackgroundColor:[UIColor colorWithHexString:@"#FC9400"] forState:UIControlStateSelected];
     [confirmBtn setCornerRadius:16.5];
     confirmBtn.titleLabel.font = [UIFont boldSystemFontOfSize:16];
     [middleView addSubview:confirmBtn];
@@ -205,6 +206,12 @@
     
     self.confirmBtn.enabled = isCan;
     self.confirmBtn.selected = isCan;
+    if (isCan == false) {
+        [self.timer invalidate];
+        self.timer = nil;
+        _seconds = 0;
+        self.timeLabel.text = @"00:00";
+    }
    
 }
 - (void)testEnded {
@@ -254,7 +261,6 @@
     if (_seconds == 0) {
         [self.timer invalidate];
         [self canSubmit:false];
-        
     }
     self.timeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld",_seconds / 60, _seconds % 60];
     

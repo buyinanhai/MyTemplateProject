@@ -97,7 +97,7 @@
     nameWidth = MAX(nameWidth, 40);
     CGFloat contentWidth = cellWidth - nameWidth - 15 - 35;
 
-    CGSize contentSize = [self.content boundingRectWithSize:CGSizeMake(contentWidth, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont mediumFont:14]} context:nil].size;
+    CGSize contentSize = [self.content boundingRectWithSize:CGSizeMake(contentWidth, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : self.textFont} context:nil].size;
     CGFloat textWidth = contentSize.width + 8;
     if (textWidth > contentWidth) {
         textWidth = contentWidth;
@@ -106,7 +106,10 @@
     return CGSizeMake(textWidth, contentSize.height);
 }
 
-
+- (void)setTextFont:(UIFont *)textFont {
+    _textFont = textFont;
+    
+}
 
 
 - (NSAttributedString *)attributedString

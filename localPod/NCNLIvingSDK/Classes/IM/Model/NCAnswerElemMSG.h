@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NCAnswerElemMSG : NCCustomeElemMSG
 
 /**
- String    1 开始（发布）答题/ 0结束答题
+ String    1 开始（发布）答题/ 0结束答题   时间到了会受到结束答题
  */
 @property (nonatomic, copy) NSString *questionOperation;
     

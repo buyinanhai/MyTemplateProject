@@ -107,11 +107,11 @@
     [refresh addTarget:self action:@selector(loadData) forControlEvents:UIControlEventValueChanged];
     self.tableView.refreshControl = refresh;
 
-        
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, _inputController.view.height - kBottom_SafeHeight, 0);
     
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.offset(0);
-        make.bottom.equalTo(_inputController.view.mas_top);
+        make.bottom.left.right.top.offset(0);
+//        make.bottom.offset(-(_inputController.view.height));
     }];
     
 }

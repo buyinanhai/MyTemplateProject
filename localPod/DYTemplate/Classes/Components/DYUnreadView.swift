@@ -47,6 +47,7 @@ import UIKit
         self.label.text = content;
         self.distributionSubviews();
         
+        
     }
     static func showWindowPosition(_ position: CGRect) {
         

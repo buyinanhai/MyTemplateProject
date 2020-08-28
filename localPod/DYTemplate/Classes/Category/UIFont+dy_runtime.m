@@ -21,8 +21,11 @@
 }
 
 + (UIFont *)adjustFont:(CGFloat)fontSize {
-    UIFont *newFont = nil;
-    newFont = [UIFont adjustFont:fontSize * [UIScreen mainScreen].bounds.size.width / kUINormalScreen];
+    UIFont *newFont = [UIFont adjustFont:fontSize];
+    
+    if (UIDevice.currentDevice.userInterfaceIdiom != UIUserInterfaceIdiomPad && (UIScreen.mainScreen.bounds.size.width < UIScreen.mainScreen.bounds.size.height)) {
+        newFont = [UIFont adjustFont:fontSize * [UIScreen mainScreen].bounds.size.width / kUINormalScreen];
+    }
     return newFont;
 }
 

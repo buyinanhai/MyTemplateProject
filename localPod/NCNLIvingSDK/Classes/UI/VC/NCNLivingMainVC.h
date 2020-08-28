@@ -41,6 +41,10 @@ NS_ASSUME_NONNULL_BEGIN
 ///trtc 推流用的密码
 @property (nonatomic, copy) NSString *liveUserSign;
 
+///im appid
+@property (nonatomic, copy) NSString *IM_appId;
+
+
 + (instancetype)liveRoomModelWithDict:(NSDictionary *)dict;
 
 @end

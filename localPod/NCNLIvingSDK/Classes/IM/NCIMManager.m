@@ -55,7 +55,7 @@
 
 - (void)connectLiveRoom {
     
-    NSString *urlstr = [NSString stringWithFormat:@"http://114.116.146.138:8995"];
+    NSString *urlstr = [NSString stringWithFormat:@"http://114.116.147.187:8995"];
     NSURL* url = [[NSURL alloc] initWithString:urlstr];
     self.socketManager = [[SocketManager alloc] initWithSocketURL:url config:@{@"log": @NO, @"compress": @YES,@"connectParams":@{@"userId":NCNLivingSDK.shareInstance.studentId,@"liveRoomId":NCNLivingSDK.shareInstance.liveRoomId,@"platform": @"ios"}}];
     SocketIOClient* socket = [self.socketManager defaultSocket];
