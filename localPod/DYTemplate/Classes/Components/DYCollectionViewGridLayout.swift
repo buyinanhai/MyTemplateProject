@@ -58,8 +58,12 @@ import UIKit
     
     
     public override var collectionViewContentSize: CGSize {
+        if self.collectionView?.numberOfItems(inSection: 0) == 0 {
+            return self.collectionView?.size ?? CGSize.zero;
+        }
        
         self.calculateAppropriateRowCount(rowCount: self.rowCount)
+        
         
         //一共多少页
         var page =  Float(self.collectionView?.numberOfItems(inSection: 0) ?? 0) / Float(self.pageCount);

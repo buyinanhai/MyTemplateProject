@@ -145,8 +145,8 @@
             $(".answer").click(function() {
                 var key = $(this).children(".key").text();
                 obj.myAnswer = key;
-                onload(obj);
                 window.webkit.messageHandlers.selectAnswer.postMessage(key)
+                onload(obj);
             })
         }
 

@@ -47,36 +47,35 @@ class LiveVC: UIViewController {
     private func enterLivingRoom() {
         
         NCNNetwork.shared().baseURL = "http://test.sdk.live.cunwedu.com.cn";
-        let model = NCNLivingRoomModel.init();
+        let roomId = "6ee0438367c74dc5a2fd7cdb05e60694";
         //3051876(我的) 3051998
-        model.studentId = "3051998";
-        
-        model.liveRoomId = "6ee0438367c74dc5a2fd7cdb05e60694";
-        if self.idField.text?.count ?? 0 > 0 {
-            model.liveRoomId = self.idField.text ?? "";
-        }
+        let studentId = "3051998";
         
         DYNetworkHUD.startLoading();
-        NCNNetwork.getLiveRoomParameters(withRoomID: model.liveRoomId, studentId: model.studentId, companyId: "138363") { (error, response) in
+        NCNNetwork.getLiveRoomParameters(withRoomID: roomId, studentId: studentId, companyId: "138363") { (error, response) in
             DYNetworkHUD.dismiss();
             if let data = response?["data"] as? [String : Any] {
                 
                 if let flag = response?["flag"] as? Int, flag == 0 {
                     let jsonData = try? JSONSerialization.data(withJSONObject: response as Any, options: .prettyPrinted);
                     print("直播间参数：\(try? JSONSerialization.jsonObject(with: jsonData ?? Data.init(), options: .allowFragments) )");
-                    model.studentSignIdentifier = data["token"] as? String ?? "";
-                    model.liveAppid = UInt32(data["trtcAppId"] as? Int ?? 0);
-                    model.liveUserSign = data["trtcSig"] as? String ?? "";
-                    model.im_appId = "\(data["imAppId"] as? Int ?? -1)";
-                    if let cml = data["cml"] as? [String : Any] {
-                        
-                        model.teacherName = "\(cml["teachersName"] as? String ?? "")";
-                        model.courseDesc = cml["lessonName"] as? String ?? "";
-                        model.groupChatId = "\(cml["id"] as? Int ?? -1)";
-                        model.groupCodeId = model.groupChatId;
-                        model.teacherId = cml["teachers"] as? String ?? "";
-                        model.tc_liveRoomid = UInt32(model.groupChatId) ?? 0;
-                    }
+//                    model.studentSignIdentifier = data["token"] as? String ?? "";
+//                    model.liveAppid = UInt32(data["trtcAppId"] as? Int ?? 0);
+//                    model.liveUserSign = data["trtcSig"] as? String ?? "";
+//                    model.im_appId = "\(data["imAppId"] as? Int ?? -1)";
+//                    if let cml = data["cml"] as? [String : Any] {
+//
+//                        model.teacherName = "\(cml["teachersName"] as? String ?? "")";
+//                        model.courseDesc = cml["lessonName"] as? String ?? "";
+//                        model.groupChatId = "\(cml["id"] as? Int ?? -1)";
+//                        model.groupCodeId = model.groupChatId;
+//                        model.teacherId = cml["teachers"] as? String ?? "";
+//                        model.tc_liveRoomid = UInt32(model.groupChatId) ?? 0;
+//                    }
+                    let model = NCNLivingRoomModel.live(withDict: data);
+                    //3051876(我的) 3051998
+                    model.studentId = "3051998";
+                    
                     let vc = NCNLivingMainVC.init(roomModel: model);
                     
                     self.present(vc, animated: true, completion: nil);

@@ -22,4 +22,6 @@
 #import "NSTimer+dy_extension.h"
 #import "DYPickerView.h"
 #import "DYScrollView.h"
+#import "WKWebView+dy_extension.h"
+
 #endif /* OC_Header_h */

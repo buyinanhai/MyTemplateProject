@@ -82,7 +82,11 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
             vc = TestWebViewVC.init();
             break;
         case 2:
-            vc = TestCenterChooseVC.init();
+            if let _ = TestCenterChooseVC.getLocalData() {
+                vc = TestCenterHomeVC.init();
+            } else {
+                vc = TestCenterChooseVC.init();
+            }
             break;
         case 3:
             vc = APHomeVC.init();

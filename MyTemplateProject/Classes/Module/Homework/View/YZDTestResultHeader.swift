@@ -54,7 +54,7 @@ class YZDTestResultHeader: UIView {
         
         self.titleBtn.setTitle(model.dy_title, for: .normal);
         
-        let timeStr = String.init(format: "%02分 %02d秒", (model.dy_usedTime ?? 0) / 60, (model.dy_usedTime ?? 0) % 60);
+        let timeStr = String.init(format: "%02d分 %02d秒", (model.dy_usedTime ?? 0) / 60, (model.dy_usedTime ?? 0) % 60);
         self.consumeTimeLabel.text = "用时：\(timeStr)";
         self.answeredLabel.text = "已作答：\(model.dy_finishCount ?? 0)";
         self.accuracyLabel.text = "正确率：\(model.dy_accuracy ?? "0.0")%";
@@ -154,7 +154,6 @@ extension YZDTestResultHeader: UICollectionViewDataSource,UICollectionViewDelega
         self.didSelectedCell?(indexPath.row);
         
     }
-    
     
     
     

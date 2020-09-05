@@ -39,7 +39,7 @@ public class YZDHomeworkNetwork: DYBaseNetwork {
     class private var relativeUrl: String {
         
         get {
-            return "\(self.isTest ? "" : "/sdk")/appApi"
+            return "\(self.isTest ? "" : "")/appApi"
         }
     }
     

@@ -166,6 +166,7 @@ extension YZDHomeworkDetailVC: UITableViewDataSource,UITableViewDelegate {
                 
             let vc = YZDTestAnswerVC.init();
             vc.afterWorkId = model?.dy_id;
+        
             self?.navigationController?.pushViewController(vc, animated: true);
         }
         

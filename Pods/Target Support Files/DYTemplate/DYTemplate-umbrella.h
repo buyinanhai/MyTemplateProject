@@ -28,6 +28,7 @@
 #import "UILabel+dy_extension.h"
 #import "UIView+dy_extension.h"
 #import "UIViewController+dy_extension.h"
+#import "WKWebView+dy_extension.h"
 #import "DYButton.h"
 #import "DYPickerView.h"
 #import "DYScrollView.h"

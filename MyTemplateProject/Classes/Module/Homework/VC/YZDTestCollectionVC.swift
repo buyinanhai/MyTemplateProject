@@ -132,8 +132,7 @@ class YZDTestCollectionVC: UIViewController {
         
         let config = WKWebViewConfiguration.init();
         let userCtrol = WKUserContentController.init();
-        userCtrol.add(self, name: "removeThisQuestion");
-        userCtrol.add(self, name: "onSelectCheckBox");
+       
         config.userContentController = userCtrol;
         let view = WKWebView.init(frame: .zero, configuration: config);
         let path = Bundle.main.path(forResource: "test-html/wrongQueList.html", ofType: nil)
@@ -142,6 +141,8 @@ class YZDTestCollectionVC: UIViewController {
         view.navigationDelegate = self;
         view.uiDelegate = self;
         view.scrollView.mj_header = MJRefreshNormalHeader.init(refreshingTarget: self, refreshingAction: #selector(self.loadQuestionsData));
+        view.dy_addScriptMessageHandler(self, name: "removeThisQuestion");
+        view.dy_addScriptMessageHandler(self, name: "onSelectCheckBox");
         
         return view;
     }()
@@ -192,6 +193,13 @@ class YZDTestCollectionVC: UIViewController {
      */
     private var willRemoveTests:[Int:Int] = [:]
     
+    
+    deinit {
+        
+        self.webView.configuration.userContentController.removeScriptMessageHandler(forName: "removeThisQuestion");
+        self.webView.configuration.userContentController.removeScriptMessageHandler(forName: "onSelectCheckBox");
+
+    }
 }
 
 

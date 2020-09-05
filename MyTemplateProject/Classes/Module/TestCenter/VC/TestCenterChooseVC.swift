@@ -11,6 +11,7 @@ import DYTemplate.DYButton
 import MJRefresh
 
 
+
 enum TestCenterChooseType :Int {
     ///选择类型
     case type = 0
@@ -29,9 +30,16 @@ enum TestCenterChooseType :Int {
 
 class TestCenterChooseVC: UIViewController {
 
+    
+    private var localModel: TestCenterLocalChooseModel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+                
+        if let dict = TestCenterChooseVC.getLocalData() {
+            self.localModel = TestCenterLocalChooseModel.init(JSON: dict);
+            self.currentTypeId = self.localModel?.chooseOption?["0"] ?? 0;
+        }
         self.setupSubview()
         // Do any additional setup after loading the view.
     }
@@ -72,13 +80,58 @@ class TestCenterChooseVC: UIViewController {
             
             let model = TestCenterChooseModel.init(id: item["id"] as! Int, name: item["name"] as! String,index: IndexPath.init(item: index, section: 0));
             models.append(model);
-            if index == 0 {
-                model.isSelected = true;
-                self.selectModel[0] = model;
-            }
+            self.mapLocalSelectModel(arrayIndex: index, selectIndex: 0, model: model);
         }
         self.dataSource[0] = models;
       
+        
+    }
+    
+    /**
+     反显选中的数据， 并返回下一个请求中需要的id
+     */
+    private func mapLocalSelectModel(arrayIndex: Int,selectIndex: Int, model: TestCenterChooseModel) -> Int? {
+        
+        var id: Int?
+        //如果当前正在选择 直接默认选中第一个
+        if self.isSynchronization {
+            if arrayIndex == 0 {
+                model.isSelected = true;
+                self.selectModel[selectIndex] = model;
+                if selectIndex == 3 {
+                    if let stageId = model.extra?["stageId"] as? Int {
+                        id = stageId;
+                    }
+                } else {
+                    id = model.id;
+                }
+            }
+        } else if let selectId = self.localModel?.chooseOption?["\(selectIndex)"] {
+            if selectId == model.id {
+                model.isSelected = true;
+                self.selectModel[selectIndex] = model;
+                if selectIndex == 3 {
+                    if let stageId = model.extra?["stageId"] as? Int {
+                        id = stageId;
+                    }
+                } else {
+                    id = model.id;
+                }
+            }
+        } else {
+            if arrayIndex == 0 {
+                model.isSelected = true;
+                self.selectModel[selectIndex] = model;
+                if selectIndex == 3 {
+                    if let stageId = model.extra?["stageId"] as? Int {
+                        id = stageId;
+                    }
+                } else {
+                    id = model.id;
+                }
+            }
+        }
+        return id;
         
     }
    
@@ -87,7 +140,6 @@ class TestCenterChooseVC: UIViewController {
     private func loadData() {
        
         var count = 0;
-       
        
         TestCenterNetwork.getStudyLevel().dy_startRequest { (response, error) in
             
@@ -102,10 +154,9 @@ class TestCenterChooseVC: UIViewController {
                     if let id = item["stageId"] as? String, let name = item["name"] as? String {
                         let model = TestCenterChooseModel.init(id: Int(id) ?? 0, name: name,index: IndexPath.init(item: index, section: 1));
                         models.append(model);
-                        if index == 0 {
-                            model.isSelected = true;
-                            self.selectModel[1] = model;
-                            self.loadGrades(stageId: model.id);
+                        
+                        if let id = self.mapLocalSelectModel(arrayIndex: index, selectIndex: 1, model: model) {
+                            self.loadGrades(stageId: id);
                         }
                     }
                 }
@@ -139,17 +190,13 @@ class TestCenterChooseVC: UIViewController {
                         //先默认小学  假定小学的stageid永远是1
                         models.append(model);
                         
-                        if index == 0 {
-                            model.isSelected = true;
-                            self.selectModel[3] = model;
-                            if let stageId = model.extra?["stageId"] as? Int {
-                                self.loadSubjects(stageId);
-                            }
+                        if let id = self.mapLocalSelectModel(arrayIndex: index, selectIndex: 3, model: model) {
+                            self.loadSubjects(id);
                         }
                     }
                 }
                 self.dataSource[3] = models.filter({ (model) -> Bool in
-                    return model.extra?["stageId"] as? Int ?? 0 == 1 ;
+                    return (model.extra?["stageId"] as? Int ?? 0 == self.selectModel[1]?.id) && self.currentTypeId == 0;
                 });
                 self.knowledgeData[3] = models;
                 self.collectionView.reloadSections(IndexSet.init(integer: 3));
@@ -178,15 +225,16 @@ class TestCenterChooseVC: UIViewController {
                     if let id = item["subjectId"] as? String, let name = item["subjectName"] as? String {
                         let model = TestCenterChooseModel.init(id: Int(id) ?? 0, name: name, index: IndexPath.init(item: index, section: 2));
                         models.append(model);
-                        if index == 0 {
-                            model.isSelected = true;
-                            self.selectModel[2] = model;
-                            self.loadVerson(from: model.id);
+                        
+                        if let id = self.mapLocalSelectModel(arrayIndex: index, selectIndex: 2, model: model) {
+                            self.loadVerson(from: id);
+
                         }
                     }
                 }
                 self.dataSource[2] = models;
                 self.collectionView.reloadSections(IndexSet.init(integer: 2));
+                self.isSynchronization = true;
             } else {
                 
                 DYNetworkHUD.showInfo(message: "加载数据失败！", inView: nil);
@@ -213,15 +261,16 @@ class TestCenterChooseVC: UIViewController {
                     if let id = item["versionId"] as? String, let name = item["versionName"] as? String {
                         let model = TestCenterChooseModel.init(id: Int(id) ?? 0, name: name,index: IndexPath.init(item: index, section: 4));
                         models.append(model);
-                        if index == 0 {
-                            model.isSelected = true;
-                            self.selectModel[4] = model;
-                            self.loadVolume(model.id);
-                            
+                        
+                        if let id = self.mapLocalSelectModel(arrayIndex: index, selectIndex: 4, model: model) {
+                            self.loadVolume(id);
                         }
                     }
                 }
                 self.chapterData[4] = models;
+                if self.currentTypeId == 1 {
+                    self.dataSource[4] = models;
+                }
                 self.collectionView.reloadSections(IndexSet.init(integer: 4));
             } else {
                 
@@ -247,11 +296,7 @@ class TestCenterChooseVC: UIViewController {
                     if let id = item["bookId"] as? String, let name = item["bookName"] as? String {
                         let model = TestCenterChooseModel.init(id: Int(id) ?? 0, name: name,index: IndexPath.init(item: index, section: 0));
                         models.append(model);
-                        if index == 0 {
-                            model.isSelected = true;
-                            self.selectModel[TestCenterChooseType.volume.rawValue] = model;
-                            
-                        }
+                        self.mapLocalSelectModel(arrayIndex: index, selectIndex: TestCenterChooseType.volume.rawValue, model: model)
                     }
                 }
                 self.chapterData[TestCenterChooseType.volume.rawValue] = models;
@@ -300,8 +345,12 @@ class TestCenterChooseVC: UIViewController {
     private var chapterData:[Int : [TestCenterChooseModel]] = [:];
 
     private var titles:[String] = ["选择类型","选择学段","选择学科","选择年级","选择版本","选择册别"];
-    private var currentId:Int = 0;
+    private var currentTypeId:Int = 0;
     
+    /**
+     是否同步本地数据完成
+     */
+    private var isSynchronization: Bool = false;
     
     private lazy var confirmBtn: UIButton = {
         
@@ -377,8 +426,35 @@ extension TestCenterChooseVC {
             self.navigationController?.pushViewController(vc, animated: true);
             self.navigationController?.viewControllers.remove(at: 1);
         }
+        var option: [String: Int] = [:]
+        for index in self.selectModel.keys {
+            let model = self.selectModel[index];
+            if let id = model?.id {
+                option["\(index)"] = id;
+            }
+        }
+        let dict = ["subjectTitle":subjectTitle,"subjectId":subjectId,"volumeId":volumeId,"headerTitle":headerTitle,"chooseOption": option
+            ] as [String : Any];
+        TestCenterChooseVC.updateLocalData(dict);
     }
     
+    
+    private class func updateLocalData(_ dict: [String:Any]) {
+       
+        if let data = try? JSONSerialization.data(withJSONObject: dict, options: .fragmentsAllowed) {
+            UserDefaults.standard.setValue(data, forKey: "xyw-tesetCenter-choose-data");
+        }
+        
+    }
+    public class func getLocalData() -> [String : Any]? {
+        
+        if let data = UserDefaults.standard.value(forKey: "xyw-tesetCenter-choose-data") as? Data {
+            if let dict = try? JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed) {
+                return dict as? [String : Any];
+            }
+        }
+        return nil;
+    }
     
 }
 
@@ -504,25 +580,26 @@ extension TestCenterChooseVC: UICollectionViewDataSource, UICollectionViewDelega
         
         if type == .type && indexPath.item == 0 {
             //点击了知识点出题
-            self.currentId = 0;
+            self.currentTypeId = 0;
             self.dataSource.removeValue(forKey: TestCenterChooseType.volume.rawValue);
             self.dataSource.removeValue(forKey: TestCenterChooseType.version.rawValue);
-            for item in self.knowledgeData {
-                //过滤年级
-                let value = item.value.filter { (model) -> Bool in
-                    return model.extra?["stageId"] as? Int ?? 0 == self.selectModel[TestCenterChooseType.level.rawValue]?.id ?? 0;
-                }
-                if let defaultModel = value.first {
-                    defaultModel.isSelected = true;
-                    self.selectModel[TestCenterChooseType.level.rawValue]?.isSelected = false;
-                    self.selectModel[TestCenterChooseType.level.rawValue] = defaultModel;
-                }
-                self.dataSource.updateValue(value, forKey: item.key);
-            }
+            self.dataSource.updateValue(self.knowledgeData[TestCenterChooseType.grade.rawValue] ?? [], forKey: TestCenterChooseType.grade.rawValue);
+//            for item in self.knowledgeData {
+//                //过滤年级
+//                let value = item.value.filter { (model) -> Bool in
+//                    return model.extra?["stageId"] as? Int ?? 0 == self.selectModel[TestCenterChooseType.level.rawValue]?.id ?? 0;
+//                }
+//                if let defaultModel = value.first {
+//                    defaultModel.isSelected = true;
+//                    self.selectModel[TestCenterChooseType.level.rawValue]?.isSelected = false;
+//                    self.selectModel[TestCenterChooseType.level.rawValue] = defaultModel;
+//                }
+//                self.dataSource.updateValue(value, forKey: item.key);
+//            }
             self.collectionView.reloadData()
         } else if type == .type  && indexPath.item == 1 {
             //点击了章节出题
-            self.currentId = 1;
+            self.currentTypeId = 1;
             for item in self.chapterData {
                 self.dataSource.updateValue(item.value, forKey: item.key);
             }
@@ -530,23 +607,24 @@ extension TestCenterChooseVC: UICollectionViewDataSource, UICollectionViewDelega
             self.collectionView.reloadData()
         } else if type == .level {
             
-            if let typeModel = self.selectModel[0] {
-                
-                self.loadSubjects(currentModel?.id ?? 0);
-                if typeModel.id == 0 {
+            self.loadGrades(stageId: currentModel?.id ?? -1);
+//            if let typeModel = self.selectModel[0] {
+
+//                if typeModel.id == 0 {
                     //还要联动年级组
-                    let grade = TestCenterChooseType.grade.rawValue;
-                    self.dataSource[grade] = self.knowledgeData[grade]?.filter({ (model) -> Bool in
-                        return model.extra?["stageId"] as? Int ?? 0 == currentModel?.id;
-                    });
-                    if let defaultModel = self.dataSource[3]?.first {
-                        defaultModel.isSelected = true;
-                        self.selectModel[grade]?.isSelected = false;
-                        self.selectModel[grade] = defaultModel;
-                    }
-                    self.collectionView.reloadSections([grade]);
-                }
-            }
+//                    let grade = TestCenterChooseType.grade.rawValue;
+//                    self.dataSource[grade] = self.knowledgeData[grade]?.filter({ (model) -> Bool in
+//                        return model.extra?["stageId"] as? Int ?? 0 == currentModel?.id;
+//                    });
+//                    if let defaultModel = self.dataSource[3]?.first {
+//                        defaultModel.isSelected = true;
+//                        self.selectModel[grade]?.isSelected = false;
+//                        self.selectModel[grade] = defaultModel;
+//                    }
+//                    self.collectionView.reloadSections([grade]);
+//                }
+//                self.loadSubjects(currentModel?.id ?? 0);
+//            }
         } else if type == .version {
             
             self.loadVolume(currentModel?.id ?? 0);

@@ -10,7 +10,7 @@ import UIKit
 import WebKit
 import DYTemplate
 /**
- 答题结果
+ 作业中心答题结果
  */
 class YZDTestResultVC: UIViewController {
 
@@ -59,14 +59,14 @@ class YZDTestResultVC: UIViewController {
         }
     }
     
-    private func updateHeaderView(_ model: YZDTestResultDetailInfo, results:[Int : String]) {
+    internal func updateHeaderView(_ model: YZDTestResultDetailInfo, results:[Int : String]) {
     
         (self.tableView.tableHeaderView as? YZDTestResultHeader)?.update(model, results: results);
     
     }
     
     //MARK: 重新加载webview
-    private func reloadWebViewContent() {
+    internal func reloadWebViewContent() {
         if self.allTests.count == 0 {
             return;
         }
@@ -84,7 +84,7 @@ class YZDTestResultVC: UIViewController {
     
     
     @objc
-    private func loadData() {
+    internal func loadData() {
         
         
         if let _model = self.recordModel {
@@ -128,7 +128,7 @@ class YZDTestResultVC: UIViewController {
     
     
     
-    private lazy var tableView: UITableView = {
+    internal lazy var tableView: UITableView = {
         
         let view = UITableView.init(frame: .zero);
         view.register(UITableViewCell.self, forCellReuseIdentifier: "cell");
@@ -145,7 +145,7 @@ class YZDTestResultVC: UIViewController {
     private weak var webView:WKWebView?
     
     private var isSuccessLoad:Bool = true;
-    private var allTests: [[String : Any]] = [];
+    internal var allTests: [[String : Any]] = [];
 
 
 }
@@ -154,6 +154,7 @@ extension YZDTestResultVC : YZDTestResultHeaderDelegate {
     
     func headerView(_ view: YZDTestResultHeader, onClickFolder isUnfold: Bool) {
         
+        if self.allTests.count == 0 { return}
         
 //        let height = (self.tableView.tableHeaderView as? YZDTestResultHeader)?.getHeight(for: isUnfold);
 //        var frame = self.tableView.tableHeaderView?.frame;

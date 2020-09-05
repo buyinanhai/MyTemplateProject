@@ -19,8 +19,6 @@ class TestCenterAnswerVC: YZDTestAnswerVC {
         super.viewDidLoad()
 
         self.navigationItem.title = "答题";
-        
-        self.loadData();
         self.headerView.hideTimeView();
         // Do any additional setup after loading the view.
     }
@@ -44,7 +42,24 @@ class TestCenterAnswerVC: YZDTestAnswerVC {
         // Pass the selected object to the new view controller.
     }
     */
-
+    @objc
+    override func showResultVC() {
+      
+        let vc = TestCenterResultVC.init();
+        vc.answers = self.answers;
+        let model = YZDTestResultDetailInfo.init(JSON: [:]);
+        model?.dy_title = self.knowledgeId == nil ? "按章节出题" : "按知识点出题";
+        model?.dy_finishCount = self.answers?.count;
+        model?.dy_usedTime = self.headerView.getUsedTime();
+        vc.headerModel = model;
+        self.navigationController?.pushViewController(vc, animated: true);
+    }
+    internal var answers: [[String : String]]?
+    
+    
+    deinit {
+           print("TestCenterAnswerVC 8888")
+    }
 }
 
 
@@ -104,6 +119,8 @@ extension TestCenterAnswerVC {
                 DYNetworkHUD.showInfo(message: error?.errorMessage ?? "提交失败!", inView: nil);
             } else {
                 
+                self.updateRightBarButton(true);
+                self.answers = answers;
                 DYNetworkHUD.showInfo(message: "提交成功!", inView: nil);
                 
             }

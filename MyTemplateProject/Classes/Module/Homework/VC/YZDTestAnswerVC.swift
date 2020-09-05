@@ -8,7 +8,7 @@
 
 import UIKit
 
-
+import DYTemplate
 /**
  答题
  */
@@ -18,7 +18,7 @@ class YZDTestAnswerVC: UIViewController {
     
     public var afterWorkId: Int?
     
-    
+    private var afterWorkFinishId:Int?
     /**
      是否可以点击下一题 在没选择答案的情况下
      */
@@ -41,7 +41,7 @@ class YZDTestAnswerVC: UIViewController {
     private func setupSubview() {
         
         self.view.backgroundColor = .init(hexString: "#F7F7F7");
-        self.edgesForExtendedLayout = UIRectEdge.init();
+        self.edgesForExtendedLayout = UIRectEdge.init() ;
         headerView.backgroundColor = .white;
         self.view.addSubview(headerView);
         headerView.mas_makeConstraints { (make) in
@@ -60,10 +60,11 @@ class YZDTestAnswerVC: UIViewController {
             make?.top.equalTo()(headerView.mas_bottom);
             make?.bottom.offset()(-62);
         }
+
         
+        self.view.addSubview(bottomView);
         bottomView.nextBtn.addTarget(self, action: #selector(nextBtnClick), for: .touchUpInside);
         bottomView.beforeBtn.addTarget(self, action: #selector(beforeBtnClick), for: .touchUpInside);
-        self.view.addSubview(bottomView);
         bottomView.mas_makeConstraints { (make) in
             make?.left.right()?.bottom()?.offset();
             make?.height.offset()(62);
@@ -71,6 +72,14 @@ class YZDTestAnswerVC: UIViewController {
         bottomView.addShadow(2, round: 2);
         bottomView.beforeBtn.isEnabled = false;
         bottomView.nextBtn.isEnabled = false;
+        
+    }
+    
+    //MARK: 更新右上角的按钮状态  提交 成功后 变成查看结果
+    internal func updateRightBarButton(_ isSubmit: Bool) {
+        
+        self.isSubmitAnswer = isSubmit;
+        self.navigationItem.rightBarButtonItem?.title = isSubmit ? "查看结果" : "提交";
         
     }
     
@@ -124,11 +133,11 @@ class YZDTestAnswerVC: UIViewController {
         
         if let jsonStr = try? String.init(data: JSONSerialization.data(withJSONObject: question, options: .fragmentsAllowed), encoding: .utf8) {
             
-            self.webView.evaluateJavaScript("onload(\(jsonStr))") { (result, error) in
+            self.webView.evaluateJavaScript("onload(\(jsonStr))") {[weak self] (result, error) in
                 
                 print("题目加载  error == \(error)");
                 if error != nil {
-                    self.isSuccessLoad = false;
+                    self?.isSuccessLoad = false;
                 }
             }
         }
@@ -140,17 +149,17 @@ class YZDTestAnswerVC: UIViewController {
            
            let config = WKWebViewConfiguration.init();
            let userCtrol = WKUserContentController.init();
-           userCtrol.add(self, name: "selectAnswer");
            config.userContentController = userCtrol;
            let view = WKWebView.init(frame: .zero, configuration: config);
             //如果不是当前控制器就加载 练习中心html
-           let html = self.isEnableClickNoAnswer ? "test-html/taskQue.html" : "test-html/testCenterQue.html"        
+           let html = self.isEnableClickNoAnswer ? "test-html/taskQue.html" : "test-html/testCenterQue.html"
            let path = Bundle.main.path(forResource: html, ofType: nil)
            let request = URLRequest.init(url: URL.init(fileURLWithPath: path ?? ""))
            view.load(request);
            view.navigationDelegate = self;
            view.uiDelegate = self;
-           
+            view.dy_addScriptMessageHandler(self, name: "selectAnswer");
+        
            return view;
        }()
 
@@ -158,6 +167,7 @@ class YZDTestAnswerVC: UIViewController {
     private var isSuccessLoad:Bool = true;
     internal var allTests: [[String : Any]] = [];
 
+    private var isSubmitAnswer: Bool = false;
     /**
      当前的题目的index
      */
@@ -184,6 +194,11 @@ class YZDTestAnswerVC: UIViewController {
         
         return view;
     }()
+    
+    deinit {
+        print("YZDTestAnswerVC 8888")
+        self.webView.configuration.userContentController.removeScriptMessageHandler(forName: "selectAnswer");
+    }
 }
 
 //MARK: actions
@@ -257,8 +272,11 @@ extension YZDTestAnswerVC {
             DYNetworkHUD.showInfo(message: "请至少完成一题！", inView: nil);
             return;
             
-        } else if self.answersCache.keys.count < self.allTests.count {
+        } else if self.isSubmitAnswer {
             
+            self.commitAnswers();
+            
+        } else if self.answersCache.keys.count < self.allTests.count {
                         
             let alertVC = UIAlertController.showCustomAlert(withTitle: "确定提交", messgae: "您的作业未做完，确定提交吗？", confirmTitle: "提交", cancleTitle: "取消") {
                 [weak self] in
@@ -269,7 +287,6 @@ extension YZDTestAnswerVC {
             self.present(alertVC, animated: true, completion: nil);
             
         } else {
-        
             self.commitAnswers();
         }
         
@@ -294,12 +311,23 @@ extension YZDTestAnswerVC {
     
     private func commitAnswers() {
                 
-        let answers = self.answersCache.map { (value) -> [String : String] in
-            let questionid = self.getCurrentQuestionValue(for: "questionId") as? Int
-            return  ["questionId": String(questionid ?? 0),"answer" : value.value];
+        if self.isSubmitAnswer {
+            
+            self.showResultVC();
+            
+        } else {
+            
+            let answers = self.answersCache.map { (value) -> [String : String] in
+                var questionid: Int?
+                if let question = self.allTests[value.key]["questionVo"] as? [String : Any] {
+                    questionid = question["questionId"] as? Int;
+                }
+                return  ["questionId": String(questionid ?? 0),"answer" : value.value];
+            }
+            self.headerView.stopReckonBytime();
+            self.commitAnswer(answers: answers)
         }
         
-        self.commitAnswer(answers: answers)
         
         
     }
@@ -312,6 +340,10 @@ extension YZDTestAnswerVC {
             
             if error != nil {
                 
+                if let _response = response as? [String :Any] {
+                    
+                    self.afterWorkFinishId = _response["afterWorkFinishId"] as? Int;
+                }
                 DYNetworkHUD.showInfo(message: error?.errorMessage ?? "提交失败!", inView: nil);
             } else {
                 
@@ -322,6 +354,19 @@ extension YZDTestAnswerVC {
         
         
     }
+    @objc
+    internal func showResultVC() {
+        
+        let model = YZDTestRecordCellModel.init(JSON: [:]);
+        model?.dy_afterWorkId = self.afterWorkId;
+        model?.dy_afterWorkFinishId = self.afterWorkFinishId;
+        let vc = YZDTestResultVC.init();
+        vc.recordModel = model;
+        
+        self.navigationController?.pushViewController(vc, animated: true);
+        
+    }
+    
     
     @objc
     internal func loadData() {
@@ -360,10 +405,7 @@ extension YZDTestAnswerVC {
                
                 self.bottomView.nextBtn.isEnabled = true;
             }
-            
-            if self.classForCoder == YZDTestAnswerVC.self {
-                self.headerView.startReckonByTime();
-            }
+            self.headerView.startReckonByTime();
             self.headerView.previewLabel.text = "\(self.currentIndex + 1)/\(questions.count)";
         }
         
@@ -481,8 +523,9 @@ internal class YZDTestAnswerHeaderView: UIView {
     
     public func startReckonByTime() {
         
-        self.timer = Timer.dy_scheduledWeakTimer(withTimeInterval: 1.0, target: self, selector: #selector(self.timerFire), userInfo: [:], repeats: true);
-        self.timer?.fire();
+        if self.timer == nil {
+            self.timer = Timer.dy_scheduledWeakTimer(withTimeInterval: 1.0, target: self, selector: #selector(self.timerFire), userInfo: [:], repeats: true);
+        }
         
     }
     
@@ -490,6 +533,7 @@ internal class YZDTestAnswerHeaderView: UIView {
         
         self.timer?.invalidate();
         self.timer = nil;
+        
     }
     
     
@@ -540,6 +584,7 @@ internal class YZDTestAnswerHeaderView: UIView {
             make?.right.equalTo()(self.previewLabel.mas_left)?.offset()(-10);
         }
         
+        
     }
     
     
@@ -587,9 +632,15 @@ internal class YZDTestAnswerHeaderView: UIView {
         return view;
     }()
     
-    private var timer: Timer?
+    private weak var timer: Timer?
     
     private var time: Int = 0;
+    
+    
+    deinit {
+        
+        print("YZDTestAnswerHeaderView 8888");
+    }
 }
 
 
@@ -618,7 +669,7 @@ internal class YZDTestAnswerBottomView: UIView {
             make?.width.offset()(88);
             make?.height.offset()(32);
         }
-      
+        
 
         
     }

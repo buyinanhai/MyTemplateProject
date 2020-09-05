@@ -25,6 +25,16 @@ class TestCenterHomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "练习中心"
+        if self.chooseVC == nil {
+            self.chooseVC = TestCenterChooseVC.init();
+        }
+        if let dict = TestCenterChooseVC.getLocalData(), let model = TestCenterLocalChooseModel.init(JSON: dict) {
+           
+            self.subjectId = model.subjectId;
+            self.volumeId = model.volumeId;
+            self.headerTitle = model.headerTitle;
+            self.subjectTitle = model.subjectTitle;
+        }
         self.setupSubView();
         self.tableView.mj_header?.beginRefreshing();
         

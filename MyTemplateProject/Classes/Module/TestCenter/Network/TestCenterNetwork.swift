@@ -13,6 +13,7 @@ class TestCenterNetwork: DYBaseNetwork {
     class private var hostUrl: String {
         
         get {
+            return "http://test.sdk.live.cunwedu.com.cn";
             return "http://192.168.11.195:8082";
         }
     }
@@ -21,7 +22,7 @@ class TestCenterNetwork: DYBaseNetwork {
         
         get {
             
-            return "SRn55wqmX07nUDZr4aVMxh69ZmUkaJAWvtJcKA2hOdI%3D";
+            return "SRn55wqmX07W8ZtGI5OKQgWYDkcXDegrcvHaYmtmkiGFJtUJ4Rm%2BfCl8GunN2fJgISjQcKn5nleB%0AMSP5z7uJZ9ADbCuuwJgX";
             
             if let token = DYNetworkConfig.share()?.extraData["token"] as? String {
                 return token;
@@ -34,7 +35,7 @@ class TestCenterNetwork: DYBaseNetwork {
     class private var userId: Int {
         
         get {
-            
+            return 2984931;
             if let userId = DYNetworkConfig.share()?.extraData["userId"] as? Int {
                 return userId;
             } else {
@@ -45,12 +46,27 @@ class TestCenterNetwork: DYBaseNetwork {
         
     }
     
+    class private var isTest: Bool {
+        
+        get {
+            
+            return self.hostUrl.contains("test.sdk");
+            
+        }
+    }
+    class private var relativeUrl: String {
+        
+        get {
+            return "\(self.isTest ? "" : "")/appApi"
+        }
+    }
+    
     //MARK: 获取科目下的知识点章节
     public class func getKnowledgePoints(from subjectId: Int) -> TestCenterNetwork {
         
         let obj = TestCenterNetwork.init();
         obj.dy_baseURL = self.hostUrl;
-        obj.dy_requestUrl = "/sdk/appApi/resource/subject-points/\(subjectId)";
+        obj.dy_requestUrl = "\(self.relativeUrl)/resource/subject-points/\(subjectId)";
         obj.dy_requestArgument = [
             "userId": self.userId,
             "token" : self.token,
@@ -68,7 +84,7 @@ class TestCenterNetwork: DYBaseNetwork {
         
         let obj = TestCenterNetwork.init();
         obj.dy_baseURL = self.hostUrl;
-        obj.dy_requestUrl = "/sdk/appApi/resource/book-dirs/\(volumeId)";
+        obj.dy_requestUrl = "\(self.relativeUrl)/resource/book-dirs/\(volumeId)";
         obj.dy_requestArgument = [
             "userId": self.userId,
             "token" : self.token,
@@ -86,7 +102,7 @@ class TestCenterNetwork: DYBaseNetwork {
         
         let obj = TestCenterNetwork.init();
         obj.dy_baseURL = self.hostUrl;
-        obj.dy_requestUrl = "/sdk/appApi/resource/questions/by-point";
+        obj.dy_requestUrl = "\(self.relativeUrl)/resource/questions/by-point";
         obj.dy_requestArgument = [
             "userId": self.userId,
             "token" : self.token,
@@ -106,7 +122,7 @@ class TestCenterNetwork: DYBaseNetwork {
         
         let obj = TestCenterNetwork.init();
         obj.dy_baseURL = self.hostUrl;
-        obj.dy_requestUrl = "/sdk/appApi/resource/questions/by-dir";
+        obj.dy_requestUrl = "\(self.relativeUrl)/resource/questions/by-dir";
         obj.dy_requestArgument = [
             "userId": self.userId,
             "token" : self.token,
@@ -125,7 +141,7 @@ class TestCenterNetwork: DYBaseNetwork {
         
         let obj = TestCenterNetwork.init();
         obj.dy_baseURL = self.hostUrl;
-        obj.dy_requestUrl = "/sdk/appApi/topic/submitTopic";
+        obj.dy_requestUrl = "\(self.relativeUrl)/topic/submitTopic";
         obj.dy_requestArgument = [
             "userId": self.userId,
             "token" : self.token,
@@ -143,7 +159,7 @@ class TestCenterNetwork: DYBaseNetwork {
         
         let obj = TestCenterNetwork.init();
         obj.dy_baseURL = self.hostUrl;
-        obj.dy_requestUrl = "/sdk/appApi/resource/textbooks";
+        obj.dy_requestUrl = "\(self.relativeUrl)/resource/textbooks";
         obj.dy_requestArgument = [
             "userId": self.userId,
             "token" : self.token,
@@ -162,7 +178,7 @@ class TestCenterNetwork: DYBaseNetwork {
         
         let obj = TestCenterNetwork.init();
         obj.dy_baseURL = self.hostUrl;
-        obj.dy_requestUrl = "/sdk/appApi/resource/stages";
+        obj.dy_requestUrl = "\(self.relativeUrl)/resource/stages";
         obj.dy_requestArgument = [
             "userId": self.userId,
             "token" : self.token,
@@ -179,7 +195,7 @@ class TestCenterNetwork: DYBaseNetwork {
         
         let obj = TestCenterNetwork.init();
         obj.dy_baseURL = self.hostUrl;
-        obj.dy_requestUrl = "/sdk/appApi/resource/subjects";
+        obj.dy_requestUrl = "\(self.relativeUrl)/resource/subjects";
         obj.dy_requestArgument = [
             "userId": self.userId,
             "token" : self.token,
@@ -198,7 +214,7 @@ class TestCenterNetwork: DYBaseNetwork {
         
         let obj = TestCenterNetwork.init();
         obj.dy_baseURL = self.hostUrl;
-        obj.dy_requestUrl = "/sdk/appApi/resource/grades";
+        obj.dy_requestUrl = "\(self.relativeUrl)/resource/grades";
         obj.dy_requestArgument = [
             "userId": self.userId,
             "token" : self.token,
@@ -216,13 +232,31 @@ class TestCenterNetwork: DYBaseNetwork {
         
         let obj = TestCenterNetwork.init();
         obj.dy_baseURL = self.hostUrl;
-        obj.dy_requestUrl = "/sdk/appApi/resource/versions";
+        obj.dy_requestUrl = "\(self.relativeUrl)/resource/versions";
         obj.dy_requestArgument = [
             "userId": self.userId,
             "token" : self.token,
             "subjectid": subjectid,
         ];
         obj.dy_requestMethod = .GET;
+        obj.dy_requestSerializerType = .JSON;
+        obj.dy_responseSerializerType = .JSON;
+        
+        return obj;
+    }
+
+    //MARK: 查看答题结果
+    public class func getTestResult(answers: [[String : String]]) -> TestCenterNetwork {
+        
+        let obj = TestCenterNetwork.init();
+        obj.dy_baseURL = self.hostUrl;
+        obj.dy_requestUrl = "\(self.relativeUrl)/topic/queryAnasisly";
+        obj.dy_requestArgument = [
+            "userId": self.userId,
+            "token" : self.token,
+            "answers": answers,
+        ];
+        obj.dy_requestMethod = .POST;
         obj.dy_requestSerializerType = .JSON;
         obj.dy_responseSerializerType = .JSON;
         

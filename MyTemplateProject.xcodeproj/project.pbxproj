@@ -59,6 +59,8 @@
 		9271C7AC24ECCB5A0004E82B /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9271C7AB24ECCB5A0004E82B /* VideoToolbox.framework */; };
 		9271C7B224ECCEDB0004E82B /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9271C7B124ECCEDB0004E82B /* OpenGLES.framework */; };
 		9271C7B424ECCEEB0004E82B /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9271C7B324ECCEEB0004E82B /* OpenAL.framework */; };
+		928D0C3624FFAB750030FDAB /* TestCenterResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D0C3524FFAB750030FDAB /* TestCenterResultVC.swift */; };
+		928D0DBE2501DF3F0030FDAB /* TestCenterLocalChooseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928D0DBD2501DF3F0030FDAB /* TestCenterLocalChooseModel.swift */; };
 		92EE7E2E24B8058800BF4DF7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EE7E2D24B8058800BF4DF7 /* AppDelegate.swift */; };
 		92EE7E3024B8058800BF4DF7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EE7E2F24B8058800BF4DF7 /* SceneDelegate.swift */; };
 		92EE7E3224B8058800BF4DF7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EE7E3124B8058800BF4DF7 /* ViewController.swift */; };
@@ -132,6 +134,8 @@
 		9271C7AD24ECCB8C0004E82B /* NCNLivingSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NCNLivingSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9271C7B124ECCEDB0004E82B /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		9271C7B324ECCEEB0004E82B /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
+		928D0C3524FFAB750030FDAB /* TestCenterResultVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCenterResultVC.swift; sourceTree = "<group>"; };
+		928D0DBD2501DF3F0030FDAB /* TestCenterLocalChooseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCenterLocalChooseModel.swift; sourceTree = "<group>"; };
 		92EE7E2A24B8058800BF4DF7 /* MyTemplateProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyTemplateProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92EE7E2D24B8058800BF4DF7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		92EE7E2F24B8058800BF4DF7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -198,6 +202,7 @@
 				923EC66424DD3B640090C577 /* TestCenterHomeVC.swift */,
 				9271C75E24E0F7C00004E82B /* TestCenterChooseVC.swift */,
 				9271C76824E53B760004E82B /* TestCenterAnswerVC.swift */,
+				928D0C3524FFAB750030FDAB /* TestCenterResultVC.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -215,6 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				9271C76424E3EDC20004E82B /* TestCenterChooseModel.swift */,
+				928D0DBD2501DF3F0030FDAB /* TestCenterLocalChooseModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -708,6 +714,7 @@
 				92631B3724BFF024005A534C /* LoginNetwork.m in Sources */,
 				92EE7EFB24B8570300BF4DF7 /* HomeVC.swift in Sources */,
 				9248D89C24C593C9001C426C /* YZDHomeworkQuestionModel_question.swift in Sources */,
+				928D0C3624FFAB750030FDAB /* TestCenterResultVC.swift in Sources */,
 				92EE7E2E24B8058800BF4DF7 /* AppDelegate.swift in Sources */,
 				9271C77124E7DB900004E82B /* DYVolumeView.swift in Sources */,
 				9271C76724E4D4980004E82B /* TestCenterChapterNodeCell.swift in Sources */,
@@ -728,6 +735,7 @@
 				92631AFF24BDC3D1005A534C /* YZDTestAnswerVC.swift in Sources */,
 				923EC66724DD3B880090C577 /* TestCenterHeaderView.swift in Sources */,
 				92EE7EFC24B8570300BF4DF7 /* MyVC.swift in Sources */,
+				928D0DBE2501DF3F0030FDAB /* TestCenterLocalChooseModel.swift in Sources */,
 				92631AE724B86304005A534C /* YZDHomeworkDetailVC.swift in Sources */,
 				92F874AA24C13C780063F8B1 /* YZDHomeworkNetwork.swift in Sources */,
 				92EE7E3824B8058800BF4DF7 /* MyTemplateProject.xcdatamodeld in Sources */,
