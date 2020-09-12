@@ -9,6 +9,26 @@
 import UIKit
 import CoreData
 
+
+
+//: [Previous](@previous)
+
+
+//: # headingOne1
+
+/*:
+
+* item1
+
+* item2
+
+* item3
+
+*/
+
+//: [Next](@next)
+
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 

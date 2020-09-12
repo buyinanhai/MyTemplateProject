@@ -10,6 +10,12 @@
 		04D9CD2F49CE7ECB939C1102 /* Pods_MyTemplateProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 954802C722A215C21B6DC642 /* Pods_MyTemplateProject.framework */; };
 		922FB12224CA750700830383 /* YZDTestResultHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 922FB12124CA750700830383 /* YZDTestResultHeader.xib */; };
 		922FB12424CA83E200830383 /* YZDTestResultDetailInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922FB12324CA83E100830383 /* YZDTestResultDetailInfo.swift */; };
+		9238449C250B68CA000B9BE1 /* NCNRechargeNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9238449B250B68CA000B9BE1 /* NCNRechargeNetwork.swift */; };
+		9238449E250B6A14000B9BE1 /* RechargeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9238449D250B6A14000B9BE1 /* RechargeVC.swift */; };
+		923844A0250B6A39000B9BE1 /* MyStudyCoinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9238449F250B6A39000B9BE1 /* MyStudyCoinVC.swift */; };
+		923844A2250B6ECC000B9BE1 /* CommonNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923844A1250B6ECC000B9BE1 /* CommonNetwork.swift */; };
+		923844A5250CAFF7000B9BE1 /* RechargeCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923844A3250CAFF7000B9BE1 /* RechargeCollectionCell.swift */; };
+		923844A6250CAFF7000B9BE1 /* RechargeCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 923844A4250CAFF7000B9BE1 /* RechargeCollectionCell.xib */; };
 		923DC76A24C6883500CCCADC /* TestWebViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923DC76924C6883400CCCADC /* TestWebViewVC.swift */; };
 		923EC66524DD3B640090C577 /* TestCenterHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923EC66424DD3B640090C577 /* TestCenterHomeVC.swift */; };
 		923EC66724DD3B880090C577 /* TestCenterHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923EC66624DD3B880090C577 /* TestCenterHeaderView.swift */; };
@@ -47,7 +53,6 @@
 		9271C76924E53B760004E82B /* TestCenterAnswerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271C76824E53B760004E82B /* TestCenterAnswerVC.swift */; };
 		9271C76F24E7D76F0004E82B /* APHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271C76E24E7D76E0004E82B /* APHomeVC.swift */; };
 		9271C77124E7DB900004E82B /* DYVolumeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271C77024E7DB900004E82B /* DYVolumeView.swift */; };
-		9271C77324EB873E0004E82B /* CommonNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271C77224EB873E0004E82B /* CommonNetwork.swift */; };
 		9271C77624EB88780004E82B /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9271C77424EB88780004E82B /* LoginVC.swift */; };
 		9271C77724EB88780004E82B /* LoginVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9271C77524EB88780004E82B /* LoginVC.xib */; };
 		9271C77924EBBA830004E82B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9271C77824EBBA830004E82B /* SystemConfiguration.framework */; };
@@ -79,6 +84,12 @@
 		5DED31BCD404196FBE8CB7E0 /* Pods-MyTemplateProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTemplateProject.debug.xcconfig"; path = "Target Support Files/Pods-MyTemplateProject/Pods-MyTemplateProject.debug.xcconfig"; sourceTree = "<group>"; };
 		922FB12124CA750700830383 /* YZDTestResultHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZDTestResultHeader.xib; sourceTree = "<group>"; };
 		922FB12324CA83E100830383 /* YZDTestResultDetailInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDTestResultDetailInfo.swift; sourceTree = "<group>"; };
+		9238449B250B68CA000B9BE1 /* NCNRechargeNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NCNRechargeNetwork.swift; sourceTree = "<group>"; };
+		9238449D250B6A14000B9BE1 /* RechargeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeVC.swift; sourceTree = "<group>"; };
+		9238449F250B6A39000B9BE1 /* MyStudyCoinVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyCoinVC.swift; sourceTree = "<group>"; };
+		923844A1250B6ECC000B9BE1 /* CommonNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommonNetwork.swift; path = MyTemplateProject/Classes/Network/CommonNetwork.swift; sourceTree = SOURCE_ROOT; };
+		923844A3250CAFF7000B9BE1 /* RechargeCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RechargeCollectionCell.swift; sourceTree = "<group>"; };
+		923844A4250CAFF7000B9BE1 /* RechargeCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RechargeCollectionCell.xib; sourceTree = "<group>"; };
 		923DC76924C6883400CCCADC /* TestWebViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestWebViewVC.swift; sourceTree = "<group>"; };
 		923EC66424DD3B640090C577 /* TestCenterHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCenterHomeVC.swift; sourceTree = "<group>"; };
 		923EC66624DD3B880090C577 /* TestCenterHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCenterHeaderView.swift; sourceTree = "<group>"; };
@@ -120,7 +131,6 @@
 		9271C76824E53B760004E82B /* TestCenterAnswerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCenterAnswerVC.swift; sourceTree = "<group>"; };
 		9271C76E24E7D76E0004E82B /* APHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APHomeVC.swift; sourceTree = "<group>"; };
 		9271C77024E7DB900004E82B /* DYVolumeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DYVolumeView.swift; sourceTree = "<group>"; };
-		9271C77224EB873E0004E82B /* CommonNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonNetwork.swift; sourceTree = "<group>"; };
 		9271C77424EB88780004E82B /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		9271C77524EB88780004E82B /* LoginVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginVC.xib; sourceTree = "<group>"; };
 		9271C77824EBBA830004E82B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -183,6 +193,42 @@
 				EA9EC7382AF665F2C02C2AAE /* Pods-MyTemplateProject.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		92384497250B6857000B9BE1 /* Recharge */ = {
+			isa = PBXGroup;
+			children = (
+				9238449A250B689F000B9BE1 /* Network */,
+				92384499250B6893000B9BE1 /* View */,
+				92384498250B6884000B9BE1 /* VC */,
+			);
+			path = Recharge;
+			sourceTree = "<group>";
+		};
+		92384498250B6884000B9BE1 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				9238449D250B6A14000B9BE1 /* RechargeVC.swift */,
+				9238449F250B6A39000B9BE1 /* MyStudyCoinVC.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		92384499250B6893000B9BE1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				923844A3250CAFF7000B9BE1 /* RechargeCollectionCell.swift */,
+				923844A4250CAFF7000B9BE1 /* RechargeCollectionCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9238449A250B689F000B9BE1 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				9238449B250B68CA000B9BE1 /* NCNRechargeNetwork.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		923EC66024DD3AE40090C577 /* TestCenter */ = {
@@ -333,6 +379,7 @@
 		92631B0D24BFF024005A534C /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				923844A1250B6ECC000B9BE1 /* CommonNetwork.swift */,
 				9271C75B24E0E1640004E82B /* TestCenter */,
 				92F874A824C13C250063F8B1 /* YZDHomework */,
 				92631B0E24BFF024005A534C /* Home */,
@@ -340,7 +387,6 @@
 				92631B1124BFF024005A534C /* MainNetwork.m */,
 				92631B1224BFF024005A534C /* My */,
 				92631B1624BFF024005A534C /* Login */,
-				9271C77224EB873E0004E82B /* CommonNetwork.swift */,
 			);
 			path = Module;
 			sourceTree = "<group>";
@@ -486,6 +532,7 @@
 		92EE7EB824B8570200BF4DF7 /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				92384497250B6857000B9BE1 /* Recharge */,
 				9271C77B24EBDC910004E82B /* Live */,
 				9271C76B24E7D6B50004E82B /* AirPlay */,
 				9271C76024E3E4180004E82B /* Base */,
@@ -630,6 +677,7 @@
 				9248D8B324C5968A001C426C /* test-html in Resources */,
 				92EE7E3D24B8058D00BF4DF7 /* LaunchScreen.storyboard in Resources */,
 				92EE7E3A24B8058D00BF4DF7 /* Assets.xcassets in Resources */,
+				923844A6250CAFF7000B9BE1 /* RechargeCollectionCell.xib in Resources */,
 				922FB12224CA750700830383 /* YZDTestResultHeader.xib in Resources */,
 				9271C77724EB88780004E82B /* LoginVC.xib in Resources */,
 				92EE7E3524B8058800BF4DF7 /* Main.storyboard in Resources */,
@@ -720,9 +768,12 @@
 				9271C76724E4D4980004E82B /* TestCenterChapterNodeCell.swift in Sources */,
 				92631AEB24BBEDA0005A534C /* YZDTestRecordVC.swift in Sources */,
 				92EE7E3024B8058800BF4DF7 /* SceneDelegate.swift in Sources */,
+				923844A2250B6ECC000B9BE1 /* CommonNetwork.swift in Sources */,
 				9248D89E24C593C9001C426C /* YZDHomeworkQuestionModel.swift in Sources */,
+				923844A5250CAFF7000B9BE1 /* RechargeCollectionCell.swift in Sources */,
 				92F874AC24C19CC50063F8B1 /* YZDTestRecordCellModel.swift in Sources */,
 				9271C76524E3EDC20004E82B /* TestCenterChooseModel.swift in Sources */,
+				9238449C250B68CA000B9BE1 /* NCNRechargeNetwork.swift in Sources */,
 				92631B0724BDD045005A534C /* YZDTestResultHeader.swift in Sources */,
 				92631B0B24BEAE8B005A534C /* YZDTestResultCell.swift in Sources */,
 				9271C77624EB88780004E82B /* LoginVC.swift in Sources */,
@@ -745,8 +796,9 @@
 				92631AFB24BDC374005A534C /* YZDTestCollectionVC.swift in Sources */,
 				92631B0324BDC4D3005A534C /* YZDTestRecordCell.swift in Sources */,
 				92631B0524BDD023005A534C /* YZDTestResultCellTableViewCell.swift in Sources */,
+				9238449E250B6A14000B9BE1 /* RechargeVC.swift in Sources */,
 				92631AE424B86304005A534C /* YZDHomeworkCell.swift in Sources */,
-				9271C77324EB873E0004E82B /* CommonNetwork.swift in Sources */,
+				923844A0250B6A39000B9BE1 /* MyStudyCoinVC.swift in Sources */,
 				9248D89624C57399001C426C /* YZDHomeworkChapterSectionModel_afterWorks.swift in Sources */,
 				92631B3624BFF024005A534C /* MyNetwork.m in Sources */,
 				9271C75D24E0E18B0004E82B /* TestCenterNetwork.swift in Sources */,

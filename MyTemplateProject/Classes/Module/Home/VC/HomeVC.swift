@@ -37,6 +37,7 @@ class HomeVC: UIViewController {
          "手机投屏",
          "自研直播间",
          "错题集",
+         "充值相关",
          
          
      ];
@@ -100,6 +101,10 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
             
         case 5:
             vc = YZDTestCollectionVC.init();
+            break;
+        case 6:
+            vc = RechargeVC.init();
+            
             break;
         default:
             break
