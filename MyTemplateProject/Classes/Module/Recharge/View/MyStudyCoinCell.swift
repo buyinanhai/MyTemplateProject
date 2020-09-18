@@ -45,17 +45,17 @@ class MyStudyCoinCell: DYTableViewCell {
         didSet {
             
             if let _model = self.model as? MyStudyCoinCellModel {
-                self.dy_detailTextLabel.text = _model.time;
-                self.amountLabel.text = "\(_model.amount ?? 0)";
-                if _model.style == 0{
+                self.dy_detailTextLabel.text = Date.getFormdateYMDHM(timeStamp: _model.changeTime ?? 0);
+                self.amountLabel.text = "\(_model.changeValue ?? 0)";
+                if _model.changeType == 2{
                     
                     self.amountLabel.textColor = UIColor.init(hexString: "#555555");
                     self.dy_textLabel.text = "购买课程";
-                } else if _model.style == 1 {
+                } else if _model.changeType == 1 {
                     
                     self.amountLabel.textColor = UIColor.init(hexString: "#F88832");
                     self.dy_textLabel.text = "充值金额";
-                } else if _model.style == 2 {
+                } else if _model.changeType == 3 {
                     
                     self.amountLabel.textColor = UIColor.init(hexString: "#53B17D");
                     self.dy_textLabel.text = "充值退款";

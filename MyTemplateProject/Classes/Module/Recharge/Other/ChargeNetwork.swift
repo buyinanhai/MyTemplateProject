@@ -23,7 +23,7 @@ class ChargeNetwork: DYBaseNetwork {
         
         get {
             
-            return "SRn55wqmX04DmFt96BvswTWl58dMJAb2cvHaYmtmkiGFJtUJ4Rm%2BfCl8GunN2fJgISjQcKn5nleB%0AMSP5z7uJZ9ADbCuuwJgX";
+            return "SRn55wqmX07UnivRtnY8ohnhRvORhzT0SYo7oVCzqGRpHaFJztJUrb3HkmPJLyEnmw032R6zK7g0%0A4Hy7KwZSIyNsBc2aPNc0";
             
             if let token = DYNetworkConfig.share()?.extraData["token"] as? String {
                 return token;
@@ -96,15 +96,15 @@ class ChargeNetwork: DYBaseNetwork {
         
         
     }
-    //MARK: 获取学习币最大值 用于在购买课程时学币不能超过1000
-    public class func getPriceLimit(code: String) -> ChargeNetwork {
+     //MARK: 获取学习币最大值 支付价格不能超过这个接口返回的最大值
+       public class func getPriceLimit() -> ChargeNetwork {
         
         
         let obj = ChargeNetwork.init();
         obj.dy_baseURL = self.hostUrl;
         obj.dy_requestUrl = "\(self.relativeUrl)/company/queryFunctionByFunctionCode";
         obj.dy_requestArgument = [
-            "code" : code,
+            "code" : "COIN_THRESHOLD",
             "token": self.token
         ];
         obj.dy_requestMethod = .POST;
@@ -117,11 +117,11 @@ class ChargeNetwork: DYBaseNetwork {
     }
     
     //MARK: 学币支付订单
-    public class func getCoinOrder(payType: String, orderId: String) -> ChargeNetwork {
+    public class func startPay(payType: String, orderId: String) -> ChargeNetwork {
            
            let obj = ChargeNetwork.init();
            obj.dy_baseURL = self.hostUrl;
-           obj.dy_requestUrl = "\(self.relativeUrl)/appFinishOrde";
+           obj.dy_requestUrl = "\(self.relativeUrl)/appFinishOrde/\(orderId)";
            obj.dy_requestArgument = [
                "payType" : payType,
                "token": self.token
@@ -132,5 +132,22 @@ class ChargeNetwork: DYBaseNetwork {
            
            return obj;
        }
-    
+    //MARK: 学币使用记录表
+    public class func getCoinRecordList() -> ChargeNetwork {
+       
+        let obj = ChargeNetwork.init();
+        obj.dy_baseURL = self.hostUrl;
+        obj.dy_requestUrl = "\(self.relativeUrl)/order/getMyIosCoin";
+        obj.dy_requestArgument = [
+            "userId" : self.userId,
+            "token": self.token
+        ];
+        obj.dy_requestMethod = .POST;
+        obj.dy_requestSerializerType = .JSON;
+        obj.dy_responseSerializerType = .JSON;
+        
+        return obj;
+        
+        
+    }
 }

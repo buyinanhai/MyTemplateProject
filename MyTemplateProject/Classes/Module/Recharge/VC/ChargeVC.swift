@@ -17,7 +17,7 @@ class ChargeVC: UIViewController {
         self.navigationItem.title = "学币充值";
         self.setupSubview();
         // Do any additional setup after loading the view.
-        SKPaymentQueue.default().add(DYPurchaseManager.shared);
+        DYPurchaseManager.addPaymentObserwer()
         NotificationCenter.default.addObserver(self, selector: #selector(chargeSuccessed(_ :)), name: .init(dy_Notification_purchase_chargeSuccessed), object: nil)
         self.loadData();
     }
@@ -156,18 +156,18 @@ class ChargeVC: UIViewController {
         
         if let result = info.object as? [String : Any] {
             
-            let price = 1;
-            self.coinLabel.text = String.init(format: "学币：%02d", price);
-            
+            if let price = result["isCoinNum"] as? Int {
+                self.coinLabel.text = String.init(format: "学币：%02d", price);
+            }
         }
         
     }
     
     //MARK: 联系客服
-    private func showContactVC() {
+    class func showContactVC(fromVC: UIViewController) {
         let vc = MyStudyCoinVC.init();
         
-        self.navigationController?.pushViewController(vc, animated: true);
+        fromVC.navigationController?.pushViewController(vc, animated: true);
     }
     
     //MARK: 开始充值
@@ -199,7 +199,10 @@ class ChargeVC: UIViewController {
                 
             } else {
                 //支付成功
-                self.coinLabel.text = String.init(format: "学币：%02d", price);
+                if let price = response?["iosCoinNum"] as? Int {
+                    
+                    self.coinLabel.text = String.init(format: "学币：%02d", price);
+                }
                 DYNetworkHUD.showInfo(message: "充值成功", inView: nil);
             }
             
@@ -231,7 +234,7 @@ class ChargeVC: UIViewController {
         let view = UILabel.init();
         view.font = UIFont.boldSystemFont(ofSize: 16)
         view.textColor = UIColor.hex("#333333");
-        view.text = "学币：不到一个亿";
+        view.text = "学币：0";
         return view;
     }()
 
@@ -291,11 +294,10 @@ extension ChargeVC {
             let confirmAction = UIAlertAction.init(title: "确定充值", style: .default) { (confirm) in
                 self.begainRecharge()
             }
-            let contactAction = UIAlertAction.init(title: "联系客服", style: .cancel) { (cancle) in
-                self.showContactVC();
+            let cancle = UIAlertAction.init(title: "取消", style: .cancel) { (cancle) in
             }
             vc.addAction(confirmAction);
-            vc.addAction(contactAction);
+            vc.addAction(cancle);
             
             self.present(vc, animated: true, completion: nil);
         }
@@ -314,7 +316,7 @@ extension ChargeVC {
     @objc
     private func rightBarBtnClick() {
         
-        self.showContactVC();
+        ChargeVC.showContactVC(fromVC: self);
     }
     
     
@@ -358,6 +360,94 @@ extension ChargeVC: UICollectionViewDataSource, UICollectionViewDelegate, UIColl
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         return .init(width: 155, height: 64);
+    }
+    
+    
+    
+}
+
+//MARK: 开始支付的业务
+extension ChargeVC {
+    
+    /**
+     * 为了方便开发，故将业务写到这个类 开始使用学币进行支付
+     * @param fromVC： 订单详情的控制器
+     * @param price： 实际支付价格
+     * @param mycoins： 我的学币余额
+     * @param orderId: 订单id
+     * @param compeleted：回调 如果isInterrupt == true 表示 支付被中断
+
+     */
+    class func startIOSPurchase(_ fromVC: UIViewController, price: Int, myCoins: Int, orderId: String, compeleted: @escaping ([String : Any]?, NSError?) -> Void) {
+        
+        if myCoins >= price {
+            ChargeNetwork.getPriceLimit().dy_startRequest { (response, error) in
+                if let result = response as? [String : Any] {
+                    
+                    if let maxPrice = result["content"] as? String {
+                        
+                        //如果价格大于约束价格就显示充值获取联系客服
+                        if price <= (Int(maxPrice) ?? 0) {
+                            
+                            compeleted(["isInterrupt":true],nil);
+                            self.showProptSheet(vc: fromVC,isNeedCharge: false);
+                        } else {
+                            
+                            //开始使用学币支付
+                            ChargeNetwork.startPay(payType: "PAY_TYPE_IOS_COIN", orderId: orderId).dy_startRequest { (response, error) in
+                                
+                                if let result = response as? [String : Any] {
+                                    
+                                    
+                                    
+                                } else {
+                                    compeleted(nil,error);
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                    } else {
+                        
+                        let error = NSError.init(domain: "支付失败！", code: -1, userInfo: nil);
+                        compeleted(nil,error);
+                    }
+                    
+                } else {
+                    compeleted(nil, error);
+                }
+            }
+            
+        } else {
+            compeleted(["isInterrupt":true],nil);
+            self.showProptSheet(vc: fromVC, isNeedCharge: true);
+        }
+    }
+    
+    
+    class func showProptSheet(vc: UIViewController, isNeedCharge: Bool) {
+        
+        let alertVC = UIAlertController.init(title: "温馨提示", message: isNeedCharge ? "您当前学币不足，需充值学币后购买，如有疑问可咨询客服！" : nil, preferredStyle: .actionSheet);
+        let cancel = UIAlertAction.init(title: "取消", style: .cancel, handler: nil);
+        let contact = UIAlertAction.init(title: "联系客服", style: .default) { (_) in
+            ChargeVC.showContactVC(fromVC: vc);
+        }
+        
+        let charge = UIAlertAction.init(title: "充值", style: .default) { (_) in
+            
+            let chargeVC = ChargeVC.init();
+            
+            vc.navigationController?.pushViewController(chargeVC, animated: true);
+        }
+        alertVC.addAction(contact);
+        if isNeedCharge {
+            alertVC.addAction(charge);
+        }
+        alertVC.addAction(cancel);
+
+        vc.present(alertVC, animated: true, completion: nil);
+        
     }
     
     

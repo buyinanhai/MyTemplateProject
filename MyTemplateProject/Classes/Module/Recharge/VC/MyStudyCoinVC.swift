@@ -8,7 +8,6 @@
 
 import UIKit
 import DYTemplate
-import StoreKit
 
 class MyStudyCoinVC: UIViewController {
 
@@ -18,7 +17,7 @@ class MyStudyCoinVC: UIViewController {
         self.navigationItem.title = "我的学币";
         self.setupSubview();
         self.tableView.begainRefreshData();
-        SKPaymentQueue.default().add(DYPurchaseManager.shared);
+        DYPurchaseManager.addPaymentObserwer()
         NotificationCenter.default.addObserver(self, selector: #selector(chargeSuccessed(_ :)), name: .init(dy_Notification_purchase_chargeSuccessed), object: nil)
         // Do any additional setup after loading the view.
     }
@@ -139,20 +138,34 @@ class MyStudyCoinVC: UIViewController {
         
     }
     
-    private func loadData(page: Int,result: DYTableView_Result) {
+    private func loadData(page: Int,result: @escaping DYTableView_Result) {
         
-        
-        var models:[MyStudyCoinCellModel] = [];
-        for _ in 0..<20 {
-            let model = MyStudyCoinCellModel.init();
-            model.title = "充值金额";
-            model.time = "2020-09-20 18:55";
-            model.amount = Int(arc4random() % 50);
-            model.style = (model.amount ?? 0) % 3;
-            models.append(model);
+        ChargeNetwork.getCoinRecordList().dy_startRequest { (response, error) in
+            
+            if let _result = response as? [String : Any] {
+                
+                if let datas = _result["iosCoinRecordList"] as? [[String : Any]] {
+                    var models:[MyStudyCoinCellModel] = [];
+                    for item in datas {
+                        if let model = MyStudyCoinCellModel.init(JSON: item) {
+                            
+                            models.append(model);
+                        }
+                    }
+                    result(models);
+                }
+                
+                if let amountCoins = _result["iosCoinNum"] {
+                    self.myCoinLabel.text = "我的学币：\(amountCoins)";
+                }
+            } else {
+                
+                DYNetworkHUD.showInfo(message: error?.errorMessage ?? "网络异常，请稍后重试！");
+                result([]);
+            }
+            
         }
         
-        result(models);
     }
 
     
@@ -206,7 +219,6 @@ class MyStudyCoinVC: UIViewController {
         
         view.register(MyStudyCoinCell.self, forCellReuseIdentifier: "cell");
         view.rowHeight = 75;
-        view.pageSize = 20;
         view.loadDataCallback = {
            [weak self] (page, result) in
             

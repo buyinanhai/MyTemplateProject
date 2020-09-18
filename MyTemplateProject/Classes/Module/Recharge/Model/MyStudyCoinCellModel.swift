@@ -7,14 +7,38 @@
 //
 
 import UIKit
+import ObjectMapper
 
-class MyStudyCoinCellModel {
-
-    var title: String?
-    var time: String?
-    var amount: Int?
-
-    // 0 购买课程 1： 在线充值 2: 充值退款
-    var style: Int?
+class MyStudyCoinCellModel: Mappable {    
+    /*
+     "orderNum":"mixed",                //类型：Mixed  必有字段  备注：无
+                    "userId":2983461,                //类型：Number  必有字段  备注：无
+                    "name":"mixed",                //类型：Mixed  必有字段  备注：无
+                    "mobile":"mixed",                //类型：Mixed  必有字段  备注：无
+                    "changeTime":"1600336053000",                //类型：String  必有字段  备注：变化时间
+                    "changeType":3,                //类型：Number  必有字段  备注：币变更类型 1:充值 ；2:消耗 ；3:回收
+                    "changeValue":-20,                //类型：Number  必有字段  备注：学币变动值 (增加为正数,减少为负数)
+                    "changeAfter":45.14,                //类型：Number  必有字段  备注：无
+                    "commodityName":"mixed",                //类型：Mixed  必有字段  备注：无
+                    "changeDes":"学币回收"                //类型：String  必有字段  备注：变化描述
+     
+     */
+    var changeTime: Double?
+    var changeValue: Int?
+    var changeDes: String?
+    //1:充值 ；2:消耗 ；3:回收
+    var changeType: Int?
     
+    
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        
+        changeTime <- map["changeTime"]
+        changeValue <- map["changeValue"]
+        changeDes <- map["changeDes"]
+        changeType <- map["changeType"]
+    }
 }
