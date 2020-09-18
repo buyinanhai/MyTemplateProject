@@ -1,5 +1,5 @@
 //
-//  RechargeVC.swift
+//  ChargeVC.swift
 //  MyTemplateProject
 //
 //  Created by 汪宁 on 2020/9/11.
@@ -8,21 +8,51 @@
 
 import UIKit
 import DYTemplate
+import StoreKit
 
-class RechargeVC: UIViewController {
+class ChargeVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "学币充值";
         self.setupSubview();
         // Do any additional setup after loading the view.
-        for (index,item) in [1,12,30,50].enumerated() {
+        SKPaymentQueue.default().add(DYPurchaseManager.shared);
+        NotificationCenter.default.addObserver(self, selector: #selector(chargeSuccessed(_ :)), name: .init(dy_Notification_purchase_chargeSuccessed), object: nil)
+        self.loadData();
+    }
+    
+    private func loadData() {
+        
+        DYNetworkHUD.startLoading();
+        
+        ChargeNetwork.getChargeList().dy_startRequest { (response, error) in
             
-            let model = RechargeCollectionCellModel.init();
-            model.priceCount = item;
-            model.coinCount = item;
-            self.dataSource[index] = model;
+            DYNetworkHUD.dismiss();
+            if let results = response as? [[String : Any]] {
+                
+                for (index,item) in results.enumerated() {
+                    let model = ChargeCollectionCellModel.init();
+                    model.coinCount = item["coins"] as? Int;
+                    model.priceCount = item["money"] as? Int;
+                    model.id = item["id"] as? Int;
+                    self.dataSource[index] = model;
+                    if index == 0 {
+                        self.currSelectedItem = 0;
+                        model.isSelected = true;
+                    }
+                }
+                self.collectionView.reloadData()
+            } else {
+                
+                DYNetworkHUD.showInfo(message: error?.errorMessage ?? "网络异常，请稍后重试！");
+            }
+            
+            
         }
+        
+        
+        
     }
     
     
@@ -87,7 +117,7 @@ class RechargeVC: UIViewController {
         
         let explainContent = UILabel.init();
         explainContent.textColor = UIColor.init(hexString: "#797979");
-        explainContent.text = "1.学币仅限ios系统消费，无法在其他系统中使用；\n2.学币用于购买优智多课堂APP中的班课商品，无法\n3.学币为虚拟币，充值后不会过期，但无法退款、提现或转赠他人\n4.在充值过程中遇到任何问题，可联系在线客服，或者拨打客服电话";
+        explainContent.text = "1.学币仅限ios系统消费，无法在其他系统中使用；\n2.学币用于购买优智多课堂APP中的班课商品，无法购买实物物品；\n3.学币为虚拟币，充值后不会过期，但无法退款、提现或转赠他人；\n4.在充值过程中遇到任何问题，可联系在线客服，或者拨打客服电话；";
         explainContent.numberOfLines = 0;
         explainContent.font = UIFont.systemFont(ofSize: 13)
         
@@ -121,14 +151,59 @@ class RechargeVC: UIViewController {
         dialBtn.addTarget(self, action: #selector(dialBtnClick(_ :)), for: .touchUpInside)
     }
     
+    @objc
+    private func chargeSuccessed(_ info: Notification) {
+        
+        if let result = info.object as? [String : Any] {
+            
+            let price = 1;
+            self.coinLabel.text = String.init(format: "学币：%02d", price);
+            
+        }
+        
+    }
+    
     //MARK: 联系客服
     private func showContactVC() {
+        let vc = MyStudyCoinVC.init();
         
+        self.navigationController?.pushViewController(vc, animated: true);
     }
     
     //MARK: 开始充值
     private func begainRecharge() {
         
+        if SKPaymentQueue.canMakePayments() {
+            
+            if let index = self.currSelectedItem, let price = self.dataSource[index]?.priceCount {
+                
+                self.getRequestAppProduct(price);
+            }
+            
+        } else {
+            DYNetworkHUD.showInfo(message: "当前无法充值，请稍后重试！", inView: nil);
+        }
+        
+    }
+    
+    private func getRequestAppProduct(_ price: Int) {
+        
+        let productorIdentifier = String.init(format: "com.cunw.xinyunclassroom.%02d", price);
+        
+        DYNetworkHUD.startLoading();
+        DYPurchaseManager.startRequest(productorIdentifier) { (response, error) in
+            
+            if let err = error as NSError? {
+                
+                DYNetworkHUD.showInfo(message: err.domain, inView: nil);
+                
+            } else {
+                //支付成功
+                self.coinLabel.text = String.init(format: "学币：%02d", price);
+                DYNetworkHUD.showInfo(message: "充值成功", inView: nil);
+            }
+            
+        }
         
     }
   
@@ -166,7 +241,7 @@ class RechargeVC: UIViewController {
         let layout = UICollectionViewFlowLayout.init();
         let view = UICollectionView.init(frame: .zero, collectionViewLayout: layout);
         view.backgroundColor = UIColor.white;
-        view.register(UINib.init(nibName: "RechargeCollectionCell", bundle: nil), forCellWithReuseIdentifier: "cell");
+        view.register(UINib.init(nibName: "ChargeCollectionCell", bundle: nil), forCellWithReuseIdentifier: "cell");
         return view;
     }()
     
@@ -182,11 +257,17 @@ class RechargeVC: UIViewController {
         return view;
     }()
     
-    private var dataSource: [Int: RechargeCollectionCellModel] = [
+    private var dataSource: [Int: ChargeCollectionCellModel] = [
         :
     ]
     
     private var currSelectedItem: Int?
+    
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self);
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -199,7 +280,7 @@ class RechargeVC: UIViewController {
 
 }
 //MARK: actions
-extension RechargeVC {
+extension ChargeVC {
     
     @objc
     private func confirmBtnClick() {
@@ -241,7 +322,7 @@ extension RechargeVC {
 }
 
 //MARK: delegate
-extension RechargeVC: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension ChargeVC: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
                 
         return self.dataSource.count;
@@ -249,8 +330,13 @@ extension RechargeVC: UICollectionViewDataSource, UICollectionViewDelegate, UICo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! RechargeCollectionCell;
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ChargeCollectionCell;
         cell.model = self.dataSource[indexPath.item];
+        if let model = cell.model as? ChargeCollectionCellModel {
+            if model.isSelected {
+                self.confirmBtn.setTitle("￥\(model.priceCount ?? 0) 确认充值", for: .normal);
+            }
+        }
         return cell;
         
     }

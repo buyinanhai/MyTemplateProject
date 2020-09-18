@@ -39,7 +39,7 @@ import UIKit
         
     }
     
-    public class func showInfo(message: String, inView: UIView?) {
+    public class func showInfo(message: String, inView: UIView? = nil) {
        
         let hud = DYNetworkHUD.shared;
 

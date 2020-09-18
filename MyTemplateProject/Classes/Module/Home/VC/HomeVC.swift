@@ -103,7 +103,7 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
             vc = YZDTestCollectionVC.init();
             break;
         case 6:
-            vc = RechargeVC.init();
+            vc = ChargeVC.init();
             
             break;
         default:

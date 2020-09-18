@@ -76,7 +76,8 @@ class YZDTestAnswerVC: UIViewController {
     }
     
     //MARK: 更新右上角的按钮状态  提交 成功后 变成查看结果
-    internal func updateRightBarButton(_ isSubmit: Bool) {
+    internal func
+        updateRightBarButton(_ isSubmit: Bool) {
         
         self.isSubmitAnswer = isSubmit;
         self.navigationItem.rightBarButtonItem?.title = isSubmit ? "查看结果" : "提交";
@@ -339,14 +340,13 @@ extension YZDTestAnswerVC {
         YZDHomeworkNetwork.commitAnswers(afterWorkId: self.afterWorkId ?? 0, usedTime: self.headerView.getUsedTime(), answers: answers).dy_startRequest { (response, error) in
             
             if error != nil {
-                
+                DYNetworkHUD.showInfo(message: error?.errorMessage ?? "提交失败!", inView: nil);
+            } else {
+                self.updateRightBarButton(true);
                 if let _response = response as? [String :Any] {
                     
                     self.afterWorkFinishId = _response["afterWorkFinishId"] as? Int;
                 }
-                DYNetworkHUD.showInfo(message: error?.errorMessage ?? "提交失败!", inView: nil);
-            } else {
-                
                 DYNetworkHUD.showInfo(message: "提交成功!", inView: nil);
                 
             }

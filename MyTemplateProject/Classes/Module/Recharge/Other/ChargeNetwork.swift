@@ -1,0 +1,136 @@
+//
+//  ChargeNetwork.swift
+//  MyTemplateProject
+//
+//  Created by 汪宁 on 2020/9/17.
+//  Copyright © 2020 汪宁. All rights reserved.
+//
+
+import UIKit
+
+class ChargeNetwork: DYBaseNetwork {
+
+    
+    class private var hostUrl: String {
+        
+        get {
+            return "http://test.sdk.live.cunwedu.com.cn";
+            return "http://192.168.11.195:8082";
+        }
+    }
+    
+    class private var token: String {
+        
+        get {
+            
+            return "SRn55wqmX04DmFt96BvswTWl58dMJAb2cvHaYmtmkiGFJtUJ4Rm%2BfCl8GunN2fJgISjQcKn5nleB%0AMSP5z7uJZ9ADbCuuwJgX";
+            
+            if let token = DYNetworkConfig.share()?.extraData["token"] as? String {
+                return token;
+            } else {
+                return "1%2B6Eifdnurv%2BwIXACMLMLsZZe75nzv8P6ZeQAVm%2FSgSvGSgIN1DqBehPdNANo5Jsg7bb0r5%2BUfqP%0A2SiEriu%2BvKFFqIIFT%2FgA";
+            }
+        }
+        
+    }
+    class private var userId: Int {
+        
+        get {
+            return 2984931;
+            if let userId = DYNetworkConfig.share()?.extraData["userId"] as? Int {
+                return userId;
+            } else {
+                return 2984573;
+            }
+            
+        }
+        
+    }
+    
+    class private var isTest: Bool {
+        
+        get {
+            
+            return self.hostUrl.contains("test.sdk");
+            
+        }
+    }
+    class private var relativeUrl: String {
+        
+        get {
+            return "\(self.isTest ? "" : "")/appApi"
+        }
+    }
+    
+    //MARK: 获取充值学币的配置
+    public class func getChargeList() -> ChargeNetwork {
+        
+        let obj = ChargeNetwork.init();
+        obj.dy_baseURL = self.hostUrl;
+        obj.dy_requestUrl = "\(self.relativeUrl)/coin-configs";
+        obj.dy_requestArgument = [
+            "token" : self.token,
+        ];
+        obj.dy_requestMethod = .POST;
+        obj.dy_requestSerializerType = .JSON;
+        obj.dy_responseSerializerType = .JSON;
+        
+        return obj;
+    }
+    
+    public class func verifyPurchase(receiptData: String) -> ChargeNetwork {
+        
+        
+        let obj = ChargeNetwork.init();
+        obj.dy_baseURL = self.hostUrl;
+        obj.dy_requestUrl = "\(self.relativeUrl)/payOrder/iap-pay-callback";
+        obj.dy_requestArgument = [
+            "receipt" : receiptData,
+            "token": self.token
+        ];
+        obj.dy_requestMethod = .POST;
+        obj.dy_requestSerializerType = .JSON;
+        obj.dy_responseSerializerType = .JSON;
+        
+        return obj;
+        
+        
+    }
+    //MARK: 获取学习币最大值 用于在购买课程时学币不能超过1000
+    public class func getPriceLimit(code: String) -> ChargeNetwork {
+        
+        
+        let obj = ChargeNetwork.init();
+        obj.dy_baseURL = self.hostUrl;
+        obj.dy_requestUrl = "\(self.relativeUrl)/company/queryFunctionByFunctionCode";
+        obj.dy_requestArgument = [
+            "code" : code,
+            "token": self.token
+        ];
+        obj.dy_requestMethod = .POST;
+        obj.dy_requestSerializerType = .JSON;
+        obj.dy_responseSerializerType = .JSON;
+        
+        return obj;
+        
+        
+    }
+    
+    //MARK: 学币支付订单
+    public class func getCoinOrder(payType: String, orderId: String) -> ChargeNetwork {
+           
+           let obj = ChargeNetwork.init();
+           obj.dy_baseURL = self.hostUrl;
+           obj.dy_requestUrl = "\(self.relativeUrl)/appFinishOrde";
+           obj.dy_requestArgument = [
+               "payType" : payType,
+               "token": self.token
+           ];
+           obj.dy_requestMethod = .POST;
+           obj.dy_requestSerializerType = .JSON;
+           obj.dy_responseSerializerType = .JSON;
+           
+           return obj;
+       }
+    
+}

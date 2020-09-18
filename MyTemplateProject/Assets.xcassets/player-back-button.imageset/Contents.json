@@ -1,17 +1,16 @@
 {
   "images" : [
     {
-      "filename" : "组 84.png",
+      "filename" : "player-back-button.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "组 84@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "组 84@3x.png",
+      "filename" : "player-back-button@2x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

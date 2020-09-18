@@ -49,6 +49,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
            
            DYNetworkConfig.share()?.extraData = ["token": "SRn55wqmX06TlYIStQdT7WMZhTAZDdHLzNZ4eYtHGyVJuL4Hi5lVjFcEGZq%2F5erQkKAJFTDWONDU%0D%0AsaQL2JTmuw%3D%3D","userId":2984573];
            DYNetworkConfig.share()?.networkBaseURL = "http://192.168.11.195:8082";
+        
+        
            
        }
 
