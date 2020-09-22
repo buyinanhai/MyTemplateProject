@@ -18,16 +18,16 @@
 
 @interface UIView (dy_extension)
 
-@property (nonatomic, assign) CGFloat x;
-@property (nonatomic, assign) CGFloat y;
-@property (nonatomic, assign) CGFloat width;
-@property (nonatomic, assign) CGFloat height;
-@property (nonatomic, assign) CGFloat centerX;
-@property (nonatomic, assign) CGFloat centerY;
-@property (nonatomic, assign) CGSize size;
-@property (nonatomic, assign) CGPoint origin;
-@property (nonatomic, assign, readonly) CGFloat maxX;
-@property (nonatomic, assign, readonly) CGFloat maxY;
+@property (nonatomic, assign) CGFloat dy_x;
+@property (nonatomic, assign) CGFloat dy_y;
+@property (nonatomic, assign) CGFloat dy_width;
+@property (nonatomic, assign) CGFloat dy_height;
+@property (nonatomic, assign) CGFloat dy_centerX;
+@property (nonatomic, assign) CGFloat dy_centerY;
+@property (nonatomic, assign) CGSize dy_size;
+@property (nonatomic, assign) CGPoint dy_origin;
+@property (nonatomic, assign, readonly) CGFloat dy_maxX;
+@property (nonatomic, assign, readonly) CGFloat dy_maxY;
 
 
 //获取该视图的控制器

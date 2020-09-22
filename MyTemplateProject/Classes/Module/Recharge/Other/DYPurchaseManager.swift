@@ -40,8 +40,12 @@ enum DYPurchasePayState: Int {
 public let dy_Notification_purchase_chargeSuccessed = "dy_Notification_purchase_chargeSuccessed";
 
 typealias RequestCompleted = (_ response: [String : Any]?, _ error: Error?) -> Void
-class DYPurchaseManager: NSObject {
+class DYPurchaseManager: NSObject, SKProductsRequestDelegate {
     
+    var transactionIdentifier : String?
+    var requestCallback: RequestCompleted?
+    
+    private var requestState: DYPurchasePayState?
     
     
     static let shared = DYPurchaseManager.init();
@@ -52,76 +56,64 @@ class DYPurchaseManager: NSObject {
         super.init()
     }
     
-    
-    class func addPaymentObserwer() {
+    static func addPaymentObserwer() {
         
-        
-        let item = DYPurchaseHandler.init();
-        SKPaymentQueue.default().add(item);
-        DYPurchaseManager.shared.items.append(item);
+        DispatchQueue.yd_once {
+            print("addPaymentObserwer-----------")
+            SKPaymentQueue.default().add(DYPurchaseManager.shared);
+        }
         
     }
+   
     
     class func startRequest(_ productIdentifier: String, compeleted: @escaping RequestCompleted) {
         
-        let handler = DYPurchaseHandler.init();
-        handler.requestCallback = compeleted;
-        SKPaymentQueue.default().add(handler);
-        DYPurchaseManager.shared.items.append(handler);
+        DYPurchaseManager.shared.requestCallback = compeleted;
+        
         let request = SKProductsRequest.init(productIdentifiers: [productIdentifier]);
-        request.delegate = handler;
+        request.delegate = DYPurchaseManager.shared;
         request.start();
         
-        
     }
-    /**
-     删除相同的监听
-     */
-    fileprivate class func removeSameItem(_ handler: DYPurchaseHandler) -> Bool {
-        
-        var shouldBeMove = false;
-        for (index,item)  in DYPurchaseManager.shared.items.enumerated() {
-            
-            if let identifier1 = item.transactionIdentifier, let identifier2 = handler.transactionIdentifier {
-                if identifier1 == identifier2, item != handler {
-                    DYPurchaseManager.shared.items.remove(at: index);
-                    SKPaymentQueue.default().remove(item);
-                    shouldBeMove = true;
-                    break;
-                }
-            }
-        }
-        return shouldBeMove;
-    }
-    
-    /**
-     丢弃handler
-     */
-    fileprivate class func discardItem(_ handler: DYPurchaseHandler) {
-        
-        for (index,item)  in DYPurchaseManager.shared.items.enumerated() {
-            if  item == handler {
-                DYPurchaseManager.shared.items.remove(at: index);
-                SKPaymentQueue.default().remove(item);
-                break;
-            }
-        }
-        
-    }
-    
-    private var items: [DYPurchaseHandler] = [];
+//    /**
+//     删除相同的监听
+//     */
+//    fileprivate class func removeSameItem(_ handler: DYPurchaseHandler) -> Bool {
+//
+//        var shouldBeMove = false;
+//        for (index,item)  in DYPurchaseManager.shared.items.enumerated() {
+//
+//            if let identifier1 = item.transactionIdentifier, let identifier2 = handler.transactionIdentifier {
+//                if identifier1 == identifier2, item != handler {
+//                    DYPurchaseManager.shared.items.remove(at: index);
+//                    SKPaymentQueue.default().remove(item);
+//                    shouldBeMove = true;
+//                    break;
+//                }
+//            }
+//        }
+//        return shouldBeMove;
+//    }
+//
+//    /**
+//     丢弃handler
+//     */
+//    fileprivate class func discardItem(_ handler: DYPurchaseHandler) {
+//
+//        for (index,item)  in DYPurchaseManager.shared.items.enumerated() {
+//            if  item == handler {
+//                DYPurchaseManager.shared.items.remove(at: index);
+//                SKPaymentQueue.default().remove(item);
+//                break;
+//            }
+//        }
+//
+//    }
+//
+//    private var items: [DYPurchaseHandler] = [];
     
 }
-private class DYPurchaseHandler: NSObject,SKPaymentTransactionObserver,SKProductsRequestDelegate {
-    
-    
-    var transactionIdentifier : String?
-    var requestCallback: RequestCompleted?
-    
-    private var requestState: DYPurchasePayState?
-    
-
-
+extension DYPurchaseManager: SKPaymentTransactionObserver {
     
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         
@@ -145,7 +137,6 @@ private class DYPurchaseHandler: NSObject,SKPaymentTransactionObserver,SKProduct
                 let err = NSError.init(domain: "重复提交！", code: self.requestState?.rawValue ?? -1, userInfo: nil);
                 self.requestCallback?(nil,err);
                 SKPaymentQueue.default().finishTransaction(item);
-                DYPurchaseManager.discardItem(self);
                 
                 break;
             case SKPaymentTransactionState.failed:
@@ -154,7 +145,6 @@ private class DYPurchaseHandler: NSObject,SKPaymentTransactionObserver,SKProduct
                 let err = NSError.init(domain: "充值失败！", code: self.requestState?.rawValue ?? -1, userInfo: nil);
                 self.requestCallback?(nil,err);
                 SKPaymentQueue.default().finishTransaction(item);
-                DYPurchaseManager.discardItem(self);
                 
                 break;
             default:
@@ -172,16 +162,22 @@ private class DYPurchaseHandler: NSObject,SKPaymentTransactionObserver,SKProduct
      */
     private func completedPayTransaction(_ transaction: SKPaymentTransaction) {
         
+        
+        print("transaction------------%@",transaction.transactionIdentifier as Any);
+        print("transaction------------%@",transaction.payment.productIdentifier);
+        print("transaction------------%@",transaction.transactionDate as Any);
+        print("transaction------------%@",transaction.payment.quantity);
+        
+        
         // 验证凭据，获取到苹果返回的交易凭据
         // appStoreReceiptURL iOS7.0增加的，购买交易完成后，会将凭据存放在该地址
         if let receiptURL = Bundle.main.appStoreReceiptURL {
             // 从沙盒中获取到购买凭据
             let receiptData = try? Data.init(contentsOf: receiptURL);
             
+           
+            
             self.transactionIdentifier = transaction.transactionIdentifier;
-            if DYPurchaseManager.removeSameItem(self) {
-                return;
-            }
             /**
              BASE64 常用的编码方案，通常用于数据传输，以及加密算法的基础算法，传输过程中能够保证数据传输的稳定性
              BASE64是可以编码和解码的
@@ -193,25 +189,39 @@ private class DYPurchaseHandler: NSObject,SKPaymentTransactionObserver,SKProduct
             
         }
         
+        
     }
+    
     
     
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
         
-        if let product = response.products.first {
-            
-            let payment = SKPayment.init(product: product);
-            
-            SKPaymentQueue.default().add(payment);
-        } else {
-            
+        print("--------------收到产品反馈消息---------------------")
+        let product = response.products;
+        print("productID:\(response.invalidProductIdentifiers)")
+        if product.count == 0 {
             self.requestState = .unfoundProductor;
             let err = NSError.init(domain: "没有找到对应的支付商品！", code: self.requestState?.rawValue ?? -1, userInfo: nil);
             self.requestCallback?(nil,err);
-            DYPurchaseManager.discardItem(self);
-
+            return
         }
         
+        var p = SKProduct()
+        for pro in product {
+            print(pro.description)
+            print(pro.localizedTitle)
+            print(pro.localizedDescription)
+            print(pro.price)
+            print(pro.productIdentifier)
+            
+            if pro.productIdentifier == pro.productIdentifier {
+                p = pro
+            }
+            
+            let payment = SKPayment(product: p)
+            print("发送购买请求")
+            SKPaymentQueue.default().add(payment)
+        }
         
     }
     
@@ -222,7 +232,6 @@ private class DYPurchaseHandler: NSObject,SKPaymentTransactionObserver,SKProduct
         self.requestCallback?(nil,err);
         print("DYPurchasePayState -------- 请求失败！")
         print(error);
-        DYPurchaseManager.discardItem(self);
       
     }
        
@@ -243,30 +252,21 @@ private class DYPurchaseHandler: NSObject,SKPaymentTransactionObserver,SKProduct
                 print("请求成功：%@",response);
                 self.requestState = .chargeSuccessed;
                 self.requestCallback?(result,nil);
-                if self.requestCallback == nil {
-                    //本地票据验证成功就发通知到外面 充值成功
-                    NotificationCenter.default.post(name: .init(dy_Notification_purchase_chargeSuccessed), object: response);
-                }
+                NotificationCenter.default.post(name: .init(dy_Notification_purchase_chargeSuccessed), object: response);
                 SKPaymentQueue.default().finishTransaction(transaction);
-                DYPurchaseManager.discardItem(self);
             } else {
                 
                 print("内购票据验证失败： %@", response);
                 self.requestState = .chargeFaild;
                 let err = NSError.init(domain: error?.errorMessage ?? "充值失败！", code: self.requestState?.rawValue ?? -1, userInfo: nil);
                 self.requestCallback?(nil,err);
-                DYPurchaseManager.discardItem(self);
             }
         }
       
         
     }
     
-    
 }
-
-
-
 
 
 

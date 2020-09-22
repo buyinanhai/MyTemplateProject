@@ -19,7 +19,6 @@ PODS:
     - DYTemplate/Base (= 1.0.0)
     - DYTemplate/ComponentUI (= 1.0.0)
     - DYTemplate/Network (= 1.0.0)
-    - DYTemplate/Test (= 1.0.0)
     - Masonry
     - MJRefresh
     - ObjectMapper
@@ -38,17 +37,14 @@ PODS:
     - Masonry
     - MJRefresh
     - ObjectMapper
-  - DYTemplate/Test (1.0.0):
-    - AFNetworking
-    - Masonry
-    - MJRefresh
-    - ObjectMapper
   - Masonry (1.1.0)
+  - MBProgressHUD (1.2.0)
   - MJRefresh (3.4.3)
   - NCNLivingSDK (0.0.1):
     - AFNetworking
     - DYTemplate/ComponentUI
     - Masonry
+    - MBProgressHUD
     - SDWebImage
     - Socket.IO-Client-Swift
     - TXLiteAVSDK_TRTC
@@ -71,6 +67,7 @@ SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - AFNetworking
     - Masonry
+    - MBProgressHUD
     - MJRefresh
     - ObjectMapper
     - SDWebImage
@@ -87,10 +84,11 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
-  DYTemplate: d72148042b106002a962ff67bf7656bfd5b3b370
+  DYTemplate: 2c207724a4d4b840be2a4689cfd7ea4bba30ee47
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   MJRefresh: 53e3e3219f204425ee6d3e62e8733d3295944cd6
-  NCNLivingSDK: f81044a2c44ca6a9bb724b242f3d4605b3e2bb12
+  NCNLivingSDK: aaf0f1bcc5dd4b6ab662339b23f1a27ecef4560a
   ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
   SDWebImage: cf6922231e95550934da2ada0f20f2becf2ceba9
   Socket.IO-Client-Swift: 1e3e3a1f09f3312a167f0d781eb2f383d477357c

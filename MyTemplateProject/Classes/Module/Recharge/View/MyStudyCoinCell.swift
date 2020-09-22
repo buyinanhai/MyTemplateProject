@@ -48,7 +48,6 @@ class MyStudyCoinCell: DYTableViewCell {
                 self.dy_detailTextLabel.text = Date.getFormdateYMDHM(timeStamp: _model.changeTime ?? 0);
                 self.amountLabel.text = "\(_model.changeValue ?? 0)";
                 if _model.changeType == 2{
-                    
                     self.amountLabel.textColor = UIColor.init(hexString: "#555555");
                     self.dy_textLabel.text = "购买课程";
                 } else if _model.changeType == 1 {

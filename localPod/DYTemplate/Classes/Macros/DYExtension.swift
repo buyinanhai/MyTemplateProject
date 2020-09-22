@@ -12,7 +12,7 @@ import UIKit
 
 public let kScreenWidth = UIScreen.main.bounds.width;
 public let kScreenHeight = UIScreen.main.bounds.height;
-public let kDY_ThemeColor:UIColor = UIColor.hex("#fb9028");
+public let kDY_ThemeColor:UIColor = UIColor.dy_color(withHexString: "#fb9028");
 
 public extension UIColor {
     
@@ -292,7 +292,7 @@ public extension UIView{
     }
 
     // MARK: - 尺寸相关
-    var x:CGFloat{
+    var dy_x:CGFloat{
         get{
             return self.frame.origin.x
         } set{
@@ -300,7 +300,7 @@ public extension UIView{
         }
     }
     
-    var y:CGFloat{
+    var dy_y:CGFloat{
         get{
             return self.frame.origin.y
         }set{
@@ -308,7 +308,7 @@ public extension UIView{
         }
     }
     
-    var width:CGFloat{
+    var dy_width:CGFloat{
         get{
             return self.frame.size.width
         }set{
@@ -316,7 +316,7 @@ public extension UIView{
         }
     }
     
-    var height:CGFloat{
+    var dy_height:CGFloat{
         get{
             return self.frame.size.height
         }set{
@@ -324,14 +324,14 @@ public extension UIView{
         }
     }
     
-    var size:CGSize{
+    var dy_size:CGSize{
         get{
             return self.frame.size
         }set{
             self.frame.size = newValue
         }
     }
-    var centerX:CGFloat{
+    var dy_centerX:CGFloat{
         get{
             return self.center.x
         }
@@ -339,7 +339,7 @@ public extension UIView{
             self.center.x = newValue
         }
     }
-    var centerY:CGFloat{
+    var dy_centerY:CGFloat{
         get{
             return self.center.y
         }
@@ -778,4 +778,24 @@ extension Dictionary {
     
 }
 
+extension DispatchQueue {
+    private static var _onceToken = [String]()
+    
+    public class func yd_once(token: String = "\(#file):\(#function):\(#line)", block: ()->Void) {
+        objc_sync_enter(self)
+        
+        defer
+        {
+            objc_sync_exit(self)
+        }
+
+        if _onceToken.contains(token)
+        {
+            return
+        }
+
+        _onceToken.append(token)
+        block()
+    }
+}
 

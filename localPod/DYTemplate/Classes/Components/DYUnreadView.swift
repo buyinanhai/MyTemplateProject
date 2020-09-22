@@ -60,7 +60,7 @@ import UIKit
     private func setupSubviews() {
         self.backgroundColor = self.bgColor;
         self.addSubview(self.label);
-        self.layer.cornerRadius = (self.label.height + CGFloat(2 * kUnReadView_Margin_TB)) * 0.5;
+        self.layer.cornerRadius = (self.label.dy_height + CGFloat(2 * kUnReadView_Margin_TB)) * 0.5;
         self.layer.masksToBounds = true;
         self.isHidden = true;
     }
@@ -68,8 +68,8 @@ import UIKit
         self.backgroundColor = self.bgColor;
         self.label.textColor = self.textColor;
         self.label.sizeToFit();
-        var width = self.label.width + 2 * kUnReadView_Margin_LB;
-        let height = self.label.height + 2 * kUnReadView_Margin_TB;
+        var width = self.label.dy_width + 2 * kUnReadView_Margin_LB;
+        let height = self.label.dy_height + 2 * kUnReadView_Margin_TB;
         if width < height {
             width = height;
         }

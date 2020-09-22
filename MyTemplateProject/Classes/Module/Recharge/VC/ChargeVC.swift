@@ -29,18 +29,25 @@ class ChargeVC: UIViewController {
         ChargeNetwork.getChargeList().dy_startRequest { (response, error) in
             
             DYNetworkHUD.dismiss();
-            if let results = response as? [[String : Any]] {
+            if let result = response as? [String : Any] {
                 
-                for (index,item) in results.enumerated() {
-                    let model = ChargeCollectionCellModel.init();
-                    model.coinCount = item["coins"] as? Int;
-                    model.priceCount = item["money"] as? Int;
-                    model.id = item["id"] as? Int;
-                    self.dataSource[index] = model;
-                    if index == 0 {
-                        self.currSelectedItem = 0;
-                        model.isSelected = true;
+                if let list = result["configList"] as? [[String : Any]] {
+                    
+                    for (index,item) in list.enumerated() {
+                        let model = ChargeCollectionCellModel.init();
+                        model.coinCount = item["coins"] as? Int;
+                        model.priceCount = item["money"] as? Int;
+                        model.id = item["id"] as? Int;
+                        self.dataSource[index] = model;
+                        if index == 0 {
+                            self.currSelectedItem = 0;
+                            model.isSelected = true;
+                        }
                     }
+                }
+                if let coins = result["iosCoinNum"] as? Double {
+                    
+                    self.coinLabel.text = "学币：\(coins)";
                 }
                 self.collectionView.reloadData()
             } else {
@@ -112,10 +119,11 @@ class ChargeVC: UIViewController {
        
         let explainTitle = UILabel.init();
         explainTitle.font = UIFont.boldSystemFont(ofSize: 16)
-        explainTitle.textColor = UIColor.hex("#333333");
+        explainTitle.textColor = UIColor.dy_hex("#333333");
         explainTitle.text = "充值说明";
         
         let explainContent = UILabel.init();
+        
         explainContent.textColor = UIColor.init(hexString: "#797979");
         explainContent.text = "1.学币仅限ios系统消费，无法在其他系统中使用；\n2.学币用于购买优智多课堂APP中的班课商品，无法购买实物物品；\n3.学币为虚拟币，充值后不会过期，但无法退款、提现或转赠他人；\n4.在充值过程中遇到任何问题，可联系在线客服，或者拨打客服电话；";
         explainContent.numberOfLines = 0;
@@ -156,8 +164,8 @@ class ChargeVC: UIViewController {
         
         if let result = info.object as? [String : Any] {
             
-            if let price = result["isCoinNum"] as? Int {
-                self.coinLabel.text = String.init(format: "学币：%02d", price);
+            if let price = result["iosCoinNum"] as? Double {
+                self.coinLabel.text = "学币：\(price)";
             }
         }
         
@@ -165,8 +173,9 @@ class ChargeVC: UIViewController {
     
     //MARK: 联系客服
     class func showContactVC(fromVC: UIViewController) {
-        let vc = MyStudyCoinVC.init();
-        
+        let vc = DYWebViewVC.init();
+        vc.title = "客服"
+        vc.url = "https://wpa1.qq.com/vKlZgv47?_type=wpa&qidian=true";
         fromVC.navigationController?.pushViewController(vc, animated: true);
     }
     
@@ -199,9 +208,9 @@ class ChargeVC: UIViewController {
                 
             } else {
                 //支付成功
-                if let price = response?["iosCoinNum"] as? Int {
+                if let price = response?["iosCoinNum"] as? Double {
                     
-                    self.coinLabel.text = String.init(format: "学币：%02d", price);
+                    self.coinLabel.text = "学币：\(price)"
                 }
                 DYNetworkHUD.showInfo(message: "充值成功", inView: nil);
             }
@@ -233,7 +242,7 @@ class ChargeVC: UIViewController {
         
         let view = UILabel.init();
         view.font = UIFont.boldSystemFont(ofSize: 16)
-        view.textColor = UIColor.hex("#333333");
+        view.textColor = UIColor.dy_hex("#333333");
         view.text = "学币：0";
         return view;
     }()
@@ -252,7 +261,7 @@ class ChargeVC: UIViewController {
         
         let view = UIButton.init();
         view.setTitle("确定充值", for: .normal)
-        view.backgroundColor = UIColor.hex("#FFE4B2");
+        view.backgroundColor = UIColor.dy_hex("#FFE4B2");
         view.setTitleColor(.init(hexString: "#FD943A"), for: .normal);
         view.titleLabel?.font = UIFont.systemFont(ofSize: 15);
         view.addRound(20);
@@ -387,8 +396,8 @@ extension ChargeVC {
                     if let maxPrice = result["content"] as? String {
                         
                         //如果价格大于约束价格就显示充值获取联系客服
-                        if price <= (Int(maxPrice) ?? 0) {
-                            
+                        if price > (Int(maxPrice) ?? 0) {
+
                             compeleted(["isInterrupt":true],nil);
                             self.showProptSheet(vc: fromVC,isNeedCharge: false);
                         } else {
@@ -398,16 +407,12 @@ extension ChargeVC {
                                 
                                 if let result = response as? [String : Any] {
                                     
-                                    
-                                    
+                                    compeleted(["status": 0], nil);
                                 } else {
                                     compeleted(nil,error);
                                 }
-                                
                             }
-                            
                         }
-                        
                     } else {
                         
                         let error = NSError.init(domain: "支付失败！", code: -1, userInfo: nil);

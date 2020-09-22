@@ -8,7 +8,7 @@
 
 #import "DYWebViewVC.h"
 #import <WebKit/WebKit.h>
-@interface DYWebViewVC ()
+@interface DYWebViewVC ()<WKUIDelegate,WKNavigationDelegate>
 
 @property (nonatomic,strong) WKWebView *webView;
 
@@ -25,9 +25,18 @@
         make.edges.offset(0);
     }];
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.url]]];
-    
+    self.webView.UIDelegate = self;
+    self.webView.navigationDelegate = self;
     // Do any additional setup after loading the view.
 }
+
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
+    
+    self.title = webView.title;
+}
+
+
+
 
 
 

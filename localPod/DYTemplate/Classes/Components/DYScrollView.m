@@ -67,14 +67,14 @@
 
 - (void)updateHeight {
     
-    CGFloat maxY = self.height + self.margin;
+    CGFloat maxY = self.dy_height + self.margin;
     for (UIView *subView in self.contentView.subviews) {
         CGFloat subMaxY = CGRectGetMaxY(subView.frame);
         if (subMaxY > maxY) {
             maxY = subMaxY;
         }
     }
-    self.contentSize = CGSizeMake(self.width, maxY);
+    self.contentSize = CGSizeMake(self.dy_width, maxY);
     [self.contentView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.edges.centerX.offset(0);
         make.height.offset(maxY);

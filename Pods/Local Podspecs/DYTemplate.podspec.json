@@ -55,22 +55,9 @@
   "default_subspecs": [
     "Base",
     "ComponentUI",
-    "Network",
-    "Test"
+    "Network"
   ],
   "subspecs": [
-    {
-      "name": "Test",
-      "source_files": [
-        "Classes/Test/*.{h,m,swift}",
-        "Classes/Test/**/*.{h,m,swift}"
-      ],
-      "vendored_libraries": "Classes/Test/**/*.a",
-      "public_header_files": [
-        "Classes/Test/*.h",
-        "Classes/Test/**/*.h"
-      ]
-    },
     {
       "name": "Base",
       "source_files": [

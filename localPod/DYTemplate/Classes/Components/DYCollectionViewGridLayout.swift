@@ -45,10 +45,10 @@ import UIKit
     public override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         
         let attributes = UICollectionViewLayoutAttributes.init(forCellWith: indexPath);
-        let horizontalMargin = ((self.collectionView?.width ?? 0.0) - self.itemSize.width * CGFloat(self.rowCount)) / CGFloat(self.rowCount - 1);
+        let horizontalMargin = ((self.collectionView?.dy_width ?? 0.0) - self.itemSize.width * CGFloat(self.rowCount)) / CGFloat(self.rowCount - 1);
         let page = indexPath.item / self.pageCount;
         let line = (indexPath.item % self.pageCount) / self.rowCount;
-        let x = (self.itemSize.width + horizontalMargin) * CGFloat(indexPath.item % self.rowCount) + (self.collectionView?.width ?? 0.0) *  CGFloat(page);
+        let x = (self.itemSize.width + horizontalMargin) * CGFloat(indexPath.item % self.rowCount) + (self.collectionView?.dy_width ?? 0.0) *  CGFloat(page);
         let y = CGFloat(line) * (self.itemSize.height + self.verticalMargin);
         attributes.frame = CGRect.init(x: x, y: y, width: self.itemSize.width, height: self.itemSize.height);
         
@@ -59,7 +59,7 @@ import UIKit
     
     public override var collectionViewContentSize: CGSize {
         if self.collectionView?.numberOfItems(inSection: 0) == 0 {
-            return self.collectionView?.size ?? CGSize.zero;
+            return self.collectionView?.dy_size ?? CGSize.zero;
         }
        
         self.calculateAppropriateRowCount(rowCount: self.rowCount)
@@ -79,7 +79,7 @@ import UIKit
         }
         let height = CGFloat(rowNum) * self.itemSize.height + CGFloat((rowNum - 1)) * self.verticalMargin;
         
-        return CGSize.init(width: (self.collectionView?.width ?? 0.0) * CGFloat(Int(page)) , height: height);
+        return CGSize.init(width: (self.collectionView?.dy_width ?? 0.0) * CGFloat(Int(page)) , height: height);
         
     }
     
@@ -94,11 +94,11 @@ import UIKit
     适配宽度  计算每行的数量
      */
     private func calculateAppropriateRowCount(rowCount: Int) {
-        if self.collectionView?.width == 0 || self.collectionView == nil {
+        if self.collectionView?.dy_width == 0 || self.collectionView == nil {
             return
         }
         let essentialWidth = CGFloat(rowCount) * self.itemSize.width;
-        if essentialWidth > self.collectionView?.width ?? 0 {
+        if essentialWidth > self.collectionView?.dy_width ?? 0 {
             self.calculateAppropriateRowCount(rowCount: rowCount - 1);
         } else {
             

@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UIImage (dy_extension)
 
 
-+ (UIImage*)imageWithColor:(UIColor*)color;
++ (UIImage*)dy_imageWithColor:(UIColor*)color;
 
 - (UIImage *)dy_rotateImageWithAngle:(CGFloat)angle resize:(CGSize)size;
 

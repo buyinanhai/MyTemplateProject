@@ -75,7 +75,7 @@
 		92EE7E3224B8058800BF4DF7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EE7E3124B8058800BF4DF7 /* ViewController.swift */; };
 		92EE7E3524B8058800BF4DF7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92EE7E3324B8058800BF4DF7 /* Main.storyboard */; };
 		92EE7E3824B8058800BF4DF7 /* MyTemplateProject.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 92EE7E3624B8058800BF4DF7 /* MyTemplateProject.xcdatamodeld */; };
-		92EE7E3A24B8058D00BF4DF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92EE7E3924B8058D00BF4DF7 /* Assets.xcassets */; };
+		92EE7E3A24B8058D00BF4DF7 /* Assets-main.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92EE7E3924B8058D00BF4DF7 /* Assets-main.xcassets */; };
 		92EE7E3D24B8058D00BF4DF7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92EE7E3B24B8058D00BF4DF7 /* LaunchScreen.storyboard */; };
 		92EE7EFB24B8570300BF4DF7 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EE7EBB24B8570200BF4DF7 /* HomeVC.swift */; };
 		92EE7EFC24B8570300BF4DF7 /* MyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EE7EBE24B8570200BF4DF7 /* MyVC.swift */; };
@@ -160,7 +160,7 @@
 		92EE7E3124B8058800BF4DF7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		92EE7E3424B8058800BF4DF7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		92EE7E3724B8058800BF4DF7 /* MyTemplateProject.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MyTemplateProject.xcdatamodel; sourceTree = "<group>"; };
-		92EE7E3924B8058D00BF4DF7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		92EE7E3924B8058D00BF4DF7 /* Assets-main.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Assets-main.xcassets"; sourceTree = "<group>"; };
 		92EE7E3C24B8058D00BF4DF7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		92EE7E3E24B8058D00BF4DF7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		92EE7EA824B81AC400BF4DF7 /* OC-bridge-header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OC-bridge-header.h"; sourceTree = "<group>"; };
@@ -538,7 +538,7 @@
 				92EE7E2F24B8058800BF4DF7 /* SceneDelegate.swift */,
 				92EE7E3124B8058800BF4DF7 /* ViewController.swift */,
 				92EE7E3324B8058800BF4DF7 /* Main.storyboard */,
-				92EE7E3924B8058D00BF4DF7 /* Assets.xcassets */,
+				92EE7E3924B8058D00BF4DF7 /* Assets-main.xcassets */,
 				92EE7E3B24B8058D00BF4DF7 /* LaunchScreen.storyboard */,
 				92EE7E3E24B8058D00BF4DF7 /* Info.plist */,
 				92EE7E3624B8058800BF4DF7 /* MyTemplateProject.xcdatamodeld */,
@@ -669,7 +669,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1150;
-				LastUpgradeCheck = 1150;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "汪宁";
 				TargetAttributes = {
 					92EE7E2924B8058800BF4DF7 = {
@@ -704,7 +704,7 @@
 				92631AE224B86304005A534C /* YZDHomeworkDetailHeaderView.xib in Resources */,
 				9248D8B324C5968A001C426C /* test-html in Resources */,
 				92EE7E3D24B8058D00BF4DF7 /* LaunchScreen.storyboard in Resources */,
-				92EE7E3A24B8058D00BF4DF7 /* Assets.xcassets in Resources */,
+				92EE7E3A24B8058D00BF4DF7 /* Assets-main.xcassets in Resources */,
 				923844A6250CAFF7000B9BE1 /* ChargeCollectionCell.xib in Resources */,
 				922FB12224CA750700830383 /* YZDTestResultHeader.xib in Resources */,
 				9271C77724EB88780004E82B /* LoginVC.xib in Resources */,
@@ -886,6 +886,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -946,6 +947,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -986,7 +988,7 @@
 				DEVELOPMENT_TEAM = F6SCZ7JR3A;
 				GCC_PREFIX_HEADER = "$(PROJECT_NAME)/PrefixHeader.pch";
 				INFOPLIST_FILE = MyTemplateProject/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1012,7 +1014,7 @@
 				DEVELOPMENT_TEAM = F6SCZ7JR3A;
 				GCC_PREFIX_HEADER = "$(PROJECT_NAME)/PrefixHeader.pch";
 				INFOPLIST_FILE = MyTemplateProject/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

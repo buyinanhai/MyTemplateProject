@@ -24,7 +24,7 @@ class MyStudyCoinCellModel: Mappable {
      
      */
     var changeTime: Double?
-    var changeValue: Int?
+    var changeValue: Double?
     var changeDes: String?
     //1:充值 ；2:消耗 ；3:回收
     var changeType: Int?

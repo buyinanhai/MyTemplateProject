@@ -26,9 +26,9 @@ class MyStudyCoinVC: UIViewController {
         
         if let result = info.object as? [String : Any] {
             
-            let price = 1;
-            self.myCoinLabel.text = String.init(format: "我的学币：%02d", price);
-            
+            if let price = result["iosCoinNum"] as? Double {
+                self.myCoinLabel.text = "我的学币：\(price)"
+            }
         }
         
     }
@@ -209,7 +209,6 @@ class MyStudyCoinVC: UIViewController {
         view.titleLabel?.font = UIFont.systemFont(ofSize: 15);
         view.setTitleColor(UIColor.init(hexString: "#FCAB54"), for: .normal);
         view.backgroundColor = UIColor.init(hexString: "#FFF1D7");
-        
         return view;
     }()
     

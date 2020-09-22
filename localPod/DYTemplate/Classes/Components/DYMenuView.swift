@@ -70,7 +70,7 @@ import UIKit
         let point = self.targetView?.convert(rect.origin, to: UIApplication.shared.keyWindow);
         
         self.addSubview(self.contentView);
-        self.contentView.frame = CGRect.init(x: 0, y: point!.y + rect.height, width: self.width, height: 80);
+        self.contentView.frame = CGRect.init(x: 0, y: point!.y + rect.height, width: self.dy_width, height: 80);
         self.setupContentView();
     }
     
@@ -105,7 +105,7 @@ import UIKit
             make?.edges.offset()(0);
         }
         
-        var maxY = self.contentView.height;
+        var maxY = self.contentView.dy_height;
         for (index, item) in self.titles.enumerated() {
             
             let btn = UIButton.init(type: .custom);
@@ -115,7 +115,7 @@ import UIKit
             let width: CGFloat  = 88.0;
             let height: CGFloat = 24;
             let row :CGFloat = 3;
-            let margin = (self.contentView.width - (width * row)) / 4;
+            let margin = (self.contentView.dy_width - (width * row)) / 4;
             let line = index / Int(row);
             let y: CGFloat = 10.0 + (CGFloat(line) * height) + (CGFloat(line) * 10);
             let x = width * CGFloat(index % 3) + (margin * CGFloat(index % 3)) + margin;
@@ -126,7 +126,7 @@ import UIKit
             maxY = btn.frame.maxY + 10;
             self.scrollView.addSubview(btn);
         }
-        self.scrollView.contentSize = CGSize.init(width: self.contentView.width, height: maxY);
+        self.scrollView.contentSize = CGSize.init(width: self.contentView.dy_width, height: maxY);
       
     }
     @objc private func btnClick(_ sender: UIButton) {

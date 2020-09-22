@@ -45,7 +45,7 @@
     return newShadow;
 }
 
-+ (UIColor *)colorWithHexString:(NSString *)color alpha:(CGFloat)alpha
++ (UIColor *)dy_colorWithHexString:(NSString *)color alpha:(CGFloat)alpha
 {
     //删除字符串中的空格
     NSString *cString = [[color stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];
@@ -92,9 +92,9 @@
 }
 
 //默认alpha值为1
-+ (UIColor *)colorWithHexString:(NSString *)color
++ (UIColor *)dy_colorWithHexString:(NSString *)color
 {
-    return [self colorWithHexString:color alpha:1.0f];
+    return [self dy_colorWithHexString:color alpha:1.0f];
 }
 
 + (UIColor *)colorWithRGB:(NSUInteger)aRGB
@@ -111,7 +111,7 @@
     
     return hexComponent / 255.0;
 }
-+ (UIColor *)hex:(NSString *)hexString
++ (UIColor *)dy_hex:(NSString *)hexString
 {
     NSString *colorString = [[hexString stringByReplacingOccurrencesOfString:@"#" withString:@""] uppercaseString];
     CGFloat alpha, red, blue, green;

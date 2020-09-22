@@ -80,7 +80,6 @@ class ChargeNetwork: DYBaseNetwork {
     
     public class func verifyPurchase(receiptData: String) -> ChargeNetwork {
         
-        
         let obj = ChargeNetwork.init();
         obj.dy_baseURL = self.hostUrl;
         obj.dy_requestUrl = "\(self.relativeUrl)/payOrder/iap-pay-callback";
@@ -121,7 +120,7 @@ class ChargeNetwork: DYBaseNetwork {
            
            let obj = ChargeNetwork.init();
            obj.dy_baseURL = self.hostUrl;
-           obj.dy_requestUrl = "\(self.relativeUrl)/appFinishOrde/\(orderId)";
+           obj.dy_requestUrl = "\(self.relativeUrl)/appFinishOrder/\(orderId)";
            obj.dy_requestArgument = [
                "payType" : payType,
                "token": self.token

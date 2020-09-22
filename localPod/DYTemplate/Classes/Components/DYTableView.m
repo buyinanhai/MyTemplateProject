@@ -70,14 +70,14 @@
 
     CGFloat height = [[info.userInfo objectForKey:@"UIKeyboardFrameEndUserInfoKey"] CGRectValue].size.height;
     
-    if (height * 0.5 > self.height) {
+    if (height * 0.5 > self.dy_height) {
         return;
     }
     [self setNeedsUpdateConstraints];
     [UIView animateWithDuration:duration animations:^{
         [self.noDataBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.centerX.offset(0);
-            make.bottom.offset(height + self.noDataBtn.height * 0.5);
+            make.bottom.offset(height + self.noDataBtn.dy_height * 0.5);
         }];
         [self layoutIfNeeded];
     }];
@@ -318,7 +318,7 @@
         _noDataBtn.direction = 1;
         _noDataBtn.hidden = YES;
         _noDataBtn.titleLabel.font = [UIFont systemFontOfSize:15];
-        [_noDataBtn setTitleColor:[UIColor hex:@"#555555"] forState:UIControlStateNormal];
+        [_noDataBtn setTitleColor:[UIColor dy_colorWithHexString:@"#555555"] forState:UIControlStateNormal];
         
     }
     return _noDataBtn;

@@ -33,7 +33,7 @@
 }
 
 - (void)setupSubView{
-    self.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.5];
+    self.backgroundColor = [UIColor dy_colorWithHexString:@"#000000" alpha:0.5];
     [self addTarget:self selector:@selector(dismiss)];
    
     self.contentView = [UIView new];
@@ -128,7 +128,7 @@
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.font = [UIFont boldSystemFontOfSize:15];
-        _titleLabel.textColor = [UIColor colorWithHexString:@"#2A2B30"];
+        _titleLabel.textColor = [UIColor dy_colorWithHexString:@"#2A2B30"];
     }
     return _titleLabel;
     

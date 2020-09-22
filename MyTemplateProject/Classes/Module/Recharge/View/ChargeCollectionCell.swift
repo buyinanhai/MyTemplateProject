@@ -43,6 +43,7 @@ class ChargeCollectionCell: UICollectionViewCell {
                 } else {
                     self.bgImageView.image = UIImage.init(named: "recharge-coin-normal");
                     self.subtitleLabel.textColor = UIColor.init(hexString: "#555555");
+                    
                 }
 
             }
@@ -54,7 +55,7 @@ class ChargeCollectionCell: UICollectionViewCell {
         super.awakeFromNib()
         self.subtitleLabel.addRound(5.5);
         self.subtitleLabel.adjustsFontSizeToFitWidth  = true;
-        self.coinView.dy_setBackgroundColor(UIColor.hex("#FF9F18"), for: .selected);
+        self.coinView.dy_setBackgroundColor(UIColor.dy_hex("#FF9F18"), for: .selected);
         self.coinView.addRound(5.5);
         self.coinView.isUserInteractionEnabled = false;
     }

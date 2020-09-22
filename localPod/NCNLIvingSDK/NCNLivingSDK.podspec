@@ -160,6 +160,7 @@ Pod::Spec.new do |spec|
    spec.dependency "Socket.IO-Client-Swift"
    spec.dependency "TZImagePickerController"
    spec.dependency "TXLiteAVSDK_TRTC"
+   spec.dependency "MBProgressHUD"
    
    spec.dependency "SDWebImage"
   

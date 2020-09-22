@@ -17,11 +17,11 @@
 +(CAGradientLayer *)shadowAsInverseWithColor:(UIColor *)color  frame:(CGRect)rect;
 +(CAGradientLayer *)shadowAsInverseWithColors:(NSArray *)colors frame:(CGRect)rect;
 
-+ (UIColor *)colorWithHexString:(NSString *)color;
++ (UIColor *)dy_colorWithHexString:(NSString *)color;
 
 //从十六进制字符串获取颜色，
 //color:支持@“#123456”、 @“0X123456”、 @“123456”三种格式
-+ (UIColor *)colorWithHexString:(NSString *)color alpha:(CGFloat)alpha;
++ (UIColor *)dy_colorWithHexString:(NSString *)color alpha:(CGFloat)alpha;
 
 /**
  *  Create a color from a HEX string.
@@ -31,11 +31,10 @@
  *  - #RRGGBB
  *  - #AARRGGBB
  *
- *  @param hex HEX string
  *
  *  @return Returns the UIColor instance
  */
-+ (UIColor *)hex:(NSString *)hexString;
++ (UIColor *)dy_hex:(NSString *)hexString;
 
 /**
  *  通过0xffffff的16进制数字创建颜色

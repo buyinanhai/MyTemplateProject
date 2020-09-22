@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MBProgressHUD.h"
+#import "MBProgressHUD/MBProgressHUD.h"
 
 typedef NS_ENUM(NSInteger,YJProgressMode){
     YJProgressModeOnlyText,           //文字

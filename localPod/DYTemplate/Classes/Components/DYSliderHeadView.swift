@@ -61,7 +61,7 @@ import UIKit
    public var sliderPositionX: CGFloat = 0.0 {
         
         didSet {
-            self.slider.frame = CGRect.init(x: self.sliderPositionX, y: self.height - 2, width: self.slider.width, height: self.slider.height)
+            self.slider.frame = CGRect.init(x: self.sliderPositionX, y: self.dy_height - 2, width: self.slider.dy_width, height: self.slider.dy_height)
         }
     
     }
@@ -90,7 +90,7 @@ import UIKit
             }
             if self.type == .banScroll {
                 for (index,_) in self.dataSources.enumerated() {
-                    let width = self.width / CGFloat(self.dataSources.count);
+                    let width = self.dy_width / CGFloat(self.dataSources.count);
                     self.widthCache[index] = width;
                 }
             }
@@ -123,7 +123,7 @@ import UIKit
         if self.dataSources.count > 0 {
             self.slider.isHidden = false;
             
-            self.slider.frame = CGRect.init(x: (self.widthCache[self.currSelectIndex]! - sliderLineWidth) * 0.5, y: self.height - 2, width: self.sliderLineWidth, height: 2);
+            self.slider.frame = CGRect.init(x: (self.widthCache[self.currSelectIndex]! - sliderLineWidth) * 0.5, y: self.dy_height - 2, width: self.sliderLineWidth, height: 2);
         } else {
             self.slider.isHidden = true;
         }
@@ -144,7 +144,7 @@ import UIKit
         self.titles = titles;
         self.collectionView.reloadData();
         if let cacheWidth = self.widthCache[self.currSelectIndex] {
-            self.slider.frame = CGRect.init(x: (cacheWidth - sliderLineWidth) * 0.5, y: self.height - 2, width: self.sliderLineWidth, height: 2);
+            self.slider.frame = CGRect.init(x: (cacheWidth - sliderLineWidth) * 0.5, y: self.dy_height - 2, width: self.sliderLineWidth, height: 2);
         }
         self.currSelectIndex = -1
         self.slider.isHidden = self.dataSources.count > 0 ? false : true;
@@ -350,7 +350,7 @@ extension DYSliderHeadView: UICollectionViewDataSource, UICollectionViewDelegate
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if let cacheWidth = self.widthCache[indexPath.item] {
-            return CGSize.init(width: cacheWidth, height: collectionView.height);
+            return CGSize.init(width: cacheWidth, height: collectionView.dy_height);
         }
         return CGSize.zero;
     }

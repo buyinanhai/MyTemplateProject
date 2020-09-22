@@ -9,108 +9,108 @@
 
 @implementation UIView (dy_extension)
 
-- (void)setX:(CGFloat)x
+- (void)setDy_x:(CGFloat)x
 {
     CGRect frame = self.frame;
     frame.origin.x = x;
     self.frame = frame;
 }
 
-- (void)setY:(CGFloat)y
+- (void)setDy_y:(CGFloat)y
 {
     CGRect frame = self.frame;
     frame.origin.y = y;
     self.frame = frame;
 }
 
-- (CGFloat)x
+- (CGFloat)dy_x
 {
     return self.frame.origin.x;
 }
 
-- (CGFloat)y
+- (CGFloat)dy_y
 {
     return self.frame.origin.y;
 }
 
-- (void)setCenterX:(CGFloat)centerX
+- (void)setDy_centerX:(CGFloat)centerX
 {
     CGPoint center = self.center;
     center.x = centerX;
     self.center = center;
 }
 
-- (CGFloat)centerX
+- (CGFloat)dy_centerX
 {
     return self.center.x;
 }
 
-- (void)setCenterY:(CGFloat)centerY
+- (void)setDy_centerY:(CGFloat)centerY
 {
     CGPoint center = self.center;
     center.y = centerY;
     self.center = center;
 }
 
-- (CGFloat)centerY
+- (CGFloat)dy_centerY
 {
     return self.center.y;
 }
 
-- (void)setWidth:(CGFloat)width
+- (void)setDy_width:(CGFloat)width
 {
     CGRect frame = self.frame;
     frame.size.width = width;
     self.frame = frame;
 }
 
-- (void)setHeight:(CGFloat)height
+- (void)setDy_height:(CGFloat)height
 {
     CGRect frame = self.frame;
     frame.size.height = height;
     self.frame = frame;
 }
 
-- (CGFloat)height
+- (CGFloat)dy_height
 {
     return self.frame.size.height;
 }
 
-- (CGFloat)width
+- (CGFloat)dy_width
 {
     return self.frame.size.width;
 }
 
-- (void)setSize:(CGSize)size
+- (void)setDy_size:(CGSize)size
 {
     CGRect frame = self.frame;
     frame.size = size;
     self.frame = frame;
 }
 
-- (CGSize)size
+- (CGSize)dy_size
 {
     return self.frame.size;
 }
 
-- (void)setOrigin:(CGPoint)origin
+- (void)setDy_origin:(CGPoint)origin
 {
     CGRect frame = self.frame;
     frame.origin = origin;
     self.frame = frame;
 }
 
-- (CGPoint)origin
+- (CGPoint)dy_origin
 {
     return self.frame.origin;
 }
 
-- (CGFloat)maxX {
-    return self.x + self.width;
+- (CGFloat)dy_maxX {
+    return self.dy_x + self.dy_width;
 }
 
--(CGFloat)maxY {
-    return self.y + self.height;
+-(CGFloat)dy_maxY {
+    return self.dy_y + self.dy_height;
 }
 
 

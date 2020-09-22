@@ -31,7 +31,6 @@
 - (void)dy_startRequestWithSuccessful:(void (^)(id _Nullable))successful {
     if (![self isAvailableNetwork]) {
         
-//        [SVProgressHUD showInfoWithStatus:@"当前网络不可用！"];
         successful(nil);
         return;
     }
@@ -65,7 +64,6 @@
             DYNetworkError *error = [DYNetworkError new];
             error.errorCode = status;
             error.errorMessage = message;
-//            [SVProgressHUD showErrorWithStatus:error.errorMessage];
             successful(nil);
         }
         DYLog(@"%@",request);
@@ -78,7 +76,6 @@
         } else {
             error.errorMessage = @"网络请求失败";
         }
-//        [SVProgressHUD showErrorWithStatus:error.errorMessage];
         successful(nil);
         DYLog(@"%@",request);
         DYLog(@"%@",error);
@@ -87,7 +84,8 @@
 
 - (void)dy_startRequestWithFinished:(void (^)(id _Nullable, DYNetworkError * _Nullable))finished {
     if (![self isAvailableNetwork]) {
-//        [SVProgressHUD showInfoWithStatus:@"当前网络不可用！"];
+        DYNetworkError *error = [[DYNetworkError alloc] initWithDomain:@"当前网络不可用!" code:-9999 userInfo:nil];
+        finished(nil,error);
         return;
     }
     [self startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
@@ -101,7 +99,7 @@
                 }
             } @catch (NSException *exception) {
                 data = [self getResponseJson:request.responseJSONObject];
-                error = [DYNetworkError new];
+                error = [[DYNetworkError alloc] initWithDomain:@"数据解析错误" code:-20000 userInfo:nil];
                 error.errorCode = -20000;
                 error.errorMessage = [NSString stringWithFormat:@"数据解析错误: %@",exception.reason];
             } @finally {
@@ -112,7 +110,7 @@
             }
         } else {
             NSString *message = [self getErrorMessage:request.responseJSONObject];
-            DYNetworkError *error = [DYNetworkError errorWithDomain:NSURLErrorDomain code:-999 userInfo:@{@"define": @"自定义的业务错误"}];
+            DYNetworkError *error = [DYNetworkError errorWithDomain:message code:status userInfo:@{@"define": @"自定义的业务错误"}];
             error.errorCode = status;
             error.errorMessage = message;
             finished(nil,error);
@@ -124,7 +122,7 @@
         DYLog(@"================================================================");
 
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
-        DYNetworkError *error = [DYNetworkError errorWithDomain:NSCocoaErrorDomain code:-8888 userInfo:request.error.userInfo];
+        DYNetworkError *error = [DYNetworkError errorWithDomain:@"网络请求失败" code:request.responseStatusCode userInfo:request.error.userInfo];
         error.errorCode = request.responseStatusCode;
         error.errorMessage = @"网络请求失败";
         if (error.code == -8888) {
@@ -141,6 +139,12 @@
 }
 - (void)dy_startRequestWithSuccessful:(void (^)(id _Nullable, DYNetworkError * _Nullable))successful failing:(void (^)(DYNetworkError * _Nullable))failing {
    
+    if (![self isAvailableNetwork]) {
+        DYNetworkError *error = [[DYNetworkError alloc] initWithDomain:@"当前网络不可用!" code:-9999 userInfo:nil];
+        failing(error);
+        return;
+    }
+    
     [self startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
         NSInteger status = [self getStatusCode:request.responseJSONObject];
         if (status == 200) {
