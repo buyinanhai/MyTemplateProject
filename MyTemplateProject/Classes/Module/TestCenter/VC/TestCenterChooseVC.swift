@@ -388,8 +388,8 @@ extension TestCenterChooseVC {
         var volumeId = -1;
         var headerTitle = "";
         var subjectTitle = "";
-        
-       
+        let gradeId = self.selectModel[TestCenterChooseType.grade.rawValue]?.id;
+               
         if self.selectModel[TestCenterChooseType.type.rawValue]?.id == 0 {
             subjectId =  self.selectModel[TestCenterChooseType.subject.rawValue]?.id ?? -1;
             subjectTitle = String.init(format: "%@-%@",self.selectModel[TestCenterChooseType.level.rawValue]?.name ?? "",self.selectModel[TestCenterChooseType.subject.rawValue]?.name ?? "" )
@@ -414,6 +414,7 @@ extension TestCenterChooseVC {
             lastVC?.subjectTitle = subjectTitle;
             lastVC?.volumeId = volumeId;
             lastVC?.headerTitle = headerTitle;
+            lastVC?.gradeId = gradeId;
             lastVC?.update();
             self.navigationController?.popViewController(animated: true);
         } else {
@@ -423,6 +424,7 @@ extension TestCenterChooseVC {
             vc.subjectId = subjectId;
             vc.volumeId = volumeId;
             vc.headerTitle = headerTitle;
+            vc.gradeId = gradeId;
             self.navigationController?.pushViewController(vc, animated: true);
             self.navigationController?.viewControllers.remove(at: 1);
         }
@@ -433,7 +435,7 @@ extension TestCenterChooseVC {
                 option["\(index)"] = id;
             }
         }
-        let dict = ["subjectTitle":subjectTitle,"subjectId":subjectId,"volumeId":volumeId,"headerTitle":headerTitle,"chooseOption": option
+        let dict = ["subjectTitle":subjectTitle,"subjectId":subjectId,"volumeId":volumeId,"headerTitle":headerTitle,"chooseOption": option,"gradeId": gradeId ?? -1
             ] as [String : Any];
         TestCenterChooseVC.updateLocalData(dict);
     }

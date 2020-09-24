@@ -21,40 +21,45 @@ import UIKit
         
         let hud = DYNetworkHUD.shared;
         
-        if !hud.activityView.isAnimating {
-            hud.defaultShowView?.addSubview(hud.activityView);
-            hud.activityView.mas_makeConstraints { (make) in
+        if !hud.progressView.isAnimating {
+            hud.shelterView.isHidden = false;
+            hud.defaultShowView?.addSubview(hud.progressView);
+            hud.progressView.mas_makeConstraints { (make) in
                 make?.center.offset();
+                make?.size.offset()(120);
             }
         }
         
-        hud.activityView.startAnimating();
+        hud.progressView.startAnimating();
         
     }
     public class func dismiss() {
         
         let hud = DYNetworkHUD.shared;
-        hud.activityView.stopAnimating();
-        hud.activityView.removeFromSuperview();
-        
+        hud.progressView.stopAnimating();
+        hud.progressView.removeFromSuperview();
+        hud.shelterView.isHidden = true;
+
     }
     
     public class func showInfo(message: String, inView: UIView? = nil) {
        
         let hud = DYNetworkHUD.shared;
 
-        if hud.activityView.isAnimating {
-            hud.activityView.stopAnimating();
-            hud.activityView.removeFromSuperview()
+        if hud.progressView.isAnimating {
+            hud.progressView.stopAnimating();
+            hud.progressView.removeFromSuperview()
+            hud.shelterView.isHidden = true;
         }
         hud.inView = inView;
         if hud.inView == nil {
             hud.inView = UIApplication.shared.windows.first;
         }
-        hud.messageView.text = "   " + message + "   ";
+        hud.messageView.text =  message ;
         hud.inView?.addSubview(hud.messageView);
         hud.messageView.mas_makeConstraints { (make) in
-            make?.center.offset();
+            make?.bottom.offset()(-64);
+            make?.centerX.offset();
             make?.height.lessThanOrEqualTo()(hud.inView);
             make?.width.lessThanOrEqualTo()(hud.inView)
 //            make?.width.offset()(120);
@@ -73,7 +78,12 @@ import UIKit
     
     private override init() {
     
+        super.init();
         
+        self.defaultShowView?.addSubview(self.shelterView);
+        self.shelterView.mas_makeConstraints { (make) in
+            make?.edges.offset();
+        }
     }
     
     private var defaultShowView: UIView? {
@@ -87,21 +97,66 @@ import UIKit
     }
     
     
-    private lazy var activityView: UIActivityIndicatorView = {
+    private lazy var messageView: DYNetworkMessageView = {
         
-        let view = UIActivityIndicatorView.init();
-        if #available(iOS 13.0, *) {
-            view.style = .large
-        } else {
-            // Fallback on earlier versions
-            view.style = .whiteLarge;
-        };
-        view.color = .gray;
+        let view = DYNetworkMessageView.init();
         
         return view;
     }()
     
-    private lazy var messageView: UILabel = {
+    
+    private var inView: UIView?
+    private var progressView: DYNetworkProgressView = {
+        
+        let view = DYNetworkProgressView.init(frame: .zero);
+        
+        return view;
+    }()
+    private lazy var shelterView: UIView = {
+        
+        let view = UIView.init();
+        view.backgroundColor = UIColor.init(white: 0, alpha: 0.3);
+        
+        return view;
+    }()
+    
+}
+    
+   
+    
+private class DYNetworkMessageView: UIView {
+    
+    public var text: String? {
+        
+        didSet {
+            
+            self.label.text = text;
+        }
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame);
+        
+        self.addSubview(self.label);
+        self.label.mas_makeConstraints { (make) in
+            make?.left.top()?.offset()(5);
+            make?.right.bottom()?.offset()(-5);
+        }
+        self.layer.cornerRadius = 5;
+        self.clipsToBounds = true;
+        self.backgroundColor = .black;
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override var intrinsicContentSize: CGSize {
+        
+        return CGSize.init(width: 120, height: 40);
+    }
+    
+    private lazy var label: UILabel = {
         
         let view = UILabel.init();
         view.backgroundColor = .black;
@@ -114,7 +169,58 @@ import UIKit
         return view;
     }()
     
+}
+
+private class DYNetworkProgressView: UIView {
     
-    private var inView: UIView?
+    public var isAnimating: Bool {
+        
+        return self.activityView.isAnimating;
+    }
+
+    public func startAnimating() {
+        
+        self.activityView.startAnimating()
+    }
+    public func stopAnimating() {
+        self.activityView.stopAnimating();
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame);
+        let effect = UIBlurEffect.init(style: .dark)
+        let effectView = UIVisualEffectView.init(effect: effect);
+        self.insertSubview(effectView, at: 0);
+        effectView.frame = self.bounds;
+        effectView.autoresizingMask = [UIView.AutoresizingMask.flexibleHeight, UIView.AutoresizingMask.flexibleWidth];
+        self.backgroundColor = UIColor.black;
+        self.layer.allowsGroupOpacity = false;
+        
+        self.addSubview(self.activityView);
+        self.activityView.mas_makeConstraints { (make) in
+            make?.center.offset();
+        }
+        self.layer.cornerRadius = 8;
+        self.clipsToBounds = true;
+    }
+    
+    
+    private lazy var activityView: UIActivityIndicatorView = {
+        
+        let view = UIActivityIndicatorView.init();
+        if #available(iOS 13.0, *) {
+            view.style = .large
+        } else {
+            // Fallback on earlier versions
+            view.style = .whiteLarge;
+        };
+        view.color = .white;
+        
+        return view;
+    }()
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
 }

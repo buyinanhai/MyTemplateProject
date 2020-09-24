@@ -29,15 +29,20 @@ class YZDTestAnswerVC: UIViewController {
         }
     }
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "答题";
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "提交", style: .plain, target: self, action: #selector(rightBatButtonClick));
         self.setupSubview();
         self.loadData();
+        if let leftBtn = self.navigationItem.leftBarButtonItem?.customView as? UIButton  {
+            leftBtn.addTarget(self, selector: #selector(leftBarBttonClick));
+        }
         // Do any additional setup after loading the view.
     }
-    
+   
     private func setupSubview() {
         
         self.view.backgroundColor = .init(hexString: "#F7F7F7");
@@ -92,6 +97,9 @@ class YZDTestAnswerVC: UIViewController {
         } else if (self.answersCache[self.currentIndex]?.count ?? 0 > 0 && !self.isEnableClickNoAnswer) {
             self.bottomView.nextBtn.isEnabled = true;
         }
+        if self.isEnableClickNoAnswer && self.currentIndex < self.allTests.count - 1 {
+            self.bottomView.nextBtn.isEnabled = true;
+        }
         if self.currentIndex == self.allTests.count - 1 {
             self.bottomView.nextBtn.isEnabled = false;
         }
@@ -131,6 +139,10 @@ class YZDTestAnswerVC: UIViewController {
         guard let question = self.allTests[self.currentIndex]["questionVo"] as? [String : Any] else {
             return;
         }
+        if let collectFlag = self.allTests[self.currentIndex]["likeFlag"] as? Int {
+            
+            self.headerView.collectBtn.isSelected = collectFlag == 0 ? true : false;
+        }
         
         if let jsonStr = try? String.init(data: JSONSerialization.data(withJSONObject: question, options: .fragmentsAllowed), encoding: .utf8) {
             
@@ -168,6 +180,7 @@ class YZDTestAnswerVC: UIViewController {
     private var isSuccessLoad:Bool = true;
     internal var allTests: [[String : Any]] = [];
 
+    ///是否已经提交答案
     private var isSubmitAnswer: Bool = false;
     /**
      当前的题目的index
@@ -205,6 +218,25 @@ class YZDTestAnswerVC: UIViewController {
 //MARK: actions
 extension YZDTestAnswerVC {
     
+    @objc
+    private func leftBarBttonClick() {
+        
+        if self.answersCache.count > 0 && self.answersCache.count < self.allTests.count {
+            let alertVC = UIAlertController.showCustomAlert(withTitle: "温馨提示", messgae: "您的题目未做完，确定退出吗？", confirmTitle: "退出", cancleTitle: "取消") {
+                [weak self] in
+
+                self?.navigationController?.popViewController(animated: true);
+            };
+            
+            self.present(alertVC, animated: true, completion: nil);
+            
+        } else {
+            
+            self.navigationController?.popViewController(animated: true)
+        }
+        
+    }
+    
     
     @objc private func collectBtnClick(_ sender: UIButton) {
         
@@ -218,12 +250,15 @@ extension YZDTestAnswerVC {
         
         if let questionId = self.getCurrentQuestionValue(for: "questionId") as? Int {
             DYNetworkHUD.startLoading();
-            YZDHomeworkNetwork.collectQuestion(afterWorkId: self.afterWorkId, questionId: questionId, likeOrUnlike: sender.isSelected ? 1 : 0).dy_startRequest { (response, error) in
-                
+            self.collectQuestion(questionId: questionId, likeOrUnlike: sender.isSelected) { (error) in
                 DYNetworkHUD.dismiss();
                 if error != nil {
                     DYNetworkHUD.showInfo(message: error?.errorMessage ?? "操作失败", inView: nil);
                     sender.isSelected = false;
+                } else {
+                    var dict = self.allTests[self.currentIndex];
+                    dict["likeFlag"] = sender.isSelected ? 0 : 1;
+                    self.allTests[self.currentIndex] = dict;
                 }
             }
         }
@@ -268,14 +303,21 @@ extension YZDTestAnswerVC {
         if self.allTests.count == 0 {
             return;
         }
-        if self.answersCache.keys.count == 0 {
+        if self.isSubmitAnswer {
+            
+            self.commitAnswers();
+            
+        } else if self.answersCache.keys.count == 0 {
             
             DYNetworkHUD.showInfo(message: "请至少完成一题！", inView: nil);
             return;
             
-        } else if self.isSubmitAnswer {
-            
-            self.commitAnswers();
+        } else if !self.isEnableClickNoAnswer {
+            //练习中心要求打完所有题目才能提交
+            if self.answersCache.count < self.allTests.count {
+                DYNetworkHUD.showInfo(message: "还有题未作答！");
+                return;
+            }
             
         } else if self.answersCache.keys.count < self.allTests.count {
                         
@@ -354,6 +396,16 @@ extension YZDTestAnswerVC {
         
         
     }
+    
+    @objc
+    internal func collectQuestion(questionId: Int, likeOrUnlike: Bool, callback: @escaping (_ error: DYNetworkError?) -> Void) {
+        
+        YZDHomeworkNetwork.collectQuestion(afterWorkId: self.afterWorkId, questionId: questionId, likeOrUnlike: likeOrUnlike ? 1 : 0).dy_startRequest { (response, error) in
+            callback(error);
+        }
+        
+    }
+    
     @objc
     internal func showResultVC() {
         

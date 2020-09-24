@@ -94,6 +94,7 @@ Pod::Spec.new do |spec|
   spec.dependency "AFNetworking"
   spec.dependency "MJRefresh"
   spec.dependency "ObjectMapper"
+  spec.dependency "SDWebImage"
   
   #spec.dependency "AlipaySDK-iOS"
   

@@ -20,6 +20,7 @@ class TestCenterLocalChooseModel: Mappable {
         subjectId <- map["subjectId"];
         volumeId <- map["volumeId"];
         chooseOption <- map["chooseOption"];
+        gradeId <- map["gradeId"];
         
     }
     ///学科id
@@ -28,6 +29,7 @@ class TestCenterLocalChooseModel: Mappable {
     public var volumeId: Int = -1;
     public var headerTitle: String?
     public var subjectTitle: String?
+    public var gradeId: Int = -1;
     
     /**
      0 : 选择类型

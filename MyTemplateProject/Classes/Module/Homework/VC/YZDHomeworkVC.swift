@@ -41,16 +41,17 @@ class YZDHomeworkVC: UIViewController {
         }
         self.tableView.backgroundColor = .HWColorWithHexString(hex: "#F7F7F7");
         
-        let rightBtn = DYButton.init(type: .custom);
-        rightBtn.titleLabel?.font = .systemFont(ofSize: 14);
-        rightBtn.setTitle("答题记录", for: .normal);
-        rightBtn.addTarget(self, action: #selector(rightBarButtonClick), for: .touchUpInside);
+//        let rightBtn = DYButton.init(type: .custom);
+//        rightBtn.titleLabel?.font = .systemFont(ofSize: 14);
+//        rightBtn.setTitle("答题记录", for: .normal);
+//        rightBtn.addTarget(self, action: #selector(rightBarButtonClick), for: .touchUpInside);
+        
 //        rightBtn.setImage(UIImage.init(named: "yzd-homework-right-btn"), for: .normal);
 //        rightBtn.margin = 8
 //        rightBtn.bounds = CGRect.init(x: 0, y: 0, width: 94, height: 25);
 //        rightBtn.addRound(12.5);
 //        rightBtn.backgroundColor = .init(hexString: "#FFF3E4");
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: rightBtn);
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "答题记录", style: .plain, target: self, action: #selector(rightBarButtonClick));
         
         self.searchHeader.addTarget(self, selector: #selector(showSearchVC));
     }

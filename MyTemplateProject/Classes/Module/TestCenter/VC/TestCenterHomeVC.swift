@@ -21,6 +21,8 @@ class TestCenterHomeVC: UIViewController {
     public var subjectTitle: String?
     
     public var chooseVC: TestCenterChooseVC!
+    
+    public var gradeId: Int?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +36,7 @@ class TestCenterHomeVC: UIViewController {
             self.volumeId = model.volumeId;
             self.headerTitle = model.headerTitle;
             self.subjectTitle = model.subjectTitle;
+            self.gradeId = model.gradeId;
         }
         self.setupSubView();
         self.tableView.mj_header?.beginRefreshing();
@@ -276,6 +279,8 @@ extension TestCenterHomeVC: UITableViewDataSource, UITableViewDelegate, TestCent
         } else {
             vc.knowledgeId = model.dy_id;
         }
+        vc.gradeId = self.gradeId;
+        vc.subjectId = "\(self.subjectId)";
         self.navigationController?.pushViewController(vc, animated: true);
         
     }

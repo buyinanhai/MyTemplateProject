@@ -400,7 +400,8 @@ extension YZDTestCollectionVC {
                 }
                 self.reloadWebViewContent();
             } else {
-            
+                self.allTests.removeAll();
+                self.reloadWebViewContent();
                 DYNetworkHUD.showInfo(message: error?.errorMessage ?? "没有错题数据", inView: nil)
             }
             

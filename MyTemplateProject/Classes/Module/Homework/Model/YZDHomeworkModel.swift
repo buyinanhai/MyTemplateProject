@@ -13,7 +13,7 @@ public class YZDHomeworkModel: NSObject {
     public var homeworkName: String!
     public var icon: String?
     public var topicCount: Int!
-    public var accuracy: Float?
+    public var accuracy: String?
     public var finishedCount: Int?
     public var productId: Int!
     
@@ -51,7 +51,7 @@ public class YZDHomeworkModel: NSObject {
         obj.homeworkName = dict["name"] as? String ?? ""
         obj.icon = dict["coverUrl"] as? String ?? ""
         obj.finishedCount = dict["finishCount"] as? Int ?? 0;
-        obj.accuracy = dict["accuracy"] as? Float ?? 0.0;
+        obj.accuracy = dict["accuracy"] as? String;
         obj.topicCount = dict["questionCount"] as? Int ?? 0;
         obj.productId = dict["productId"] as? Int ?? 0;
         obj.liveFlag = dict["liveFlag"] as? Int

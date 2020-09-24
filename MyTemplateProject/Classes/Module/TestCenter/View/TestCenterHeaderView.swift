@@ -105,7 +105,7 @@ class TestCenterHeaderView: UIView {
         self.subjectLabel = subjectLabel;
         
         self.chooseBtn.addTarget(self, action: #selector(chooseBtnClick), for: .touchUpInside);
-        (self.searchHeader.viewWithTag(1001) as? UIButton)?.addTarget(self, action: #selector(searchBtnClick), for: .touchUpInside)
+        self.searchHeader.addTarget(self, selector: #selector(searchBtnClick));
     }
     
     

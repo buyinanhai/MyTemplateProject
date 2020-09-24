@@ -41,7 +41,7 @@
             DYNetworkError *error = nil;
             @try {
                 if ([data isKindOfClass:[NSString class]]) {
-                    data = [NSJSONSerialization JSONObjectWithData:[data dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:0];
+                    data = [NSJSONSerialization JSONObjectWithData:[data dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONWritingPrettyPrinted error:0];
                 }
             } @catch (NSException *exception) {
                 data = [self getResponseJson:request.responseJSONObject];
@@ -95,7 +95,7 @@
             DYNetworkError *error = nil;
             @try {
                 if ([data isKindOfClass:[NSString class]]) {
-                    data = [NSJSONSerialization JSONObjectWithData:[data dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:0];
+                    data = [NSJSONSerialization JSONObjectWithData:[data dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONWritingPrettyPrinted error:0];
                 }
             } @catch (NSException *exception) {
                 data = [self getResponseJson:request.responseJSONObject];
@@ -152,7 +152,7 @@
             DYNetworkError *error = nil;
             @try {
                 if ([data isKindOfClass:[NSString class]]) {
-                    data = [NSJSONSerialization JSONObjectWithData:[data dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:0];
+                    data = [NSJSONSerialization JSONObjectWithData:[data dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONWritingPrettyPrinted error:0];
                 }
             } @catch (NSException *exception) {
                 data = [self getResponseJson:request.responseJSONObject];

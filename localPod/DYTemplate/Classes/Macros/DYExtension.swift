@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SDWebImage
+
 //import Kingfisher
 
 
@@ -538,16 +540,17 @@ extension UIImage {
         finished(_results,nil);
     }
 }
-
-
+import SDWebImage
 public extension UIImageView{
     
     func dy_setImage(urlStr: String?, placeholder: UIImage?) {
     
         self.image = placeholder;
         if let url = URL.init(string: urlStr ?? "") {
+            
 //            self.setImageWith(url, placeholderImage: placeholder);
-        } 
+            self.sd_setImage(with: url, placeholderImage: placeholder, options: .progressiveLoad, context: nil);
+        }
     }
 
     

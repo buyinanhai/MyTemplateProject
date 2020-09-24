@@ -50,6 +50,7 @@ class DYPurchaseManager: NSObject, SKProductsRequestDelegate {
     
     static let shared = DYPurchaseManager.init();
     
+    private var timeoutInterval = 60;
     
     private override init() {
         
@@ -73,6 +74,22 @@ class DYPurchaseManager: NSObject, SKProductsRequestDelegate {
         let request = SKProductsRequest.init(productIdentifiers: [productIdentifier]);
         request.delegate = DYPurchaseManager.shared;
         request.start();
+        
+        
+    }
+    
+    
+    @objc
+    private func timerFire() {
+        
+        self.timeoutInterval -= 1;
+        if self.timeoutInterval < 0 {
+            
+            let error = NSError.init(domain: "请求超时， 请稍后重试", code: -888, userInfo: nil);
+            self.requestCallback?(nil, error);
+            self.timer?.invalidate();
+            self.timeoutInterval = 60;
+        }
         
     }
 //    /**
@@ -111,48 +128,61 @@ class DYPurchaseManager: NSObject, SKProductsRequestDelegate {
 //    }
 //
 //    private var items: [DYPurchaseHandler] = [];
+    private var localTransactions: [String :SKPaymentTransaction] = [:];
+    private var timer: Timer?
     
 }
 extension DYPurchaseManager: SKPaymentTransactionObserver {
     
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-        
-        
+    
         for item in transactions {
+            if item.transactionState == .purchased {
+                if let identifier = item.transactionIdentifier {
+                    
+                    self.localTransactions[identifier] = item;
+                }
+            }
+        }
+        //只取最后一个
+        if let currentTransaction = transactions.last {
+            switch currentTransaction.transactionState {
             
-            switch item.transactionState {
-                
             case SKPaymentTransactionState.purchasing:
                 print("DYPurchasePayState ------- 商品添加到列表")
                 self.requestState = .purchasing;
+                self.timer = Timer.dy_scheduledWeakTimer(withTimeInterval: 1.0, target: self, selector: #selector(timerFire), userInfo: [:], repeats: true);
+                timeoutInterval = 60;
                 break;
             case SKPaymentTransactionState.purchased:
                 print("DYPurchasePayState ------ 充值成功！")
+                self.timer?.invalidate();
+                self.timeoutInterval = 60;
                 self.requestState = .purchased;
-                self.completedPayTransaction(item);
+                self.completedPayTransaction(currentTransaction);
                 break;
             case SKPaymentTransactionState.restored:
                 print("DYPurchasePayState ------ 重复交易！")
                 self.requestState = .purchaseResubmit;
                 let err = NSError.init(domain: "重复提交！", code: self.requestState?.rawValue ?? -1, userInfo: nil);
                 self.requestCallback?(nil,err);
-                SKPaymentQueue.default().finishTransaction(item);
+                self.requestCallback = nil;
+                SKPaymentQueue.default().finishTransaction(currentTransaction);
                 
                 break;
             case SKPaymentTransactionState.failed:
-                print("DYPurchasePayState ------ 充值失败")
+                print("DYPurchasePayState ------ 充值失败%@", currentTransaction.error?.localizedDescription);
                 self.requestState = .purchaseFailed;
                 let err = NSError.init(domain: "充值失败！", code: self.requestState?.rawValue ?? -1, userInfo: nil);
                 self.requestCallback?(nil,err);
-                SKPaymentQueue.default().finishTransaction(item);
+                self.requestCallback = nil;
+                SKPaymentQueue.default().finishTransaction(currentTransaction);
                 
                 break;
             default:
                 break;
             }
-            
         }
-        
     }
     
     
@@ -175,7 +205,6 @@ extension DYPurchaseManager: SKPaymentTransactionObserver {
             // 从沙盒中获取到购买凭据
             let receiptData = try? Data.init(contentsOf: receiptURL);
             
-           
             
             self.transactionIdentifier = transaction.transactionIdentifier;
             /**
@@ -248,19 +277,55 @@ extension DYPurchaseManager: SKPaymentTransactionObserver {
         
         ChargeNetwork.verifyPurchase(receiptData: dataStr).dy_startRequest { (response, error) in
             if let result = response as? [String : Any] {
+               //默认数组中最后一个才是当前成功的标准，因为一个票据会包含多个
+                var chargeResult = false;
+                var haveOtherSuccessed = false;
+                if let transactions = result["transactions"] as? [[String : Any]] {
+                    
+                    for (index,item) in transactions.enumerated() {
+                        
+                        if let id = item["transactionId"] as? String,let flag = item["status"] as? Int {
+                            
+                            if flag == 1 {
+                                if let transaction = self.localTransactions[id] {
+                                    SKPaymentQueue.default().finishTransaction(transaction);
+                                }
+                                self.localTransactions.removeValue(forKey: id);
+                                if index == transactions.count - 1 {
+                                    //最后一个是成功的就算成功
+                                    chargeResult = true;
+                                } else {
+                                    haveOtherSuccessed = true;
+                                }
+                                
+                            }
+                        }
+                    }
+                }
+                
+                print("请求成功：%@",result);
+                self.requestState = chargeResult ? .chargeSuccessed : . purchaseFailed;
+                if chargeResult {
+                    self.requestCallback?(result,nil);
+                    NotificationCenter.default.post(name: .init(dy_Notification_purchase_chargeSuccessed), object: response);
+                } else {
+                    //只要有其中一个成功就通知外面
+                    if haveOtherSuccessed {
+                        NotificationCenter.default.post(name: .init(dy_Notification_purchase_chargeSuccessed), object: response);
+                    }
+                    let error = NSError.init(domain: "二次票据验证失败", code: -1, userInfo: nil)
+                    self.requestCallback?(nil,error);
+                }
                
-                print("请求成功：%@",response);
-                self.requestState = .chargeSuccessed;
-                self.requestCallback?(result,nil);
-                NotificationCenter.default.post(name: .init(dy_Notification_purchase_chargeSuccessed), object: response);
-                SKPaymentQueue.default().finishTransaction(transaction);
             } else {
                 
-                print("内购票据验证失败： %@", response);
+                print("内购票据验证失败： %@", response ?? "");
                 self.requestState = .chargeFaild;
                 let err = NSError.init(domain: error?.errorMessage ?? "充值失败！", code: self.requestState?.rawValue ?? -1, userInfo: nil);
                 self.requestCallback?(nil,err);
             }
+            self.requestCallback = nil;
+
         }
       
         

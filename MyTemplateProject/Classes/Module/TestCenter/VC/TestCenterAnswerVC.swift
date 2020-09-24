@@ -15,6 +15,10 @@ class TestCenterAnswerVC: YZDTestAnswerVC {
     
     public var chapterId: String?;
     
+    public var gradeId: Int?
+    
+    public var subjectId: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -110,9 +114,9 @@ extension TestCenterAnswerVC {
     }
     
     override func commitAnswer(answers: [[String : String]]) {
-        
+    
         DYNetworkHUD.startLoading()
-        TestCenterNetwork.commitAnswers(answers: answers).dy_startRequest { (response, error) in
+        TestCenterNetwork.commitAnswers(answers: answers,gradeId: self.gradeId ?? -1,subjectId: self.subjectId ?? "").dy_startRequest { (response, error) in
             
             if error != nil {
                 
@@ -126,5 +130,14 @@ extension TestCenterAnswerVC {
             }
         }
     }
+    //MARK: 收藏试题
+    override func collectQuestion(questionId: Int, likeOrUnlike: Bool, callback: @escaping (DYNetworkError?) -> Void) {
+        
+        TestCenterNetwork.collectQuestion(gradeId: self.gradeId ?? 0, subjectId: self.subjectId ?? "", questionId: questionId, likeOrUnlike: likeOrUnlike ? 1 : 0).dy_startRequest { (response, error) in
+            callback(error);
+        }
+    }
+    
+    
     
 }
