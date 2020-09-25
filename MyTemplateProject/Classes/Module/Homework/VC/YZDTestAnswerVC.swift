@@ -259,6 +259,8 @@ extension YZDTestAnswerVC {
                     var dict = self.allTests[self.currentIndex];
                     dict["likeFlag"] = sender.isSelected ? 0 : 1;
                     self.allTests[self.currentIndex] = dict;
+                    let prompt = sender.isSelected ? "成功添加到错题集！" : "移除成功！"
+                    DYNetworkHUD.showInfo(message: prompt);
                 }
             }
         }
@@ -312,12 +314,9 @@ extension YZDTestAnswerVC {
             DYNetworkHUD.showInfo(message: "请至少完成一题！", inView: nil);
             return;
             
-        } else if !self.isEnableClickNoAnswer {
+        } else if !self.isEnableClickNoAnswer &&  self.answersCache.count < self.allTests.count {
             //练习中心要求打完所有题目才能提交
-            if self.answersCache.count < self.allTests.count {
-                DYNetworkHUD.showInfo(message: "还有题未作答！");
-                return;
-            }
+            DYNetworkHUD.showInfo(message: "还有题未作答！");
             
         } else if self.answersCache.keys.count < self.allTests.count {
                         

@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		04D9CD2F49CE7ECB939C1102 /* Pods_MyTemplateProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 954802C722A215C21B6DC642 /* Pods_MyTemplateProject.framework */; };
-		922FB12224CA750700830383 /* YZDTestResultHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 922FB12124CA750700830383 /* YZDTestResultHeader.xib */; };
-		922FB12424CA83E200830383 /* YZDTestResultDetailInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922FB12324CA83E100830383 /* YZDTestResultDetailInfo.swift */; };
 		9238449C250B68CA000B9BE1 /* NCNRechargeNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9238449B250B68CA000B9BE1 /* NCNRechargeNetwork.swift */; };
 		9238449E250B6A14000B9BE1 /* ChargeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9238449D250B6A14000B9BE1 /* ChargeVC.swift */; };
 		923844A0250B6A39000B9BE1 /* MyStudyCoinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9238449F250B6A39000B9BE1 /* MyStudyCoinVC.swift */; };
@@ -23,28 +21,7 @@
 		923DC76A24C6883500CCCADC /* TestWebViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923DC76924C6883400CCCADC /* TestWebViewVC.swift */; };
 		923EC66524DD3B640090C577 /* TestCenterHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923EC66424DD3B640090C577 /* TestCenterHomeVC.swift */; };
 		923EC66724DD3B880090C577 /* TestCenterHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923EC66624DD3B880090C577 /* TestCenterHeaderView.swift */; };
-		9248D89524C57398001C426C /* YZDHomeworkChapterSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9248D89324C57398001C426C /* YZDHomeworkChapterSectionModel.swift */; };
-		9248D89624C57399001C426C /* YZDHomeworkChapterSectionModel_afterWorks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9248D89424C57398001C426C /* YZDHomeworkChapterSectionModel_afterWorks.swift */; };
-		9248D89C24C593C9001C426C /* YZDHomeworkQuestionModel_question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9248D89824C593C8001C426C /* YZDHomeworkQuestionModel_question.swift */; };
-		9248D89D24C593C9001C426C /* YZDHomeworkQuestionModel_optionsMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9248D89924C593C9001C426C /* YZDHomeworkQuestionModel_optionsMap.swift */; };
-		9248D89E24C593C9001C426C /* YZDHomeworkQuestionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9248D89A24C593C9001C426C /* YZDHomeworkQuestionModel.swift */; };
-		9248D89F24C593C9001C426C /* YZDHomeworkQuestionModel_optionsJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9248D89B24C593C9001C426C /* YZDHomeworkQuestionModel_optionsJson.swift */; };
 		9248D8B324C5968A001C426C /* test-html in Resources */ = {isa = PBXBuildFile; fileRef = 9248D8B224C5968A001C426C /* test-html */; };
-		92631AE224B86304005A534C /* YZDHomeworkDetailHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92631AD724B86304005A534C /* YZDHomeworkDetailHeaderView.xib */; };
-		92631AE424B86304005A534C /* YZDHomeworkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92631ADA24B86304005A534C /* YZDHomeworkCell.swift */; };
-		92631AE524B86304005A534C /* YZDHomeworkDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92631ADB24B86304005A534C /* YZDHomeworkDetailHeaderView.swift */; };
-		92631AE624B86304005A534C /* YZDHomeworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92631ADD24B86304005A534C /* YZDHomeworkModel.swift */; };
-		92631AE724B86304005A534C /* YZDHomeworkDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92631ADF24B86304005A534C /* YZDHomeworkDetailVC.swift */; };
-		92631AE824B86304005A534C /* YZDHomeworkVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92631AE024B86304005A534C /* YZDHomeworkVC.swift */; };
-		92631AEB24BBEDA0005A534C /* YZDTestRecordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92631AEA24BBEDA0005A534C /* YZDTestRecordVC.swift */; };
-		92631AED24BC0DD1005A534C /* YZDHomeworkDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92631AEC24BC0DD1005A534C /* YZDHomeworkDetailCell.swift */; };
-		92631AFB24BDC374005A534C /* YZDTestCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92631AFA24BDC374005A534C /* YZDTestCollectionVC.swift */; };
-		92631AFD24BDC395005A534C /* YZDTestResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92631AFC24BDC395005A534C /* YZDTestResultVC.swift */; };
-		92631AFF24BDC3D1005A534C /* YZDTestAnswerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92631AFE24BDC3D1005A534C /* YZDTestAnswerVC.swift */; };
-		92631B0324BDC4D3005A534C /* YZDTestRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92631B0224BDC4D3005A534C /* YZDTestRecordCell.swift */; };
-		92631B0524BDD023005A534C /* YZDTestResultCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92631B0424BDD023005A534C /* YZDTestResultCellTableViewCell.swift */; };
-		92631B0724BDD045005A534C /* YZDTestResultHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92631B0624BDD045005A534C /* YZDTestResultHeader.swift */; };
-		92631B0B24BEAE8B005A534C /* YZDTestResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92631B0A24BEAE8B005A534C /* YZDTestResultCell.swift */; };
 		92631B3424BFF024005A534C /* HomeNetWork.m in Sources */ = {isa = PBXBuildFile; fileRef = 92631B0F24BFF024005A534C /* HomeNetWork.m */; };
 		92631B3524BFF024005A534C /* MainNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 92631B1124BFF024005A534C /* MainNetwork.m */; };
 		92631B3624BFF024005A534C /* MyNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 92631B1324BFF024005A534C /* MyNetwork.m */; };
@@ -80,14 +57,35 @@
 		92EE7EFB24B8570300BF4DF7 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EE7EBB24B8570200BF4DF7 /* HomeVC.swift */; };
 		92EE7EFC24B8570300BF4DF7 /* MyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EE7EBE24B8570200BF4DF7 /* MyVC.swift */; };
 		92EE7EFD24B8570300BF4DF7 /* MyVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92EE7EBF24B8570200BF4DF7 /* MyVC.xib */; };
-		92F874AA24C13C780063F8B1 /* YZDHomeworkNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F874A924C13C780063F8B1 /* YZDHomeworkNetwork.swift */; };
-		92F874AC24C19CC50063F8B1 /* YZDTestRecordCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F874AB24C19CC50063F8B1 /* YZDTestRecordCellModel.swift */; };
+		92F2D2DC251C988900317D5D /* YZDHomeworkChapterSectionModel_afterWorks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F2D2BE251C988800317D5D /* YZDHomeworkChapterSectionModel_afterWorks.swift */; };
+		92F2D2DD251C988900317D5D /* YZDHomeworkQuestionModel_question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F2D2C0251C988800317D5D /* YZDHomeworkQuestionModel_question.swift */; };
+		92F2D2DE251C988900317D5D /* YZDHomeworkQuestionModel_optionsJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F2D2C1251C988800317D5D /* YZDHomeworkQuestionModel_optionsJson.swift */; };
+		92F2D2DF251C988900317D5D /* YZDHomeworkQuestionModel_optionsMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F2D2C2251C988800317D5D /* YZDHomeworkQuestionModel_optionsMap.swift */; };
+		92F2D2E0251C988900317D5D /* YZDHomeworkQuestionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F2D2C3251C988800317D5D /* YZDHomeworkQuestionModel.swift */; };
+		92F2D2E1251C988900317D5D /* YZDTestRecordCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F2D2C4251C988800317D5D /* YZDTestRecordCellModel.swift */; };
+		92F2D2E2251C988900317D5D /* YZDTestResultDetailInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F2D2C5251C988800317D5D /* YZDTestResultDetailInfo.swift */; };
+		92F2D2E3251C988900317D5D /* YZDHomeworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F2D2C6251C988800317D5D /* YZDHomeworkModel.swift */; };
+		92F2D2E4251C988900317D5D /* YZDHomeworkChapterSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F2D2C7251C988800317D5D /* YZDHomeworkChapterSectionModel.swift */; };
+		92F2D2E5251C988900317D5D /* YZDHomeworkNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F2D2C9251C988800317D5D /* YZDHomeworkNetwork.swift */; };
+		92F2D2E6251C988900317D5D /* YZDHomeworkDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F2D2CB251C988800317D5D /* YZDHomeworkDetailVC.swift */; };
+		92F2D2E7251C988900317D5D /* YZDTestRecordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F2D2CC251C988800317D5D /* YZDTestRecordVC.swift */; };
+		92F2D2E8251C988900317D5D /* YZDHomeworkVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F2D2CD251C988900317D5D /* YZDHomeworkVC.swift */; };
+		92F2D2E9251C988900317D5D /* YZDTestCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F2D2CE251C988900317D5D /* YZDTestCollectionVC.swift */; };
+		92F2D2EA251C988900317D5D /* YZDTestResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F2D2CF251C988900317D5D /* YZDTestResultVC.swift */; };
+		92F2D2EB251C988900317D5D /* YZDTestAnswerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F2D2D0251C988900317D5D /* YZDTestAnswerVC.swift */; };
+		92F2D2EC251C988900317D5D /* YZDHomeworkDetailHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92F2D2D2251C988900317D5D /* YZDHomeworkDetailHeaderView.xib */; };
+		92F2D2ED251C988900317D5D /* YZDTestResultHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92F2D2D3251C988900317D5D /* YZDTestResultHeader.xib */; };
+		92F2D2EE251C988900317D5D /* YZDHomeworkDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F2D2D5251C988900317D5D /* YZDHomeworkDetailCell.swift */; };
+		92F2D2EF251C988900317D5D /* YZDTestResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F2D2D6251C988900317D5D /* YZDTestResultCell.swift */; };
+		92F2D2F0251C988900317D5D /* YZDTestResultCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F2D2D7251C988900317D5D /* YZDTestResultCellTableViewCell.swift */; };
+		92F2D2F1251C988900317D5D /* YZDHomeworkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F2D2D8251C988900317D5D /* YZDHomeworkCell.swift */; };
+		92F2D2F2251C988900317D5D /* YZDTestRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F2D2D9251C988900317D5D /* YZDTestRecordCell.swift */; };
+		92F2D2F3251C988900317D5D /* YZDTestResultHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F2D2DA251C988900317D5D /* YZDTestResultHeader.swift */; };
+		92F2D2F4251C988900317D5D /* YZDHomeworkDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F2D2DB251C988900317D5D /* YZDHomeworkDetailHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		5DED31BCD404196FBE8CB7E0 /* Pods-MyTemplateProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTemplateProject.debug.xcconfig"; path = "Target Support Files/Pods-MyTemplateProject/Pods-MyTemplateProject.debug.xcconfig"; sourceTree = "<group>"; };
-		922FB12124CA750700830383 /* YZDTestResultHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YZDTestResultHeader.xib; sourceTree = "<group>"; };
-		922FB12324CA83E100830383 /* YZDTestResultDetailInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDTestResultDetailInfo.swift; sourceTree = "<group>"; };
 		9238449B250B68CA000B9BE1 /* NCNRechargeNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NCNRechargeNetwork.swift; sourceTree = "<group>"; };
 		9238449D250B6A14000B9BE1 /* ChargeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChargeVC.swift; sourceTree = "<group>"; };
 		9238449F250B6A39000B9BE1 /* MyStudyCoinVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyCoinVC.swift; sourceTree = "<group>"; };
@@ -101,28 +99,7 @@
 		923DC76924C6883400CCCADC /* TestWebViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestWebViewVC.swift; sourceTree = "<group>"; };
 		923EC66424DD3B640090C577 /* TestCenterHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCenterHomeVC.swift; sourceTree = "<group>"; };
 		923EC66624DD3B880090C577 /* TestCenterHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCenterHeaderView.swift; sourceTree = "<group>"; };
-		9248D89324C57398001C426C /* YZDHomeworkChapterSectionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDHomeworkChapterSectionModel.swift; sourceTree = "<group>"; };
-		9248D89424C57398001C426C /* YZDHomeworkChapterSectionModel_afterWorks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDHomeworkChapterSectionModel_afterWorks.swift; sourceTree = "<group>"; };
-		9248D89824C593C8001C426C /* YZDHomeworkQuestionModel_question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDHomeworkQuestionModel_question.swift; sourceTree = "<group>"; };
-		9248D89924C593C9001C426C /* YZDHomeworkQuestionModel_optionsMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDHomeworkQuestionModel_optionsMap.swift; sourceTree = "<group>"; };
-		9248D89A24C593C9001C426C /* YZDHomeworkQuestionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDHomeworkQuestionModel.swift; sourceTree = "<group>"; };
-		9248D89B24C593C9001C426C /* YZDHomeworkQuestionModel_optionsJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDHomeworkQuestionModel_optionsJson.swift; sourceTree = "<group>"; };
 		9248D8B224C5968A001C426C /* test-html */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "test-html"; sourceTree = "<group>"; };
-		92631AD724B86304005A534C /* YZDHomeworkDetailHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YZDHomeworkDetailHeaderView.xib; sourceTree = "<group>"; };
-		92631ADA24B86304005A534C /* YZDHomeworkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDHomeworkCell.swift; sourceTree = "<group>"; };
-		92631ADB24B86304005A534C /* YZDHomeworkDetailHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDHomeworkDetailHeaderView.swift; sourceTree = "<group>"; };
-		92631ADD24B86304005A534C /* YZDHomeworkModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDHomeworkModel.swift; sourceTree = "<group>"; };
-		92631ADF24B86304005A534C /* YZDHomeworkDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDHomeworkDetailVC.swift; sourceTree = "<group>"; };
-		92631AE024B86304005A534C /* YZDHomeworkVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDHomeworkVC.swift; sourceTree = "<group>"; };
-		92631AEA24BBEDA0005A534C /* YZDTestRecordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YZDTestRecordVC.swift; sourceTree = "<group>"; };
-		92631AEC24BC0DD1005A534C /* YZDHomeworkDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YZDHomeworkDetailCell.swift; sourceTree = "<group>"; };
-		92631AFA24BDC374005A534C /* YZDTestCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YZDTestCollectionVC.swift; sourceTree = "<group>"; };
-		92631AFC24BDC395005A534C /* YZDTestResultVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YZDTestResultVC.swift; sourceTree = "<group>"; };
-		92631AFE24BDC3D1005A534C /* YZDTestAnswerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YZDTestAnswerVC.swift; sourceTree = "<group>"; };
-		92631B0224BDC4D3005A534C /* YZDTestRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YZDTestRecordCell.swift; sourceTree = "<group>"; };
-		92631B0424BDD023005A534C /* YZDTestResultCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YZDTestResultCellTableViewCell.swift; sourceTree = "<group>"; };
-		92631B0624BDD045005A534C /* YZDTestResultHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YZDTestResultHeader.swift; sourceTree = "<group>"; };
-		92631B0A24BEAE8B005A534C /* YZDTestResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YZDTestResultCell.swift; sourceTree = "<group>"; };
 		92631B0F24BFF024005A534C /* HomeNetWork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeNetWork.m; sourceTree = "<group>"; };
 		92631B1024BFF024005A534C /* HomeNetWork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeNetWork.h; sourceTree = "<group>"; };
 		92631B1124BFF024005A534C /* MainNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainNetwork.m; sourceTree = "<group>"; };
@@ -168,8 +145,31 @@
 		92EE7EBB24B8570200BF4DF7 /* HomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		92EE7EBE24B8570200BF4DF7 /* MyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyVC.swift; sourceTree = "<group>"; };
 		92EE7EBF24B8570200BF4DF7 /* MyVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyVC.xib; sourceTree = "<group>"; };
-		92F874A924C13C780063F8B1 /* YZDHomeworkNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YZDHomeworkNetwork.swift; sourceTree = "<group>"; };
-		92F874AB24C19CC50063F8B1 /* YZDTestRecordCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YZDTestRecordCellModel.swift; sourceTree = "<group>"; };
+		92F2D2BE251C988800317D5D /* YZDHomeworkChapterSectionModel_afterWorks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDHomeworkChapterSectionModel_afterWorks.swift; sourceTree = "<group>"; };
+		92F2D2C0251C988800317D5D /* YZDHomeworkQuestionModel_question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDHomeworkQuestionModel_question.swift; sourceTree = "<group>"; };
+		92F2D2C1251C988800317D5D /* YZDHomeworkQuestionModel_optionsJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDHomeworkQuestionModel_optionsJson.swift; sourceTree = "<group>"; };
+		92F2D2C2251C988800317D5D /* YZDHomeworkQuestionModel_optionsMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDHomeworkQuestionModel_optionsMap.swift; sourceTree = "<group>"; };
+		92F2D2C3251C988800317D5D /* YZDHomeworkQuestionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDHomeworkQuestionModel.swift; sourceTree = "<group>"; };
+		92F2D2C4251C988800317D5D /* YZDTestRecordCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDTestRecordCellModel.swift; sourceTree = "<group>"; };
+		92F2D2C5251C988800317D5D /* YZDTestResultDetailInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDTestResultDetailInfo.swift; sourceTree = "<group>"; };
+		92F2D2C6251C988800317D5D /* YZDHomeworkModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDHomeworkModel.swift; sourceTree = "<group>"; };
+		92F2D2C7251C988800317D5D /* YZDHomeworkChapterSectionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDHomeworkChapterSectionModel.swift; sourceTree = "<group>"; };
+		92F2D2C9251C988800317D5D /* YZDHomeworkNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDHomeworkNetwork.swift; sourceTree = "<group>"; };
+		92F2D2CB251C988800317D5D /* YZDHomeworkDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDHomeworkDetailVC.swift; sourceTree = "<group>"; };
+		92F2D2CC251C988800317D5D /* YZDTestRecordVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDTestRecordVC.swift; sourceTree = "<group>"; };
+		92F2D2CD251C988900317D5D /* YZDHomeworkVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDHomeworkVC.swift; sourceTree = "<group>"; };
+		92F2D2CE251C988900317D5D /* YZDTestCollectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDTestCollectionVC.swift; sourceTree = "<group>"; };
+		92F2D2CF251C988900317D5D /* YZDTestResultVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDTestResultVC.swift; sourceTree = "<group>"; };
+		92F2D2D0251C988900317D5D /* YZDTestAnswerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDTestAnswerVC.swift; sourceTree = "<group>"; };
+		92F2D2D2251C988900317D5D /* YZDHomeworkDetailHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YZDHomeworkDetailHeaderView.xib; sourceTree = "<group>"; };
+		92F2D2D3251C988900317D5D /* YZDTestResultHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YZDTestResultHeader.xib; sourceTree = "<group>"; };
+		92F2D2D5251C988900317D5D /* YZDHomeworkDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDHomeworkDetailCell.swift; sourceTree = "<group>"; };
+		92F2D2D6251C988900317D5D /* YZDTestResultCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDTestResultCell.swift; sourceTree = "<group>"; };
+		92F2D2D7251C988900317D5D /* YZDTestResultCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDTestResultCellTableViewCell.swift; sourceTree = "<group>"; };
+		92F2D2D8251C988900317D5D /* YZDHomeworkCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDHomeworkCell.swift; sourceTree = "<group>"; };
+		92F2D2D9251C988900317D5D /* YZDTestRecordCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDTestRecordCell.swift; sourceTree = "<group>"; };
+		92F2D2DA251C988900317D5D /* YZDTestResultHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDTestResultHeader.swift; sourceTree = "<group>"; };
+		92F2D2DB251C988900317D5D /* YZDHomeworkDetailHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZDHomeworkDetailHeaderView.swift; sourceTree = "<group>"; };
 		954802C722A215C21B6DC642 /* Pods_MyTemplateProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyTemplateProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA9EC7382AF665F2C02C2AAE /* Pods-MyTemplateProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTemplateProject.release.xcconfig"; path = "Target Support Files/Pods-MyTemplateProject/Pods-MyTemplateProject.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -299,17 +299,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		9248D89724C593B4001C426C /* Test */ = {
-			isa = PBXGroup;
-			children = (
-				9248D89B24C593C9001C426C /* YZDHomeworkQuestionModel_optionsJson.swift */,
-				9248D89924C593C9001C426C /* YZDHomeworkQuestionModel_optionsMap.swift */,
-				9248D89824C593C8001C426C /* YZDHomeworkQuestionModel_question.swift */,
-				9248D89A24C593C9001C426C /* YZDHomeworkQuestionModel.swift */,
-			);
-			path = Test;
-			sourceTree = "<group>";
-		};
 		9248D8A024C5962E001C426C /* Other */ = {
 			isa = PBXGroup;
 			children = (
@@ -326,74 +315,16 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
-		924FE3E324ED26E300101AB1 /* Network */ = {
-			isa = PBXGroup;
-			children = (
-				92F874A924C13C780063F8B1 /* YZDHomeworkNetwork.swift */,
-			);
-			path = Network;
-			sourceTree = "<group>";
-		};
 		92631AD424B85BF1005A534C /* Homework */ = {
 			isa = PBXGroup;
 			children = (
-				924FE3E324ED26E300101AB1 /* Network */,
+				92F2D2BD251C988800317D5D /* Model */,
+				92F2D2C8251C988800317D5D /* Network */,
+				92F2D2CA251C988800317D5D /* VC */,
+				92F2D2D1251C988900317D5D /* View */,
 				9248D8A024C5962E001C426C /* Other */,
-				92631ADC24B86304005A534C /* Model */,
-				92631ADE24B86304005A534C /* VC */,
-				92631AD624B86304005A534C /* View */,
 			);
 			path = Homework;
-			sourceTree = "<group>";
-		};
-		92631AD624B86304005A534C /* View */ = {
-			isa = PBXGroup;
-			children = (
-				92631AD724B86304005A534C /* YZDHomeworkDetailHeaderView.xib */,
-				92631AD924B86304005A534C /* Cell */,
-				92631ADB24B86304005A534C /* YZDHomeworkDetailHeaderView.swift */,
-				92631B0624BDD045005A534C /* YZDTestResultHeader.swift */,
-				922FB12124CA750700830383 /* YZDTestResultHeader.xib */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		92631AD924B86304005A534C /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				92631ADA24B86304005A534C /* YZDHomeworkCell.swift */,
-				92631AEC24BC0DD1005A534C /* YZDHomeworkDetailCell.swift */,
-				92631B0224BDC4D3005A534C /* YZDTestRecordCell.swift */,
-				92631B0424BDD023005A534C /* YZDTestResultCellTableViewCell.swift */,
-				92631B0A24BEAE8B005A534C /* YZDTestResultCell.swift */,
-			);
-			path = Cell;
-			sourceTree = "<group>";
-		};
-		92631ADC24B86304005A534C /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				922FB12324CA83E100830383 /* YZDTestResultDetailInfo.swift */,
-				9248D89724C593B4001C426C /* Test */,
-				9248D89424C57398001C426C /* YZDHomeworkChapterSectionModel_afterWorks.swift */,
-				9248D89324C57398001C426C /* YZDHomeworkChapterSectionModel.swift */,
-				92F874AB24C19CC50063F8B1 /* YZDTestRecordCellModel.swift */,
-				92631ADD24B86304005A534C /* YZDHomeworkModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		92631ADE24B86304005A534C /* VC */ = {
-			isa = PBXGroup;
-			children = (
-				92631AE024B86304005A534C /* YZDHomeworkVC.swift */,
-				92631ADF24B86304005A534C /* YZDHomeworkDetailVC.swift */,
-				92631AEA24BBEDA0005A534C /* YZDTestRecordVC.swift */,
-				92631AFA24BDC374005A534C /* YZDTestCollectionVC.swift */,
-				92631AFC24BDC395005A534C /* YZDTestResultVC.swift */,
-				92631AFE24BDC3D1005A534C /* YZDTestAnswerVC.swift */,
-			);
-			path = VC;
 			sourceTree = "<group>";
 		};
 		92631B0C24BFF023005A534C /* Network */ = {
@@ -615,6 +546,75 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		92F2D2BD251C988800317D5D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				92F2D2BE251C988800317D5D /* YZDHomeworkChapterSectionModel_afterWorks.swift */,
+				92F2D2BF251C988800317D5D /* Test */,
+				92F2D2C4251C988800317D5D /* YZDTestRecordCellModel.swift */,
+				92F2D2C5251C988800317D5D /* YZDTestResultDetailInfo.swift */,
+				92F2D2C6251C988800317D5D /* YZDHomeworkModel.swift */,
+				92F2D2C7251C988800317D5D /* YZDHomeworkChapterSectionModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		92F2D2BF251C988800317D5D /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				92F2D2C0251C988800317D5D /* YZDHomeworkQuestionModel_question.swift */,
+				92F2D2C1251C988800317D5D /* YZDHomeworkQuestionModel_optionsJson.swift */,
+				92F2D2C2251C988800317D5D /* YZDHomeworkQuestionModel_optionsMap.swift */,
+				92F2D2C3251C988800317D5D /* YZDHomeworkQuestionModel.swift */,
+			);
+			path = Test;
+			sourceTree = "<group>";
+		};
+		92F2D2C8251C988800317D5D /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				92F2D2C9251C988800317D5D /* YZDHomeworkNetwork.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		92F2D2CA251C988800317D5D /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				92F2D2CB251C988800317D5D /* YZDHomeworkDetailVC.swift */,
+				92F2D2CC251C988800317D5D /* YZDTestRecordVC.swift */,
+				92F2D2CD251C988900317D5D /* YZDHomeworkVC.swift */,
+				92F2D2CE251C988900317D5D /* YZDTestCollectionVC.swift */,
+				92F2D2CF251C988900317D5D /* YZDTestResultVC.swift */,
+				92F2D2D0251C988900317D5D /* YZDTestAnswerVC.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		92F2D2D1251C988900317D5D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				92F2D2D2251C988900317D5D /* YZDHomeworkDetailHeaderView.xib */,
+				92F2D2D3251C988900317D5D /* YZDTestResultHeader.xib */,
+				92F2D2D4251C988900317D5D /* Cell */,
+				92F2D2DA251C988900317D5D /* YZDTestResultHeader.swift */,
+				92F2D2DB251C988900317D5D /* YZDHomeworkDetailHeaderView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		92F2D2D4251C988900317D5D /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				92F2D2D5251C988900317D5D /* YZDHomeworkDetailCell.swift */,
+				92F2D2D6251C988900317D5D /* YZDTestResultCell.swift */,
+				92F2D2D7251C988900317D5D /* YZDTestResultCellTableViewCell.swift */,
+				92F2D2D8251C988900317D5D /* YZDHomeworkCell.swift */,
+				92F2D2D9251C988900317D5D /* YZDTestRecordCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		92F874A824C13C250063F8B1 /* YZDHomework */ = {
 			isa = PBXGroup;
 			children = (
@@ -701,12 +701,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				92EE7EFD24B8570300BF4DF7 /* MyVC.xib in Resources */,
-				92631AE224B86304005A534C /* YZDHomeworkDetailHeaderView.xib in Resources */,
 				9248D8B324C5968A001C426C /* test-html in Resources */,
+				92F2D2EC251C988900317D5D /* YZDHomeworkDetailHeaderView.xib in Resources */,
 				92EE7E3D24B8058D00BF4DF7 /* LaunchScreen.storyboard in Resources */,
+				92F2D2ED251C988900317D5D /* YZDTestResultHeader.xib in Resources */,
 				92EE7E3A24B8058D00BF4DF7 /* Assets-main.xcassets in Resources */,
 				923844A6250CAFF7000B9BE1 /* ChargeCollectionCell.xib in Resources */,
-				922FB12224CA750700830383 /* YZDTestResultHeader.xib in Resources */,
 				9271C77724EB88780004E82B /* LoginVC.xib in Resources */,
 				92EE7E3524B8058800BF4DF7 /* Main.storyboard in Resources */,
 			);
@@ -778,62 +778,62 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92631AFD24BDC395005A534C /* YZDTestResultVC.swift in Sources */,
-				92631AE824B86304005A534C /* YZDHomeworkVC.swift in Sources */,
+				92F2D2E9251C988900317D5D /* YZDTestCollectionVC.swift in Sources */,
+				92F2D2EE251C988900317D5D /* YZDHomeworkDetailCell.swift in Sources */,
 				9271C75F24E0F7C00004E82B /* TestCenterChooseVC.swift in Sources */,
-				92631AE624B86304005A534C /* YZDHomeworkModel.swift in Sources */,
 				9271C76324E3E43B0004E82B /* DYBaseNavigationVC.swift in Sources */,
 				92631B3424BFF024005A534C /* HomeNetWork.m in Sources */,
-				9248D89524C57398001C426C /* YZDHomeworkChapterSectionModel.swift in Sources */,
 				923845182511A1F0000B9BE1 /* DYPurchaseManager.swift in Sources */,
+				92F2D2DE251C988900317D5D /* YZDHomeworkQuestionModel_optionsJson.swift in Sources */,
+				92F2D2F2251C988900317D5D /* YZDTestRecordCell.swift in Sources */,
+				92F2D2F1251C988900317D5D /* YZDHomeworkCell.swift in Sources */,
 				92EE7E3224B8058800BF4DF7 /* ViewController.swift in Sources */,
 				92631B3524BFF024005A534C /* MainNetwork.m in Sources */,
+				92F2D2F4251C988900317D5D /* YZDHomeworkDetailHeaderView.swift in Sources */,
+				92F2D2E7251C988900317D5D /* YZDTestRecordVC.swift in Sources */,
+				92F2D2DF251C988900317D5D /* YZDHomeworkQuestionModel_optionsMap.swift in Sources */,
+				92F2D2E4251C988900317D5D /* YZDHomeworkChapterSectionModel.swift in Sources */,
 				92631B3724BFF024005A534C /* LoginNetwork.m in Sources */,
 				92EE7EFB24B8570300BF4DF7 /* HomeVC.swift in Sources */,
-				9248D89C24C593C9001C426C /* YZDHomeworkQuestionModel_question.swift in Sources */,
+				92F2D2E8251C988900317D5D /* YZDHomeworkVC.swift in Sources */,
 				928D0C3624FFAB750030FDAB /* TestCenterResultVC.swift in Sources */,
+				92F2D2E6251C988900317D5D /* YZDHomeworkDetailVC.swift in Sources */,
 				92EE7E2E24B8058800BF4DF7 /* AppDelegate.swift in Sources */,
+				92F2D2F0251C988900317D5D /* YZDTestResultCellTableViewCell.swift in Sources */,
 				9271C77124E7DB900004E82B /* DYVolumeView.swift in Sources */,
 				9271C76724E4D4980004E82B /* TestCenterChapterNodeCell.swift in Sources */,
-				92631AEB24BBEDA0005A534C /* YZDTestRecordVC.swift in Sources */,
 				9238451E251316CD000B9BE1 /* ChargeNetwork.swift in Sources */,
 				92EE7E3024B8058800BF4DF7 /* SceneDelegate.swift in Sources */,
 				92384513250F1793000B9BE1 /* MyStudyCoinCellModel.swift in Sources */,
 				923844A2250B6ECC000B9BE1 /* CommonNetwork.swift in Sources */,
-				9248D89E24C593C9001C426C /* YZDHomeworkQuestionModel.swift in Sources */,
+				92F2D2EF251C988900317D5D /* YZDTestResultCell.swift in Sources */,
 				923844A5250CAFF7000B9BE1 /* ChargeCollectionCell.swift in Sources */,
-				92F874AC24C19CC50063F8B1 /* YZDTestRecordCellModel.swift in Sources */,
+				92F2D2DD251C988900317D5D /* YZDHomeworkQuestionModel_question.swift in Sources */,
 				9271C76524E3EDC20004E82B /* TestCenterChooseModel.swift in Sources */,
 				9238449C250B68CA000B9BE1 /* NCNRechargeNetwork.swift in Sources */,
-				92631B0724BDD045005A534C /* YZDTestResultHeader.swift in Sources */,
-				92631B0B24BEAE8B005A534C /* YZDTestResultCell.swift in Sources */,
+				92F2D2E1251C988900317D5D /* YZDTestRecordCellModel.swift in Sources */,
+				92F2D2E5251C988900317D5D /* YZDHomeworkNetwork.swift in Sources */,
 				9271C77624EB88780004E82B /* LoginVC.swift in Sources */,
+				92F2D2F3251C988900317D5D /* YZDTestResultHeader.swift in Sources */,
+				92F2D2E0251C988900317D5D /* YZDHomeworkQuestionModel.swift in Sources */,
 				923DC76A24C6883500CCCADC /* TestWebViewVC.swift in Sources */,
+				92F2D2EA251C988900317D5D /* YZDTestResultVC.swift in Sources */,
 				9271C77E24EBDCB80004E82B /* LiveVC.swift in Sources */,
-				92631AED24BC0DD1005A534C /* YZDHomeworkDetailCell.swift in Sources */,
 				923EC66524DD3B640090C577 /* TestCenterHomeVC.swift in Sources */,
 				9271C76F24E7D76F0004E82B /* APHomeVC.swift in Sources */,
-				922FB12424CA83E200830383 /* YZDTestResultDetailInfo.swift in Sources */,
-				92631AFF24BDC3D1005A534C /* YZDTestAnswerVC.swift in Sources */,
 				923EC66724DD3B880090C577 /* TestCenterHeaderView.swift in Sources */,
+				92F2D2DC251C988900317D5D /* YZDHomeworkChapterSectionModel_afterWorks.swift in Sources */,
 				92EE7EFC24B8570300BF4DF7 /* MyVC.swift in Sources */,
 				928D0DBE2501DF3F0030FDAB /* TestCenterLocalChooseModel.swift in Sources */,
-				92631AE724B86304005A534C /* YZDHomeworkDetailVC.swift in Sources */,
-				92F874AA24C13C780063F8B1 /* YZDHomeworkNetwork.swift in Sources */,
 				92EE7E3824B8058800BF4DF7 /* MyTemplateProject.xcdatamodeld in Sources */,
 				92384510250F161E000B9BE1 /* MyStudyCoinCell.swift in Sources */,
-				9248D89F24C593C9001C426C /* YZDHomeworkQuestionModel_optionsJson.swift in Sources */,
-				9248D89D24C593C9001C426C /* YZDHomeworkQuestionModel_optionsMap.swift in Sources */,
-				92631AE524B86304005A534C /* YZDHomeworkDetailHeaderView.swift in Sources */,
-				92631AFB24BDC374005A534C /* YZDTestCollectionVC.swift in Sources */,
-				92631B0324BDC4D3005A534C /* YZDTestRecordCell.swift in Sources */,
-				92631B0524BDD023005A534C /* YZDTestResultCellTableViewCell.swift in Sources */,
 				9238449E250B6A14000B9BE1 /* ChargeVC.swift in Sources */,
-				92631AE424B86304005A534C /* YZDHomeworkCell.swift in Sources */,
 				923844A0250B6A39000B9BE1 /* MyStudyCoinVC.swift in Sources */,
-				9248D89624C57399001C426C /* YZDHomeworkChapterSectionModel_afterWorks.swift in Sources */,
+				92F2D2E2251C988900317D5D /* YZDTestResultDetailInfo.swift in Sources */,
 				92631B3624BFF024005A534C /* MyNetwork.m in Sources */,
+				92F2D2E3251C988900317D5D /* YZDHomeworkModel.swift in Sources */,
 				9271C75D24E0E18B0004E82B /* TestCenterNetwork.swift in Sources */,
+				92F2D2EB251C988900317D5D /* YZDTestAnswerVC.swift in Sources */,
 				9271C76924E53B760004E82B /* TestCenterAnswerVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -994,7 +994,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cunw.xinyunclassroom;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ios.template;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_NAME)/OC-bridge-header.h";
 				SWIFT_VERSION = 5.0;
@@ -1020,7 +1020,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.cunw.xinyunclassroom;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ios.template;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_NAME)/OC-bridge-header.h";
 				SWIFT_VERSION = 5.0;

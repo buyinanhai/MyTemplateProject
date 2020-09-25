@@ -159,7 +159,7 @@ class YZDTestCollectionVC: UIViewController {
     private var currentPage: Int = 0;
     private var pageSize: Int {
         get {
-            return 4;
+            return 5;
         }
     }
     
@@ -374,6 +374,7 @@ extension YZDTestCollectionVC {
         if self.webView.scrollView.mj_header?.isRefreshing ?? false {
             self.currentPage = 0;
         }
+        self.webView.scrollView.mj_footer = nil;
         YZDHomeworkNetwork.getMyErrorCollections(classTypeId: self.productId ?? 0, subjectId: self.currentSubjectId, gradeId: self.currentGradeId, page: self.currentPage, pageSize: self.pageSize).dy_startRequest { (response, error) in
             self.webView.scrollView.mj_header?.endRefreshing();
             self.webView.scrollView.mj_footer?.endRefreshing();

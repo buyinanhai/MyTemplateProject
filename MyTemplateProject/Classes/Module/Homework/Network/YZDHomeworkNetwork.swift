@@ -59,8 +59,10 @@ public class YZDHomeworkNetwork: DYBaseNetwork {
     }
     class private var userId: Int {
         
+        
         get {
             
+            return 2984931;
             if let userId = DYNetworkConfig.share()?.extraData["userId"] as? Int {
                 return userId;
             } else {
@@ -274,7 +276,7 @@ public class YZDHomeworkNetwork: DYBaseNetwork {
                 "subjectId": subjectId ?? "",
                 "gradeId" : gradeId ?? 0,
             ];
-            if (subjectId != nil) {
+            if (subjectId == nil) {
                 obj.dy_requestArgument = [
                     "userId": self.userId,
                     "token" : self.token,

@@ -47,6 +47,9 @@
     ],
     "ObjectMapper": [
 
+    ],
+    "SDWebImage": [
+
     ]
   },
   "pod_target_xcconfig": {

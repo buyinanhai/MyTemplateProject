@@ -53,7 +53,13 @@ class YZDHomeworkDetailHeaderView: UIView {
                 self.acountLabel.text = "题量：\(value.questionCount ?? 0)";
                 self.finishedCount.text = "已完成：\(value.finishCount ?? 0)";
                 self.accuracyLabel.text = "正确率：\(value.accuracy ?? "0.0")%";
-                
+                if let accuracy = value.accuracy {
+                    if accuracy == "-1" {
+                        self.accuracyLabel.text = "正确率：未作答";
+                    } else {
+                        self.accuracyLabel.text = "正确率：\(accuracy)%";
+                    }
+                }
             }
             
         }

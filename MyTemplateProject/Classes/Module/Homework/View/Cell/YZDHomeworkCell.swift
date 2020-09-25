@@ -21,7 +21,12 @@ class YZDHomeworkCell: DYTableViewCell {
             if let value = self.model as? YZDHomeworkModel {
                 
                 self.titleLabel.text = value.homeworkName;
-                self.topicLabel.text = "题量：\(value.topicCount ?? 0)   正确率：\(value.accuracy == ””“ ?? "0.0")%"
+                if (value.accuracy ?? "") == "-1" {
+                    self.topicLabel.text = "题量：\(value.topicCount ?? 0)   正确率：未作答"
+                } else {
+                    self.topicLabel.text = "题量：\(value.topicCount ?? 0)   正确率：\(value.accuracy ?? "0.0")%"
+                }
+
 //                sd_loadingImg(value.icon ?? "", iv: self.iconView, defImgName: "00000000006")
                 self.iconView.dy_setImage(urlStr: value.icon ?? "", placeholder: UIImage.init(named: "00000000006"));
                 
