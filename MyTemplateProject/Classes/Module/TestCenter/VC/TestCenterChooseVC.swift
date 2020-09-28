@@ -148,6 +148,8 @@ class TestCenterChooseVC: UIViewController {
             if let _response = response as? [[String : Any]] {
                 
                 //"stageId":"1","name":"小学"
+                self.selectModel.removeValue(forKey: TestCenterChooseType.level.rawValue);
+
                 var models:[TestCenterChooseModel] = [];
                 for (index,item) in _response.enumerated() {
                     
@@ -179,6 +181,8 @@ class TestCenterChooseVC: UIViewController {
             if let _response = response as? [[String : Any]] {
                 
                 DYNetworkHUD.dismiss()
+                self.selectModel.removeValue(forKey: TestCenterChooseType.grade.rawValue);
+
                 //{"id":1,"name":"一年级","stageId":1}
                 var models:[TestCenterChooseModel] = [];
                 for (index,item) in _response.enumerated() {
@@ -219,6 +223,7 @@ class TestCenterChooseVC: UIViewController {
                 
                 //"subjectId":"1","name":"小学"
                 DYNetworkHUD.dismiss();
+                self.selectModel.removeValue(forKey: TestCenterChooseType.subject.rawValue);
                 var models:[TestCenterChooseModel] = [];
                 for (index,item) in _response.enumerated() {
                     
@@ -256,6 +261,7 @@ class TestCenterChooseVC: UIViewController {
                 DYNetworkHUD.dismiss();
                 //"versionId":"18801","versionName":"湖南版"
                 var models:[TestCenterChooseModel] = [];
+                self.selectModel.removeValue(forKey: TestCenterChooseType.version.rawValue);
                 for (index,item) in _response.enumerated() {
                     
                     if let id = item["versionId"] as? String, let name = item["versionName"] as? String {
@@ -290,6 +296,7 @@ class TestCenterChooseVC: UIViewController {
                 
                 //"subjectId":"1","name":"小学"
                 DYNetworkHUD.dismiss();
+                self.selectModel.removeValue(forKey: TestCenterChooseType.volume.rawValue);
                 var models:[TestCenterChooseModel] = [];
                 for (index,item) in _response.enumerated() {
                     
@@ -634,6 +641,9 @@ extension TestCenterChooseVC: UICollectionViewDataSource, UICollectionViewDelega
         } else if type == .grade {
             
             self.loadSubjects(currentModel?.extra?["stageId"] as? Int ?? 0);
+        } else if type  == .subject {
+            
+            self.loadVerson(from: currentModel?.id ?? 0);
         }
     }
     

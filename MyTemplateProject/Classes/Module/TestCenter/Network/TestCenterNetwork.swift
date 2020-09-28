@@ -238,7 +238,7 @@ class TestCenterNetwork: DYBaseNetwork {
         obj.dy_requestArgument = [
             "userId": self.userId,
             "token" : self.token,
-            "subjectid": subjectid,
+            "subjectId": subjectid,
         ];
         obj.dy_requestMethod = .GET;
         obj.dy_requestSerializerType = .JSON;
