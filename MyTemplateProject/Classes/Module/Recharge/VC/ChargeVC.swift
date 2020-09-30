@@ -367,10 +367,17 @@ extension ChargeVC: UICollectionViewDataSource, UICollectionViewDelegate, UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        return .init(width: 155, height: 64);
+        let margin = 20.0;
+        var width = (Double(collectionView.width) - margin) * 0.5;
+        if width > 155 {
+            width = 155
+        }
+        return .init(width: width, height: 64);
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return .init(top: 0, left: 0, bottom: 0, right: 0);
+    }
     
     
 }

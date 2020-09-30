@@ -82,7 +82,8 @@ static const NSTimeInterval defautltTimeInterval = 1.0;
 
 - (NSTimeInterval)noClickInterval
 {
-    return [objc_getAssociatedObject(self, @selector(noClickInterval)) doubleValue];
+    return 0.2;
+//    return [objc_getAssociatedObject(self, @selector(noClickInterval)) doubleValue];
 }
 
 - (void)setIsIngoreClick:(BOOL)isIngoreClick
@@ -119,7 +120,7 @@ static const NSTimeInterval defautltTimeInterval = 1.0;
 
 -(void)delayEnableAction{
     self.userInteractionEnabled = NO;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.userInteractionEnabled = YES;
     });
 }

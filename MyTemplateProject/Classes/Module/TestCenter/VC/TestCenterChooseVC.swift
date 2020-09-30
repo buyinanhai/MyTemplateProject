@@ -396,7 +396,7 @@ extension TestCenterChooseVC {
         var headerTitle = "";
         var subjectTitle = "";
         let gradeId = self.selectModel[TestCenterChooseType.grade.rawValue]?.id;
-               
+        var type = 0;
         if self.selectModel[TestCenterChooseType.type.rawValue]?.id == 0 {
             subjectId =  self.selectModel[TestCenterChooseType.subject.rawValue]?.id ?? -1;
             subjectTitle = String.init(format: "%@-%@",self.selectModel[TestCenterChooseType.level.rawValue]?.name ?? "",self.selectModel[TestCenterChooseType.subject.rawValue]?.name ?? "" )
@@ -409,6 +409,7 @@ extension TestCenterChooseVC {
             volumeId = self.selectModel[TestCenterChooseType.volume.rawValue]?.id ?? -1;
             subjectTitle = String.init(format: "%@-%@-%@-%@",self.selectModel[TestCenterChooseType.level.rawValue]?.name ?? "",self.selectModel[TestCenterChooseType.subject.rawValue]?.name ?? "",self.selectModel[TestCenterChooseType.version.rawValue]?.name ?? "",self.selectModel[TestCenterChooseType.volume.rawValue]?.name ?? "" );
             headerTitle = "  章节做题  ";
+            type = 1;
             if volumeId < 0 {
                 DYNetworkHUD.showInfo(message: "请选择册别！", inView: nil);
                 return
@@ -422,6 +423,7 @@ extension TestCenterChooseVC {
             lastVC?.volumeId = volumeId;
             lastVC?.headerTitle = headerTitle;
             lastVC?.gradeId = gradeId;
+            lastVC?.selectedType = type;
             lastVC?.update();
             self.navigationController?.popViewController(animated: true);
         } else {
@@ -432,6 +434,7 @@ extension TestCenterChooseVC {
             vc.volumeId = volumeId;
             vc.headerTitle = headerTitle;
             vc.gradeId = gradeId;
+            vc.selectedType = type;
             self.navigationController?.pushViewController(vc, animated: true);
             self.navigationController?.viewControllers.remove(at: 1);
         }
@@ -617,30 +620,14 @@ extension TestCenterChooseVC: UICollectionViewDataSource, UICollectionViewDelega
         } else if type == .level {
             
             self.loadGrades(stageId: currentModel?.id ?? -1);
-//            if let typeModel = self.selectModel[0] {
 
-//                if typeModel.id == 0 {
-                    //还要联动年级组
-//                    let grade = TestCenterChooseType.grade.rawValue;
-//                    self.dataSource[grade] = self.knowledgeData[grade]?.filter({ (model) -> Bool in
-//                        return model.extra?["stageId"] as? Int ?? 0 == currentModel?.id;
-//                    });
-//                    if let defaultModel = self.dataSource[3]?.first {
-//                        defaultModel.isSelected = true;
-//                        self.selectModel[grade]?.isSelected = false;
-//                        self.selectModel[grade] = defaultModel;
-//                    }
-//                    self.collectionView.reloadSections([grade]);
-//                }
-//                self.loadSubjects(currentModel?.id ?? 0);
-//            }
         } else if type == .version {
             
             self.loadVolume(currentModel?.id ?? 0);
             
         } else if type == .grade {
-            
-            self.loadSubjects(currentModel?.extra?["stageId"] as? Int ?? 0);
+            //年级不需要联动
+//            self.loadSubjects(currentModel?.extra?["stageId"] as? Int ?? 0);
         } else if type  == .subject {
             
             self.loadVerson(from: currentModel?.id ?? 0);

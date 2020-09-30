@@ -23,6 +23,9 @@ class TestCenterHomeVC: UIViewController {
     public var chooseVC: TestCenterChooseVC!
     
     public var gradeId: Int?
+    
+    /// 0 : 知识点  1： 章节目录
+    public var selectedType: Int = 0;
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -274,10 +277,10 @@ extension TestCenterHomeVC: UITableViewDataSource, UITableViewDelegate, TestCent
     private func showAnswerVC(model: TestCenterNodeModel) {
         
         let vc = TestCenterAnswerVC.init();
-        if self.subjectId > 0 {
-            vc.chapterId = model.dy_id;
-        } else {
+        if self.selectedType ==  0 {
             vc.knowledgeId = model.dy_id;
+        } else if self.selectedType == 1 {
+            vc.chapterId = model.dy_id;
         }
         vc.gradeId = self.gradeId;
         vc.subjectId = "\(self.subjectId)";

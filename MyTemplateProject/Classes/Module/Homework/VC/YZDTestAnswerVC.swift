@@ -39,6 +39,8 @@ class YZDTestAnswerVC: UIViewController {
         self.loadData();
         if let leftBtn = self.navigationItem.leftBarButtonItem?.customView as? UIButton  {
             leftBtn.addTarget(self, selector: #selector(leftBarBttonClick));
+        } else {
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "nav_arrow_left"), style: .plain, target: self, action: #selector(leftBarBttonClick));
         }
         // Do any additional setup after loading the view.
     }
@@ -48,26 +50,35 @@ class YZDTestAnswerVC: UIViewController {
         self.view.backgroundColor = .init(hexString: "#F7F7F7");
         self.edgesForExtendedLayout = UIRectEdge.init() ;
         headerView.backgroundColor = .white;
-        self.view.addSubview(headerView);
-        headerView.mas_makeConstraints { (make) in
-            make?.top.offset()(20);
-            make?.left.offset()(15)
-            make?.right.offset()(-15);
-            make?.height.offset()(44);
-        }
+       
         self.headerView.collectBtn.addTarget(self, action: #selector(collectBtnClick(_ :)), for: .touchUpInside);
             
+        self.view.addSubview(bottomView);
         
-        self.view.addSubview(self.webView);
-        self.webView.mas_makeConstraints { (make) in
+        let contentView = UIView.init();
+        contentView.backgroundColor = .white;
+        contentView.addRound(8);
+        self.view.addSubview(contentView);
+        
+        contentView.mas_makeConstraints { (make) in
             make?.left.offset()(15);
             make?.right.offset()(-15);
-            make?.top.equalTo()(headerView.mas_bottom);
-            make?.bottom.offset()(-62);
+            make?.top.offset()(20);
+            make?.bottom.equalTo()(self.bottomView.mas_top)?.offset()(-20);
         }
-
-        
-        self.view.addSubview(bottomView);
+        contentView.addSubview(headerView);
+        headerView.mas_makeConstraints { (make) in
+            make?.top.left()?.right()?.offset();
+            make?.height.offset()(44);
+        }
+        contentView.addSubview(self.webView);
+        self.webView.mas_makeConstraints { (make) in
+            make?.left.offset()(10);
+            make?.right.offset()(-10);
+            make?.bottom.offset();
+            make?.top.equalTo()(headerView.mas_bottom);
+        }
+                
         bottomView.nextBtn.addTarget(self, action: #selector(nextBtnClick), for: .touchUpInside);
         bottomView.beforeBtn.addTarget(self, action: #selector(beforeBtnClick), for: .touchUpInside);
         bottomView.mas_makeConstraints { (make) in
@@ -146,7 +157,7 @@ class YZDTestAnswerVC: UIViewController {
         
         if let jsonStr = try? String.init(data: JSONSerialization.data(withJSONObject: question, options: .fragmentsAllowed), encoding: .utf8) {
             
-            self.webView.evaluateJavaScript("onload(\(jsonStr))") {[weak self] (result, error) in
+            self.webView.evaluateJavaScript("onload(\(jsonStr ?? ""))") {[weak self] (result, error) in
                 
                 print("题目加载  error == \(error)");
                 if error != nil {

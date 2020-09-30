@@ -228,6 +228,12 @@ extension YZDTestCollectionVC: WKScriptMessageHandler,WKNavigationDelegate, WKUI
                 
                 if state == 1 {
                     self.willRemoveTests[index] = 1;
+                    if self.allTests.count == self.willRemoveTests.count {
+                        self.editView.setSelectBtnSelectState(true);
+                    }
+                } else if state == 0 {
+                    //只要其中一个取消了选中 不是全选
+                    self.editView.setSelectBtnSelectState(false);
                 }
             }
         }
@@ -239,7 +245,7 @@ extension YZDTestCollectionVC: WKScriptMessageHandler,WKNavigationDelegate, WKUI
         
         if isSuccessLoad == false {
             if let jsonStr = try? String.init(data: JSONSerialization.data(withJSONObject: self.allTests, options: .fragmentsAllowed), encoding: .utf8) {
-                self.webView.evaluateJavaScript("onload(\(jsonStr))") { (result, error) in
+                self.webView.evaluateJavaScript("onload(\(jsonStr ?? ""))") { (result, error) in
                     
                     print("第二次题目加载  error == \(error)");
                     if error != nil {
@@ -310,10 +316,20 @@ extension YZDTestCollectionVC {
                     break;
                 }
                 questionIds.append(questionId)
-                surplusTests.remove(at: index);
-                
             }
         }
+        for questionId in questionIds {
+            
+            for (index,item) in surplusTests.enumerated() {
+                if let _questionId = item["questionId"] as? Int{
+                    if questionId == _questionId  {
+                        surplusTests.remove(at: index);
+                        break;
+                    }
+                }
+            }
+        }
+        
         if questionIds.count == 0 {
             return;
         }
@@ -324,6 +340,7 @@ extension YZDTestCollectionVC {
                 DYNetworkHUD.showInfo(message: "操作成功！", inView: nil);
                 self.allTests = surplusTests;
                 self.reloadWebViewContent();
+                
             } else {
                 DYNetworkHUD.showInfo(message: error?.errorMessage ?? "操作失败", inView: nil);
             }
@@ -332,7 +349,7 @@ extension YZDTestCollectionVC {
     //MARK: 重新加载webview
     private func reloadWebViewContent() {
         if let jsonStr = try? String.init(data: JSONSerialization.data(withJSONObject: self.allTests, options: .fragmentsAllowed), encoding: .utf8) {
-            self.webView.evaluateJavaScript("onload(\(jsonStr))") { (result, error) in
+            self.webView.evaluateJavaScript("onload(\(jsonStr ?? ""))") { (result, error) in
                 
                 print("题目加载  error == \(error)");
                 if error != nil {
@@ -372,20 +389,21 @@ extension YZDTestCollectionVC {
     @objc
     private func loadQuestionsData() {
         if self.webView.scrollView.mj_header?.isRefreshing ?? false {
-            self.currentPage = 0;
+            self.currentPage = 1;
+            self.webView.scrollView.mj_footer = nil;
+            self.hasFooter = false;
         }
-        self.webView.scrollView.mj_footer = nil;
         YZDHomeworkNetwork.getMyErrorCollections(classTypeId: self.productId ?? 0, subjectId: self.currentSubjectId, gradeId: self.currentGradeId, page: self.currentPage, pageSize: self.pageSize).dy_startRequest { (response, error) in
             self.webView.scrollView.mj_header?.endRefreshing();
             self.webView.scrollView.mj_footer?.endRefreshing();
             if let _response = response as? [String : Any], let items = _response["list"] as? [[String : Any]] {
                 
-                if self.currentPage == 0 {
+                if self.currentPage == 1 {
                     self.allTests.removeAll();
                     self.allTests.append(contentsOf: items);
                     
                     if self.webView.scrollView.mj_footer == nil && items.count == self.pageSize {
-                        self.webView.scrollView.mj_footer = MJRefreshAutoNormalFooter.init(refreshingTarget: self, refreshingAction: #selector(self.loadMoreData));
+                        self.webView.scrollView.mj_footer = MJRefreshBackNormalFooter.init(refreshingTarget: self, refreshingAction: #selector(self.loadMoreData));
                         self.hasFooter = true;
                         self.isExhaustLoadData = false;
                     } else {
@@ -531,15 +549,17 @@ extension YZDTestCollectionVC {
               }
               self.webView.scrollView.mj_header = MJRefreshNormalHeader.init(refreshingTarget: self, refreshingAction: #selector(self.loadQuestionsData));
               if hasFooter {
-                  self.webView.scrollView.mj_footer = MJRefreshAutoNormalFooter.init(refreshingTarget: self, refreshingAction: #selector(self.loadMoreData));
+                  self.webView.scrollView.mj_footer = MJRefreshBackNormalFooter.init(refreshingTarget: self, refreshingAction: #selector(self.loadMoreData));
                   if self.isExhaustLoadData {
                       self.webView.scrollView.mj_footer?.endRefreshingWithNoMoreData();
                   }
               }
               self.willRemoveTests.removeAll();
           }
-        
-      }
+    
+        self.editView.setSelectBtnSelectState(false);
+    }
+    
       
 }
 
@@ -576,7 +596,12 @@ class YZDTestCollectionAllSelectView: UIView {
         self.removeBtn.addTarget(self, action: #selector(removeBtnClick), for: .touchUpInside);
 
     }
+ 
     
+    public func setSelectBtnSelectState(_ state: Bool) {
+        
+        self.selectBtn.isSelected = state;
+    }
     @objc
     private func removeBtnClick() {
         

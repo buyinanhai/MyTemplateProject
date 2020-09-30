@@ -98,7 +98,7 @@ class TestWebViewVC: UIViewController {
     //MARK: 重新加载webview
     private func reloadWebViewContent() {
         if let jsonStr = try? String.init(data: JSONSerialization.data(withJSONObject: self.allTests, options: .fragmentsAllowed), encoding: .utf8) {
-            self.webView.evaluateJavaScript("onload(\(jsonStr))") { (result, error) in
+            self.webView.evaluateJavaScript("onload(\(jsonStr ?? ""))") { (result, error) in
                 
                 print("题目加载  error == \(error)");
                 if error != nil {
@@ -171,7 +171,7 @@ extension TestWebViewVC: WKScriptMessageHandler,WKNavigationDelegate, WKUIDelega
         
         if isSuccessLoad == false {
             if let jsonStr = try? String.init(data: JSONSerialization.data(withJSONObject: self.allTests, options: .fragmentsAllowed), encoding: .utf8) {
-                self.webView.evaluateJavaScript("onload(\(jsonStr))") { (result, error) in
+                self.webView.evaluateJavaScript("onload(\(jsonStr ?? ""))") { (result, error) in
                     
                     print("第二次题目加载  error == \(error)");
                     if error != nil {
