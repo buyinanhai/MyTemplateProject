@@ -18,7 +18,7 @@ class YZDTestCollectionVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "课程错题";
+        self.navigationItem.title = "错题集";
         self.setupSubview();
         self.webView.scrollView.mj_header?.beginRefreshing()
         self.loadData();
@@ -221,7 +221,6 @@ extension YZDTestCollectionVC: WKScriptMessageHandler,WKNavigationDelegate, WKUI
             
         } else if message.name == "onSelectCheckBox" {
             
-            print("onSelectCheckBox  ：   \(message.body)");
             if let array = message.body as? [Int] {
                 let index = array[0];
                 let state = array[1];
@@ -233,9 +232,12 @@ extension YZDTestCollectionVC: WKScriptMessageHandler,WKNavigationDelegate, WKUI
                     }
                 } else if state == 0 {
                     //只要其中一个取消了选中 不是全选
+                    self.willRemoveTests.removeValue(forKey: index);
                     self.editView.setSelectBtnSelectState(false);
                 }
             }
+            print("onSelectCheckBox  ：   \(message.body)  willremoves: \(self.willRemoveTests.description)");
+
         }
         
     }
@@ -339,6 +341,7 @@ extension YZDTestCollectionVC {
             if let _  = response as? [String : Any] {
                 DYNetworkHUD.showInfo(message: "操作成功！", inView: nil);
                 self.allTests = surplusTests;
+                self.willRemoveTests.removeAll();
                 self.reloadWebViewContent();
                 
             } else {
@@ -481,10 +484,18 @@ extension YZDTestCollectionVC {
     
     private func removeButtonClickFromEditView() {
         
-        let indexes = self.willRemoveTests.map({ (value) -> Int in
-            return value.key;
+        let indexes = self.willRemoveTests.map({ (value) -> Int? in
+            if value.value == 1 {
+                return value.key;
+            }
+            return nil;
         });
-        self.removeQuestionsFromCollections(indexes);
+        if let results = indexes.filter({ (value) -> Bool in
+            return value != nil;
+        }) as? [Int] {
+            self.removeQuestionsFromCollections(results);
+        }
+        
     }
     
     private func selectAllBtnClickFromEditView(_ isSelect: Bool) {
@@ -509,24 +520,26 @@ extension YZDTestCollectionVC {
             return;
         }
         
-          var actions:[YCMenuAction] = []
-          
-          for item in self.allGrades {
-              if let action = YCMenuAction.init(title: item.1, image: nil) {
-                  actions.append(action);
-              }
-          }
-          let menuView = YCMenuView.menu(with: actions, width: 120, relyonView: self.gradeBtn);
-          menuView?.show();
-          menuView?.didSelectedCellCallback = {
-              [weak self] (view, index) in
-              if let tuple = self?.allGrades[index?.row ?? 0] {
-                  
-                  self?.currentGradeId = tuple.0;
-                  self?.gradeBtn.setTitle(tuple.1, for: .normal);
-                  self?.loadSubjectsData(stageId: tuple.2);
-              }
-          }
+        var actions:[YCMenuAction] = []
+        
+        for item in self.allGrades {
+            if let action = YCMenuAction.init(title: item.1, image: nil) {
+                actions.append(action);
+            }
+        }
+        let menuView = YCMenuView.menuCollection(with: actions, width: 220, relyonView: self.gradeBtn);
+        menuView?.textFont = UIFont.systemFont(ofSize: 13);
+        menuView?.menuCellHeight = 24;
+        menuView?.show();
+        menuView?.didSelectedCellCallback = {
+            [weak self] (view, index) in
+            if let tuple = self?.allGrades[index?.row ?? 0] {
+                
+                self?.currentGradeId = tuple.0;
+                self?.gradeBtn.setTitle(tuple.1, for: .normal);
+                self?.loadSubjectsData(stageId: tuple.2);
+            }
+        }
           
       }
       

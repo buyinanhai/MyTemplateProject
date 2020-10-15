@@ -278,6 +278,7 @@
 				$(".removeBtn").show();
 				selectAll(false);
 			}
+           
 		}
 
 		/**
@@ -287,9 +288,13 @@
 		function selectAll(flag) {
 			if(flag) {
 				$(".checkBox").attr("src", "imgs/img_checkbox_1.png");
-			} else {
+                $(".checkBox").addClass("selected");
+            } else {
 				$(".checkBox").attr("src", "imgs/img_checkbox_0.png");
+                $(".checkBox").removeClass("selected");
+
 			}
+            
 		}
 
 		/**

@@ -42,7 +42,7 @@ class YZDHomeworkDetailVC: UIViewController {
         self.tableView.register(UITableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: "header");
         self.tableView.backgroundColor = .clear;
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "课程错题", style: .plain, target: self, action: #selector(rightBarButtonClick));
+//        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "课程错题", style: .plain, target: self, action: #selector(rightBarButtonClick));
     }
     
     

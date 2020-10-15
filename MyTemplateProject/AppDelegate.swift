@@ -41,8 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
        
         self.configMainVC()
-        
-        
+                
         return true
     }
 

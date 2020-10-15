@@ -173,8 +173,8 @@
 }
 @end
 
-
-@interface YCMenuView()<UITableViewDelegate,UITableViewDataSource>
+typedef int ContentStyle;
+@interface YCMenuView()<UITableViewDelegate,UITableViewDataSource, UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 {
     CGPoint          _refPoint;
     UIView          *_refView;
@@ -189,6 +189,9 @@
 @property(nonatomic,strong)UITableView              *tableView;
 @property(nonatomic,strong)UIView                   *contentView;
 @property(nonatomic,strong)UIView                   *bgView;
+@property (nonatomic, strong) UICollectionView *collectionView;
+//0 ： list, 1 : bookrack
+@property (nonatomic, assign) ContentStyle style;
 
 @end
 
@@ -197,18 +200,26 @@ static NSString *const menuCellID = @"YCMenuCell";
 
 + (instancetype)menuWithActions:(NSArray<YCMenuAction *> *)actions width:(CGFloat)width atPoint:(CGPoint)point{
     NSAssert(width>0.0f, @"width要大于0");
-    YCMenuView *menu = [[YCMenuView alloc] initWithActions:actions width:width atPoint:point];
+    YCMenuView *menu = [[YCMenuView alloc] initWithActions:actions width:width atPoint:point style:0];
     return menu;
 }
 + (instancetype)menuWithActions:(NSArray<YCMenuAction *> *)actions width:(CGFloat)width relyonView:(id)view{
     NSAssert(width>0.0f, @"width要大于0");
     NSAssert([view isKindOfClass:[UIView class]]||[view isKindOfClass:[UIBarButtonItem class]], @"relyonView必须是UIView或UIBarButtonItem");
-    YCMenuView *menu = [[YCMenuView alloc] initWithActions:actions width:width relyonView:view];
+    YCMenuView *menu = [[YCMenuView alloc] initWithActions:actions width:width relyonView:view style:0];
     return menu;
 }
++ (instancetype)menuCollectionWithActions:(NSArray<YCMenuAction *> *)actions width:(CGFloat)width relyonView:(id)view {
+    NSAssert(width>0.0f, @"width要大于0");
+    NSAssert([view isKindOfClass:[UIView class]]||[view isKindOfClass:[UIBarButtonItem class]], @"relyonView必须是UIView或UIBarButtonItem");
+    YCMenuView *menu = [[YCMenuView alloc] initWithActions:actions width:width relyonView:view style:1];
+    return menu;
+    
+}
 
-- (instancetype)initWithActions:(NSArray<YCMenuAction *> *)actions width:(CGFloat)width atPoint:(CGPoint)point{
+- (instancetype)initWithActions:(NSArray<YCMenuAction *> *)actions width:(CGFloat)width atPoint:(CGPoint)point style:(ContentStyle)style {
     if (self = [super init]) {
+        self.style = style;
         _actions = [actions copy];
         _refPoint = point;
         _menuWidth = width;
@@ -218,7 +229,7 @@ static NSString *const menuCellID = @"YCMenuCell";
     return self;
 }
 
-- (instancetype)initWithActions:(NSArray<YCMenuAction *> *)actions width:(CGFloat)width relyonView:(id)view{
+- (instancetype)initWithActions:(NSArray<YCMenuAction *> *)actions width:(CGFloat)width relyonView:(id)view style:(ContentStyle)style {
     if (self = [super init]) {
         // 针对UIBarButtonItem做的处理
         if ([view isKindOfClass:[UIBarButtonItem class]]) {
@@ -227,6 +238,7 @@ static NSString *const menuCellID = @"YCMenuCell";
         }else{
             _refView = view;
         }
+        self.style = style;
         _actions = [actions copy];
         _menuWidth = width;
         [self defaultConfiguration];
@@ -256,12 +268,19 @@ static NSString *const menuCellID = @"YCMenuCell";
 - (void)setupSubView{
     [self calculateArrowAndFrame];
     [self setupMaskLayer];
+    if (self.style == 0) {
+        [self.contentView addSubview:self.tableView];
+        
+    } else if (self.style == 1) {
+        [self.contentView addSubview:self.collectionView];
+    }
     [self addSubview:self.contentView];
 }
 
 - (void)reloadData{
     [self.contentView removeFromSuperview];
     [self.tableView removeFromSuperview];
+    [self.collectionView removeFromSuperview];
     self.contentView = nil;
     self.tableView = nil;
     [self setupSubView];
@@ -369,6 +388,11 @@ static NSString *const menuCellID = @"YCMenuCell";
     //保存原来的frame，防止设置锚点后偏移
     self.layer.anchorPoint = anchorPoint;
     self.frame = CGRectMake(originX, originY, width, height);
+    
+    if (self.style == 1) {
+        
+        self.collectionView.frame = CGRectMake(0, _topMargin, self.width, self.height);
+    }
 }
 
 - (CAShapeLayer *)drawMaskLayer{
@@ -446,6 +470,60 @@ static NSString *const menuCellID = @"YCMenuCell";
     }
     if (_dismissOnselected) [self dismiss];
 }
+#pragma mark <UICollectionview delegate>
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return  _actions.count;
+}
+- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+    UILabel *label = cell.contentView.subviews.firstObject;
+    if (label == nil) {
+        
+        label = [UILabel new];
+        label.backgroundColor = [UIColor dy_colorWithHexString:@"#EAEAEA"];
+        label.textColor = self.textColor;
+        if (@available(iOS 14.0, *)) {
+            label.textAlignment = UIListContentTextAlignmentCenter;
+        } else {
+            label.textAlignment = UITextAlignmentCenter;
+            // Fallback on earlier versions
+        }
+        label.font = self.textFont;
+        [label addRound:self.menuCellHeight * 0.5];
+        [cell.contentView addSubview:label];
+        label.frame = CGRectMake(0, 0, cell.width, self.menuCellHeight);
+    }
+    YCMenuAction *action = _actions[indexPath.row];
+    label.text = action.title;
+    
+    return  cell;
+    
+    
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    YCMenuAction *action = _actions[indexPath.row];
+    if (action.handler) {
+        action.handler(action);
+    }
+    if (self.didSelectedCellCallback) {
+        self.didSelectedCellCallback(self,indexPath);
+    }
+    if (_dismissOnselected) [self dismiss];
+    
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    YCMenuAction *action = _actions[indexPath.row];
+
+    CGFloat width = [action.title boundingRectWithSize:CGSizeMake(collectionView.width, self.height) options:0 attributes:@{NSFontAttributeName: self.textFont} context:nil].size.width + 15;
+    if (width < 60) {
+        width = 60;
+    }
+    return CGSizeMake(width, self.menuCellHeight);
+}
 
 #pragma mark - Setting&&Getting
 - (UITableView *)tableView{
@@ -461,6 +539,21 @@ static NSString *const menuCellID = @"YCMenuCell";
         [_tableView registerClass:[YCMenuCell class] forCellReuseIdentifier:menuCellID];
     }
     return _tableView;
+}
+- (UICollectionView *)collectionView {
+    
+    if (!_collectionView) {
+        UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
+        layout.sectionInset = UIEdgeInsetsMake(5, 5, 5, 5);
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, _topMargin, self.width, self.height - kArrowHeight) collectionViewLayout:layout];
+        _collectionView.dataSource = self;
+        _collectionView.delegate = self;
+        [_collectionView registerClass:UICollectionViewCell.class forCellWithReuseIdentifier:@"cell"];
+        _collectionView.backgroundColor = UIColor.whiteColor;
+        
+    }
+    return _collectionView;
+    
 }
 - (UIView *)bgView{
     if (!_bgView) {
@@ -478,7 +571,6 @@ static NSString *const menuCellID = @"YCMenuCell";
         _contentView = [[UIView alloc] initWithFrame:self.bounds];
         _contentView.backgroundColor = _menuColor;
         _contentView.layer.masksToBounds = YES;
-        [_contentView addSubview:self.tableView];
     }
     return _contentView;
 }
@@ -502,6 +594,7 @@ static NSString *const menuCellID = @"YCMenuCell";
     if ([_separatorColor isEqual:separatorColor]) return;
     _separatorColor = separatorColor;
     [self.tableView reloadData];
+    [self.collectionView reloadData];
 }
 - (void)setMenuCellHeight:(CGFloat)menuCellHeight{
     if (_menuCellHeight == menuCellHeight)return;
@@ -528,11 +621,15 @@ static NSString *const menuCellID = @"YCMenuCell";
     if ([_textFont isEqual:textFont]) return;
     _textFont = textFont;
     [self.tableView reloadData];
+    [self.collectionView reloadData];
+
 }
 - (void)setTextColor:(UIColor *)textColor{
     if ([_textColor isEqual:textColor]) return;
     _textColor = textColor;
     [self.tableView reloadData];
+    [self.collectionView reloadData];
+
 }
 - (void)setOffset:(CGFloat)offset{
     if (_offset == offset) return;

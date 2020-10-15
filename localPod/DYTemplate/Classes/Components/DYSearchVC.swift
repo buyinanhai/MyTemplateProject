@@ -78,7 +78,8 @@ import UIKit
         self.searchBar.keyboardType = UIKeyboardType.webSearch;
         self.searchBar.delegate = self;
         self.delegate = self;
-
+        self.view.backgroundColor = UIColor.groupTableViewBackground;
+        
     }
     
     public func didDismissSearchController(_ searchController: UISearchController) {
@@ -146,7 +147,7 @@ private class DYSearchResultVC: UIViewController, UISearchResultsUpdating {
         self.automaticallyAdjustsScrollViewInsets = false;
         self.tableView.mas_makeConstraints { (make) in
             if #available(iOS 11.0, *) {
-                make?.top.equalTo()(self.view.mas_safeAreaLayoutGuideTop)?.offset()(55);
+                make?.top.equalTo()(self.view.mas_safeAreaLayoutGuideTop)?.offset()(60);
             } else {
                 // Fallback on earlier versions
                 make?.top.offset()(44);

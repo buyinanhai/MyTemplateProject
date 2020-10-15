@@ -34,9 +34,10 @@ class YZDTestRecordCell: DYTableViewCell {
                 self.timeLabel.text = Date.getFormdateMDHM(timeStamp: Double(_model.dy_createDate ?? 0));
 //                let useTime = _model.dy_usedTime ?? 0;
 //                self.consumeTimeLabel.text = String.init(format: "用时：%02d:%02d", useTime / 60, useTime % 60);
+                self.chapterLabel.text = String.init(format: "%@ %@", _model.dy_moduleName ?? "" , _model.dy_lessonName ?? "");
                 self.consumeTimeLabel.text = Date.getFormdateHM(timeStamp: Double(_model.dy_usedTime ?? 0));
                 self.answeredLabel.text = "已做答：\(_model.dy_finishCount ?? 0)题";
-                self.accuracyLabel.text = "正确率：\(_model.dy_accuracy ?? "0.0")/%";
+                self.accuracyLabel.text = "正确率：\(_model.dy_accuracy ?? "0.0")%";
             }
             
         }
@@ -82,7 +83,7 @@ class YZDTestRecordCell: DYTableViewCell {
         self.timeLabel.mas_makeConstraints { (make) in
             make?.right.offset()(-8);
             make?.centerY.equalTo()(self.nameLabel);
-            make?.width.offset()(70);
+            make?.width.offset()(100);
         }
         self.nameLabel.mas_makeConstraints { (make) in
             make?.top.offset()(12);
@@ -125,7 +126,7 @@ class YZDTestRecordCell: DYTableViewCell {
         view.font = .systemFont(ofSize: 11);
         view.text = "07月07日  11:30";
         view.textColor = .init(hexString: "#B9B9B9");
-        
+        view.textAlignment = .right;
         return view;
     }()
 
@@ -143,7 +144,6 @@ class YZDTestRecordCell: DYTableViewCell {
         let view = UILabel.init();
         view.font = UIFont.systemFont(ofSize: 13);
         view.textColor = UIColor.gray;
-        view.text = "第一单元  老茶馆 第一节 光头强";
         
         return view;
     }()

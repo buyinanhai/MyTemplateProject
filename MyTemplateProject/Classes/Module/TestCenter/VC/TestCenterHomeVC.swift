@@ -23,7 +23,7 @@ class TestCenterHomeVC: UIViewController {
     public var chooseVC: TestCenterChooseVC!
     
     public var gradeId: Int?
-    
+        
     /// 0 : 知识点  1： 章节目录
     public var selectedType: Int = 0;
 
@@ -40,6 +40,8 @@ class TestCenterHomeVC: UIViewController {
             self.headerTitle = model.headerTitle;
             self.subjectTitle = model.subjectTitle;
             self.gradeId = model.gradeId;
+            self.selectedType = model.chooseOption?["0"] ?? 0;
+
         }
         self.setupSubView();
         self.tableView.mj_header?.beginRefreshing();
@@ -87,7 +89,7 @@ class TestCenterHomeVC: UIViewController {
         
         
         DYNetworkHUD.startLoading()
-        if self.subjectId > 0 {
+        if self.subjectId > 0 && self.selectedType == 0 {
             TestCenterNetwork.getKnowledgePoints(from: self.subjectId).dy_startRequest { (response, error) in
                 
                 if let _response = response as? [String : Any], let list = _response["list"] as? [[String :Any]] {
@@ -105,7 +107,7 @@ class TestCenterHomeVC: UIViewController {
                 }
                 self.tableView.mj_header?.endRefreshing();
             }
-        } else if self.volumeId > 0 {
+        } else if self.volumeId > 0 && self.selectedType == 1 {
             
             TestCenterNetwork.getChapterPoints(fromVolume: self.volumeId).dy_startRequest { (response, error) in
 
@@ -284,6 +286,7 @@ extension TestCenterHomeVC: UITableViewDataSource, UITableViewDelegate, TestCent
         }
         vc.gradeId = self.gradeId;
         vc.subjectId = "\(self.subjectId)";
+        vc.nodeId = model.dy_id;
         self.navigationController?.pushViewController(vc, animated: true);
         
     }

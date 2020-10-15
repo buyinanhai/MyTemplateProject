@@ -44,6 +44,20 @@ class YZDTestAnswerVC: UIViewController {
         }
         // Do any additional setup after loading the view.
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated);
+        if self.navigationController?.interactivePopGestureRecognizer != nil {
+            self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false;
+        }
+        
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated);
+        if self.navigationController?.interactivePopGestureRecognizer != nil {
+            self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true;
+        }
+    }
    
     private func setupSubview() {
         
@@ -232,8 +246,15 @@ extension YZDTestAnswerVC {
     @objc
     private func leftBarBttonClick() {
         
-        if self.answersCache.count > 0 && self.answersCache.count < self.allTests.count {
-            let alertVC = UIAlertController.showCustomAlert(withTitle: "温馨提示", messgae: "您的题目未做完，确定退出吗？", confirmTitle: "退出", cancleTitle: "取消") {
+        if self.answersCache.count > 0 {
+            
+            var message = "您的题目未做完，确定退出吗？";
+            
+            if self.isEnableClickNoAnswer {
+                message = self.answersCache.count == self.allTests.count ? "您的作业未提交，确定退出吗？" : "您的作业还未做完，确定退出吗？"
+            }
+            
+            let alertVC = UIAlertController.showCustomAlert(withTitle: "温馨提示", messgae: message, confirmTitle: "退出", cancleTitle: "取消") {
                 [weak self] in
 
                 self?.navigationController?.popViewController(animated: true);
@@ -320,17 +341,12 @@ extension YZDTestAnswerVC {
             
             self.commitAnswers();
             
-        } else if self.answersCache.keys.count == 0 {
-            
-            DYNetworkHUD.showInfo(message: "请至少完成一题！", inView: nil);
-            return;
-            
         } else if !self.isEnableClickNoAnswer &&  self.answersCache.count < self.allTests.count {
             //练习中心要求打完所有题目才能提交
             DYNetworkHUD.showInfo(message: "还有题未作答！");
             
         } else if self.answersCache.keys.count < self.allTests.count {
-                        
+                        //判断作业中心的做题逻辑
             let alertVC = UIAlertController.showCustomAlert(withTitle: "确定提交", messgae: "您的作业未做完，确定提交吗？", confirmTitle: "提交", cancleTitle: "取消") {
                 [weak self] in
                 self?.commitAnswers();
@@ -400,7 +416,7 @@ extension YZDTestAnswerVC {
                     self.afterWorkFinishId = _response["afterWorkFinishId"] as? Int;
                 }
                 DYNetworkHUD.showInfo(message: "提交成功!", inView: nil);
-                
+                self.showResultVC();
             }
         }
         
@@ -424,8 +440,10 @@ extension YZDTestAnswerVC {
         model?.dy_afterWorkFinishId = self.afterWorkFinishId;
         let vc = YZDTestResultVC.init();
         vc.recordModel = model;
-        
-        self.navigationController?.pushViewController(vc, animated: true);
+        var controllers = self.navigationController?.viewControllers;
+        controllers?.removeLast();
+        controllers?.append(vc);
+        self.navigationController?.setViewControllers(controllers ?? [vc], animated: true);
         
     }
     

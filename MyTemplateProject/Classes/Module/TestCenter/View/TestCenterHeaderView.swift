@@ -68,6 +68,7 @@ class TestCenterHeaderView: UIView {
         subjectLabel.textColor = .init(hexString: "#FFB366");
         subjectLabel.font = .systemFont(ofSize: 11);
         subjectLabel.text = "高中-数学-人教版-必修一";
+        subjectLabel.numberOfLines = 2;
         
         let finishedLabel = UILabel.init();
         finishedLabel.textColor = .init(hexString: "#FFB366");

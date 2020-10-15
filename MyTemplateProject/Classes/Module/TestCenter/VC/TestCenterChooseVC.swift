@@ -391,15 +391,14 @@ extension TestCenterChooseVC {
     private func confirmBtnClick() {
         
       
-        var subjectId = -1;
+        let subjectId = self.selectModel[TestCenterChooseType.subject.rawValue]?.id ?? -1;
         var volumeId = -1;
         var headerTitle = "";
         var subjectTitle = "";
         let gradeId = self.selectModel[TestCenterChooseType.grade.rawValue]?.id;
         var type = 0;
         if self.selectModel[TestCenterChooseType.type.rawValue]?.id == 0 {
-            subjectId =  self.selectModel[TestCenterChooseType.subject.rawValue]?.id ?? -1;
-            subjectTitle = String.init(format: "%@-%@",self.selectModel[TestCenterChooseType.level.rawValue]?.name ?? "",self.selectModel[TestCenterChooseType.subject.rawValue]?.name ?? "" )
+            subjectTitle = String.init(format: "%@-%@-%@",self.selectModel[TestCenterChooseType.level.rawValue]?.name ?? "",self.selectModel[TestCenterChooseType.grade.rawValue]?.name ?? "",self.selectModel[TestCenterChooseType.subject.rawValue]?.name ?? "" )
             headerTitle = "  知识点做题  ";
             if subjectId < 0 {
                 DYNetworkHUD.showInfo(message: "请选择科目！", inView: nil);

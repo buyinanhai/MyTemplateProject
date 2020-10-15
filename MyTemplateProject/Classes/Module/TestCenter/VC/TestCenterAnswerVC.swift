@@ -19,6 +19,9 @@ class TestCenterAnswerVC: YZDTestAnswerVC {
     
     public var subjectId: String?
     
+    public var nodeId: String?
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -56,7 +59,10 @@ class TestCenterAnswerVC: YZDTestAnswerVC {
         model?.dy_finishCount = self.answers?.count;
         model?.dy_usedTime = self.headerView.getUsedTime();
         vc.headerModel = model;
-        self.navigationController?.pushViewController(vc, animated: true);
+        var controllers = self.navigationController?.viewControllers;
+        controllers?.removeLast();
+        controllers?.append(vc);
+        self.navigationController?.setViewControllers(controllers ?? [vc], animated: true);
     }
     internal var answers: [[String : String]]?
     
@@ -116,7 +122,7 @@ extension TestCenterAnswerVC {
     override func commitAnswer(answers: [[String : String]]) {
     
         DYNetworkHUD.startLoading()
-        TestCenterNetwork.commitAnswers(answers: answers,gradeId: self.gradeId ?? -1,subjectId: self.subjectId ?? "").dy_startRequest { (response, error) in
+        TestCenterNetwork.commitAnswers(answers: answers,gradeId: self.gradeId ?? -1,subjectId: self.subjectId ?? "", nodeId: self.nodeId ?? "").dy_startRequest { (response, error) in
             
             if error != nil {
                 
@@ -126,14 +132,14 @@ extension TestCenterAnswerVC {
                 self.updateRightBarButton(true);
                 self.answers = answers;
                 DYNetworkHUD.showInfo(message: "提交成功!", inView: nil);
-                
+                self.showResultVC();
             }
         }
     }
     //MARK: 收藏试题
     override func collectQuestion(questionId: Int, likeOrUnlike: Bool, callback: @escaping (DYNetworkError?) -> Void) {
         
-        TestCenterNetwork.collectQuestion(gradeId: self.gradeId ?? 0, subjectId: self.subjectId ?? "", questionId: questionId, likeOrUnlike: likeOrUnlike ? 1 : 0).dy_startRequest { (response, error) in
+        TestCenterNetwork.collectQuestion(gradeId: self.gradeId ?? 0, subjectId: self.subjectId ?? "", questionId: questionId, likeOrUnlike: likeOrUnlike ? 1 : 0, nodeId: self.nodeId ?? "").dy_startRequest { (response, error) in
             callback(error);
         }
     }

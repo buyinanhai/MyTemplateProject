@@ -41,6 +41,9 @@
 + (instancetype)menuWithActions:(NSArray<YCMenuAction *> *)actions width:(CGFloat)width atPoint:(CGPoint)point;
 // 从关联视图创建（可以是UIView和UIBarButtonItem）
 + (instancetype)menuWithActions:(NSArray<YCMenuAction *> *)actions width:(CGFloat)width relyonView:(id)view;
+
++ (instancetype)menuCollectionWithActions:(NSArray<YCMenuAction *> *)actions width:(CGFloat)width relyonView:(id)view;
+
 - (void)show;
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;

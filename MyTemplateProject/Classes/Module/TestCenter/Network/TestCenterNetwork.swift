@@ -22,7 +22,7 @@ class TestCenterNetwork: DYBaseNetwork {
         
         get {
             
-            return "SRn55wqmX042EufVj3%2FrtZHGsj2Y2129cvHaYmtmkiGFJtUJ4Rm%2BfCl8GunN2fJgISjQcKn5nleB%0AMSP5z7uJZ9ADbCuuwJgX";
+            return "SRn55wqmX06poNGUgICln%2F9ifXwoQVMLcvHaYmtmkiGFJtUJ4Rm%2BfCl8GunN2fJgISjQcKn5nleB%0AMSP5z7uJZ9ADbCuuwJgX";
             
             if let token = DYNetworkConfig.share()?.extraData["token"] as? String {
                 return token;
@@ -137,7 +137,7 @@ class TestCenterNetwork: DYBaseNetwork {
     }
     
     //MARK: 提交答案
-    public class func commitAnswers(answers:[[String: String]], gradeId: Int, subjectId: String) -> TestCenterNetwork {
+    public class func commitAnswers(answers:[[String: String]], gradeId: Int, subjectId: String, nodeId: String) -> TestCenterNetwork {
         
         let obj = TestCenterNetwork.init();
         obj.dy_baseURL = self.hostUrl;
@@ -147,8 +147,19 @@ class TestCenterNetwork: DYBaseNetwork {
             "token" : self.token,
             "answers" : answers,
             "gradeId": gradeId,
-            "subjectId": subjectId
+            "subjectId": subjectId,
+            "id": nodeId
         ];
+        //章节做题提交不传年级
+        if gradeId == -1 {
+            obj.dy_requestArgument = [
+                "userId": self.userId,
+                "token" : self.token,
+                "answers" : answers,
+                "subjectId": subjectId,
+                "id": nodeId
+            ];
+        }
         obj.dy_requestMethod = .POST;
         obj.dy_requestSerializerType = .JSON;
         obj.dy_responseSerializerType = .JSON;
@@ -267,20 +278,20 @@ class TestCenterNetwork: DYBaseNetwork {
 
 
     //MARK:收藏题目
-    public class func collectQuestion(gradeId: Int, subjectId: String,questionId: Int,likeOrUnlike: Int) -> TestCenterNetwork {
+    public class func collectQuestion(gradeId: Int, subjectId: String,questionId: Int,likeOrUnlike: Int,nodeId: String) -> TestCenterNetwork {
 
         let obj = TestCenterNetwork.init();
         obj.dy_baseURL = self.hostUrl;
         obj.dy_requestUrl = "\(self.relativeUrl)/afterWork/like-question";
-        
-            obj.dy_requestArgument = [
-                "userId": self.userId,
-                "token" : self.token,
-                "questionId":questionId,
-                "likeOrUnlike": likeOrUnlike == 1 ? 0 : 1,
-                "gradeId":gradeId,
-                "subjectId":subjectId
-            ];
+        obj.dy_requestArgument = [
+            "userId": self.userId,
+            "token" : self.token,
+            "questionId":questionId,
+            "likeOrUnlike": likeOrUnlike == 1 ? 0 : 1,
+            "gradeId":gradeId,
+            "subjectId":subjectId,
+            "id": nodeId
+        ];
         
         obj.dy_requestMethod = .POST;
         obj.dy_requestSerializerType = .JSON;
