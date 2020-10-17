@@ -41,11 +41,14 @@ class YZDTestResultHeader: UIView {
     public func getHeight(for isUnfold: Bool) -> CGFloat {
     
         var height = self.height;
-        
-        let updateHeight = self.collectionView.contentSize.height - 60;
+        let cellHeight:CGFloat = 60.0;
+        var updateHeight = self.collectionView.contentSize.height - cellHeight;
+        if self.collectionView.contentSize.height >= cellHeight * 4.0 {
+            updateHeight = (cellHeight + 10.0) * 3.0 ;
+        }
         
         height = isUnfold ? height + updateHeight : height - updateHeight;
-        
+    
         return height;
     }
     
@@ -79,7 +82,7 @@ class YZDTestResultHeader: UIView {
         let layout = DYCollectionViewGridLayout.init();
         layout.itemSize = CGSize.init(width: 40, height: 60);
         layout.rowCount = 5;
-        layout.pageCount = 999;
+        layout.pageCount = 99999;
         self.collectionView.collectionViewLayout = layout;
         self.collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell");
         self.collectionView.dataSource = self;
@@ -92,16 +95,12 @@ class YZDTestResultHeader: UIView {
         
         sender.isSelected = !sender.isSelected;
         
-        sender.transform = sender.isSelected ? CGAffineTransform.init(rotationAngle: CGFloat(M_PI)) : CGAffineTransform.identity;
+        sender.transform = sender.isSelected ? CGAffineTransform.init(rotationAngle: CGFloat(Double.pi)) : CGAffineTransform.identity;
         
-        var height = self.height;
-               
-        let updateHeight: CGFloat = self.collectionView.contentSize.height - 60;
-               
-        height = sender.isSelected ? height + updateHeight : height - updateHeight;
-        
+        self.collectionView.isScrollEnabled = sender.isSelected;
+        let newHeight = self.getHeight(for: sender.isSelected);
         var frame = self.frame;
-        frame.size.height = height;
+        frame.size.height = newHeight;
         self.frame = frame;
         self.delegate?.headerView(self, onClickFolder: sender.isSelected);
         

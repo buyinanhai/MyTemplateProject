@@ -319,7 +319,12 @@ extension ChargeVC {
         
         if let phoneNumber = sender.titleLabel?.text {
             
-            UIApplication.shared.open(URL.init(string: "tel:\(phoneNumber)")!, options: [UIApplication.OpenExternalURLOptionsKey.universalLinksOnly : false], completionHandler: nil)
+            if #available(iOS 10.0, *) {
+                UIApplication.shared.open(URL.init(string: "tel:\(phoneNumber)")!, options: [UIApplication.OpenExternalURLOptionsKey.universalLinksOnly : false], completionHandler: nil)
+            } else {
+                UIApplication.shared.openURL(URL.init(string: "tel:\(phoneNumber)")!)
+                // Fallback on earlier versions
+            }
         }
     }
     @objc

@@ -23,7 +23,7 @@ class ChargeNetwork: DYBaseNetwork {
         
         get {
             
-            return "SRn55wqmX06poNGUgICln%2F9ifXwoQVMLcvHaYmtmkiGFJtUJ4Rm%2BfCl8GunN2fJgISjQcKn5nleB%0AMSP5z7uJZ9ADbCuuwJgX";
+            return "SRn55wqmX07mXW4y7IhPI6k3J%2F4iO%2Bg7YZjV9QhS%2B7l9u6WuU3CCcwyyWgbVPcNsDbFLAHXNYtsh%0A4CHxoU76rmc74nPV%2F0Q2";
 
             if let token = DYNetworkConfig.share()?.extraData["token"] as? String {
                 return token;

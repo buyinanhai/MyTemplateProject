@@ -38,6 +38,7 @@ class HomeVC: UIViewController {
          "自研直播间",
          "错题集",
          "充值相关",
+        "我的学币"
          
          
      ];
@@ -101,9 +102,14 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
             
         case 5:
             vc = YZDTestCollectionVC.init();
+            
             break;
         case 6:
             vc = ChargeVC.init();
+            
+            break;
+        case 7:
+            vc = MyStudyCoinVC.init();
             
             break;
         default:

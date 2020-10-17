@@ -81,7 +81,7 @@ extension TestCenterAnswerVC {
         
         DYNetworkHUD.startLoading();
         if let id = self.knowledgeId {
-            TestCenterNetwork.getRandomTests(byKnowledge: id, questionCount: 5).dy_startRequest { (response, error) in
+            TestCenterNetwork.getRandomTests(byKnowledge: id, questionCount: 5,gradeId: self.gradeId ?? -1, subjectId: self.subjectId ?? "").dy_startRequest { (response, error) in
 
                 DYNetworkHUD.dismiss();
                 if let _response = response as? [String : Any] {

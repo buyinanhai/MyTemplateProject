@@ -45,7 +45,7 @@ class MyStudyCoinCell: DYTableViewCell {
         didSet {
             
             if let _model = self.model as? MyStudyCoinCellModel {
-                self.dy_detailTextLabel.text = Date.getFormdateYMDHM(timeStamp: _model.changeTime ?? 0);
+                self.dy_detailTextLabel.text = _model.changeTime
                 self.amountLabel.text = "\(_model.changeValue ?? 0)";
                 if _model.changeType == 2{
                     self.amountLabel.textColor = UIColor.init(hexString: "#555555");

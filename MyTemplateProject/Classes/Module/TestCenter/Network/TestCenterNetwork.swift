@@ -22,7 +22,7 @@ class TestCenterNetwork: DYBaseNetwork {
         
         get {
             
-            return "SRn55wqmX06poNGUgICln%2F9ifXwoQVMLcvHaYmtmkiGFJtUJ4Rm%2BfCl8GunN2fJgISjQcKn5nleB%0AMSP5z7uJZ9ADbCuuwJgX";
+            return "SRn55wqmX07mXW4y7IhPI6k3J%2F4iO%2Bg7YZjV9QhS%2B7l9u6WuU3CCcwyyWgbVPcNsDbFLAHXNYtsh%0A4CHxoU76rmc74nPV%2F0Q2";
             
             if let token = DYNetworkConfig.share()?.extraData["token"] as? String {
                 return token;
@@ -98,7 +98,7 @@ class TestCenterNetwork: DYBaseNetwork {
     
     
     //MARK: 根据知识点id随机获取题目
-    public class func getRandomTests(byKnowledge knowledgeId: String,questionCount: Int) -> TestCenterNetwork {
+    public class func getRandomTests(byKnowledge knowledgeId: String,questionCount: Int, gradeId:Int, subjectId:String) -> TestCenterNetwork {
         
         let obj = TestCenterNetwork.init();
         obj.dy_baseURL = self.hostUrl;
@@ -107,7 +107,9 @@ class TestCenterNetwork: DYBaseNetwork {
             "userId": self.userId,
             "token" : self.token,
             "pointId" : knowledgeId,
-            "questionCount":questionCount
+            "questionCount":questionCount,
+            "gradeId":gradeId,
+            "subjectId":subjectId,
         ];
         obj.dy_requestMethod = .POST;
         obj.dy_requestSerializerType = .JSON;
@@ -223,7 +225,7 @@ class TestCenterNetwork: DYBaseNetwork {
     
     
     //MARK: 查询年级
-    public class func getGrades(stageId: Int) -> TestCenterNetwork {
+    public class func getGrades(stageId: Int, subjectId:String) -> TestCenterNetwork {
         
         let obj = TestCenterNetwork.init();
         obj.dy_baseURL = self.hostUrl;
@@ -232,6 +234,8 @@ class TestCenterNetwork: DYBaseNetwork {
             "userId": self.userId,
             "token" : self.token,
             "stageId": stageId,
+            "subjectId": subjectId,
+
         ];
         obj.dy_requestMethod = .GET;
         obj.dy_requestSerializerType = .JSON;

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -99,14 +101,14 @@
                             </constraints>
                         </view>
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="XoF-DF-FDG">
-                            <rect key="frame" x="8" y="86" width="386" height="97"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <rect key="frame" x="8" y="86" width="386" height="87"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <collectionViewLayout key="collectionViewLayout" id="al0-RJ-B5I" customClass="DYCollectionViewGridLayout" customModule="MyTemplateProject" customModuleProvider="target"/>
                         </collectionView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5aM-VQ-Q51">
-                            <rect key="frame" x="188.5" y="183" width="25" height="15"/>
+                            <rect key="frame" x="188.5" y="173" width="25" height="25"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="15" id="CAx-8U-K0f"/>
+                                <constraint firstAttribute="height" constant="25" id="CAx-8U-K0f"/>
                                 <constraint firstAttribute="width" constant="25" id="QsG-Jp-tP7"/>
                             </constraints>
                             <state key="normal" image="yzd-homework-btn-down"/>
@@ -115,7 +117,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="XoF-DF-FDG" secondAttribute="trailing" constant="8" id="8pC-5D-pcE"/>
                         <constraint firstAttribute="bottom" secondItem="5aM-VQ-Q51" secondAttribute="bottom" id="C1s-tn-Y9a"/>
@@ -123,7 +125,7 @@
                         <constraint firstItem="TJc-Z5-tVP" firstAttribute="top" secondItem="oLj-Oo-eiV" secondAttribute="bottom" constant="15" id="DNA-qI-VxE"/>
                         <constraint firstItem="TJc-Z5-tVP" firstAttribute="centerX" secondItem="lks-I7-E4u" secondAttribute="centerX" id="FV2-d0-o6I"/>
                         <constraint firstItem="5aM-VQ-Q51" firstAttribute="centerX" secondItem="lks-I7-E4u" secondAttribute="centerX" id="Hcm-DV-yXK"/>
-                        <constraint firstAttribute="bottom" secondItem="XoF-DF-FDG" secondAttribute="bottom" constant="15" id="QFv-Um-hck"/>
+                        <constraint firstAttribute="bottom" secondItem="XoF-DF-FDG" secondAttribute="bottom" constant="25" id="QFv-Um-hck"/>
                         <constraint firstAttribute="trailing" secondItem="C7U-J0-Y4a" secondAttribute="trailing" constant="8" id="Vdh-pY-x5D"/>
                         <constraint firstItem="XoF-DF-FDG" firstAttribute="leading" secondItem="lks-I7-E4u" secondAttribute="leading" constant="8" id="ebv-53-baA"/>
                         <constraint firstItem="XoF-DF-FDG" firstAttribute="top" secondItem="C7U-J0-Y4a" secondAttribute="bottom" constant="10" id="gek-nl-ZyZ"/>
@@ -140,6 +142,7 @@
                     </userDefinedRuntimeAttributes>
                 </view>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="lks-I7-E4u" secondAttribute="bottom" constant="5" id="69b-ug-521"/>
@@ -148,7 +151,6 @@
                 <constraint firstItem="lks-I7-E4u" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="ncl-v5-hou"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="accuracyLabel" destination="vKX-KH-nbB" id="yrk-mm-QB8"/>
                 <outlet property="answeredLabel" destination="gcH-eh-QGh" id="zc6-DT-yNi"/>
@@ -162,5 +164,8 @@
     <resources>
         <image name="yzd-homework-btn-down" width="9.3333330154418945" height="9.3333330154418945"/>
         <image name="yzd-homework-result-title" width="25" height="25"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		04D9CD2F49CE7ECB939C1102 /* Pods_MyTemplateProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 954802C722A215C21B6DC642 /* Pods_MyTemplateProject.framework */; };
+		92362EA225399BD8005030FA /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92362EA125399BD8005030FA /* StoreKit.framework */; };
 		9238449C250B68CA000B9BE1 /* NCNRechargeNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9238449B250B68CA000B9BE1 /* NCNRechargeNetwork.swift */; };
 		9238449E250B6A14000B9BE1 /* ChargeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9238449D250B6A14000B9BE1 /* ChargeVC.swift */; };
 		923844A0250B6A39000B9BE1 /* MyStudyCoinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9238449F250B6A39000B9BE1 /* MyStudyCoinVC.swift */; };
@@ -86,6 +87,7 @@
 
 /* Begin PBXFileReference section */
 		5DED31BCD404196FBE8CB7E0 /* Pods-MyTemplateProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTemplateProject.debug.xcconfig"; path = "Target Support Files/Pods-MyTemplateProject/Pods-MyTemplateProject.debug.xcconfig"; sourceTree = "<group>"; };
+		92362EA125399BD8005030FA /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		9238449B250B68CA000B9BE1 /* NCNRechargeNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NCNRechargeNetwork.swift; sourceTree = "<group>"; };
 		9238449D250B6A14000B9BE1 /* ChargeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChargeVC.swift; sourceTree = "<group>"; };
 		9238449F250B6A39000B9BE1 /* MyStudyCoinVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyCoinVC.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 				9271C78024EBE1C50004E82B /* libz.tbd in Frameworks */,
 				9271C78224EBE1F60004E82B /* libiconv.tbd in Frameworks */,
 				9271C7B424ECCEEB0004E82B /* OpenAL.framework in Frameworks */,
+				92362EA225399BD8005030FA /* StoreKit.framework in Frameworks */,
 				04D9CD2F49CE7ECB939C1102 /* Pods_MyTemplateProject.framework in Frameworks */,
 				9271C7AA24ECCB520004E82B /* AudioToolbox.framework in Frameworks */,
 			);
@@ -625,6 +628,7 @@
 		932F1271B2F9324CB01E2FED /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				92362EA125399BD8005030FA /* StoreKit.framework */,
 				9271C7B324ECCEEB0004E82B /* OpenAL.framework */,
 				9271C7B124ECCEDB0004E82B /* OpenGLES.framework */,
 				9271C7AD24ECCB8C0004E82B /* NCNLivingSDK.framework */,
@@ -983,12 +987,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MyTemplateProject/MyTemplateProject.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.1;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = F6SCZ7JR3A;
 				GCC_PREFIX_HEADER = "$(PROJECT_NAME)/PrefixHeader.pch";
 				INFOPLIST_FILE = MyTemplateProject/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -996,6 +1001,7 @@
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.cunw.xinyunclassroom;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_NAME)/OC-bridge-header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1009,12 +1015,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = MyTemplateProject/MyTemplateProject.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.1;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = F6SCZ7JR3A;
 				GCC_PREFIX_HEADER = "$(PROJECT_NAME)/PrefixHeader.pch";
 				INFOPLIST_FILE = MyTemplateProject/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1022,6 +1029,7 @@
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.cunw.xinyunclassroom;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_NAME)/OC-bridge-header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

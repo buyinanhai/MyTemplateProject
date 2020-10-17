@@ -85,7 +85,7 @@ class DYPurchaseManager: NSObject, SKProductsRequestDelegate {
         self.timeoutInterval -= 1;
         if self.timeoutInterval < 0 {
             
-            let error = NSError.init(domain: "请求超时， 请稍后重试", code: -888, userInfo: nil);
+            let error = NSError.init(domain: "本地请求超时， 请重试！", code: -888, userInfo: nil);
             self.requestCallback?(nil, error);
             self.timer?.invalidate();
             self.timeoutInterval = 60;
@@ -151,7 +151,7 @@ extension DYPurchaseManager: SKPaymentTransactionObserver {
             case SKPaymentTransactionState.purchasing:
                 print("DYPurchasePayState ------- 商品添加到列表")
                 self.requestState = .purchasing;
-                self.timer = Timer.dy_scheduledWeakTimer(withTimeInterval: 1.0, target: self, selector: #selector(timerFire), userInfo: [:], repeats: true);
+//                self.timer = Timer.dy_scheduledWeakTimer(withTimeInterval: 1.0, target: self, selector: #selector(timerFire), userInfo: [:], repeats: true);
                 timeoutInterval = 60;
                 break;
             case SKPaymentTransactionState.purchased:
@@ -227,7 +227,7 @@ extension DYPurchaseManager: SKPaymentTransactionObserver {
         
         print("--------------收到产品反馈消息---------------------")
         let product = response.products;
-        print("productID:\(response.invalidProductIdentifiers)")
+        print("invalidProductIdentifiers productID:\(response.invalidProductIdentifiers)")
         if product.count == 0 {
             self.requestState = .unfoundProductor;
             let err = NSError.init(domain: "没有找到对应的支付商品！", code: self.requestState?.rawValue ?? -1, userInfo: nil);
@@ -274,7 +274,7 @@ extension DYPurchaseManager: SKPaymentTransactionObserver {
     
     func verifyInvoiceInfo(dataStr: String, transaction: SKPaymentTransaction) {
         
-        
+        timeoutInterval = 60;
         ChargeNetwork.verifyPurchase(receiptData: dataStr).dy_startRequest { (response, error) in
             if let result = response as? [String : Any] {
                //默认数组中最后一个才是当前成功的标准，因为一个票据会包含多个

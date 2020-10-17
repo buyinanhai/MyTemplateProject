@@ -83,6 +83,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
    
     // MARK: - Core Data stack
 
+    @available(iOS 10.0, *)
     lazy var persistentContainer: NSPersistentContainer = {
         /*
          The persistent container for the application. This implementation
@@ -112,6 +113,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: - Core Data Saving support
 
+    @available(iOS 10.0, *)
     func saveContext () {
         let context = persistentContainer.viewContext
         if context.hasChanges {

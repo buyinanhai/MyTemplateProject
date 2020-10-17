@@ -23,7 +23,7 @@ class MyStudyCoinCellModel: Mappable {
                     "changeDes":"学币回收"                //类型：String  必有字段  备注：变化描述
      
      */
-    var changeTime: Double?
+    var changeTime: String?
     var changeValue: Double?
     var changeDes: String?
     //1:充值 ；2:消耗 ；3:回收

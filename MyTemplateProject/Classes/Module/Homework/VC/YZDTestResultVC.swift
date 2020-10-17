@@ -47,7 +47,7 @@ class YZDTestResultVC: UIViewController {
             let header = YZDTestResultHeader.initHeaderView();
             header.delegate = self;
             self.tableView.tableHeaderView = header;
-            self.tableView.tableHeaderView?.frame = CGRect.init(x: 0, y: 0, width: self.view.width, height: 180);
+            self.tableView.tableHeaderView?.frame = CGRect.init(x: 0, y: 0, width: self.view.width, height: 190);
             
             header.didSelectedCell = {
                 [weak self] (index) in

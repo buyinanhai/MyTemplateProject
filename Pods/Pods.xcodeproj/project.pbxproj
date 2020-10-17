@@ -15,7 +15,6 @@
 			dependencies = (
 			);
 			name = TXLiteAVSDK_TRTC;
-			productName = TXLiteAVSDK_TRTC;
 		};
 /* End PBXAggregateTarget section */
 
@@ -949,7 +948,7 @@
 		1FA9A623357DA3DD0AA842022D3BF7B5 /* NCNTestView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = NCNTestView.m; sourceTree = "<group>"; };
 		1FB88BE0E741F31EA54C4B0D21BBF81A /* NCCustomMessageData.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = NCCustomMessageData.m; sourceTree = "<group>"; };
 		1FD0ADFE214B69FD1375979E2ECFD58C /* SDImageAPNGCoder.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDImageAPNGCoder.m; path = SDWebImage/Core/SDImageAPNGCoder.m; sourceTree = "<group>"; };
-		1FFED36A657123030ABB700256D73F15 /* Masonry.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Masonry.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1FFED36A657123030ABB700256D73F15 /* Masonry.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Masonry.framework; path = Masonry.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		20158C4469774EDD29327E33CB60ABC3 /* Pods-MyTemplateProject-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-MyTemplateProject-dummy.m"; sourceTree = "<group>"; };
 		202E519FE327DCDF806C08F7AE0F6669 /* NCAnswerElemMSG.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = NCAnswerElemMSG.m; sourceTree = "<group>"; };
 		204B40A770654D2F53F0B3D333E94B4B /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFNetworkReachabilityManager.h; path = AFNetworking/AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
@@ -967,7 +966,7 @@
 		24205E091FDC0B3BB608345AC5960429 /* SDAnimatedImage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDAnimatedImage.m; path = SDWebImage/Core/SDAnimatedImage.m; sourceTree = "<group>"; };
 		242DE5D81DB92C59C5759C8041C2C273 /* NCRollElemMSG.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = NCRollElemMSG.h; sourceTree = "<group>"; };
 		25A337CD0AACE028379E6FD20A021084 /* SDImageAPNGCoder.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDImageAPNGCoder.h; path = SDWebImage/Core/SDImageAPNGCoder.h; sourceTree = "<group>"; };
-		261CA976E29C0B6D264772D540318AC5 /* Pods_MyTemplateProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyTemplateProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		261CA976E29C0B6D264772D540318AC5 /* Pods_MyTemplateProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_MyTemplateProject.framework; path = "Pods-MyTemplateProject.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		268C9ED3C44A1BD1B8225601ECB9FC73 /* YTKNetworkAgent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = YTKNetworkAgent.h; sourceTree = "<group>"; };
 		269C055D17CC71FBBA93D907D2DFE256 /* TZLocationManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TZLocationManager.m; path = TZImagePickerController/TZImagePickerController/TZLocationManager.m; sourceTree = "<group>"; };
 		27BEBC96B4041F24F184E55DAE059C2C /* SDImageLoadersManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDImageLoadersManager.m; path = SDWebImage/Core/SDImageLoadersManager.m; sourceTree = "<group>"; };
@@ -989,7 +988,7 @@
 		2CBECA73937B1DE2A0FF27120734919D /* SDWebImageIndicator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDWebImageIndicator.h; path = SDWebImage/Core/SDWebImageIndicator.h; sourceTree = "<group>"; };
 		2CCC57D9CE1F8A9995153F4E861BB50A /* NSLayoutConstraint+MASDebugAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSLayoutConstraint+MASDebugAdditions.m"; path = "Masonry/NSLayoutConstraint+MASDebugAdditions.m"; sourceTree = "<group>"; };
 		2D53137EC848E4BAE22CFE5763C8AE2B /* TUIInputBar.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TUIInputBar.h; sourceTree = "<group>"; };
-		2DE86E1A868EA6EC4BDEE391FFCC5A0A /* DYTemplate.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = DYTemplate.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		2DE86E1A868EA6EC4BDEE391FFCC5A0A /* DYTemplate.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = DYTemplate.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		2E843DF02229016C220B6FF6DB5053C6 /* NCNLiveConfig.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = NCNLiveConfig.m; sourceTree = "<group>"; };
 		2ED92D3BDE7177EACBC7D53A358FAE34 /* SDWebImageOperation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDWebImageOperation.h; path = SDWebImage/Core/SDWebImageOperation.h; sourceTree = "<group>"; };
 		2F9479F9C3FAA3DF8BA1D679825F02C2 /* TZAssetModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TZAssetModel.h; path = TZImagePickerController/TZImagePickerController/TZAssetModel.h; sourceTree = "<group>"; };
@@ -1083,7 +1082,7 @@
 		4C2A8F75E4030E6C050ED5BD9E4D1AB8 /* ViewController+MASAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "ViewController+MASAdditions.m"; path = "Masonry/ViewController+MASAdditions.m"; sourceTree = "<group>"; };
 		4C350F28D846FEB52DDB0589238049CE /* MASViewConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASViewConstraint.m; path = Masonry/MASViewConstraint.m; sourceTree = "<group>"; };
 		4D663E55E93F2869DCDA2F5D0514C531 /* NCNLivingSDK.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = NCNLivingSDK.m; path = Classes/NCNLivingSDK.m; sourceTree = "<group>"; };
-		4E10481C72F6E5DA057C2DC8B2C64F86 /* License */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = License; sourceTree = "<group>"; };
+		4E10481C72F6E5DA057C2DC8B2C64F86 /* License */ = {isa = PBXFileReference; includeInIndex = 1; path = License; sourceTree = "<group>"; };
 		4E8A0C29E659442AE91B93C381956FCF /* SDImageCoder.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDImageCoder.m; path = SDWebImage/Core/SDImageCoder.m; sourceTree = "<group>"; };
 		4E9EDE1B0CAA063F758AF7E159D9CE80 /* AFAutoPurgingImageCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFAutoPurgingImageCache.m; path = "UIKit+AFNetworking/AFAutoPurgingImageCache.m"; sourceTree = "<group>"; };
 		4EC9392CBFFDC537827E7F5B548FB8C1 /* TXVideoCustomProcessDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TXVideoCustomProcessDelegate.h; path = TXLiteAVSDK_TRTC/TXLiteAVSDK_TRTC.framework/Headers/TXVideoCustomProcessDelegate.h; sourceTree = "<group>"; };
@@ -1092,7 +1091,7 @@
 		5052962889BA45E769B702F7782CEAF8 /* NCQAElemMSG.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = NCQAElemMSG.h; sourceTree = "<group>"; };
 		50530C17E2BF57E156A025F11E661C70 /* NCNLiveLansacpeMaskView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = NCNLiveLansacpeMaskView.h; sourceTree = "<group>"; };
 		506E33802D15213C6C4BA933CEB07327 /* TestNetwork.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TestNetwork.h; path = Classes/Network/TestNetwork.h; sourceTree = "<group>"; };
-		50C0B0879B7086918A819F704BF40B4B /* SocketIO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SocketIO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		50C0B0879B7086918A819F704BF40B4B /* SocketIO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SocketIO.framework; path = "Socket.IO-Client-Swift.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		50C32F826B1D84087B82E5B19537D5B5 /* TZImagePickerController-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "TZImagePickerController-dummy.m"; sourceTree = "<group>"; };
 		5159F2180290551BA326C9F5729F7D84 /* SDAnimatedImageView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDAnimatedImageView.m; path = SDWebImage/Core/SDAnimatedImageView.m; sourceTree = "<group>"; };
 		51662D9535EB98D10ACBF78BB1D455D6 /* NSString+RegexCategory.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSString+RegexCategory.m"; path = "Classes/Category/NSString+RegexCategory.m"; sourceTree = "<group>"; };
@@ -1259,7 +1258,7 @@
 		84F931039F2EB46BF622638C126E46A8 /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFURLResponseSerialization.h; path = AFNetworking/AFURLResponseSerialization.h; sourceTree = "<group>"; };
 		8515730A696896B7468F5092FB63F010 /* TXLiteAVSDK_TRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TXLiteAVSDK_TRTC.framework; path = TXLiteAVSDK_TRTC/TXLiteAVSDK_TRTC.framework; sourceTree = "<group>"; };
 		8544E9A2D02946B9981E1890B12D2746 /* NCLivePushView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = NCLivePushView.h; sourceTree = "<group>"; };
-		8647B18B1D6491AF3667695CCEFC7E83 /* NCNLivingSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NCNLivingSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8647B18B1D6491AF3667695CCEFC7E83 /* NCNLivingSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = NCNLivingSDK.framework; path = NCNLivingSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		866F4F92241FA17F2E82FF81386E3A48 /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFNetworkReachabilityManager.m; path = AFNetworking/AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
 		86C92D443CBF5D922760C46EF353CAFA /* NCNPublishView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = NCNPublishView.h; sourceTree = "<group>"; };
 		87646F72EBC135D2A72F8FAE857FF7D7 /* TransformOperators.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TransformOperators.swift; path = Sources/TransformOperators.swift; sourceTree = "<group>"; };
@@ -1267,7 +1266,7 @@
 		87ACE614983490DA330A8791020C0C7E /* YQDColorMacro.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = YQDColorMacro.h; sourceTree = "<group>"; };
 		87C7CDF6500845AE1C014D200561A076 /* DYScrollView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DYScrollView.h; path = Classes/Components/DYScrollView.h; sourceTree = "<group>"; };
 		88B06BB5192CA505AB12B5BEDCE5838D /* MJRefresh-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MJRefresh-dummy.m"; sourceTree = "<group>"; };
-		891B2270823847ED23F2ECFC28F935EC /* Starscream.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Starscream.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		891B2270823847ED23F2ECFC28F935EC /* Starscream.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Starscream.framework; path = Starscream.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		892C094124E252B31F4299ABAE19674A /* TZPhotoPreviewCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TZPhotoPreviewCell.h; path = TZImagePickerController/TZImagePickerController/TZPhotoPreviewCell.h; sourceTree = "<group>"; };
 		8945260AF25995FC2B717FC409F8FC67 /* TUIMenuView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = TUIMenuView.m; sourceTree = "<group>"; };
 		894D00AD76A90242D2480EFF8B373A5C /* MJRefreshBackStateFooter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MJRefreshBackStateFooter.m; path = MJRefresh/Custom/Footer/Back/MJRefreshBackStateFooter.m; sourceTree = "<group>"; };
@@ -1278,7 +1277,7 @@
 		8AE803831896CFE348D377EEE7FBCD91 /* DateFormatterTransform.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DateFormatterTransform.swift; path = Sources/DateFormatterTransform.swift; sourceTree = "<group>"; };
 		8AEDDA380A297372896A23782FEA4551 /* NSDictionary+dy_extension.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+dy_extension.m"; path = "Classes/Category/NSDictionary+dy_extension.m"; sourceTree = "<group>"; };
 		8B5FFE8B39F509A97499B81C642144B7 /* NCNCustomMessageUtil.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = NCNCustomMessageUtil.h; sourceTree = "<group>"; };
-		8B8FAB0D627B17EDE1366984278705D9 /* MBProgressHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MBProgressHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B8FAB0D627B17EDE1366984278705D9 /* MBProgressHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = MBProgressHUD.framework; path = MBProgressHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BB56D59DF6A97385D8C9C675328EF3B /* NCCustomElemEntityMessage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = NCCustomElemEntityMessage.h; sourceTree = "<group>"; };
 		8C36206B3ABE356F6463DADA441284EC /* NSTimer+dy_extension.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSTimer+dy_extension.m"; path = "Classes/Category/NSTimer+dy_extension.m"; sourceTree = "<group>"; };
 		8CA2A88765470029128D910BEA162D1C /* SDImageGraphics.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDImageGraphics.m; path = SDWebImage/Core/SDImageGraphics.m; sourceTree = "<group>"; };
@@ -1287,7 +1286,7 @@
 		8D3416C7CEB3F951F23FF2C63D6EC44E /* FromJSON.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FromJSON.swift; path = Sources/FromJSON.swift; sourceTree = "<group>"; };
 		8DBA0D7001F575861F8C7BE0B8A93514 /* TRTCCloud.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TRTCCloud.h; path = TXLiteAVSDK_TRTC/TXLiteAVSDK_TRTC.framework/Headers/TRTCCloud.h; sourceTree = "<group>"; };
 		8DCFD14DBD378A25926126DEAC761361 /* NSString+dy_extension.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSString+dy_extension.h"; path = "Classes/Category/NSString+dy_extension.h"; sourceTree = "<group>"; };
-		8E1D5C0FCA0D872C3F21E87F25420681 /* TZImagePickerController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TZImagePickerController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E1D5C0FCA0D872C3F21E87F25420681 /* TZImagePickerController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = TZImagePickerController.framework; path = TZImagePickerController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E60C6EC0989786A834654BA43531FD2 /* UIRefreshControl+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIRefreshControl+AFNetworking.h"; path = "UIKit+AFNetworking/UIRefreshControl+AFNetworking.h"; sourceTree = "<group>"; };
 		8E7FCEF3D9E4B31AE71A0B425B8BA2FE /* SDWebImageCacheKeyFilter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDWebImageCacheKeyFilter.m; path = SDWebImage/Core/SDWebImageCacheKeyFilter.m; sourceTree = "<group>"; };
 		8EC320FCD9D22924699E9D53AB5AEC7B /* DYTableView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DYTableView.h; path = Classes/Components/DYTableView.h; sourceTree = "<group>"; };
@@ -1337,7 +1336,7 @@
 		9CD83CF37B0A3924022251ED4A665292 /* MASConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASConstraint.m; path = Masonry/MASConstraint.m; sourceTree = "<group>"; };
 		9CE832966F5D94C5B20C7FD776C1D4E8 /* DYTableView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DYTableView.m; path = Classes/Components/DYTableView.m; sourceTree = "<group>"; };
 		9D68F29E1BD891FC9E988753A0C32F7A /* MJRefreshNormalHeader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MJRefreshNormalHeader.h; path = MJRefresh/Custom/Header/MJRefreshNormalHeader.h; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9DA822429AF5104E5F912558721F347D /* SDWeakProxy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDWeakProxy.h; path = SDWebImage/Private/SDWeakProxy.h; sourceTree = "<group>"; };
 		9DCB05547868DD7B5A5C55BBE182CF9E /* SocketIOClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketIOClient.swift; path = Source/SocketIO/Client/SocketIOClient.swift; sourceTree = "<group>"; };
 		9E27FDC6308D4DCBF2F800C6B525996A /* NCNLivingSDK-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NCNLivingSDK-dummy.m"; sourceTree = "<group>"; };
@@ -1360,7 +1359,7 @@
 		A48A4B0A74E0236087BE11557DCB4DD4 /* NCLiveVC.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = NCLiveVC.m; sourceTree = "<group>"; };
 		A4A49BB9CEBC5710C99919CCA517E49F /* Pods-MyTemplateProject-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-MyTemplateProject-resources.sh"; sourceTree = "<group>"; };
 		A4B269BFF8DB4E837FF3F715B825EECF /* NCControlElemMSG.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = NCControlElemMSG.h; sourceTree = "<group>"; };
-		A4FA15D44DF6BAC7550EDEED10862AA3 /* AFNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AFNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A4FA15D44DF6BAC7550EDEED10862AA3 /* AFNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = AFNetworking.framework; path = AFNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A52115F5AC707600EC6907E00E8DF6C0 /* UIImage+Transform.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+Transform.h"; path = "SDWebImage/Core/UIImage+Transform.h"; sourceTree = "<group>"; };
 		A53CD42BAA798F26F8A08E79D4841D0A /* UIColor+SDHexString.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIColor+SDHexString.h"; path = "SDWebImage/Private/UIColor+SDHexString.h"; sourceTree = "<group>"; };
 		A58F3CD3F4835B69F328829D07A67195 /* TZPhotoPreviewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TZPhotoPreviewController.m; path = TZImagePickerController/TZImagePickerController/TZPhotoPreviewController.m; sourceTree = "<group>"; };
@@ -1391,9 +1390,9 @@
 		AEA4D0C5018D0D01AFE00A3100F64651 /* Masonry-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Masonry-dummy.m"; sourceTree = "<group>"; };
 		AED0F27A59666A7C3D683DAC108EE677 /* SocketManagerSpec.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketManagerSpec.swift; path = Source/SocketIO/Manager/SocketManagerSpec.swift; sourceTree = "<group>"; };
 		AEEA7B5A5C8E6800ED61254BCCADFD85 /* NSBundle+MJRefresh.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSBundle+MJRefresh.m"; path = "MJRefresh/NSBundle+MJRefresh.m"; sourceTree = "<group>"; };
-		B04D5213C8250B7B476E2254287FA4F5 /* DYTemplate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DYTemplate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B04D5213C8250B7B476E2254287FA4F5 /* DYTemplate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = DYTemplate.framework; path = DYTemplate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0B0B2CA03B8826CBAD7EBB2027339F9 /* AFNetworking.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = AFNetworking.modulemap; sourceTree = "<group>"; };
-		B0B214D775196BA7CA8E17E53048A493 /* SDWebImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SDWebImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0B214D775196BA7CA8E17E53048A493 /* SDWebImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SDWebImage.framework; path = SDWebImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0D0996184076EA9E2FEDE18FAC011D2 /* DYNetworkConfig.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = DYNetworkConfig.h; sourceTree = "<group>"; };
 		B114C35A6C611560456AF03D2F938BCE /* TXLiveAudioSessionDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TXLiveAudioSessionDelegate.h; path = TXLiteAVSDK_TRTC/TXLiteAVSDK_TRTC.framework/Headers/TXLiveAudioSessionDelegate.h; sourceTree = "<group>"; };
 		B155AA036893FFC4E5568067FDC8EBC2 /* TXLivePlayConfig.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TXLivePlayConfig.h; path = TXLiteAVSDK_TRTC/TXLiteAVSDK_TRTC.framework/Headers/TXLivePlayConfig.h; sourceTree = "<group>"; };
@@ -1416,7 +1415,7 @@
 		B5AF804A111EC5ADEE84FB6B9350AAC2 /* DYBaseNetwork.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = DYBaseNetwork.h; sourceTree = "<group>"; };
 		B5F09A1BCC9B06D807ADA1635149B658 /* SocketAckManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketAckManager.swift; path = Source/SocketIO/Ack/SocketAckManager.swift; sourceTree = "<group>"; };
 		B8DDF89985035CF3F2BB649CB59ACDC6 /* TZImagePickerController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TZImagePickerController.h; path = TZImagePickerController/TZImagePickerController/TZImagePickerController.h; sourceTree = "<group>"; };
-		B9084FE779702931E8DF1D00A2D725FB /* ObjectMapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ObjectMapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9084FE779702931E8DF1D00A2D725FB /* ObjectMapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = ObjectMapper.framework; path = ObjectMapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9D6DEF27FBFA9A33EAA6B9027D800B5 /* NSArray+MASAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSArray+MASAdditions.m"; path = "Masonry/NSArray+MASAdditions.m"; sourceTree = "<group>"; };
 		B9FAB81DD71492107A59011B8F839136 /* Pods-MyTemplateProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MyTemplateProject.debug.xcconfig"; sourceTree = "<group>"; };
 		BACD753C09389CA3E0E3ABE4A4160F76 /* SDWebImageOperation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDWebImageOperation.m; path = SDWebImage/Core/SDWebImageOperation.m; sourceTree = "<group>"; };
@@ -1453,7 +1452,7 @@
 		C523FD0B1611376792157A829F6ECE5D /* NCNLiveChatView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = NCNLiveChatView.h; sourceTree = "<group>"; };
 		C53DC8A69696C53B92D6C718D587BC8A /* NCExamElemMSG.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = NCExamElemMSG.h; sourceTree = "<group>"; };
 		C55DA993BCC214941A56C964A4BC501A /* SDImageTransformer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDImageTransformer.h; path = SDWebImage/Core/SDImageTransformer.h; sourceTree = "<group>"; };
-		C608F4A8471EA1C10FC5D6FEEE202FA0 /* NCNLivingSDK.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = NCNLivingSDK.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		C608F4A8471EA1C10FC5D6FEEE202FA0 /* NCNLivingSDK.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = NCNLivingSDK.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		C63C55FAB6C7202CD91BA956A750B729 /* Socket.IO-Client-Swift-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Socket.IO-Client-Swift-prefix.pch"; sourceTree = "<group>"; };
 		C6ACFF9B13641C50D213CE340B1881FD /* UIView+Extension.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
 		C6CA205554447F460D443B7795B58A3C /* UIProgressView+AFNetworking.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIProgressView+AFNetworking.m"; path = "UIKit+AFNetworking/UIProgressView+AFNetworking.m"; sourceTree = "<group>"; };
@@ -1539,7 +1538,7 @@
 		E456674147BDE8BD00AA027813D52C03 /* DYNetworkError.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = DYNetworkError.m; sourceTree = "<group>"; };
 		E475F2C2D047E684EA75F2AD70BE6D75 /* YTKBaseRequest.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = YTKBaseRequest.h; sourceTree = "<group>"; };
 		E482E7C8768C8365F457634CBE68D736 /* UIView+Layout.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIView+Layout.m"; path = "TZImagePickerController/TZImagePickerController/UIView+Layout.m"; sourceTree = "<group>"; };
-		E49D6D248DD1CEE584E6776B9164A1B2 /* MJRefresh.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MJRefresh.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E49D6D248DD1CEE584E6776B9164A1B2 /* MJRefresh.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = MJRefresh.framework; path = MJRefresh.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E51B225EFFF50DFFA0D4E4927A041F26 /* TZImagePickerController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TZImagePickerController-prefix.pch"; sourceTree = "<group>"; };
 		E54841A2CA8332DE678AAB281E85172F /* ZYDrawingLayer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = ZYDrawingLayer.h; sourceTree = "<group>"; };
 		E5611EAA14562951871EDA6EA260DC5B /* UIView+Frame.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
@@ -1820,6 +1819,7 @@
 				7E94B6F298C89DB784E065144482B5A2 /* Frameworks */,
 				763274865467AE3F01293A594BA13144 /* Support Files */,
 			);
+			name = TXLiteAVSDK_TRTC;
 			path = TXLiteAVSDK_TRTC;
 			sourceTree = "<group>";
 		};
@@ -1864,6 +1864,7 @@
 				4C2A8F75E4030E6C050ED5BD9E4D1AB8 /* ViewController+MASAdditions.m */,
 				1161B68E9380D1D8AA7C6C469443FDEC /* Support Files */,
 			);
+			name = Masonry;
 			path = Masonry;
 			sourceTree = "<group>";
 		};
@@ -1936,6 +1937,7 @@
 			children = (
 				D32C304234DA54B3D72F70A68E72866E /* Views */,
 			);
+			name = UI;
 			path = UI;
 			sourceTree = "<group>";
 		};
@@ -1986,6 +1988,7 @@
 				AE7D1CF5CB4809B3E2A6B745A6283812 /* Resources */,
 				FC3BDDF6FFD8F4AE170E90DCC968D766 /* Support Files */,
 			);
+			name = MJRefresh;
 			path = MJRefresh;
 			sourceTree = "<group>";
 		};
@@ -2172,6 +2175,7 @@
 				B4D127EFB2F320D659D7AC7168F78E4C /* Landscape */,
 				631F131667F2F643597E995DEBF08111 /* test */,
 			);
+			name = Views;
 			path = Views;
 			sourceTree = "<group>";
 		};
@@ -2183,6 +2187,7 @@
 				437D8CFF326A8C6A27FD6016BE56AD26 /* NCNRollCallAlert.h */,
 				9C8AC6C8CE6A3CE5001A92888A06DA41 /* NCNRollCallAlert.m */,
 			);
+			name = Alert;
 			path = Alert;
 			sourceTree = "<group>";
 		};
@@ -2192,6 +2197,7 @@
 				335DB6B4195FD71775FD79980CF049AF /* Core */,
 				7FAE3108EC1478FB4C1668968F4ADD1C /* Support Files */,
 			);
+			name = SDWebImage;
 			path = SDWebImage;
 			sourceTree = "<group>";
 		};
@@ -2254,6 +2260,7 @@
 				DAA475E2FF6DEF9436E38E800FE422BD /* Resources */,
 				FF068E466DBA95AF5B7DFA5477751425 /* Support Files */,
 			);
+			name = TZImagePickerController;
 			path = TZImagePickerController;
 			sourceTree = "<group>";
 		};
@@ -2279,6 +2286,7 @@
 				A11B3F53B99D7DB3001DE5AB0A4CAEE2 /* MBProgressHUD.m */,
 				44D95485FF9AC6B4F79A78A5461D68C9 /* Support Files */,
 			);
+			name = MBProgressHUD;
 			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
@@ -2318,6 +2326,7 @@
 			children = (
 				98D2602CA92CDDBB1909D18D39AFE232 /* NCNStuListCell.xib */,
 			);
+			name = Landscape;
 			path = Landscape;
 			sourceTree = "<group>";
 		};
@@ -2344,6 +2353,7 @@
 				0EDEE9498672AF8247B8B1C26B80AD21 /* NCNTestView.h */,
 				1FA9A623357DA3DD0AA842022D3BF7B5 /* NCNTestView.m */,
 			);
+			name = test;
 			path = test;
 			sourceTree = "<group>";
 		};
@@ -2382,6 +2392,7 @@
 				80DB7CB2D8CE37D17E20EF56EC2A36B9 /* YJProgressHUD.h */,
 				0F840A5ABA7AAD3556EAB154617B102C /* YJProgressHUD.m */,
 			);
+			name = YJProgressHUDK;
 			path = YJProgressHUDK;
 			sourceTree = "<group>";
 		};
@@ -2416,6 +2427,7 @@
 			children = (
 				30B546B2813951E698D2A4BC4AACEDC7 /* UI */,
 			);
+			name = Classes;
 			path = Classes;
 			sourceTree = "<group>";
 		};
@@ -2452,6 +2464,7 @@
 				DF5E4CFE9178CCDC2761510D4E166DB7 /* YTKRequest.h */,
 				81FE6E38893ECFA0235D2275603EB396 /* YTKRequest.m */,
 			);
+			name = YTK;
 			path = YTK;
 			sourceTree = "<group>";
 		};
@@ -2498,6 +2511,7 @@
 				EA35C13F4650F5968966168102AFF72E /* NCNPublishVC.h */,
 				F787CE00C7A6714EBBA01EDF666B87D9 /* NCNPublishVC.m */,
 			);
+			name = "VideoRoom(直播教室)";
 			path = "VideoRoom(直播教室)";
 			sourceTree = "<group>";
 		};
@@ -2585,6 +2599,7 @@
 				242DE5D81DB92C59C5759C8041C2C273 /* NCRollElemMSG.h */,
 				83EE72048EBF55C50A04FD232C834777 /* NCRollElemMSG.m */,
 			);
+			name = Model;
 			path = Model;
 			sourceTree = "<group>";
 		};
@@ -2608,6 +2623,7 @@
 				29F28F04520281A814C85AC1C5301546 /* TUIMenuView.h */,
 				8945260AF25995FC2B717FC409F8FC67 /* TUIMenuView.m */,
 			);
+			name = InputView;
 			path = InputView;
 			sourceTree = "<group>";
 		};
@@ -2707,6 +2723,7 @@
 				DD9A653DCC382C30D0B6909A0BF95768 /* NCNMessageCellModel.h */,
 				2C754D930FF10837CF2F0A5A92E933EF /* NCNMessageCellModel.m */,
 			);
+			name = CellModel;
 			path = CellModel;
 			sourceTree = "<group>";
 		};
@@ -2742,6 +2759,7 @@
 				D351C6E4802E9A6B458E7544C8370B0A /* NCNLivingMainVC.h */,
 				E27C954425445FA21BA40F71D0AA9B13 /* NCNLivingMainVC.m */,
 			);
+			name = VC;
 			path = VC;
 			sourceTree = "<group>";
 		};
@@ -2761,6 +2779,7 @@
 				A92D42F71ADF0613CE8230FAEC580CFC /* NCNLivingSettingConfig.h */,
 				E8599DFDAAC2618ECAEF47594D02A492 /* NCNLivingSettingConfig.m */,
 			);
+			name = Model;
 			path = Model;
 			sourceTree = "<group>";
 		};
@@ -2778,6 +2797,7 @@
 				50530C17E2BF57E156A025F11E661C70 /* NCNLiveLansacpeMaskView.h */,
 				71F21EE23C853D211979B87D17A51733 /* NCNLiveLansacpeMaskView.m */,
 			);
+			name = Landscape;
 			path = Landscape;
 			sourceTree = "<group>";
 		};
@@ -2810,6 +2830,7 @@
 				EBFD798A4974479CA06DDA62B2FE02FE /* URLTransform.swift */,
 				4ABD26FE3BD519300CAB977854761D13 /* Support Files */,
 			);
+			name = ObjectMapper;
 			path = ObjectMapper;
 			sourceTree = "<group>";
 		};
@@ -2870,6 +2891,7 @@
 				04B36FB0B6597EAD8FD115238810440C /* NCNQ&ACellData.h */,
 				B3CF7EC62CF4AD0970B09DCAF9F22584 /* NCNQ&ACellData.m */,
 			);
+			name = Model;
 			path = Model;
 			sourceTree = "<group>";
 		};
@@ -2905,6 +2927,7 @@
 				A1E5075F43EF6330479E396675DB2199 /* NCNMessageCell.h */,
 				A2C53542FF350276FC3E8DBC0AC9A4AC /* NCNMessageCell.m */,
 			);
+			name = CellView;
 			path = CellView;
 			sourceTree = "<group>";
 		};
@@ -2929,6 +2952,7 @@
 				C03C9272F7A09114F25A54687969B038 /* NCLiveVC.h */,
 				A48A4B0A74E0236087BE11557DCB4DD4 /* NCLiveVC.m */,
 			);
+			name = VC;
 			path = VC;
 			sourceTree = "<group>";
 		};
@@ -2974,6 +2998,7 @@
 				C97ED97474F06536750283B115FD68F3 /* SSLSecurity.swift */,
 				47965BCC658DA8FA1F7714C56DD9784C /* Support Files */,
 			);
+			name = "Socket.IO-Client-Swift";
 			path = "Socket.IO-Client-Swift";
 			sourceTree = "<group>";
 		};
@@ -2986,6 +3011,7 @@
 				03C7A39795B6304ED82065E38D361728 /* WebSocket.swift */,
 				C7567A7C76CBB023BF62C1D5F14B2533 /* Support Files */,
 			);
+			name = Starscream;
 			path = Starscream;
 			sourceTree = "<group>";
 		};
@@ -3000,6 +3026,7 @@
 				EF65BA4A7BA42BF5DECCA09B7A0725C8 /* Support Files */,
 				211B5892AE7E46BC22DE3E4FB0E5F2DD /* UIKit */,
 			);
+			name = AFNetworking;
 			path = AFNetworking;
 			sourceTree = "<group>";
 		};
@@ -3011,6 +3038,7 @@
 				784169AE13F5BB4135E522E76A497CA4 /* NCNPublishView.xib */,
 				51D4E23A3B20436010C16411A3F00AAF /* Landscape */,
 			);
+			name = Views;
 			path = Views;
 			sourceTree = "<group>";
 		};
@@ -3079,6 +3107,7 @@
 			children = (
 				ECCEA41589A1D9CECFC46544907062A1 /* LiveResources.bundle */,
 			);
+			name = Resources;
 			path = Resources;
 			sourceTree = "<group>";
 		};
@@ -3092,6 +3121,7 @@
 				EA46C8AF62C5C5DC6C6ED2A1619D6469 /* NCLiveView.h */,
 				E3C13E21F7FAF677B71B67C86FB9DFA4 /* NCLiveView.m */,
 			);
+			name = View;
 			path = View;
 			sourceTree = "<group>";
 		};
@@ -3792,7 +3822,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1100;
-				LastUpgradeCheck = 1200;
+				LastUpgradeCheck = 1100;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 10.0";
@@ -4517,7 +4547,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/NCNLivingSDK/NCNLivingSDK-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/NCNLivingSDK/NCNLivingSDK-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4554,7 +4584,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/TZImagePickerController/TZImagePickerController-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/TZImagePickerController/TZImagePickerController-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4589,7 +4619,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/TZImagePickerController/TZImagePickerController-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/TZImagePickerController/TZImagePickerController-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4625,7 +4655,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/Masonry/Masonry-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/Masonry/Masonry-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4651,7 +4681,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4678,7 +4708,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/SDWebImage/SDWebImage-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/SDWebImage/SDWebImage-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4714,7 +4744,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/MJRefresh/MJRefresh-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/MJRefresh/MJRefresh-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4750,7 +4780,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/SDWebImage/SDWebImage-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/SDWebImage/SDWebImage-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4785,7 +4815,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/Starscream/Starscream-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/Starscream/Starscream-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4821,7 +4851,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/MJRefresh/MJRefresh-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/MJRefresh/MJRefresh-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4856,7 +4886,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "Target Support Files/Pods-MyTemplateProject/Pods-MyTemplateProject-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4894,7 +4924,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/Masonry/Masonry-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/Masonry/Masonry-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4929,7 +4959,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/Socket.IO-Client-Swift/Socket.IO-Client-Swift-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/Socket.IO-Client-Swift/Socket.IO-Client-Swift-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4974,7 +5004,6 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -4997,7 +5026,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -5035,7 +5064,6 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -5061,7 +5089,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -5090,7 +5118,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/AFNetworking/AFNetworking-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/AFNetworking/AFNetworking-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5125,7 +5153,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/ObjectMapper/ObjectMapper-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/ObjectMapper/ObjectMapper-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5161,7 +5189,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/DYTemplate/DYTemplate-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/DYTemplate/DYTemplate-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5197,7 +5225,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/AFNetworking/AFNetworking-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/AFNetworking/AFNetworking-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5233,7 +5261,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/MBProgressHUD/MBProgressHUD-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/MBProgressHUD/MBProgressHUD-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5268,7 +5296,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/Socket.IO-Client-Swift/Socket.IO-Client-Swift-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/Socket.IO-Client-Swift/Socket.IO-Client-Swift-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5302,7 +5330,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/MBProgressHUD/MBProgressHUD-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/MBProgressHUD/MBProgressHUD-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5328,7 +5356,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5354,7 +5382,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/ObjectMapper/ObjectMapper-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/ObjectMapper/ObjectMapper-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5389,7 +5417,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "Target Support Files/Pods-MyTemplateProject/Pods-MyTemplateProject-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5426,7 +5454,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/NCNLivingSDK/NCNLivingSDK-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/NCNLivingSDK/NCNLivingSDK-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5462,7 +5490,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/Starscream/Starscream-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/Starscream/Starscream-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5497,7 +5525,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/DYTemplate/DYTemplate-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/DYTemplate/DYTemplate-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

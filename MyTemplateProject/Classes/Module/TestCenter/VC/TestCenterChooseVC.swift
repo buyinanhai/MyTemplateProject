@@ -158,7 +158,8 @@ class TestCenterChooseVC: UIViewController {
                         models.append(model);
                         
                         if let id = self.mapLocalSelectModel(arrayIndex: index, selectIndex: 1, model: model) {
-                            self.loadGrades(stageId: id);
+                            
+                            self.loadSubjects(id);
                         }
                     }
                 }
@@ -174,10 +175,10 @@ class TestCenterChooseVC: UIViewController {
         }
     }
     
-    private func loadGrades(stageId: Int) {
+    private func loadGrades(stageId: Int, subjectId: String) {
         
         DYNetworkHUD.startLoading();
-        TestCenterNetwork.getGrades(stageId: stageId).dy_startRequest { (response, error) in
+        TestCenterNetwork.getGrades(stageId: stageId,subjectId: subjectId).dy_startRequest { (response, error) in
             if let _response = response as? [[String : Any]] {
                 
                 DYNetworkHUD.dismiss()
@@ -195,7 +196,7 @@ class TestCenterChooseVC: UIViewController {
                         models.append(model);
                         
                         if let id = self.mapLocalSelectModel(arrayIndex: index, selectIndex: 3, model: model) {
-                            self.loadSubjects(id);
+//                            self.loadSubjects(id);
                         }
                     }
                 }
@@ -227,13 +228,13 @@ class TestCenterChooseVC: UIViewController {
                 var models:[TestCenterChooseModel] = [];
                 for (index,item) in _response.enumerated() {
                     
-                    if let id = item["subjectId"] as? String, let name = item["subjectName"] as? String {
-                        let model = TestCenterChooseModel.init(id: Int(id) ?? 0, name: name, index: IndexPath.init(item: index, section: 2));
+                    if let subjectId = item["subjectId"] as? String, let name = item["subjectName"] as? String {
+                        let model = TestCenterChooseModel.init(id: Int(subjectId) ?? 0, name: name, index: IndexPath.init(item: index, section: 2));
                         models.append(model);
                         
                         if let id = self.mapLocalSelectModel(arrayIndex: index, selectIndex: 2, model: model) {
                             self.loadVerson(from: id);
-
+                            self.loadGrades(stageId: stageId, subjectId: subjectId);
                         }
                     }
                 }
@@ -618,7 +619,8 @@ extension TestCenterChooseVC: UICollectionViewDataSource, UICollectionViewDelega
             self.collectionView.reloadData()
         } else if type == .level {
             
-            self.loadGrades(stageId: currentModel?.id ?? -1);
+            self.loadSubjects(currentModel?.id ?? -1)
+//            self.loadGrades(stageId: currentModel?.id ?? -1);
 
         } else if type == .version {
             
@@ -630,6 +632,10 @@ extension TestCenterChooseVC: UICollectionViewDataSource, UICollectionViewDelega
         } else if type  == .subject {
             
             self.loadVerson(from: currentModel?.id ?? 0);
+            if let stageId = self.selectModel[TestCenterChooseType.level.rawValue]?.id, let subjectId = currentModel?.id {
+                
+                self.loadGrades(stageId: stageId, subjectId: String(subjectId));
+            }
         }
     }
     
