@@ -69,13 +69,24 @@
             background: #EDEDED;
             color: #777777;
         }
-        
+    img{
+        max-width: 100%!important;
+    }
 
+        .loadingDiv {
+            background-color: .clear
+            display: flex;
+            flex-direction: row: /* row 为横向排列，column 为纵向排列 */
+            align-items: center;
+            justify-content: center;
+        }
     </style>
 </head>
 
 <body id="content" style="opacity:1">
-<div class="main">
+    <div id="loadingDiv" style="display: none; "><div id="over" style=" position: absolute;top: 0;left: 0; width: 35px;height: 35px; background-color: #f5f5f5;opacity:0.5;z-index: 1000;"></div><div id="layout" style="position: absolute;top: 50%; left: 45%; center: center; width: 35px; height: 35px;  z-index: 1001;text-align:center;"><img src="imgs/myloading.gif"/></div></div>
+
+    <div class="main"  style="display: none;">
 </div>
 <script src="https://cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
         async></script>
@@ -83,11 +94,18 @@
 
 <script>
     function onload(obj){
+        document.getElementById("loadingDiv").style.display="block";
+        $(".main").hide();
         var main = '';
         // main += '<p id = "firstLine" ><span class="typeName">'+ obj.questionTypeName +'</span></p>';
         // main += '<p><span>'+ obj.tempText +'</span></p>';
         main += '<p id = "stem">';
         main += obj.stem+'</p>';
+        
+        var optionsStr = obj.options;
+        if (!optionsStr){
+            optionsStr = '[]';
+        }
 
         var options = JSON.parse(obj.options)
         var myAnswer = obj.myAnswer;
@@ -136,8 +154,13 @@
             })
         }
 
-        window.MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById('content')]);
+        window.MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById('content')],[fadeInBody]);
     }
+// 等mathjax重绘完再显示
+function fadeInBody(){
+        document.getElementById("loadingDiv").style.display="none";
+        $(".main").show();
+}
 
     // 取消点击事件
     function cancelClick(){

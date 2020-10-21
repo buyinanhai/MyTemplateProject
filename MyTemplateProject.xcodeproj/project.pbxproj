@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		04D9CD2F49CE7ECB939C1102 /* Pods_MyTemplateProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 954802C722A215C21B6DC642 /* Pods_MyTemplateProject.framework */; };
 		92362EA225399BD8005030FA /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92362EA125399BD8005030FA /* StoreKit.framework */; };
-		9238449C250B68CA000B9BE1 /* NCNRechargeNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9238449B250B68CA000B9BE1 /* NCNRechargeNetwork.swift */; };
 		9238449E250B6A14000B9BE1 /* ChargeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9238449D250B6A14000B9BE1 /* ChargeVC.swift */; };
 		923844A0250B6A39000B9BE1 /* MyStudyCoinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9238449F250B6A39000B9BE1 /* MyStudyCoinVC.swift */; };
 		923844A2250B6ECC000B9BE1 /* CommonNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923844A1250B6ECC000B9BE1 /* CommonNetwork.swift */; };
@@ -88,7 +87,6 @@
 /* Begin PBXFileReference section */
 		5DED31BCD404196FBE8CB7E0 /* Pods-MyTemplateProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTemplateProject.debug.xcconfig"; path = "Target Support Files/Pods-MyTemplateProject/Pods-MyTemplateProject.debug.xcconfig"; sourceTree = "<group>"; };
 		92362EA125399BD8005030FA /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		9238449B250B68CA000B9BE1 /* NCNRechargeNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NCNRechargeNetwork.swift; sourceTree = "<group>"; };
 		9238449D250B6A14000B9BE1 /* ChargeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChargeVC.swift; sourceTree = "<group>"; };
 		9238449F250B6A39000B9BE1 /* MyStudyCoinVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyCoinVC.swift; sourceTree = "<group>"; };
 		923844A1250B6ECC000B9BE1 /* CommonNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommonNetwork.swift; path = MyTemplateProject/Classes/Network/CommonNetwork.swift; sourceTree = SOURCE_ROOT; };
@@ -240,7 +238,7 @@
 		9238449A250B689F000B9BE1 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				9238449B250B68CA000B9BE1 /* NCNRechargeNetwork.swift */,
+				9238451D251316CC000B9BE1 /* ChargeNetwork.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -257,7 +255,6 @@
 			isa = PBXGroup;
 			children = (
 				923845172511A1F0000B9BE1 /* DYPurchaseManager.swift */,
-				9238451D251316CC000B9BE1 /* ChargeNetwork.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -814,7 +811,6 @@
 				923844A5250CAFF7000B9BE1 /* ChargeCollectionCell.swift in Sources */,
 				92F2D2DD251C988900317D5D /* YZDHomeworkQuestionModel_question.swift in Sources */,
 				9271C76524E3EDC20004E82B /* TestCenterChooseModel.swift in Sources */,
-				9238449C250B68CA000B9BE1 /* NCNRechargeNetwork.swift in Sources */,
 				92F2D2E1251C988900317D5D /* YZDTestRecordCellModel.swift in Sources */,
 				92F2D2E5251C988900317D5D /* YZDHomeworkNetwork.swift in Sources */,
 				9271C77624EB88780004E82B /* LoginVC.swift in Sources */,

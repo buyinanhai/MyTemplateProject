@@ -12,6 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface DYWebViewVC : UIViewController
 
+@property (nonatomic, assign) BOOL isShowWebTitle;
+
+
 @property (nonatomic,copy) NSString *url;
 @property (nonatomic,copy) NSString *html;
 

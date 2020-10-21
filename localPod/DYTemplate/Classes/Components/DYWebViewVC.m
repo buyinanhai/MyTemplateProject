@@ -32,9 +32,10 @@
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
     
-    self.title = webView.title;
+    if (self.isShowWebTitle) {
+        self.title = webView.title;
+    }
 }
-
 
 
 
