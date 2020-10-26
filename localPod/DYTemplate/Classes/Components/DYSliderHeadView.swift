@@ -51,7 +51,7 @@ import UIKit
     ///滑动的线条宽度
    public var sliderLineWidth:CGFloat = 15;
    public var type: DYSliderHeaderType = .normal;
-  public  var font: UIFont = UIFont.systemFont(ofSize: 14);
+   public var fontSize: CGFloat = 14;
    public var imageSize: CGSize?
    public var images: [String]?
     ///view下面的黑线颜色
@@ -169,6 +169,14 @@ import UIKit
         
     }
     
+    private var font: UIFont {
+        
+        get {
+            
+            return UIFont.systemFont(ofSize: self.fontSize);
+        }
+    }
+    
     public func hideBottomLine() {
         self.lineView.isHidden = true;
     }
@@ -261,8 +269,8 @@ import UIKit
     }
     
     private func updateLabelStatus(isSelect:Bool, label: DYButton) {
-        let fontSize = self.font.pointSize ;
-        label.titleLabel?.font = UIFont.systemFont(ofSize: isSelect ? fontSize + 2 : fontSize - 2);
+        let fontSize = self.fontSize ;
+        label.titleLabel?.font = UIFont.systemFont(ofSize: isSelect ? fontSize + 2 : fontSize);
         label.textColor = isSelect ? self.selectColor : self.textColor;
     }
     
@@ -326,7 +334,7 @@ extension DYSliderHeadView: UICollectionViewDataSource, UICollectionViewDelegate
         if let btn = cell.contentView.subviews.last as? DYButton {
             let model = self.dataSources[indexPath.item];
             if model.isSelect == true && indexPath.item == self.currSelectIndex {
-                btn.titleLabel?.font = UIFont.systemFont(ofSize: 16);
+                btn.titleLabel?.font = UIFont.systemFont(ofSize: self.fontSize + 2);
             } else {
                 btn.titleLabel?.font = self.font;
             }

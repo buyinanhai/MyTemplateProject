@@ -51,24 +51,24 @@ import UIKit
             hud.progressView.removeFromSuperview()
             hud.shelterView.isHidden = true;
         }
-        hud.inView = inView;
-        if hud.inView == nil {
-            hud.inView = UIApplication.shared.windows.first;
+        var contentView = inView;
+        if  inView == nil {
+            contentView = UIApplication.shared.windows.first;
         }
-        hud.messageView.text =  message ;
-        hud.inView?.addSubview(hud.messageView);
+        hud.messageView.text = message ;
+        contentView?.addSubview(hud.messageView);
         hud.messageView.mas_makeConstraints { (make) in
             make?.bottom.offset()(-64);
             make?.centerX.offset();
-            make?.height.lessThanOrEqualTo()(hud.inView);
-            make?.width.lessThanOrEqualTo()(hud.inView)
-//            make?.width.offset()(120);
-//            make?.height.offset()(60);
+            make?.height.lessThanOrEqualTo()(contentView);
+            make?.width.lessThanOrEqualTo()(contentView)
+
         }
        
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + hud.showTime) {
             hud.messageView.removeFromSuperview();
+            hud.shelterView.isHidden = true;
         }
         
     }
@@ -105,7 +105,6 @@ import UIKit
     }()
     
     
-    private var inView: UIView?
     private var progressView: DYNetworkProgressView = {
         
         let view = DYNetworkProgressView.init(frame: .zero);

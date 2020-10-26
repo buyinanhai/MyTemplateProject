@@ -11,6 +11,9 @@ import DYTemplate.DYNetwork
 
 class TestCenterAnswerVC: YZDTestAnswerVC {
 
+    /// 0 : 知识点  1： 章节目录
+    public var type: Int = 0;
+    
     public var knowledgeId: String?
     
     public var chapterId: String?;
@@ -139,7 +142,7 @@ extension TestCenterAnswerVC {
     //MARK: 收藏试题
     override func collectQuestion(questionId: Int, likeOrUnlike: Bool, callback: @escaping (DYNetworkError?) -> Void) {
         
-        TestCenterNetwork.collectQuestion(gradeId: self.gradeId ?? 0, subjectId: self.subjectId ?? "", questionId: questionId, likeOrUnlike: likeOrUnlike ? 1 : 0, nodeId: self.nodeId ?? "").dy_startRequest { (response, error) in
+        TestCenterNetwork.collectQuestion(gradeId: self.gradeId ?? 0, subjectId: self.subjectId ?? "", questionId: questionId, likeOrUnlike: likeOrUnlike ? 1 : 0, nodeId: self.type == 0 ? "" : self.nodeId ?? "").dy_startRequest { (response, error) in
             callback(error);
         }
     }

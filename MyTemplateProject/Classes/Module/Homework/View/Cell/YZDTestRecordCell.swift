@@ -35,7 +35,7 @@ class YZDTestRecordCell: DYTableViewCell {
 //                let useTime = _model.dy_usedTime ?? 0;
 //                self.consumeTimeLabel.text = String.init(format: "用时：%02d:%02d", useTime / 60, useTime % 60);
                 self.chapterLabel.text = String.init(format: "%@ %@", _model.dy_moduleName ?? "" , _model.dy_lessonName ?? "");
-                self.consumeTimeLabel.text = Date.getFormdateHM(timeStamp: Double(_model.dy_usedTime ?? 0));
+                self.consumeTimeLabel.text = String.init(format: "用时：%02d分%02d秒", (_model.dy_usedTime ?? 0) / 60, (_model.dy_usedTime ?? 0) % 60);
                 self.answeredLabel.text = "已做答：\(_model.dy_finishCount ?? 0)题";
                 self.accuracyLabel.text = "正确率：\(_model.dy_accuracy ?? "0.0")%";
             }

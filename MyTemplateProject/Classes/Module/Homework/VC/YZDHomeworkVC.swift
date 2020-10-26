@@ -66,7 +66,7 @@ class YZDHomeworkVC: UIViewController {
     }
     
     private func loadData(page: Int, result:@escaping DYTableView_Result) {
-        
+                
         YZDHomeworkNetwork.getMyHomework(page: page, pageSize: 10).dy_startRequest { (response, error) in
             if let _value = response as? [String : Any],let datas = _value["list"] as? [[String : Any]] {
                 var arrays:[YZDHomeworkModel] = [];

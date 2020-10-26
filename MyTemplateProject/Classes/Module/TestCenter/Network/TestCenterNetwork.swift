@@ -22,7 +22,7 @@ class TestCenterNetwork: DYBaseNetwork {
         
         get {
             
-            return "SRn55wqmX07YW2tkTZXQXIstDq08cwb4YZjV9QhS%2B7l9u6WuU3CCcwyyWgbVPcNsDbFLAHXNYtsh%0A4CHxoU76rmc74nPV%2F0Q2";
+            return "SRn55wqmX04pNekU6ZgaGPFX6WgiS6BQKKwdYRie%2FeaFJtUJ4Rm%2BfCl8GunN2fJgISjQcKn5nleB%0AMSP5z7uJZ9ADbCuuwJgX";
             
             if let token = DYNetworkConfig.share()?.extraData["token"] as? String {
                 return token;
@@ -150,7 +150,6 @@ class TestCenterNetwork: DYBaseNetwork {
             "answers" : answers,
             "gradeId": gradeId,
             "subjectId": subjectId,
-            "id": nodeId
         ];
         //章节做题提交不传年级
         if gradeId == -1 {
@@ -281,8 +280,8 @@ class TestCenterNetwork: DYBaseNetwork {
     }
 
 
-    //MARK:收藏题目
-    public class func collectQuestion(gradeId: Int, subjectId: String,questionId: Int,likeOrUnlike: Int,nodeId: String) -> TestCenterNetwork {
+    //MARK:收藏题目 知识点 不需要传 节点id
+    public class func collectQuestion(gradeId: Int, subjectId: String,questionId: Int,likeOrUnlike: Int,nodeId: String?) -> TestCenterNetwork {
 
         let obj = TestCenterNetwork.init();
         obj.dy_baseURL = self.hostUrl;
@@ -294,7 +293,7 @@ class TestCenterNetwork: DYBaseNetwork {
             "likeOrUnlike": likeOrUnlike == 1 ? 0 : 1,
             "gradeId":gradeId,
             "subjectId":subjectId,
-            "id": nodeId
+            "id": nodeId ?? ""
         ];
         
         obj.dy_requestMethod = .POST;

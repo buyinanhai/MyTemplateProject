@@ -391,7 +391,7 @@ static NSString *const menuCellID = @"YCMenuCell";
     
     if (self.style == 1) {
         
-        self.collectionView.frame = CGRectMake(0, _topMargin, self.width, self.height);
+        self.collectionView.frame = CGRectMake(0, _topMargin, self.width, self.height - kArrowHeight);
     }
 }
 
@@ -544,7 +544,7 @@ static NSString *const menuCellID = @"YCMenuCell";
     
     if (!_collectionView) {
         UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
-        layout.sectionInset = UIEdgeInsetsMake(5, 5, 5, 5);
+        layout.sectionInset = UIEdgeInsetsMake(8, 8, 8, 8);
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, _topMargin, self.width, self.height - kArrowHeight) collectionViewLayout:layout];
         _collectionView.dataSource = self;
         _collectionView.delegate = self;

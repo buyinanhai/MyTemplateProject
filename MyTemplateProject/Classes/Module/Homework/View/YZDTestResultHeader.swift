@@ -33,7 +33,7 @@ class YZDTestResultHeader: UIView {
     
     class func initHeaderView() -> YZDTestResultHeader {
         
-            let view = Bundle.main.loadNibNamed("YZDTestResultHeader", owner: nil, options: nil)?.last as! YZDTestResultHeader;
+        let view = Bundle.main.loadNibNamed("YZDTestResultHeader", owner: nil, options: nil)?.last as! YZDTestResultHeader;
         
         return view;
     }

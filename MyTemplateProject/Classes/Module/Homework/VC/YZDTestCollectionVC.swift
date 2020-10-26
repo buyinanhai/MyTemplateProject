@@ -443,6 +443,7 @@ extension YZDTestCollectionVC {
             
             if let items = response as? [[String : Any]] {
                 DYNetworkHUD.dismiss();
+                self.allSubjects.removeAll();
                 for item in items {
                     if let name = item["subjectName"] as? String, let id = item["subjectId"] as? String {
                         self.allSubjects.append((name, id));
@@ -458,7 +459,7 @@ extension YZDTestCollectionVC {
                 
             } else {
                 
-                DYNetworkHUD.showInfo(message: error?.errorMessage ?? "没有科目数据", inView: nil)
+                DYNetworkHUD.showInfo(message: error?.errorMessage ?? "没有找到相关科目", inView: nil)
             }
             
         }

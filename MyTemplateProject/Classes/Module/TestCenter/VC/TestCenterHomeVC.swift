@@ -287,6 +287,7 @@ extension TestCenterHomeVC: UITableViewDataSource, UITableViewDelegate, TestCent
         vc.gradeId = self.gradeId;
         vc.subjectId = "\(self.subjectId)";
         vc.nodeId = model.dy_id;
+        vc.type = self.selectedType;
         self.navigationController?.pushViewController(vc, animated: true);
         
     }
