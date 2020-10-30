@@ -415,39 +415,59 @@ extension TestCenterChooseVC {
                 return
             }
         }
-       
-        if (self.navigationController?.viewControllers.count ?? 0) > 2 {
-            let lastVC = self.navigationController?.viewControllers[1] as? TestCenterHomeVC;
-            lastVC?.subjectId = subjectId;
-            lastVC?.subjectTitle = subjectTitle;
-            lastVC?.volumeId = volumeId;
-            lastVC?.headerTitle = headerTitle;
-            lastVC?.gradeId = gradeId;
-            lastVC?.selectedType = type;
-            lastVC?.update();
-            self.navigationController?.popViewController(animated: true);
-        } else {
-            let vc = TestCenterHomeVC.init();
-            vc.chooseVC = self;
-            vc.subjectTitle = subjectTitle;
-            vc.subjectId = subjectId;
-            vc.volumeId = volumeId;
-            vc.headerTitle = headerTitle;
-            vc.gradeId = gradeId;
-            vc.selectedType = type;
-            self.navigationController?.pushViewController(vc, animated: true);
-            self.navigationController?.viewControllers.remove(at: 1);
-        }
-        var option: [String: Int] = [:]
-        for index in self.selectModel.keys {
-            let model = self.selectModel[index];
-            if let id = model?.id {
-                option["\(index)"] = id;
+        
+        DYNetworkHUD.startLoading();
+        TestCenterHomeVC.preinitialLoadData(subjectId: subjectId, volumeId: volumeId) { (response, error) in
+            
+            if let _response = response as? [String : Any], let list = _response["list"] as? [[String :Any]] {
+                
+                if list.count > 0 {
+                    DYNetworkHUD.dismiss()
+                    if (self.navigationController?.viewControllers.count ?? 0) > 2 {
+                        let lastVC = self.navigationController?.viewControllers[1] as? TestCenterHomeVC;
+                        lastVC?.subjectId = subjectId;
+                        lastVC?.subjectTitle = subjectTitle;
+                        lastVC?.volumeId = volumeId;
+                        lastVC?.headerTitle = headerTitle;
+                        lastVC?.gradeId = gradeId;
+                        lastVC?.selectedType = type;
+                        lastVC?.preinitaialData = _response;
+                        lastVC?.update();
+                        self.navigationController?.popViewController(animated: true);
+                    } else {
+                        let vc = TestCenterHomeVC.init();
+                        vc.chooseVC = self;
+                        vc.subjectTitle = subjectTitle;
+                        vc.subjectId = subjectId;
+                        vc.volumeId = volumeId;
+                        vc.headerTitle = headerTitle;
+                        vc.gradeId = gradeId;
+                        vc.selectedType = type;
+                        vc.preinitaialData = _response
+                        self.navigationController?.pushViewController(vc, animated: true);
+                        self.navigationController?.viewControllers.remove(at: 1);
+                    }
+                    var option: [String: Int] = [:]
+                    for index in self.selectModel.keys {
+                        let model = self.selectModel[index];
+                        if let id = model?.id {
+                            option["\(index)"] = id;
+                        }
+                    }
+                    let dict = ["subjectTitle":subjectTitle,"subjectId":subjectId,"volumeId":volumeId,"headerTitle":headerTitle,"chooseOption": option,"gradeId": gradeId ?? -1
+                        ] as [String : Any];
+                    TestCenterChooseVC.updateLocalData(dict);
+                    
+                } else {
+                    
+                    DYNetworkHUD.showInfo(message: self.currentTypeId == 0 ? "知识点正在完善中" : "章节正在完善中");
+                }
+            
+            } else {
+                
+                DYNetworkHUD.showInfo(message: error?.errorMessage ?? "网络请求失败，请稍后重试");
             }
         }
-        let dict = ["subjectTitle":subjectTitle,"subjectId":subjectId,"volumeId":volumeId,"headerTitle":headerTitle,"chooseOption": option,"gradeId": gradeId ?? -1
-            ] as [String : Any];
-        TestCenterChooseVC.updateLocalData(dict);
     }
     
     

@@ -26,6 +26,9 @@ class TestCenterHomeVC: UIViewController {
         
     /// 0 : 知识点  1： 章节目录
     public var selectedType: Int = 0;
+    
+    ///在选择页面加载的数据  有这个就不需要再请求一次了
+    public var preinitaialData: Any?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,11 +47,20 @@ class TestCenterHomeVC: UIViewController {
 
         }
         self.setupSubView();
-        self.tableView.mj_header?.beginRefreshing();
         
-        self.loadData()
+        if self.preinitaialData == nil {
+            self.tableView.mj_header?.beginRefreshing();
+        } else {
+            
+            if let _response = self.preinitaialData as? [String : Any]{
+                
+                self.handleResponse(response: _response);
+            }
+        }
         // Do any additional setup after loading the view.
     }
+    
+ 
     
     private func setupSubView() {
         self.view.backgroundColor = .init(hexString: "#F7F7F7");
@@ -79,55 +91,88 @@ class TestCenterHomeVC: UIViewController {
         
         self.headerView.titleLabel.text = self.headerTitle;
         self.headerView.subjectLabel.text = self.subjectTitle;
-        self.tableView.mj_header?.beginRefreshing();
+        if let _response = self.preinitaialData as? [String : Any]{
+            self.handleResponse(response: _response);
+            
+        } else {
+            
+            self.tableView.mj_header?.beginRefreshing();
+        }
+        
     }
     
     
+    //预加载  从外面判断有没有章节数据
+    public static func preinitialLoadData(subjectId: Int?, volumeId: Int?, finished: @escaping (_ response: Any?, _ Error: DYNetworkError?) -> Void) {
+        
+        if subjectId == nil && volumeId == nil {
+            let newError = DYNetworkError.init();
+            newError.errorMessage = "参数不能为空！";
+            finished(nil, newError);
+            return;
+        }
+       
+        let type = (subjectId == nil) ? 1 : 0;
+        
+        self.loadData(subjectId: subjectId ?? -1, volumeId: volumeId ?? -1, type: type, finished: finished)
+        
+    }
+    
+    public static func loadData(subjectId: Int, volumeId: Int, type: Int, finished: @escaping (_ response: Any?, _ Error: DYNetworkError?) -> Void) {
+        
+        if subjectId > 0 && type == 0 {
+            TestCenterNetwork.getKnowledgePoints(from: subjectId).dy_startRequest { (response, error) in
+                finished(response, error);
+
+            }
+           
+        } else if volumeId > 0 && type == 1 {
+            
+            TestCenterNetwork.getChapterPoints(fromVolume: volumeId).dy_startRequest { (response, error) in
+
+                finished(response, error);
+            }
+        }
+        
+        
+    }
     //MARK: network
     @objc
     private func loadData () {
         
         
         DYNetworkHUD.startLoading()
-        if self.subjectId > 0 && self.selectedType == 0 {
-            TestCenterNetwork.getKnowledgePoints(from: self.subjectId).dy_startRequest { (response, error) in
-                
-                if let _response = response as? [String : Any], let list = _response["list"] as? [[String :Any]] {
-                    
-                    DYNetworkHUD.dismiss();
-                    self.datas = self.handlerChapterPointsData(list: list, parent: nil);
-                    self.tableView.reloadData();
-                    if let totalCount = _response["totalCount"] as? Int, let finishCount = _response["finishCount"] as? Int {
-                        
-                        self.headerView.progressLabel.text = "已做题 \(finishCount)/\(totalCount)";
-                    }
-                } else {
-                    DYNetworkHUD.showInfo(message: error?.errorMessage ?? "加载失败，请稍后重试", inView: self.view);
-                    
-                }
-                self.tableView.mj_header?.endRefreshing();
-            }
-        } else if self.volumeId > 0 && self.selectedType == 1 {
             
-            TestCenterNetwork.getChapterPoints(fromVolume: self.volumeId).dy_startRequest { (response, error) in
-
-                if let _response = response as? [String : Any], let list = _response["list"] as? [[String :Any]] {
-                    
-                    DYNetworkHUD.dismiss();
-                    self.datas = self.handlerChapterPointsData(list: list,parent: nil) ;
-                    self.tableView.reloadData();
-                    if let totalCount = _response["totalCount"] as? Int, let finishCount = _response["finishCount"] as? Int {
-                        
-                        self.headerView.progressLabel.text = "已做题 \(finishCount)/\(totalCount)";
-                    }
-                } else {
-                    DYNetworkHUD.showInfo(message: error?.errorMessage ?? "加载失败，请稍后重试", inView: self.view);
-                    
-                }
-                self.tableView.mj_header?.endRefreshing();
+        TestCenterHomeVC.loadData(subjectId: self.subjectId, volumeId: self.volumeId, type: self.selectedType) { (response, error) in
+            
+            if let _response = response as? [String : Any] {
+                
+                DYNetworkHUD.dismiss();
+                self.handleResponse(response: _response);
+            } else {
+                DYNetworkHUD.showInfo(message: error?.errorMessage ?? "加载失败，请稍后重试", inView: self.view);
+                
             }
+            self.tableView.mj_header?.endRefreshing();
+            
         }
     }
+    
+    private func handleResponse(response: [String :Any]) {
+        
+        if let list = response["list"] as? [[String : Any]] {
+            
+            self.datas = self.handlerChapterPointsData(list: list, parent: nil);
+            self.tableView.reloadData();
+        }
+        if let totalCount = response["totalCount"] as? Int, let finishCount = response["finishCount"] as? Int {
+            
+            self.headerView.progressLabel.text = "已做题 \(finishCount)/\(totalCount)";
+        }
+    }
+    
+    
+    
     
     private func handlerChapterPointsData(list: [[String : Any]]?, parent: TestCenterNodeModel?) -> [TestCenterNodeModel] {
                 
