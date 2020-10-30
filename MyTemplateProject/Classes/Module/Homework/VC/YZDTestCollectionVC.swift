@@ -422,7 +422,10 @@ extension YZDTestCollectionVC {
                 }
                 self.reloadWebViewContent();
             } else {
-                self.allTests.removeAll();
+                if self.currentPage == 1 {
+                    self.allTests.removeAll();
+                }
+                self.currentPage -= 1;
                 self.reloadWebViewContent();
                 DYNetworkHUD.showInfo(message: error?.errorMessage ?? "没有错题数据", inView: nil)
             }

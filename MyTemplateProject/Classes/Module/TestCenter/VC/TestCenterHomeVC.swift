@@ -383,12 +383,16 @@ extension TestCenterHomeVC: UITableViewDataSource, UITableViewDelegate, TestCent
                         
                         self?.showAnswerVC(model: _model);
                         
+                        self?.isSearching = false;
+                        self?.clearSearchResult()
                     })
                 }
             }
         }
         searchVC.didDismissSearchControllerCallback = {
             [weak self] in
+            
+            //搜索完后 需要清理数据
             self?.isSearching = false;
             
             self?.clearSearchResult()

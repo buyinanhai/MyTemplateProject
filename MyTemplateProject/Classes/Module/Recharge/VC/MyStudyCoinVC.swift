@@ -155,8 +155,8 @@ class MyStudyCoinVC: UIViewController {
                     result(models);
                 }
                 
-                if let amountCoins = _result["iosCoinNum"] {
-                    self.myCoinLabel.text = "我的学币：\(amountCoins)";
+                if let amountCoins = _result["iosCoinNum"] as? Double {
+                    self.myCoinLabel.text = String.init(format: "我的学币：%.2f", amountCoins);
                 }
             } else {
                 
