@@ -283,6 +283,7 @@ static NSString *const menuCellID = @"YCMenuCell";
     [self.collectionView removeFromSuperview];
     self.contentView = nil;
     self.tableView = nil;
+    self.collectionView = nil;
     [self setupSubView];
 }
 
@@ -344,7 +345,19 @@ static NSString *const menuCellID = @"YCMenuCell";
     CGFloat height;
     
     width = _menuWidth;
-    height = (_actions.count > _maxDisplayCount) ? _maxDisplayCount * _menuCellHeight + kArrowHeight: _actions.count * _menuCellHeight + kArrowHeight;
+    NSInteger counts = _actions.count;
+    height = (counts > _maxDisplayCount) ? _maxDisplayCount * _menuCellHeight + kArrowHeight: counts * _menuCellHeight + kArrowHeight;
+    if (_style == 1 ) {
+        NSInteger row = counts / 3 ;
+        height = row * self.menuCellHeight + kArrowHeight + ((row - 1) * 10) + 16;
+        if (counts % 3 > 0) {
+            height += self.menuCellHeight + 10;
+        }
+        
+        if (height > 300) {
+            height = 300;
+        }
+    }
     // 默认在中间
     _arrowPosition = 0.5 * width - 0.5 * kArrowWidth;
     
@@ -392,6 +405,7 @@ static NSString *const menuCellID = @"YCMenuCell";
     if (self.style == 1) {
         
         self.collectionView.frame = CGRectMake(0, _topMargin, self.width, self.height - kArrowHeight);
+       
     }
 }
 

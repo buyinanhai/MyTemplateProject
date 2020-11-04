@@ -22,7 +22,7 @@ class TestCenterNetwork: DYBaseNetwork {
         
         get {
             
-            return "SRn55wqmX07etO7lCImIz98Qtg4ecuNxcvHaYmtmkiGFJtUJ4Rm%2BfCl8GunN2fJgISjQcKn5nleB%0AMSP5z7uJZ9ADbCuuwJgX";
+            return "SRn55wqmX05A4NhsmZL32D7OgZm%2FOoxrcvHaYmtmkiGFJtUJ4Rm%2BfCl8GunN2fJgISjQcKn5nleB%0AMSP5z7uJZ9ADbCuuwJgX";
             
             if let token = DYNetworkConfig.share()?.extraData["token"] as? String {
                 return token;
@@ -139,26 +139,27 @@ class TestCenterNetwork: DYBaseNetwork {
     }
     
     //MARK: 提交答案
-    public class func commitAnswers(answers:[[String: String]], gradeId: Int, subjectId: String, nodeId: String) -> TestCenterNetwork {
+    public class func commitAnswers(answers:[[String: String]], gradeId: Int, subjectId: String, nodeId: String, type: Int) -> TestCenterNetwork {
         
         let obj = TestCenterNetwork.init();
         obj.dy_baseURL = self.hostUrl;
         obj.dy_requestUrl = "\(self.relativeUrl)/topic/submitTopic";
-        obj.dy_requestArgument = [
-            "userId": self.userId,
-            "token" : self.token,
-            "answers" : answers,
-            "gradeId": gradeId,
-            "subjectId": subjectId,
-        ];
-        //章节做题提交不传年级
-        if gradeId == -1 {
+        if type == 1 {
+            //章节做题
             obj.dy_requestArgument = [
                 "userId": self.userId,
                 "token" : self.token,
                 "answers" : answers,
-                "subjectId": subjectId,
                 "id": nodeId
+            ];
+        } else if type == 0 {
+            //知识点做题
+            obj.dy_requestArgument = [
+                "userId": self.userId,
+                "token" : self.token,
+                "answers" : answers,
+                "gradeId": gradeId,
+                "subjectId": subjectId,
             ];
         }
         obj.dy_requestMethod = .POST;
@@ -281,20 +282,32 @@ class TestCenterNetwork: DYBaseNetwork {
 
 
     //MARK:收藏题目 知识点 不需要传 节点id
-    public class func collectQuestion(gradeId: Int, subjectId: String,questionId: Int,likeOrUnlike: Int,nodeId: String?) -> TestCenterNetwork {
+    public class func collectQuestion(type: Int,gradeId: Int, subjectId: String,questionId: Int,likeOrUnlike: Int,nodeId: String?) -> TestCenterNetwork {
 
         let obj = TestCenterNetwork.init();
         obj.dy_baseURL = self.hostUrl;
         obj.dy_requestUrl = "\(self.relativeUrl)/afterWork/like-question";
-        obj.dy_requestArgument = [
-            "userId": self.userId,
-            "token" : self.token,
-            "questionId":questionId,
-            "likeOrUnlike": likeOrUnlike == 1 ? 0 : 1,
-            "gradeId":gradeId,
-            "subjectId":subjectId,
-            "id": nodeId ?? ""
-        ];
+        if type == 1 {
+            //章节题目收藏
+            obj.dy_requestArgument = [
+                "userId": self.userId,
+                "token" : self.token,
+                "questionId":questionId,
+                "likeOrUnlike": likeOrUnlike == 1 ? 0 : 1,
+                "id": nodeId ?? ""
+            ];
+        } else if type == 0 {
+            //知识点题收藏
+            obj.dy_requestArgument = [
+                "userId": self.userId,
+                "token" : self.token,
+                "questionId":questionId,
+                "likeOrUnlike": likeOrUnlike == 1 ? 0 : 1,
+                "gradeId":gradeId,
+                "subjectId":subjectId,
+            ];
+        }
+        
         
         obj.dy_requestMethod = .POST;
         obj.dy_requestSerializerType = .JSON;

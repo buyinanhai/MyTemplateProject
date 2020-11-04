@@ -125,7 +125,7 @@ extension TestCenterAnswerVC {
     override func commitAnswer(answers: [[String : String]]) {
     
         DYNetworkHUD.startLoading()
-        TestCenterNetwork.commitAnswers(answers: answers,gradeId: self.gradeId ?? -1,subjectId: self.subjectId ?? "", nodeId: self.nodeId ?? "").dy_startRequest { (response, error) in
+        TestCenterNetwork.commitAnswers(answers: answers,gradeId: self.gradeId ?? -1,subjectId: self.subjectId ?? "", nodeId: self.nodeId ?? "", type: self.type).dy_startRequest { (response, error) in
             
             if error != nil {
                 
@@ -142,7 +142,7 @@ extension TestCenterAnswerVC {
     //MARK: 收藏试题
     override func collectQuestion(questionId: Int, likeOrUnlike: Bool, callback: @escaping (DYNetworkError?) -> Void) {
         
-        TestCenterNetwork.collectQuestion(gradeId: self.gradeId ?? 0, subjectId: self.subjectId ?? "", questionId: questionId, likeOrUnlike: likeOrUnlike ? 1 : 0, nodeId: self.type == 0 ? "" : self.nodeId ?? "").dy_startRequest { (response, error) in
+        TestCenterNetwork.collectQuestion(type: self.type, gradeId: self.gradeId ?? 0, subjectId: self.subjectId ?? "", questionId: questionId, likeOrUnlike: likeOrUnlike ? 1 : 0, nodeId: self.type == 0 ? "" : self.nodeId ?? "").dy_startRequest { (response, error) in
             callback(error);
         }
     }

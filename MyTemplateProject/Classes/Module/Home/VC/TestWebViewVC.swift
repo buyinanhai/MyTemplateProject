@@ -25,43 +25,43 @@ class TestWebViewVC: UIViewController {
                    make?.edges.offset();
                }
       
-        self.webView.scrollView.mj_header?.beginRefreshing {
-            
-        }
-    
+//        self.webView.scrollView.mj_header?.beginRefreshing {
+//
+//        }
+        self.webView.load(URLRequest.init(url: URL.init(string: "https://test.uaregood.net/mobile#/home?token=eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE2MDQzNzIzNzAsInN1YiI6IntcImlkXCI6XCI2OTc4NTQ4NzI2OTkxNDYyNDBcIixcImFjY291bnRcIjpcIjEwMDU0QzAwMDNcIixcImFwcENvZGVcIjpcIkEwN1wiLFwidXNlckZsYWdcIjowfSIsImlzcyI6ImN1bnciLCJleHAiOjE2MDQzODY3NzB9.Q6BOQ9tcJsppoF-g1bpBN1PY2n2EsHUKUVro_sBiNkY&platform=app&t=1604372370661.02")!));
         // Do any additional setup after loading the view.
     }
     
 
     @objc
     private func loadData() {
-        let pageSize = 4;
-        YZDHomeworkNetwork.getMyErrorCollections(classTypeId: self.productId ?? 0, subjectId: nil, gradeId: nil, page: self.currentPage, pageSize: pageSize).dy_startRequest { (response, error) in
-            self.webView.scrollView.mj_header?.endRefreshing();
-            self.webView.scrollView.mj_footer?.endRefreshing();
-            if let _response = response as? [String : Any], let items = _response["list"] as? [[String : Any]] {
-                
-                if self.currentPage == 0 {
-                    self.allTests.removeAll();
-                    self.allTests.append(contentsOf: items);
-                    
-                    if self.webView.scrollView.mj_footer == nil && items.count == pageSize {
-                        self.webView.scrollView.mj_footer = MJRefreshAutoNormalFooter.init(refreshingTarget: self, refreshingAction: #selector(self.loadMoreData));
-                    }
-                } else {
-                    self.allTests.append(contentsOf: items);
-                    if items.count < pageSize {
-                        self.webView.scrollView.mj_footer?.endRefreshingWithNoMoreData();
-                    }
-                }
-                self.reloadWebViewContent();
-               
-                
-            } else {
-                DYNetworkHUD.showInfo(message: error?.errorMessage ?? "没有错题数据", inView: nil)
-            }
-            
-        }
+//        let pageSize = 4;
+//        YZDHomeworkNetwork.getMyErrorCollections(classTypeId: self.productId ?? 0, subjectId: nil, gradeId: nil, page: self.currentPage, pageSize: pageSize).dy_startRequest { (response, error) in
+//            self.webView.scrollView.mj_header?.endRefreshing();
+//            self.webView.scrollView.mj_footer?.endRefreshing();
+//            if let _response = response as? [String : Any], let items = _response["list"] as? [[String : Any]] {
+//
+//                if self.currentPage == 0 {
+//                    self.allTests.removeAll();
+//                    self.allTests.append(contentsOf: items);
+//
+//                    if self.webView.scrollView.mj_footer == nil && items.count == pageSize {
+//                        self.webView.scrollView.mj_footer = MJRefreshAutoNormalFooter.init(refreshingTarget: self, refreshingAction: #selector(self.loadMoreData));
+//                    }
+//                } else {
+//                    self.allTests.append(contentsOf: items);
+//                    if items.count < pageSize {
+//                        self.webView.scrollView.mj_footer?.endRefreshingWithNoMoreData();
+//                    }
+//                }
+//                self.reloadWebViewContent();
+//
+//
+//            } else {
+//                DYNetworkHUD.showInfo(message: error?.errorMessage ?? "没有错题数据", inView: nil)
+//            }
+//
+//        }
     }
     @objc
     private func loadMoreData() {
@@ -122,6 +122,8 @@ class TestWebViewVC: UIViewController {
         view.navigationDelegate = self;
         view.uiDelegate = self;
         view.scrollView.mj_header = MJRefreshNormalHeader.init(refreshingTarget: self, refreshingAction: #selector(loadData));
+      
+
         
         return view;
     }()
@@ -228,3 +230,89 @@ extension TestWebViewVC: WKScriptMessageHandler,WKNavigationDelegate, WKUIDelega
     
 }
  
+
+//拦截类
+class CustomURLSchemeHandler: NSObject {
+    
+}
+
+@available(iOS 11.0, *)
+extension CustomURLSchemeHandler:WKURLSchemeHandler{
+    
+    @available(iOS 11.0, *)
+    func webView(_ webView: WKWebView, start urlSchemeTask: WKURLSchemeTask) {
+        
+        //文件名
+        let fileName = urlSchemeTask.request.url?.lastPathComponent
+        //文件扩展名（文件类型）
+        let pathExtension = urlSchemeTask.request.url?.pathExtension
+        
+        //获取本地资源
+        let fileURL = Bundle.main.url(forResource: fileName?.components(separatedBy: ".").first, withExtension: pathExtension)
+        
+        //本地存在文件
+        if fileURL != nil{
+            //获取本地资源异常
+            do {
+                //返回本地数据
+                let data:NSData = try Data.init(contentsOf: fileURL!) as NSData
+                let pathExtension = fileURL!.pathExtension
+                let mime = mimeType(forPathExtension: pathExtension)
+                
+                let response:URLResponse = URLResponse.init(url: urlSchemeTask.request.url!, mimeType: mime, expectedContentLength: data.length, textEncodingName: nil)
+                urlSchemeTask.didReceive(response)
+                urlSchemeTask.didReceive(data as Data)
+                urlSchemeTask.didFinish()
+            }catch {
+                //本地资源获取异常
+                requestWebViewData(urlSchemeTask: urlSchemeTask)
+            }
+        }else{
+            //无本地资源
+            requestWebViewData(urlSchemeTask: urlSchemeTask)
+        }
+    }
+    
+    @available(iOS 11.0, *)
+    func webView(_ webView: WKWebView, stop urlSchemeTask: WKURLSchemeTask) {
+        
+    }
+    
+    /// 代替H5发出网络请求
+    ///
+    /// - Parameter urlSchemeTask:
+    private func requestWebViewData(urlSchemeTask: WKURLSchemeTask){
+        let schemeUrl:String = urlSchemeTask.request.url?.absoluteString ?? ""  //***这个搞过来好像都是小写的
+        //换成原始的请求地址
+        let replacedStr = schemeUrl.replacingOccurrences(of: "yjkcustomscheme", with: "https")
+        //发出请求结果返回
+        let request = URLRequest.init(url: URL.init(string: replacedStr)!)
+        let config = URLSessionConfiguration.default
+        let session = URLSession.init(configuration: config)
+        let dataTask = session.dataTask(with: request) { (data:Data?, response:URLResponse?, error:Error?) in
+            if error != nil{
+                urlSchemeTask.didFailWithError(error!)
+            }else{
+                urlSchemeTask.didReceive(response!)
+                urlSchemeTask.didReceive(data!)
+                urlSchemeTask.didFinish()
+            }
+        }
+        dataTask.resume()
+    }
+    
+    /// 获取文件类型
+    ///
+    /// - Parameter pathExtension:
+    /// - Returns:
+    private func mimeType(forPathExtension pathExtension: String) -> String {
+//        if
+//            let id = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, pathExtension as CFString, nil)?.takeRetainedValue(),
+//            let contentType = UTTypeCopyPreferredTagWithClass(id, kUTTagClassMIMEType)?.takeRetainedValue()
+//        {
+//            return contentType as String
+//        }
+//
+        return "application/octet-stream"
+    }
+}

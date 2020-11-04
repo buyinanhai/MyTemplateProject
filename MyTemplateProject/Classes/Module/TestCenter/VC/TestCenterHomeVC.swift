@@ -103,7 +103,7 @@ class TestCenterHomeVC: UIViewController {
     
     
     //预加载  从外面判断有没有章节数据
-    public static func preinitialLoadData(subjectId: Int?, volumeId: Int?, finished: @escaping (_ response: Any?, _ Error: DYNetworkError?) -> Void) {
+    public static func preinitialLoadData(subjectId: Int?, volumeId: Int?, type: Int, finished: @escaping (_ response: Any?, _ Error: DYNetworkError?) -> Void) {
         
         if subjectId == nil && volumeId == nil {
             let newError = DYNetworkError.init();
@@ -111,8 +111,6 @@ class TestCenterHomeVC: UIViewController {
             finished(nil, newError);
             return;
         }
-       
-        let type = (subjectId == nil) ? 1 : 0;
         
         self.loadData(subjectId: subjectId ?? -1, volumeId: volumeId ?? -1, type: type, finished: finished)
         

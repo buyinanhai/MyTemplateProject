@@ -417,7 +417,7 @@ extension TestCenterChooseVC {
         }
         
         DYNetworkHUD.startLoading();
-        TestCenterHomeVC.preinitialLoadData(subjectId: subjectId, volumeId: volumeId) { (response, error) in
+        TestCenterHomeVC.preinitialLoadData(subjectId: subjectId, volumeId: volumeId, type: self.currentTypeId) { (response, error) in
             
             if let _response = response as? [String : Any], let list = _response["list"] as? [[String :Any]] {
                 
