@@ -63,6 +63,10 @@
                 background: #53B8A1;
                 color: #FFFFFF;
 			}
+    .errorOption {
+        background: #ff0000;
+        color: #ffffff;
+    }
 
 			.unSelectOption {
 				background: #EDEDED;
@@ -140,64 +144,64 @@
 </body>
 
 <script>
-		// 加载数据
-		function onload(obj) {
-            document.getElementById("loadingDiv").style.display="block";
-            $(".main").hide();
-			var list = obj;
-			var main = '';
-			$.each(list, function(i, bean) {
-				var que = bean.questionVo
-				var item = ''
-				// <!--序号 +【题型】+ 题目stem-->
-				item += '<div class="item" id = "item' + i + '">';
-				item += '<p>';
-				item += '<span class="typeName">' + que.questionTypeName + '</span>';
-				item += '<span>' + (i + 1) + '.' + que.stem + '</span>';
-				item += '</p>'
+    // 加载数据
+    function onload(obj) {
+        document.getElementById("loadingDiv").style.display="block";
+        $(".main").hide();
+        var list = obj;
+        var main = '';
+        $.each(list, function(i, bean) {
+            var que = bean.questionVo
+            var item = ''
+            // <!--序号 +【题型】+ 题目stem-->
+            item += '<div class="item" id = "item' + i + '">';
+            item += '<p>';
+            item += '<span class="typeName">' + que.questionTypeName + '</span>';
+            item += '<span>' + (i + 1) + '.' + que.stem + '</span>';
+            item += '</p>'
 
-				// 选项
-				var options = JSON.parse(que.options)
-				var myAnswer = bean.userAnswer;
-				var subsetOption = '';
-				$.each(options, function(i, d) {
-					Object.keys(d).forEach(function(key) {
-						var optionVal = d[key];
-						if(optionVal != null) {
-							var isCheck = myAnswer ? myAnswer.indexOf(key) > -1 : false;
-							subsetOption += '<p class="answer">';
-							subsetOption += '<span class="key ';
-							if(isCheck) {
-								subsetOption += 'selectOption';
-							} else {
-								subsetOption += 'unSelectOption';
-							}
-							subsetOption += '">' + key + '</span>';
-							subsetOption += '<span class="answer-option">' + d[key] + '</span></p>';
-						}
-					});
-				})
-				item += subsetOption;
+            // 选项
+            var optionsStr = que.options;
+            if (!optionsStr){
+                optionsStr = '[]';
+            }
+            var options = JSON.parse(optionsStr)
+            var myAnswer = bean.userAnswer;
+            var rightAns = que.answer; // 正确答案
+            var subsetOption = '';
+            $.each(options, function(i, d) {
+                Object.keys(d).forEach(function(key) {
+                    var optionVal = d[key];
+                    if(optionVal != null) {
+                        var isCheck = myAnswer ? myAnswer.indexOf(key) > -1 : false;
+                        var isError = isCheck && (rightAns.indexOf(key) == -1)
+                        var keyClass = isError ? 'errorOption' : (isCheck ? 'selectOption' : 'unSelectOption');
+                        subsetOption += '<p class="answer">';
+                        subsetOption += '<span class="key ' + keyClass + '">' + key + '</span>';
+                        subsetOption += '<span class="answer-option">' + d[key] + '</span></p>';
+                    }
+                });
+            })
+            item += subsetOption;
 
-				// 分割线
-				item += '<div class="lineData">';
-				item += '<div class = "leftCircle"/>';
-				item += '<hr class = "grayLine"/>';
-				item += '<div class = "rightCircle"/>';
-				item += '</div>';
+            // 分割线
+            item += '<div class="lineData">';
+            item += '<div class = "leftCircle"/>';
+            item += '<hr class = "grayLine"/>';
+            item += '<div class = "rightCircle"/>';
+            item += '</div>';
 
-				// 解析
-				item += '<div class="answer-resolve" >'
-				item += '<p>正确答案：' + que.answer + '</p>'
-				item += '<p>您的答案：' + (!myAnswer ? '' : myAnswer) + '</p>'
-				item += '<p>' + que.explanation + '</p>'
-				item += '</div>'
+            // 解析
+            item += '<div class="answer-resolve" >'
+            item += '<p>正确答案：' + que.answer + '</p>'
+            item += '<p>您的答案：' + (!myAnswer ? '' : myAnswer) + '</p>'
+            item += '<p>' + que.explanation + '</p>'
+            item += '</div>'
 
-				item += '</div>'
-				main += item + '</div><br>'
-			})
-			$(".main").html(main);
-
+            item += '</div>'
+            main += item + '</div><br>'
+        })
+        $(".main").html(main);
             window.MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById('content')],[fadeInBody]);
         }
 

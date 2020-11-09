@@ -88,7 +88,7 @@ class YZDTestRecordCell: DYTableViewCell {
         self.nameLabel.mas_makeConstraints { (make) in
             make?.top.offset()(12);
             make?.left.offset()(10);
-            make?.right.equalTo()(self.timeLabel.mas_right)?.offset()(-5);
+            make?.right.equalTo()(self.timeLabel.mas_left)?.offset()(-5);
         }
         self.chapterLabel.mas_makeConstraints { (make) in
             make?.centerY.offset();

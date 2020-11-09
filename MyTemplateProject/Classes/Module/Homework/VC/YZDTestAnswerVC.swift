@@ -385,8 +385,12 @@ extension YZDTestAnswerVC {
             self.showResultVC();
             
         } else {
+            let seqAnswers = self.answersCache.sorted { (val1, val2) -> Bool in
+                
+                return val1.key < val2.key;
+            }
             
-            let answers = self.answersCache.map { (value) -> [String : String] in
+            let answers = seqAnswers.map { (value) -> [String : String] in
                 var questionid: Int?
                 if let question = self.allTests[value.key]["questionVo"] as? [String : Any] {
                     questionid = question["questionId"] as? Int;
@@ -504,8 +508,14 @@ extension YZDTestAnswerVC: WKScriptMessageHandler,WKNavigationDelegate, WKUIDele
             if let answer = message.body as? String {
                 
                 if answer.count > 0 {
-                    
-                    self.answersCache[self.currentIndex] = answer;
+                    var newAnswer = answer;
+                    //删除最后一个引号
+                    if answer.last == "," {
+                        if let lastIndex = newAnswer.lastIndex(of: ",") {
+                            newAnswer.remove(at: lastIndex);
+                        }
+                    }
+                    self.answersCache[self.currentIndex] = newAnswer;
                     
                     if !self.isEnableClickNoAnswer && self.hasNext {
                         self.bottomView.nextBtn.isEnabled = true;

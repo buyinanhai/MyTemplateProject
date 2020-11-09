@@ -123,7 +123,8 @@ extension TestCenterAnswerVC {
     }
     
     override func commitAnswer(answers: [[String : String]]) {
-    
+
+        
         DYNetworkHUD.startLoading()
         TestCenterNetwork.commitAnswers(answers: answers,gradeId: self.gradeId ?? -1,subjectId: self.subjectId ?? "", nodeId: self.nodeId ?? "", type: self.type).dy_startRequest { (response, error) in
             
