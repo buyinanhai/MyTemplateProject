@@ -51,6 +51,8 @@
 #import "YTKNetworkConfig.h"
 #import "YTKNetworkPrivate.h"
 #import "YTKRequest.h"
+#import "DYIAPManager.h"
+#import "DYSandBoxHelper.h"
 
 FOUNDATION_EXPORT double DYTemplateVersionNumber;
 FOUNDATION_EXPORT const unsigned char DYTemplateVersionString[];

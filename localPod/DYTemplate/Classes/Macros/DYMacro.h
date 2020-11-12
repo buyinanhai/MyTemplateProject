@@ -41,6 +41,31 @@
 #define SexBack HexColor(@"#6cd1f1")
 
 
+//=====================单例==================
+// @interface
+#define dy_singleton_interface(className) \
++ (className *)shared;
+
+
+// @implementation
+#define dy_singleton_implementation(className) \
+static className *_instance; \
++ (id)allocWithZone:(NSZone *)zone \
+{ \
+static dispatch_once_t onceToken; \
+dispatch_once(&onceToken, ^{ \
+_instance = [super allocWithZone:zone]; \
+}); \
+return _instance; \
+} \
++ (className *)shared \
+{ \
+static dispatch_once_t onceToken; \
+dispatch_once(&onceToken, ^{ \
+_instance = [[self alloc] init]; \
+}); \
+return _instance; \
+}
 // 黑色
 #define Color_0 HexColor(@"#1E1E1E")
 #define Color_3 HexColor(@"#333333")

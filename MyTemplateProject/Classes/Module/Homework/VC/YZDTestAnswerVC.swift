@@ -650,7 +650,7 @@ internal class YZDTestAnswerHeaderView: UIView {
         
         self.typeLabel.mas_makeConstraints { (make) in
             make?.left.offset()(15);
-            make?.top.offset()(8);
+            make?.centerY.equalTo()(self.previewLabel);
             make?.width.offset()(60);
             make?.height.offset()(26);
             

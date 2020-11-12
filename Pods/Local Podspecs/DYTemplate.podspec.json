@@ -58,9 +58,19 @@
   "default_subspecs": [
     "Base",
     "ComponentUI",
-    "Network"
+    "Network",
+    "Tool"
   ],
   "subspecs": [
+    {
+      "name": "Tool",
+      "source_files": [
+        "Classes/Tool/*.{h,m}"
+      ],
+      "public_header_files": [
+        "Classes/Tool/*.h"
+      ]
+    },
     {
       "name": "Base",
       "source_files": [

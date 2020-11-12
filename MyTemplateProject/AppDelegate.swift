@@ -75,6 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 //        DYNetworkConfig.share()?.networkBaseURL = "http://192.168.11.195:8082";
         DYNetworkConfig.share()?.networkBaseURL = "http://test.sdk.live.cunwedu.com.cn";
+        
 
     }
     
@@ -132,6 +133,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
         return .portrait;
+    }
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+        
     }
 }
 

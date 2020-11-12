@@ -32,4 +32,12 @@
     return [formatter stringFromDate:date];
     
 }
+
++ (NSString *)dy_transformDateFormat:(NSDate *)update{
+   
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString *destDateString = [dateFormatter stringFromDate:update];
+    return destDateString;
+}
 @end

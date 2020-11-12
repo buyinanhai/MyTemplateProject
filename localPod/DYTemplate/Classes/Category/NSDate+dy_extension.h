@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSTimeInterval)dy_dateStrToIntervalWithDateStr:(NSString *)dateStr dateFormat:(NSString *)format;
 
 + (NSString *)dy_timeStampToDateStrWithInterval:(NSTimeInterval)interval dataFormat:(NSString *)format;
++ (NSString *)dy_transformDateFormat:(NSDate *)date;
 
 
 @end

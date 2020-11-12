@@ -76,6 +76,8 @@
 			.answer-option {
 				margin-left: 14px;
                 flex: 1;
+                margin-bottom: 0;
+                margin-top: 0;
 
 			}
 			/*内部元素两端对齐*/
@@ -83,7 +85,7 @@
 			.lineDate {
 				margin-top: 16px;
 				display: flex;
-				justify-content: space-between;
+				justify-content: flex-end;
 				align-items: center;
 			}
 
@@ -138,7 +140,7 @@
 				display: none;
 				position: absolute;
 				right: 2px;
-				top: 2px;
+				top: 12px;
 			}
 
 			.selected {}
@@ -150,6 +152,24 @@
         width:auto;
         max-width: 100%!important;
     }
+    .queSome{
+       display: flex;
+       justify-content: space-between;
+       align-items: center;
+      }
+      .queSome .time{
+       font-size: 12px;
+       color: #B5B5B5;
+       margin-right:20px;
+      }
+        .queContent{
+            display: flex;
+        }
+        .queContent p{
+        margin-bottom: 0;
+        margin-top: 0;
+        
+       }
         </style>
 </head>
 
@@ -168,13 +188,13 @@
 				var que = bean.questionVo
 				var item = ''
 				// <!--序号 +【题型】+ 题目stem-->
-				item += '<div class="item">';
-				item += '<p>';
-				item += '<span class="typeName">' + que.questionTypeName + '</span>';
-				item += '<span>' + (i+1)+ '.' + que.stem + '</span>';
-				item += '</p>'
-
-				// 选项
+                item += '<div class="item" id = "item' + i + '">';
+                    item += '<div  class="queSome">';
+                    item += '<span class="typeName">' + que.questionTypeName + '</span>';
+                    item += '<span class="time">' + bean.createDate + '</span>';
+                    item += '</div>';
+                    item += '<div class="queContent">'+'<span style="padding-top: 2px;">' + (i + 1)+ '.'+'</span>'+'<div>'  + que.stem+ '</div>'+ '</div>';
+                    // 选项
 				var options = JSON.parse(que.options)
 				var myAnswer = que.myAnswer;
 				var subsetOption = '';
@@ -183,22 +203,22 @@
 						var optionVal = d[key];
 						if(optionVal != null) {
 							var isCheck = myAnswer ? myAnswer.indexOf(key) > -1 : false;
-							subsetOption += '<p class="answer">';
-							subsetOption += '<span class="key ';
+							subsetOption += '<div class="answer">';
+							subsetOption += '<p class="key ';
 							if(isCheck) {
 								subsetOption += 'selectOption';
 							} else {
 								subsetOption += 'unSelectOption';
 							}
-							subsetOption += '">' + key + '</span>';
-							subsetOption += '<span class="answer-option">' + d[key] + '</span></p>';
+							subsetOption += '">' + key + '</p>';
+							subsetOption += '<div class="answer-option">' + d[key] + '</div></div>';
 						}
 					});
 				})
 				item += subsetOption;
 
 				// 时间
-				item += '<div class ="lineDate"><span class = "createDate">' + bean.createDate + '</span>';
+				item += '<div class ="lineDate">';
 				item += '<span class = "removeBtn" data-num="' + i + '">' + "移除" + '</span>'
 				item += '</div>';
 
@@ -307,6 +327,7 @@
 		function canCheck() {
 			$(".checkBox").addClass("active");
 		}
+
 
 	</script>
 

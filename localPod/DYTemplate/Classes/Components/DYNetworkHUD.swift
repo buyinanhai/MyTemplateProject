@@ -48,6 +48,7 @@ import UIKit
 
         if hud.progressView.isAnimating {
             hud.progressView.stopAnimating();
+
             hud.progressView.removeFromSuperview()
             hud.shelterView.isHidden = true;
         }

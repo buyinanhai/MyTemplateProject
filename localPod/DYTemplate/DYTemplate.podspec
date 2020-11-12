@@ -102,8 +102,14 @@ Pod::Spec.new do |spec|
      "GCC_PREPROCESSOR_DEFINITIONS" => "$(inherited) DYTemplate_NAME=#{spec.name} DYTemplate_VERSION=#{spec.version}",
    }
   
-  spec.default_subspecs = ["Base", "ComponentUI", "Network"]
+  spec.default_subspecs = ["Base", "ComponentUI", "Network", "Tool"]
 
+  spec.subspec "Tool" do | base_spec |
+    
+    base_spec.source_files = ["Classes/Tool/*.{h,m}"]
+    base_spec.public_header_files = ["Classes/Tool/*.h"]
+    
+  end
   
   spec.subspec "Base" do | base_spec |
     

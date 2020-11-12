@@ -17,9 +17,44 @@ class ChargeVC: UIViewController {
         self.navigationItem.title = "学币充值";
         self.setupSubview();
         // Do any additional setup after loading the view.
-        DYPurchaseManager.addPaymentObserwer()
-        NotificationCenter.default.addObserver(self, selector: #selector(chargeSuccessed(_ :)), name: .init(dy_Notification_purchase_chargeSuccessed), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(chargeSuccessed(_ :)), name: .init(kDY_NOTIFICATION_PURCHASE_SUCCESSED), object: nil)
         self.loadData();
+        DYIAPManager.shared().start(withUserID: "2984931");
+        DYIAPManager.shared().delegate = self
+        DYIAPManager.shared().handlePaymentSuccessed = {
+            (receipt,resultCallback) in
+            
+            ChargeNetwork.verifyPurchase(receiptData: receipt ?? "").dy_startRequest { (response, error) in
+                DYNetworkHUD.dismiss();
+                resultCallback?(response,error);
+                if let result = response as? [String : Any] {
+                    //默认数组中最后一个才是当前成功的标准，因为一个票据会包含多个
+                   
+                    if let transactions = result["transactions"] as? [[String : Any]] {
+                        
+                        for (_,item) in transactions.enumerated() {
+                            
+                            if let flag = item["status"] as? Int {
+                                
+                                if flag == 1 {
+                                   
+                                    if let err = error as NSError? {
+                                        
+                                        DYNetworkHUD.showInfo(message: err.domain, inView: nil);
+                                        
+                                    } else {
+                                        DYNetworkHUD.showInfo(message: "充值成功", inView: nil);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    DYNetworkHUD.showInfo(message: error?.errorMessage ??
+                                            "请求服务器失败，请稍后重试！");
+                }
+            }
+        }
     }
     
     private func loadData() {
@@ -186,6 +221,7 @@ class ChargeVC: UIViewController {
             
             if let index = self.currSelectedItem, let price = self.dataSource[index]?.priceCount {
                 
+                
                 self.getRequestAppProduct(price);
             }
             
@@ -200,22 +236,8 @@ class ChargeVC: UIViewController {
         let productorIdentifier = String.init(format: "com.cunw.xinyunclassroom.%02d", price);
         
         DYNetworkHUD.startLoading();
-        DYPurchaseManager.startRequest(productorIdentifier) { (response, error) in
-            
-            if let err = error as NSError? {
-                
-                DYNetworkHUD.showInfo(message: err.domain, inView: nil);
-                
-            } else {
-                //支付成功
-                if let price = response?["iosCoinNum"] as? Double {
-                    
-                    self.coinLabel.text = "学币：\(price)"
-                }
-                DYNetworkHUD.showInfo(message: "充值成功", inView: nil);
-            }
-            
-        }
+        DYIAPManager.shared().requestProduct(withId: productorIdentifier);
+       
         
     }
   
@@ -466,6 +488,30 @@ extension ChargeVC {
         vc.present(alertVC, animated: true, completion: nil);
         
     }
+    
+    
+}
+
+
+extension ChargeVC: DYIApRequestResultsDelegate {
+   
+    
+    func finished(with code: DYIAPStatusCode, info: String?) {
+        
+        switch code {
+        case .IAP_STATUSCODE_SUCCESS:
+            break;
+        default:
+            if let _ = info {
+                DispatchQueue.main.async {
+                    DYNetworkHUD.showInfo(message: info ?? "");
+                }
+            }
+            break
+        }
+    }
+    
+    
     
     
 }

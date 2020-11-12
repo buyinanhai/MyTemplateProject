@@ -19,6 +19,7 @@ PODS:
     - DYTemplate/Base (= 1.0.0)
     - DYTemplate/ComponentUI (= 1.0.0)
     - DYTemplate/Network (= 1.0.0)
+    - DYTemplate/Tool (= 1.0.0)
     - Masonry
     - MJRefresh
     - ObjectMapper
@@ -36,6 +37,12 @@ PODS:
     - ObjectMapper
     - SDWebImage
   - DYTemplate/Network (1.0.0):
+    - AFNetworking
+    - Masonry
+    - MJRefresh
+    - ObjectMapper
+    - SDWebImage
+  - DYTemplate/Tool (1.0.0):
     - AFNetworking
     - Masonry
     - MJRefresh
@@ -88,7 +95,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
-  DYTemplate: defd9537ac85856658e81eee33f401e828b5aa61
+  DYTemplate: ad15f6652e493ac9774b7b6590a242adee793086
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   MJRefresh: 53e3e3219f204425ee6d3e62e8733d3295944cd6
