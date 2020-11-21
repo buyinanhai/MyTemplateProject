@@ -17,8 +17,7 @@ class MyStudyCoinVC: UIViewController {
         self.navigationItem.title = "我的学币";
         self.setupSubview();
         self.tableView.begainRefreshData();
-        DYPurchaseManager.addPaymentObserwer()
-        NotificationCenter.default.addObserver(self, selector: #selector(chargeSuccessed(_ :)), name: .init(dy_Notification_purchase_chargeSuccessed), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(chargeSuccessed(_ :)), name: .init(kDY_NOTIFICATION_PURCHASE_SUCCESSED), object: nil)
         // Do any additional setup after loading the view.
     }
     @objc

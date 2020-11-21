@@ -19,42 +19,8 @@ class ChargeVC: UIViewController {
         // Do any additional setup after loading the view.
         NotificationCenter.default.addObserver(self, selector: #selector(chargeSuccessed(_ :)), name: .init(kDY_NOTIFICATION_PURCHASE_SUCCESSED), object: nil)
         self.loadData();
-        DYIAPManager.shared().start(withUserID: "2984931");
-        DYIAPManager.shared().delegate = self
-        DYIAPManager.shared().handlePaymentSuccessed = {
-            (receipt,resultCallback) in
-            
-            ChargeNetwork.verifyPurchase(receiptData: receipt ?? "").dy_startRequest { (response, error) in
-                DYNetworkHUD.dismiss();
-                resultCallback?(response,error);
-                if let result = response as? [String : Any] {
-                    //默认数组中最后一个才是当前成功的标准，因为一个票据会包含多个
-                   
-                    if let transactions = result["transactions"] as? [[String : Any]] {
-                        
-                        for (_,item) in transactions.enumerated() {
-                            
-                            if let flag = item["status"] as? Int {
-                                
-                                if flag == 1 {
-                                   
-                                    if let err = error as NSError? {
-                                        
-                                        DYNetworkHUD.showInfo(message: err.domain, inView: nil);
-                                        
-                                    } else {
-                                        DYNetworkHUD.showInfo(message: "充值成功", inView: nil);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                } else {
-                    DYNetworkHUD.showInfo(message: error?.errorMessage ??
-                                            "请求服务器失败，请稍后重试！");
-                }
-            }
-        }
+        DYIAPManager.shared().start(withUserID: "2984931",delegate: self);
+       
     }
     
     private func loadData() {
@@ -413,7 +379,7 @@ extension ChargeVC: UICollectionViewDataSource, UICollectionViewDelegate, UIColl
 extension ChargeVC {
     
     /**
-     * 为了方便开发，故将业务写到这个类 开始使用学币进行支付
+     * 为了方便开发，于优智多课堂项目分离，故将业务写到这个类 开始使用学币进行支付
      * @param fromVC： 订单详情的控制器
      * @param price： 实际支付价格
      * @param mycoins： 我的学币余额
@@ -492,26 +458,58 @@ extension ChargeVC {
     
 }
 
-
-extension ChargeVC: DYIApRequestResultsDelegate {
+//MARK: DYIAPHandlerDelegate
+extension ChargeVC: DYIAPHandlerDelegate {
    
     
-    func finished(with code: DYIAPStatusCode, info: String?) {
+    func iap_finished(with code: DYIAPStatusCode, info: String?) {
         
-        switch code {
-        case .IAP_STATUSCODE_SUCCESS:
-            break;
-        default:
-            if let _ = info {
-                DispatchQueue.main.async {
-                    DYNetworkHUD.showInfo(message: info ?? "");
-                }
+        if let message = info {
+            DispatchQueue.main.async {
+                DYNetworkHUD.showInfo(message: message);
             }
-            break
         }
+       
     }
     
-    
-    
-    
+    func iap_paymentSuccessed(withReceipt receipt: String, completed callback: ExteriorRequestCallback? = nil) {
+        
+        ChargeNetwork.verifyPurchase(receiptData: receipt).dy_startRequest { (response, error) in
+            DYNetworkHUD.dismiss();
+            var newError: NSError?
+            var payStatus = DYIAPStatusCode.IAP_STATUSCODE_FAILED;
+            if let result = response as? [String : Any] {
+                //默认数组中最后一个才是当前成功的标准，因为一个票据会包含多个
+               
+                if let transactions = result["transactions"] as? [[String : Any]] {
+                    
+                    for (_,item) in transactions.enumerated() {
+                        
+                        if let flag = item["status"] as? Int {
+                            
+                            if flag == 1 {
+                                payStatus = DYIAPStatusCode.IAP_STATUSCODE_SUCCESS;
+                                newError = nil;
+                            } else if flag == 2 {
+                                //已经使用的票据
+                                payStatus = DYIAPStatusCode.IAP_STATUSCODE_RECEIPT_USED;
+                                newError = NSError.init(domain: "票据已经使用!", code: DYIAPStatusCode.IAP_STATUSCODE_RECEIPT_USED.rawValue, userInfo: nil);
+                                if let identifier = item["transactionId"] as? String {
+                                    DYIAPManager.shared().removeReceipt(withTransitionIdentifier: identifier);
+                                }
+                            } else {
+                                newError = NSError.init(domain: "票据验证失败！", code: DYIAPStatusCode.IAP_STATUSCODE_FAILED.rawValue, userInfo: nil);
+                            }
+                        }
+                    }
+                }
+            } else {
+                newError = NSError.init(domain: error?.errorMessage ?? "请求失败！", code: error?.code ?? -1, userInfo: error?.userInfo);
+            }
+            callback?(response,payStatus,newError);
+            
+        }
+        
+    }
+        
 }
