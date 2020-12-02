@@ -650,7 +650,7 @@ internal class YZDTestAnswerHeaderView: UIView {
         
         self.typeLabel.mas_makeConstraints { (make) in
             make?.left.offset()(15);
-            make?.centerY.equalTo()(self.previewLabel);
+            make?.centerY.equalTo()(self.timeBtn);
             make?.width.offset()(60);
             make?.height.offset()(26);
             
@@ -665,12 +665,13 @@ internal class YZDTestAnswerHeaderView: UIView {
     
         self.previewLabel.mas_makeConstraints { (make) in
             make?.right.offset()(-15);
-            make?.bottom.equalTo()(self.timeBtn);
+            make?.centerY.equalTo()(self.typeLabel);
+
         }
         
         self.collectBtn.mas_makeConstraints { (make) in
-            make?.bottom.equalTo()(self.previewLabel);
-            make?.size.offset()(20);
+            make?.centerY.equalTo()(self.typeLabel);
+            make?.size.offset()(35);
             make?.right.equalTo()(self.previewLabel.mas_left)?.offset()(-10);
         }
         

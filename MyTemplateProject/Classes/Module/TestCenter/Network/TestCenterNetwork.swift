@@ -22,7 +22,7 @@ class TestCenterNetwork: DYBaseNetwork {
         
         get {
             
-            return "SRn55wqmX06eZylFB8h4FZXWsAZdHwNAKKwdYRie%2FeaFJtUJ4Rm%2BfCl8GunN2fJgISjQcKn5nleB%0AMSP5z7uJZ9ADbCuuwJgX";
+            return "SRn55wqmX042DMxDwB4y1JxoFiW%2BZdcsKKwdYRie%2FeaFJtUJ4Rm%2BfCl8GunN2fJgISjQcKn5nleB%0AMSP5z7uJZ9ADbCuuwJgX";
             
             if let token = DYNetworkConfig.share()?.extraData["token"] as? String {
                 return token;
