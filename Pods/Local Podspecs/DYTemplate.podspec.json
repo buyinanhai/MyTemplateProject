@@ -1,19 +1,22 @@
 {
   "name": "DYTemplate",
   "version": "1.0.0",
-  "summary": "我的工程模板",
+  "summary": "ios开发的常用工具类",
   "description": "个人iOS开发的积累，主要是开发常用的工具。",
-  "homepage": "https://dongyee.edu",
-  "license": "Dongye",
+  "homepage": "https://github.com/buyinanhai/DYTemplate",
   "authors": {
-    "汪宁": "汪宁"
+    "buyinanhai": "1026238004@qq.com"
+  },
+  "license": {
+    "type": "MIT",
+    "file": "license"
   },
   "platforms": {
     "ios": "9.0"
   },
   "source": {
     "git": "https://github.com/buyinanhai/DYTemplate.git",
-    "tag": "v1.0.0"
+    "tag": "1.0.0"
   },
   "source_files": [
     "Classes",

@@ -34,13 +34,16 @@ NS_ASSUME_NONNULL_BEGIN
 typedef void (^DYTableView_Result)(NSArray<id> *sources);
 /**
  *如果要当前view处理datasource 需要cell和model都继承DY...
+ *只支持单组  主要为了方便开发翻页页面
  */
 @interface DYTableView : UITableView
 @property (nonatomic,assign) NSUInteger pageIndex;
 ///如果需要翻页 必须得设置
 @property (nonatomic,assign) NSUInteger pageSize;
 @property (nonatomic,strong) NSMutableArray<id> *dy_dataSource;
+/** 空数据时的显示内容 默认 == 暂无数据 */
 @property (nonatomic,copy) NSString *noDataText;
+/** 空数据的图片 */
 @property (nonatomic,copy) NSString *noDataImage;
 /**
  * 是否开启cell删除模式 默认 NO
@@ -78,13 +81,26 @@ typedef void (^DYTableView_Result)(NSArray<id> *sources);
 
 - (void)begainRefreshData;
 
+/**
+    刷新loadLocalDataCallback回调的数据  不触发下拉动画
+ */
 - (void)loadLocalData;
+/**
+    下拉刷新页面
+*/
 - (void)loadData;
+/**
+ 上拉加载下一页
+ */
 - (void)loadMoreData;
 /**
  * 根据dy_datasource 的count 显示隐藏
  */
 - (void)updateNoDataView;
+
+/**
+ 强制控制 没有数据的view的显示隐藏
+ */
 - (void)manualUpdateNoDataView:(BOOL)isShow;
 @end
 

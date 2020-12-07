@@ -342,7 +342,15 @@ extension YZDTestCollectionVC {
                 DYNetworkHUD.showInfo(message: "操作成功！", inView: nil);
                 self.allTests = surplusTests;
                 self.willRemoveTests.removeAll();
-                self.reloadWebViewContent();
+                if self.editView.isAllSelected {
+                    //如果是全选 就重新加载
+                    self.navigationItem.rightBarButtonItem?.title = "取消";
+                    self.rightBarButtonClick();
+                    self.webView.scrollView.mj_header?.beginRefreshing();
+                    
+                } else{
+                    self.reloadWebViewContent();
+                }
                 
             } else {
                 DYNetworkHUD.showInfo(message: error?.errorMessage ?? "操作失败", inView: nil);
@@ -587,6 +595,14 @@ class YZDTestCollectionAllSelectView: UIView {
     public var removeBtnClickCallback:(() -> Void)?
     
     public var allSelectBtnClickCallback: ((Bool) -> Void)?
+    
+    public var isAllSelected: Bool {
+        
+        get {
+            
+            return self.selectBtn.isSelected;
+        }
+    }
     
     override init(frame: CGRect) {
         

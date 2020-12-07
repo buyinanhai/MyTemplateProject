@@ -287,11 +287,12 @@ extension ChargeVC {
         
         if self.currSelectedItem != nil {
             
-            let vc = UIAlertController.init(title: "充值提醒", message: "学币充值后不能退款、体现或转赠且仅可ios系统中购买班课类使用。建议联系客服了解详细充值规则", preferredStyle: .alert);
+            let vc = UIAlertController.init(title: "充值提醒", message: "学币充值后不能退款、提现或转赠，且仅可用于iOS系统中购买班课类产品时使用。建议联系客服了解详细充值规则。", preferredStyle: .alert);
             let confirmAction = UIAlertAction.init(title: "确定充值", style: .default) { (confirm) in
                 self.begainRecharge()
             }
-            let cancle = UIAlertAction.init(title: "取消", style: .cancel) { (cancle) in
+            let cancle = UIAlertAction.init(title: "联系客服", style: .cancel) { (cancle) in
+                self.rightBarBtnClick()
             }
             vc.addAction(confirmAction);
             vc.addAction(cancle);
@@ -387,8 +388,8 @@ extension ChargeVC {
      * @param compeleted：回调 如果isInterrupt == true 表示 支付被中断
 
      */
-    class func startIOSPurchase(_ fromVC: UIViewController, price: Int, myCoins: Int, orderId: String, compeleted: @escaping ([String : Any]?, NSError?) -> Void) {
-        
+    class func startIOSPurchase(_ fromVC: UIViewController, price: Double, myCoins: Double, orderId: String, compeleted: @escaping ([String : Any]?, NSError?) -> Void) {
+
         if myCoins >= price {
             ChargeNetwork.getPriceLimit().dy_startRequest { (response, error) in
                 if let result = response as? [String : Any] {
@@ -396,7 +397,7 @@ extension ChargeVC {
                     if let maxPrice = result["content"] as? String {
                         
                         //如果价格大于约束价格就显示充值获取联系客服
-                        if price > (Int(maxPrice) ?? 0) {
+                        if price > (Double(maxPrice) ?? 0.0) {
 
                             compeleted(["isInterrupt":true],nil);
                             self.showProptSheet(vc: fromVC,isNeedCharge: false);
@@ -405,7 +406,7 @@ extension ChargeVC {
                             //开始使用学币支付
                             ChargeNetwork.startPay(payType: "PAY_TYPE_IOS_COIN", orderId: orderId).dy_startRequest { (response, error) in
                                 
-                                if let result = response as? [String : Any] {
+                                if let _ = response as? [String : Any] {
                                     
                                     compeleted(["status": 0], nil);
                                 } else {
@@ -464,9 +465,10 @@ extension ChargeVC: DYIAPHandlerDelegate {
     
     func iap_finished(with code: DYIAPStatusCode, info: String?) {
         
-        if let message = info {
+        if let _ = info {
             DispatchQueue.main.async {
-                DYNetworkHUD.showInfo(message: message);
+                
+                DYNetworkHUD.showInfo(message: code == DYIAPStatusCode.IAP_STATUSCODE_SUCCESS ? "充值成功": "充值失败");
             }
         }
        

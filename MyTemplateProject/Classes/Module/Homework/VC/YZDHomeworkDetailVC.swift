@@ -45,6 +45,13 @@ class YZDHomeworkDetailVC: UIViewController {
 //        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "课程错题", style: .plain, target: self, action: #selector(rightBarButtonClick));
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated);
+        
+        if self.isNeedRefresh {
+            self.loadHomework(self.currentChapter?.0 ?? -1);
+        }
+    }
     
     
     private func loadData() {
@@ -99,6 +106,7 @@ class YZDHomeworkDetailVC: UIViewController {
             } else {
                 DYNetworkHUD.showInfo(message: error?.errorMessage ?? "没有相关数据", inView: nil)
             }
+            self.isNeedRefresh = false;
         }
         
     }
@@ -146,6 +154,10 @@ class YZDHomeworkDetailVC: UIViewController {
     private var currentChapter:(Int, String)?
     private var currentChapterIndex:Int = 0;
 
+    /**
+     是否需要从新加载
+     */
+    private var isNeedRefresh: Bool = false;
 
 }
 
@@ -166,6 +178,12 @@ extension YZDHomeworkDetailVC: UITableViewDataSource,UITableViewDelegate {
                 
             let vc = YZDTestAnswerVC.init();
             vc.afterWorkId = model?.dy_id;
+            vc.submitAnswerCallback = {
+                [weak self] (isSuccess) in
+                
+                self?.isNeedRefresh = true;
+              
+            }
         
             self?.navigationController?.pushViewController(vc, animated: true);
         }

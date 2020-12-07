@@ -28,15 +28,21 @@
 
         .answer {
             display: flex;
+            margin-bottom: 10px;
+            align-items: center;
+
         }
 
-        .answer-option {
-            margin-left: 14px;
-            flex: 1;
-        }
+    .answer-option {
+        margin-left: 14px;
+        flex: 1;
+        margin-bottom: 0;
+        margin-top: 0;
+
+    }
 
         .key {
-            margin-left: 4px;
+            margin-left: 8px;
             width: 20px;
             font-size: 12px;
             height: 20px;
@@ -126,9 +132,11 @@
                     var isCheck = myAnswer ? myAnswer.indexOf(key) > -1 : false;
                     var isError = isCheck && (obj.answer.indexOf(key) == -1)
                     var keyClass = isError ? "errorOption" : (isCheck ? "selectOption" : "unSelectOption");
-                    subsetOption += '<p class="answer">' +
-                        '<span class="key ' + keyClass + '">' + key + '</span>' +
-                        '<span class="answer-option">' + d[key] + '</span></p>';
+                  
+                  subsetOption += '<div class="answer">' +
+                        '<p class="key ' + keyClass + '">' + key + '</p>' +
+                        '<div class="answer-option">' + d[key] + '</div></div>';
+                                            
                 }
             });
         })

@@ -48,7 +48,7 @@ public class YZDHomeworkNetwork: DYBaseNetwork {
         
         get {
             
-            return "SRn55wqmX06eZylFB8h4FZXWsAZdHwNAKKwdYRie%2FeaFJtUJ4Rm%2BfCl8GunN2fJgISjQcKn5nleB%0AMSP5z7uJZ9ADbCuuwJgX";
+            return "SRn55wqmX06MGHilA0JUPu3AUr0oD5Uo";
             if let token = DYNetworkConfig.share()?.extraData["token"] as? String {
                 return token;
             } else {

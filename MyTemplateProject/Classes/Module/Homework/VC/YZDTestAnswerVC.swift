@@ -18,7 +18,14 @@ class YZDTestAnswerVC: UIViewController {
     
     public var afterWorkId: Int?
     
+    /**
+        提交成功的处理回调
+     */
+    public var submitAnswerCallback: ((Bool) -> Void)?
+    
     private var afterWorkFinishId:Int?
+    
+    
     /**
      是否可以点击下一题 在没选择答案的情况下
      */
@@ -419,7 +426,8 @@ extension YZDTestAnswerVC {
                     
                     self.afterWorkFinishId = _response["afterWorkFinishId"] as? Int;
                 }
-                DYNetworkHUD.showInfo(message: "提交成功!", inView: nil);
+                DYNetworkHUD.dismiss();
+                self.submitAnswerCallback?(true);
                 self.showResultVC();
             }
         }
